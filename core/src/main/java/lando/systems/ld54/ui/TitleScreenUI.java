@@ -12,6 +12,7 @@ import lando.systems.ld54.Assets;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.screens.BaseScreen;
+import lando.systems.ld54.screens.CreditScreen;
 import lando.systems.ld54.screens.GameScreen;
 
 public class TitleScreenUI extends Group {
@@ -63,7 +64,7 @@ public class TitleScreenUI extends Group {
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.input.setInputProcessor(null);
                 screen.exitingScreen = true;
-                screen.game.setScreen(new GameScreen());
+                screen.game.setScreen(new CreditScreen());
             }
         });
 
