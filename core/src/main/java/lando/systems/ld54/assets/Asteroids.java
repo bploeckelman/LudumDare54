@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import lando.systems.ld54.Assets;
-import lando.systems.ld54.Config;
 import lando.systems.ld54.objects.Asteroid;
+import lando.systems.ld54.screens.GameScreen;
 
 public class Asteroids {
 
@@ -35,15 +35,9 @@ public class Asteroids {
         for (var level : Asteroids.Level.values()) {
             for (int i = 0; i < 10; i++) {
                 var region = Asteroids.getRandomAsteroid(level);
-//                var asteroid = new Asteroid(region, MathUtils.random(0, gameWidth), MathUtils.random(0, gameHeight));
-
-                // for now create them in the center region since we don't have pan/zoom in yet
-                var minX = Config.Screen.window_width;
-                var maxX = 2 * minX;
-                var minY = Config.Screen.window_height;
-                var maxY = 2 * minY;
-
-                var asteroid = new Asteroid(region, MathUtils.random(minX, maxX), MathUtils.random(minY, maxY));
+                var x = MathUtils.random(0, GameScreen.gameWidth);
+                var y = MathUtils.random(0, GameScreen.gameHeight);
+                var asteroid = new Asteroid(region, x, y);
                 array.add(asteroid);
             }
         }

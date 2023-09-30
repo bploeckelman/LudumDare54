@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.kotcrab.vis.ui.VisUI;
-import lando.systems.ld54.*;
+import lando.systems.ld54.Assets;
+import lando.systems.ld54.Config;
+import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.utils.screenshake.CameraShaker;
 
@@ -59,7 +61,6 @@ public abstract class BaseScreen implements Disposable {
             worldCamera.update();
         }
 
-
         screenShaker.update(delta);
         uiStage.act(delta);
     }
@@ -76,9 +77,5 @@ public abstract class BaseScreen implements Disposable {
 
         // extend and setup any per-screen ui widgets in here...
     }
-
-
-
-
 
 }
