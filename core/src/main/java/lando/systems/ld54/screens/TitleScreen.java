@@ -1,6 +1,7 @@
 package lando.systems.ld54.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -37,8 +38,11 @@ public class TitleScreen extends BaseScreen {
         {
             float width = worldCamera.viewportWidth;
             float height = worldCamera.viewportHeight;
-            batch.draw(background, 50, 200, width - 100, height - 400);
-
+            //batch.draw(background, 50, 200, width - 100, height - 400);
+            // draw text "LD45" with font assets.freeTypeFont
+            batch.setColor(Color.RED);
+            assets.abandonedFont50.draw(batch, "LD54", 50, 100);
+            batch.setColor(Color.WHITE);
         }
 
         batch.end();

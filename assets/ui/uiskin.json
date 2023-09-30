@@ -36,7 +36,7 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	outfit-medium-80px: {
 		file: outfit-medium-80px.fnt,
 	}
-}
+},
 com.badlogic.gdx.graphics.Color: {
 	black: {
 		r: 0

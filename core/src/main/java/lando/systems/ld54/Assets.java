@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
@@ -35,6 +36,8 @@ public class Assets implements Disposable {
     public BitmapFont font;
     public BitmapFont smallFont;
     public BitmapFont largeFont;
+    public BitmapFont abandonedFont20;
+    public BitmapFont abandonedFont50;
 
     public Texture pixel;
     public Texture gdx;
@@ -181,6 +184,13 @@ public class Assets implements Disposable {
         font.setUseIntegerPositions(false);
         largeFont = mgr.get("fonts/outfit-medium-80px.fnt");
         largeFont.setUseIntegerPositions(false);
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Abandoned-Bold.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 100;
+        abandonedFont50 = generator.generateFont(parameter);
+        parameter.size = 20;
+        abandonedFont20 = generator.generateFont(parameter);
+        generator.dispose();
 
         inputPrompts = new InputPrompts(this);
 
