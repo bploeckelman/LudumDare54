@@ -143,7 +143,7 @@ public class Main extends ApplicationAdapter {
     public void render() {
         update(Time.delta);
 
-        ScreenUtils.clear(Color.DARK_GRAY);
+//        ScreenUtils.clear(Color.DARK_GRAY);
 
         currentScreen.renderFrameBuffers(assets.batch);
 

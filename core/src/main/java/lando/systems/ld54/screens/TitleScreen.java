@@ -20,6 +20,9 @@ public class TitleScreen extends BaseScreen {
     public void update(float dt) {
         super.update(dt);
 
+        if (Gdx.input.justTouched()) {
+            game.setScreen(new GameScreen());
+        }
     }
 
     @Override
