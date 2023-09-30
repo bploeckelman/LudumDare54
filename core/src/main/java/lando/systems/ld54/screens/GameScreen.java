@@ -44,6 +44,7 @@ public class GameScreen extends BaseScreen {
     PlayerShip playerShip;
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
+    float accum;
 
     public GameScreen() {
         launcher = new DragLauncher(this);
@@ -91,6 +92,7 @@ public class GameScreen extends BaseScreen {
             Gdx.app.exit();
         }
 
+        accum += dt;
         windowCamera.unproject(mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0));
         launcher.update(dt);
         if (Gdx.input.isTouched()){
@@ -180,12 +182,25 @@ public class GameScreen extends BaseScreen {
      * @param batch the SpriteBatch to draw with
      */
     private void renderFogArea(SpriteBatch batch) {
-        ScreenUtils.clear(Color.DARK_GRAY);
+        ScreenUtils.clear(Color.BLACK);
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
+        batch.draw(assets.pixel, 100, 100, 5, 5);
+
         // TEMP - 'world' bounds
         assets.shapes.rectangle(0, 0, gameWidth, gameHeight, Color.MAGENTA, 4);
         batch.end();
+
+        // Background
+        batch.setShader(assets.plasmaShader);
+        batch.begin();
+        assets.plasmaShader.setUniformf("u_time", accum);
+
+        batch.draw(assets.noiseTexture, -200, -200, gameWidth + 400, gameHeight + 400);
+        batch.end();
+        batch.setShader(null);
+
+
     }
 
     private void resetWorldCamera() {

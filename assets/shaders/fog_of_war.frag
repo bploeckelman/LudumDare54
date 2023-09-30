@@ -52,7 +52,7 @@ float cnoise(vec2 P){
 
 void main() {
     float wiggleSpeedMulti = .3;
-    vec2 wiggle = 10.0 *(1.0 / u_screenSize);
+    vec2 wiggle = 5.0 *(1.0 / u_screenSize);
     vec4 exploredColor = texture2D(u_texture, vec2(v_texCoord.x, v_texCoord.y));
     vec4 unexploredColor = texture2D(u_texture1, vec2(v_texCoord.x, v_texCoord.y));
 

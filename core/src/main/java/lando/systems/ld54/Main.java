@@ -22,6 +22,7 @@ import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.screens.BaseScreen;
 import lando.systems.ld54.screens.LaunchScreen;
 import lando.systems.ld54.screens.TitleScreen;
+import lando.systems.ld54.ui.DebugInfo;
 import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.accessors.*;
 
@@ -175,7 +176,7 @@ public class Main extends ApplicationAdapter {
             currentScreen.render(assets.batch);
         }
         if (Config.Debug.general) {
-//            DebugInfo.render(assets);
+            DebugInfo.render(assets);
         }
     }
 
