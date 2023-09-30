@@ -23,30 +23,10 @@ public class AudioManager implements Disposable {
     public enum Sounds {
         none
         , coin
-        , swoosh
-        , bigswoosh
-        , grunt
-        , pop
-        , impact
-        , thud
-        , error
-        , bodyHit
-        , gobble
-        , ticktock
-        , zap
-        , collect
-        , cannon
-        , spawn
-        , giggle
-
-
     }
 
     public enum Musics {
         none
-        , level1Thin
-        , level1Full
-        , introMusic
     }
 
     public ObjectMap<Sounds, SoundContainer> sounds = new ObjectMap<>();

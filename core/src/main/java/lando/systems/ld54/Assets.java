@@ -2,6 +2,7 @@ package lando.systems.ld54;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -34,6 +35,8 @@ public class Assets implements Disposable {
     public Texture gdx;
 
     public TextureRegion pixelRegion;
+
+    public Sound coin1;
 
     public Assets() {
         this(Load.SYNC);
@@ -70,6 +73,10 @@ public class Assets implements Disposable {
             mgr.load("fonts/outfit-medium-20px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-40px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-80px.fnt", BitmapFont.class);
+
+            //Load Sounds
+            mgr.load("audio/sounds/coin1.ogg", Sound.class);
+
         }
 
         if (load == Load.SYNC) {
@@ -93,6 +100,9 @@ public class Assets implements Disposable {
         font.setUseIntegerPositions(false);
         largeFont = mgr.get("fonts/outfit-medium-80px.fnt");
         largeFont.setUseIntegerPositions(false);
+
+        // Sounds
+        coin1 = mgr.get("audio/sounds/coin1.ogg", Sound.class);
 
         initialized = true;
         return 1;
