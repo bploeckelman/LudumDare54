@@ -48,6 +48,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> osha;
     public Animation<TextureRegion> yoda; //german shep
     public Animation<TextureRegion> obi; //white lab
+    public Animation<TextureRegion> earthSpin;
 
     public TextureRegion pixelRegion;
 
@@ -176,6 +177,7 @@ public class Assets implements Disposable {
         osha = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
         yoda = new Animation<>(.1f, atlas.findRegions("pets/ross-dog"), Animation.PlayMode.LOOP);
         obi = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
+        earthSpin = new Animation<>(0.05f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
 
         // Fonts
         // TODO - add in some freetype fonts and verify that they work correctly in the web builds

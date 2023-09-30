@@ -6,12 +6,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.components.DragLauncher;
@@ -33,12 +35,14 @@ public class GameScreen extends BaseScreen {
     TextureRegion foggedTextureRegion;
     TextureRegion exploredTextureRegion;
     FogOfWar fogOfWar;
+    Earth earth;
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
 
     public GameScreen() {
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
+        earth = new Earth(assets);
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
 
@@ -72,6 +76,7 @@ public class GameScreen extends BaseScreen {
         launcher.update(dt);
 
         fogOfWar.update(dt);
+        earth.update(dt);
         asteroids.forEach(Asteroid::update);
 
         cameraController.update(dt);
@@ -114,7 +119,7 @@ public class GameScreen extends BaseScreen {
 
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
-        batch.draw(assets.pixelRegion, gameWidth / 2f, gameHeight / 2f, 5, 5);
+        earth.draw(batch, gameWidth / 2f, gameHeight / 2f);
         asteroids.forEach(a -> a.draw(batch));
 
         // TEMP - 'world' bounds
@@ -149,6 +154,31 @@ public class GameScreen extends BaseScreen {
             Gdx.input.setInputProcessor(cameraController);
         } else {
             cameraController.reset(worldCamera);
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // Convenience data structures - extract to their own class if they get big
+    // ------------------------------------------------------------------------
+
+    static class Earth {
+        Animation<TextureRegion> anim;
+        TextureRegion keyframe;
+        float animState = 0;
+
+        Earth(Assets assets) {
+            this.anim = assets.earthSpin;
+            this.keyframe = anim.getKeyFrames()[0];
+            this.animState = 0;
+        }
+
+        void update(float dt) {
+            animState += dt;
+            keyframe = anim.getKeyFrame(animState);
+        }
+
+        void draw(SpriteBatch batch, float x, float y) {
+            batch.draw(keyframe, x, y);
         }
     }
 
