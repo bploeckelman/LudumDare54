@@ -43,7 +43,7 @@ public class AudioManager implements Disposable {
         this.assets = assets;
         this.tween = tween;
 
-//        putSound(Sounds.coin, assets.coin1);
+        putSound(Sounds.coin, assets.coin);
 //        putSound(Sounds.swoosh, assets.swoosh1);
 //        putSound(Sounds.bigswoosh, assets.bigSwoosh1);
 //        putSound(Sounds.grunt, assets.grunt1);

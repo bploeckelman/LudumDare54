@@ -5,15 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.ui.TitleScreenUI;
 
 public class TitleScreen extends BaseScreen {
 
-    private boolean drawUI = false;
+    private boolean drawUI = true;
     private Texture background;
 
 
     public TitleScreen() {
         background = Main.game.assets.gdx;
+        Gdx.input.setInputProcessor(uiStage);
     }
 
     @Override
@@ -47,5 +49,12 @@ public class TitleScreen extends BaseScreen {
         if (drawUI) {
             uiStage.draw();
         }
+    }
+
+    @Override
+    public void initializeUI() {
+        super.initializeUI();
+        TitleScreenUI titleScreenUI = new TitleScreenUI(this);
+        uiStage.addActor(titleScreenUI);
     }
 }
