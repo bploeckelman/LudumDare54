@@ -46,7 +46,7 @@ public class FogOfWar {
         accum += dt;
         for (int i = fogObjects.size() -1 ; i >= 0; i--) {
             FogObject o = fogObjects.get(i);
-            o.alpha += dt * .8f;
+            o.alpha += dt * 2f;
 
         }
     }
