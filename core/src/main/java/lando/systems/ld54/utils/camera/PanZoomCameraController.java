@@ -73,13 +73,13 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     public void moveUp(float amount) {
         amount = Calc.abs(amount);
-        tmp.set(Vector3.Y).nor().scl(amount);
+        tmp.set(Vector3.Y).nor().scl(-amount);
         camera.position.add(tmp);
     }
 
     public void moveDown(float amount) {
         amount = Calc.abs(amount);
-        tmp.set(Vector3.Y).nor().scl(-amount);
+        tmp.set(Vector3.Y).nor().scl(amount);
         camera.position.add(tmp);
     }
 
