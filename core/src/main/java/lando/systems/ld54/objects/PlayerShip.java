@@ -12,6 +12,7 @@ public class PlayerShip {
     private Animation<TextureRegion> anim;
     private TextureRegion keyframe;
     private float animState;
+    private float shipAngle;
 
     // TODO - should pos be center and we offset by half-size in draw()?
     //  or should pos be bottom left and offset by half-size in getCenter()?
@@ -45,8 +46,12 @@ public class PlayerShip {
         batch.draw(keyframe,
             pos.x - size.x / 2f,
             pos.y - size.y / 2f,
-            size.x, size.y
-        );
+            size.x / 2f, size.y / 2f, size.x, size.y, 1f, 1f, shipAngle);
+    }
+
+    public void launch(float angle, float power) {
+        shipAngle = angle;
+        vel.set(power, 0).rotateDeg(shipAngle + 90);
     }
 
 }

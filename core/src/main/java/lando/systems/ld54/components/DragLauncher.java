@@ -40,8 +40,9 @@ public class DragLauncher {
             updateLaunchAngle(mousePos);
         } else if (dragging && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             updateLaunchAngle(mousePos);
-        } else {
+        } else if (dragging) {
             dragging = false;
+            launchShip();
         }
     }
 
@@ -65,7 +66,8 @@ public class DragLauncher {
         }
     }
 
-    private void launch(Vector3 launchVector) {
-
+    private void launchShip() {
+        // launch angle is backwards
+        screen.launchShip(angle - 180, strength);
     }
 }

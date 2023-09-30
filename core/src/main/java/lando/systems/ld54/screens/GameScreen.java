@@ -43,7 +43,7 @@ public class GameScreen extends BaseScreen {
     TextureRegion exploredTextureRegion;
     TextureRegion fogMaskTextureRegion;
     FogOfWar fogOfWar;
-    PlayerShip playerShip;
+    Array<PlayerShip> playerShips = new Array<>();
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
     float accum;
@@ -52,7 +52,6 @@ public class GameScreen extends BaseScreen {
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
         earth = new Earth(assets,gameWidth / 2f, gameHeight / 2f);
-        playerShip = new PlayerShip(assets);
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
 
@@ -105,7 +104,7 @@ public class GameScreen extends BaseScreen {
 
         fogOfWar.update(dt);
         earth.update(dt);
-        playerShip.update(dt);
+        playerShips.forEach(x -> x.update(dt));
         asteroids.forEach(Asteroid::update);
 
         cameraController.update(dt);
@@ -170,7 +169,7 @@ public class GameScreen extends BaseScreen {
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
         earth.render(batch);
-        playerShip.draw(batch);
+        playerShips.forEach(ps -> ps.draw(batch));
         launcher.render(batch);
         asteroids.forEach(a -> a.draw(batch));
 
@@ -224,5 +223,11 @@ public class GameScreen extends BaseScreen {
         } else {
             cameraController.reset(worldCamera);
         }
+    }
+
+    public void launchShip(float angle, float power) {
+        var ship = new PlayerShip(assets);
+        ship.launch(angle, power);
+        playerShips.add(ship);
     }
 }
