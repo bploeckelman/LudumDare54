@@ -10,9 +10,11 @@ uniform sampler2D u_texture2;
 
 uniform float u_time;
 uniform vec2 u_screenSize;
+uniform float u_showFog;
 
 varying vec4 v_color;
 varying vec2 v_texCoord;
+
 
 
 vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
@@ -60,6 +62,7 @@ void main() {
     vec4 mask = texture2D(u_texture2, maskVec);
 
     vec4 finalColor = mix(exploredColor, unexploredColor, 1. - mask.r);
+    finalColor = mix (exploredColor, finalColor, u_showFog);
     gl_FragColor = finalColor;
 
 }
