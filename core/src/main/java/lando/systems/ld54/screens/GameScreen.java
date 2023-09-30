@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
+import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.Asteroid;
 
@@ -19,6 +21,10 @@ public class GameScreen extends BaseScreen {
 
     public float gameWidth = Config.Screen.window_width * 3f;
     public float gameHeight = Config.Screen.framebuffer_height * 3f;
+
+    public final Vector3 mousePos = new Vector3();
+
+    DragLauncher launcher;
 
     FrameBuffer foggedBuffer;
     FrameBuffer exploredBuffer;
@@ -28,6 +34,7 @@ public class GameScreen extends BaseScreen {
     Array<Asteroid> asteroids;
 
     public GameScreen() {
+        launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
@@ -59,6 +66,9 @@ public class GameScreen extends BaseScreen {
             Gdx.app.exit();
         }
 
+        windowCamera.unproject(mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+        launcher.update(dt);
+
         fogOfWar.update(dt);
         asteroids.forEach(Asteroid::update);
     }
@@ -84,6 +94,7 @@ public class GameScreen extends BaseScreen {
         batch.begin();
         batch.draw(exploredTextureRegion.getTexture(), 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
         batch.draw(fogOfWar.fogMaskTexture, 0, 0, 40, 40);
+        launcher.render(batch);
         batch.end();
     }
 
