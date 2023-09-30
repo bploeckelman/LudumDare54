@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
+import lando.systems.ld54.assets.Earth;
 import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.Asteroid;
@@ -31,6 +32,8 @@ public class GameScreen extends BaseScreen {
 
     public final Vector3 mousePos = new Vector3();
 
+    public Earth earth;
+
     DragLauncher launcher;
 
     FrameBuffer foggedBuffer;
@@ -40,7 +43,6 @@ public class GameScreen extends BaseScreen {
     TextureRegion exploredTextureRegion;
     TextureRegion fogMaskTextureRegion;
     FogOfWar fogOfWar;
-    Earth earth;
     PlayerShip playerShip;
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
@@ -49,7 +51,7 @@ public class GameScreen extends BaseScreen {
     public GameScreen() {
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
-        earth = new Earth(assets);
+        earth = new Earth(assets,gameWidth / 2f, gameHeight / 2f);
         playerShip = new PlayerShip(assets);
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
@@ -93,7 +95,7 @@ public class GameScreen extends BaseScreen {
         }
 
         accum += dt;
-        windowCamera.unproject(mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+        worldCamera.unproject(mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0));
         launcher.update(dt);
         if (Gdx.input.isTouched()){
             Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -151,8 +153,6 @@ public class GameScreen extends BaseScreen {
         batch.draw(exploredTextureRegion.getTexture(), 0, worldCamera.viewportHeight, worldCamera.viewportWidth, -worldCamera.viewportHeight);
         batch.setShader(null);
 
-        launcher.render(batch);
-
         batch.end();
     }
 
@@ -167,8 +167,9 @@ public class GameScreen extends BaseScreen {
 
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
-        earth.draw(batch, gameWidth / 2f, gameHeight / 2f);
+        earth.render(batch);
         playerShip.draw(batch);
+        launcher.render(batch);
         asteroids.forEach(a -> a.draw(batch));
 
         // TEMP - 'world' bounds
@@ -222,33 +223,4 @@ public class GameScreen extends BaseScreen {
             cameraController.reset(worldCamera);
         }
     }
-
-    // ------------------------------------------------------------------------
-    // Convenience data structures - extract to their own class if they get big
-    // ------------------------------------------------------------------------
-
-    static class Earth {
-        Animation<TextureRegion> anim;
-        TextureRegion keyframe;
-        float animState;
-        float size = 96;
-
-        Earth(Assets assets) {
-            this.anim = assets.earthSpin;
-            this.keyframe = anim.getKeyFrames()[0];
-            this.animState = 0;
-        }
-
-        void update(float dt) {
-            animState += dt;
-            keyframe = anim.getKeyFrame(animState);
-        }
-
-        void draw(SpriteBatch batch, float x, float y) {
-            var centerX = x - size / 2f;
-            var centerY = y - size / 2f;
-            batch.draw(keyframe, centerX, centerY);
-        }
-    }
-
 }
