@@ -116,7 +116,6 @@ public class GameScreen extends BaseScreen {
         batch.end();
         fogMaskBuffer.end();
 
-
         foggedBuffer.begin();
         renderFogArea(batch);
         foggedBuffer.end();
@@ -150,8 +149,6 @@ public class GameScreen extends BaseScreen {
         launcher.render(batch);
 
         batch.end();
-
-
     }
 
     /**
@@ -181,6 +178,10 @@ public class GameScreen extends BaseScreen {
     private void renderFogArea(SpriteBatch batch) {
         ScreenUtils.clear(Color.DARK_GRAY);
         batch.setProjectionMatrix(worldCamera.combined);
+        batch.begin();
+        // TEMP - 'world' bounds
+        assets.shapes.rectangle(0, 0, gameWidth, gameHeight, Color.MAGENTA, 4);
+        batch.end();
     }
 
     private void resetWorldCamera() {
@@ -210,7 +211,8 @@ public class GameScreen extends BaseScreen {
     static class Earth {
         Animation<TextureRegion> anim;
         TextureRegion keyframe;
-        float animState = 0;
+        float animState;
+        float size = 96;
 
         Earth(Assets assets) {
             this.anim = assets.earthSpin;
@@ -224,7 +226,9 @@ public class GameScreen extends BaseScreen {
         }
 
         void draw(SpriteBatch batch, float x, float y) {
-            batch.draw(keyframe, x, y);
+            var centerX = x - size / 2f;
+            var centerY = y - size / 2f;
+            batch.draw(keyframe, centerX, centerY);
         }
     }
 
