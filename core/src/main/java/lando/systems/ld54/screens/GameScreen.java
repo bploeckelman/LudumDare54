@@ -93,7 +93,9 @@ public class GameScreen extends BaseScreen {
 
         accum += dt;
         worldCamera.unproject(mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+
         launcher.update(dt);
+
         if (Gdx.input.isTouched()){
             Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             worldCamera.unproject(touchPoint);
@@ -112,6 +114,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void renderFrameBuffers(SpriteBatch batch) {
         fogOfWar.render(batch);
+
         fogMaskBuffer.begin();
         ScreenUtils.clear(Color.BLACK);
         batch.setProjectionMatrix(worldCamera.combined);
@@ -149,10 +152,9 @@ public class GameScreen extends BaseScreen {
         exploredTextureRegion.getTexture().bind(0);
 
         batch.draw(exploredTextureRegion.getTexture(), 0, worldCamera.viewportHeight, worldCamera.viewportWidth, -worldCamera.viewportHeight);
+
         batch.setShader(null);
-
         launcher.render(batch);
-
         if (Config.Debug.general) {
             batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
         }
@@ -199,12 +201,9 @@ public class GameScreen extends BaseScreen {
         batch.setShader(assets.plasmaShader);
         batch.begin();
         assets.plasmaShader.setUniformf("u_time", accum);
-
         batch.draw(assets.noiseTexture, -200, -200, gameWidth + 400, gameHeight + 400);
         batch.end();
         batch.setShader(null);
-
-
     }
 
     private void resetWorldCamera() {
@@ -232,4 +231,5 @@ public class GameScreen extends BaseScreen {
         ship.launch(angle, power);
         playerShips.add(ship);
     }
+
 }

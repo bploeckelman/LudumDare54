@@ -9,10 +9,11 @@ import lando.systems.ld54.screens.GameScreen;
 
 public class PlayerShip {
 
+    private static final float DRAG_FRICTION = 0.995f;
+
     private Animation<TextureRegion> anim;
     private TextureRegion keyframe;
     private float animState;
-    private float shipAngle;
 
     // TODO - should pos be center and we offset by half-size in draw()?
     //  or should pos be bottom left and offset by half-size in getCenter()?
@@ -21,6 +22,7 @@ public class PlayerShip {
     public Vector2 pos;
     public Vector2 vel;
     public Vector2 size;
+    public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
 
     public PlayerShip(Assets assets) {
         this.anim = assets.playerShip;
@@ -28,6 +30,7 @@ public class PlayerShip {
         this.pos = new Vector2();
         this.vel = new Vector2();
         this.size = new Vector2();
+        this.rotation = 0;
 
         // TEMP - manually set initial position and size for now
         this.pos.set(GameScreen.gameWidth / 2f, GameScreen.gameHeight / 2f);
@@ -35,23 +38,42 @@ public class PlayerShip {
     }
 
     public void update(float dt) {
+        // update animation
         animState += dt;
         keyframe = anim.getKeyFrame(animState);
 
+        // get rotation based on velocity
+        rotation = vel.angleDeg();
+
+        // integrate velocity into position
         pos.x += dt * vel.x;
         pos.y += dt * vel.y;
+
+        // slow down over time
+        vel.scl(DRAG_FRICTION);
+    }
+
+    public void setVel(float angle, float power) {
+        vel.set(1, 0).setAngleDeg(angle).scl(power);
     }
 
     public void draw(SpriteBatch batch) {
         batch.draw(keyframe,
             pos.x - size.x / 2f,
             pos.y - size.y / 2f,
-            size.x / 2f, size.y / 2f, size.x, size.y, 1f, 1f, shipAngle);
+            size.x / 2f,
+            size.y / 2f,
+            size.x, size.y,
+            1, 1,
+            rotation
+        );
     }
 
     public void launch(float angle, float power) {
-        shipAngle = angle;
-        vel.set(power, 0).rotateDeg(shipAngle + 90);
+        vel.set(1, 0).setAngleDeg(angle).scl(power);
+
+//        setVel(angle, power);
+//        vel.set(power, 0).rotateDeg(shipAngle + 90);
     }
 
 }

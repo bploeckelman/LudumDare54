@@ -1,7 +1,10 @@
 package lando.systems.ld54.fogofwar;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;

@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import lando.systems.ld54.Config;
 import lando.systems.ld54.screens.GameScreen;
+import text.formic.Stringf;
 
 public class DragLauncher {
 
@@ -60,14 +62,30 @@ public class DragLauncher {
     public void render(SpriteBatch batch) {
         if (dragging) {
             var earthCenter = screen.earth.centerPosition;
-            batch.draw(currentImage, earthCenter.x,
-                earthCenter.y - currentImage.getRegionHeight() / 2f, 0,currentImage.getRegionHeight() / 2f,
-                currentImage.getRegionWidth(), currentImage.getRegionHeight(), -strength/maxPull, 1f,angle - 90);
+//            batch.draw(currentImage, earthCenter.x,
+//                earthCenter.y - currentImage.getRegionHeight() / 2f, 0,currentImage.getRegionHeight() / 2f,
+//                currentImage.getRegionWidth(), currentImage.getRegionHeight(), -strength/maxPull, 1f,angle - 90);
+            batch.draw(currentImage,
+                earthCenter.x - currentImage.getRegionWidth() / 2f,
+                earthCenter.y,
+                currentImage.getRegionWidth() / 2f,
+                0,
+                currentImage.getRegionWidth(),
+                currentImage.getRegionHeight(),
+                1f, strength/maxPull,
+                angle
+            );
         }
     }
 
     private void launchShip() {
         // launch angle is backwards
-        screen.launchShip(angle - 180, strength);
+//        screen.launchShip(angle - 180, strength);
+
+        if (Config.Debug.general) {
+            Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, strength));
+        }
+        screen.launchShip(angle, strength);
     }
+
 }
