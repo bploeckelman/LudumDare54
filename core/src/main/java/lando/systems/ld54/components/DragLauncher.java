@@ -25,7 +25,7 @@ public class DragLauncher {
     private final GameScreen screen;
 
     public DragLauncher(GameScreen gameScreen) {
-        dragAnim = gameScreen.assets.launchPuller;
+        dragAnim = gameScreen.assets.launchArrow;
         currentImage = dragAnim.getKeyFrame(0);
         screen = gameScreen;
     }
@@ -60,9 +60,9 @@ public class DragLauncher {
     public void render(SpriteBatch batch) {
         if (dragging) {
             var earthCenter = screen.earth.centerPosition;
-            batch.draw(currentImage, earthCenter.x - currentImage.getRegionWidth() / 2f,
-                earthCenter.y, currentImage.getRegionWidth() / 2f, 0, currentImage.getRegionWidth(),
-                currentImage.getRegionHeight(), 1f, strength/maxPull, angle);
+            batch.draw(currentImage, earthCenter.x,
+                earthCenter.y - currentImage.getRegionHeight() / 2f, 0,currentImage.getRegionHeight() / 2f,
+                currentImage.getRegionWidth(), currentImage.getRegionHeight(), -strength/maxPull, 1f,angle - 90);
         }
     }
 

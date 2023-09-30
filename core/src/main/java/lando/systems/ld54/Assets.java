@@ -51,7 +51,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> obi; //white lab
     public Animation<TextureRegion> earthSpin;
     public Animation<TextureRegion> playerShip;
-    public Animation<TextureRegion> launchPuller;
+    public Animation<TextureRegion> launchArrow;
 
     public TextureRegion pixelRegion;
     public TextureRegion fuzzyCircle;
@@ -191,7 +191,7 @@ public class Assets implements Disposable {
         obi = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
         earthSpin = new Animation<>(0.05f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/player-ship"), Animation.PlayMode.LOOP);
-        launchPuller = new Animation<>(.1f, atlas.findRegions("launchdrag/launchdrag"), Animation.PlayMode.LOOP);
+        launchArrow = new Animation<>(.1f, atlas.findRegions("launch-arrow/launch-arrow"), Animation.PlayMode.LOOP);
 
         // Fonts
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
