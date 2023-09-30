@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import lando.systems.ld54.Assets;
@@ -24,14 +25,7 @@ public class TitleScreenUI extends Group {
 
     public TitleScreenUI(BaseScreen screen) {
         SettingsUI settingsUI = new SettingsUI(screen.assets, screen.skin, screen.audioManager, screen.windowCamera);
-
-        TextButton.TextButtonStyle outfitMediumStyle = screen.skin.get("text", TextButton.TextButtonStyle.class);
-        TextButton.TextButtonStyle titleScreenButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
-        titleScreenButtonStyle.font = screen.assets.abandonedFont20;
-        titleScreenButtonStyle.fontColor = Color.WHITE;
-        titleScreenButtonStyle.up = Assets.Patch.glass.drawable;
-        titleScreenButtonStyle.down = Assets.Patch.glass_dim.drawable;
-        titleScreenButtonStyle.over = Assets.Patch.glass_dim.drawable;
+        TextButton.TextButtonStyle titleScreenButtonStyle = setButtonStyle(screen.skin);
 
         float left = screen.windowCamera.viewportWidth * .8f;
         float top = screen.windowCamera.viewportHeight * (1f / 4f);
@@ -78,5 +72,16 @@ public class TitleScreenUI extends Group {
         addActor(settingsButton);
         addActor(creditButton);
         addActor(settingsUI);
+    }
+
+    private TextButton.TextButtonStyle setButtonStyle(Skin skin) {
+        TextButton.TextButtonStyle outfitMediumStyle = skin.get("text", TextButton.TextButtonStyle.class);
+        TextButton.TextButtonStyle titleScreenButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
+        titleScreenButtonStyle.font = Main.game.assets.abandonedFont20;
+        titleScreenButtonStyle.fontColor = Color.WHITE;
+        titleScreenButtonStyle.up = Assets.Patch.glass.drawable;
+        titleScreenButtonStyle.down = Assets.Patch.glass_dim.drawable;
+        titleScreenButtonStyle.over = Assets.Patch.glass_dim.drawable;
+        return titleScreenButtonStyle;
     }
 }

@@ -128,7 +128,7 @@ public class SettingsUI extends Group {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 audio.setMusicVolume(musicSlider.getValue());
-                audio.currentMusic.setVolume(musicSlider.getValue());
+                if (audio.currentMusic != null) { audio.currentMusic.setVolume(musicSlider.getValue()); }
             }
         });
         settingsWindow.add(musicSlider).padBottom(10f).width(settingsWindow.getWidth() - 100f);
