@@ -1,6 +1,7 @@
 package lando.systems.ld54.screens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,15 +9,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.fogofwar.FogOfWar;
 
 public class GameScreen extends BaseScreen {
+
+    public float gameWidth = Config.Screen.window_width * 3f;
+    public float gameHeight = Config.Screen.framebuffer_height * 3f;
 
     FrameBuffer foggedBuffer;
     FrameBuffer exploredBuffer;
     TextureRegion foggedTextureRegion;
     TextureRegion exploredTextureRegion;
+    FogOfWar fogOfWar;
+
 
     public GameScreen() {
+
+        fogOfWar = new FogOfWar(gameWidth, gameHeight);
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
         int width = Config.Screen.framebuffer_width;
@@ -35,16 +44,19 @@ public class GameScreen extends BaseScreen {
         exploredTextureRegion = new TextureRegion(exploredFrameBufferTexture);
         exploredTextureRegion.flip(false, true);
 
-
+        worldCamera.position.set(gameWidth/2f, gameHeight/2f, 1f);
+        worldCamera.update();
     }
 
     @Override
     public void update(float dt) {
-
+        fogOfWar.update(dt);
     }
 
     @Override
     public void renderFrameBuffers(SpriteBatch batch) {
+        fogOfWar.render(batch);
+
         foggedBuffer.begin();
         renderFogArea(batch);
         foggedBuffer.end();
@@ -58,8 +70,10 @@ public class GameScreen extends BaseScreen {
     public void render(SpriteBatch batch) {
         ScreenUtils.clear(Color.DARK_GRAY);
 
+        batch.setProjectionMatrix(windowCamera.combined);
         batch.begin();
         batch.draw(exploredTextureRegion.getTexture(), 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
+        batch.draw(fogOfWar.fogMaskTexture, 0, 0, 40, 40);
         batch.end();
     }
 
@@ -71,8 +85,9 @@ public class GameScreen extends BaseScreen {
     private void renderExploredArea(SpriteBatch batch) {
         ScreenUtils.clear(Color.BLACK);
 
+        batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
-        batch.draw(assets.pixelRegion, worldCamera.viewportWidth/2f, worldCamera.viewportHeight/2f, 5, 5);
+        batch.draw(assets.pixelRegion, gameWidth/2f, gameHeight/2f, 5, 5);
         batch.end();
     }
 
@@ -82,6 +97,7 @@ public class GameScreen extends BaseScreen {
      * @param batch
      */
     private void renderFogArea(SpriteBatch batch) {
+        batch.setProjectionMatrix(worldCamera.combined);
 
     }
 }
