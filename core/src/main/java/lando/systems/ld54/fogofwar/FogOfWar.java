@@ -58,7 +58,7 @@ public class FogOfWar {
         batch.setShader(fogObjectShader);
         batch.begin();
         fogObjectShader.setUniformf("u_screenBounds", fogMaskCamera.viewportWidth, fogMaskCamera.viewportHeight);
-        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glEnable(GL30.GL_BLEND);
         Gdx.gl.glBlendEquation(GL30.GL_MAX);
 //        batch.setBlendFunction(GL30.GL_SRC_ALPHA, GL30.GL_DST_ALPHA);
 //        batch.setBlendFunctionSeparate(GL30.GL_MAX, GL30.GL_MAX, GL30.GL_MAX, GL30.GL_MAX);

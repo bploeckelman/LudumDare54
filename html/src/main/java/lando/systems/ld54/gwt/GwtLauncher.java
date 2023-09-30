@@ -19,7 +19,9 @@ public class GwtLauncher extends GwtApplication {
 //            return cfg;
             // If you want a fixed size application, comment out the above resizable section,
             // and uncomment below:
-            return new GwtApplicationConfiguration(Config.Screen.window_width, Config.Screen.window_height);
+            GwtApplicationConfiguration config = new GwtApplicationConfiguration(Config.Screen.window_width, Config.Screen.window_height);
+            config.useGL30 = true;
+            return config;
         }
 
         @Override
