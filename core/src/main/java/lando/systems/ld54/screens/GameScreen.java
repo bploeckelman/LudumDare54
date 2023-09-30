@@ -142,6 +142,7 @@ public class GameScreen extends BaseScreen {
 
         fogShader.setUniformf("u_time", fogOfWar.accum);
         fogShader.setUniformf("u_screenSize", worldCamera.viewportWidth, worldCamera.viewportHeight);
+        fogShader.setUniformf("u_showFog", Config.Debug.general ? 0f : 1f);
 
         fogMaskTextureRegion.getTexture().bind(2);
         fogShader.setUniformi("u_texture2", 2);
@@ -153,7 +154,10 @@ public class GameScreen extends BaseScreen {
         batch.setShader(null);
 
         launcher.render(batch);
-        batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth/6, windowCamera.viewportHeight/6);
+
+        if (Config.Debug.general) {
+            batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
+        }
         batch.end();
     }
 

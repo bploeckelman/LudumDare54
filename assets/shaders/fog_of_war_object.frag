@@ -14,9 +14,11 @@ void main() {
     if (v_color.b > .5) {
         // draw Circle
         float radius = v_color.g * 1000.;
-        vec2 shapeDim = radius/u_screenBounds;
+        float shapeDim = radius/100.;
         float dist =  distance(v_texCoord, vec2(.5)) * 2.;
-        float filled = smoothstep(.95, .7, dist) * v_color.a;
+        float leftEdge = 1. - (.01 /shapeDim);
+        float rightEdge = 1. - (.15 / shapeDim);
+        float filled = smoothstep(leftEdge, rightEdge, dist) * v_color.a;
         finalColor = vec4(filled, filled, filled, filled);
     } else {
         // draw Square
