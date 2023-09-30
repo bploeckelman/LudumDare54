@@ -6,6 +6,7 @@
   <inherits name="aurelienribon.tweenengine" />
   <inherits name="com.badlogic.gdx.controllers" />
   <inherits name="com.badlogic.gdx.controllers.controllers-gwt" />
+  <inherits name="com.badlogic.gdx.graphics.g2d.freetype.freetype-gwt" />
   <inherits name="com.github.tommyettinger.textratypist" />
   <inherits name="com.kotcrab.vis.vis-ui" />
   <inherits name="com.ray3k.tenpatch.tenpatch" />
@@ -14,9 +15,12 @@
   <inherits name="lando.systems.ld54.Main" />
   <inherits name="regexodus.regexodus" />
   <inherits name="space.earlygrey.shapedrawer" />
+
   <entry-point class="lando.systems.ld54.gwt.GwtLauncher" />
+
   <set-configuration-property name="gdx.assetpath" value="../assets" />
   <set-configuration-property name="xsiframe.failIfScriptTag" value="FALSE"/>
+
   <!-- These two lines reduce the work GWT has to do during compilation and also shrink output size. -->
   <set-property name="user.agent" value="gecko1_8, safari"/>
   <collapse-property name="user.agent" values="*" />
