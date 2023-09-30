@@ -15,15 +15,19 @@ public class DragLauncher {
     private boolean dragging = false;
     private final Vector2 touchPos = new Vector2();
     private final Vector2 dragPos = new Vector2();
-    //private final Vector2 launchAngle = new Vector2();
+    private float strength = 0;
+    private float angle = 0;
 
     private float maxPull = 100;
     private Animation<TextureRegion> dragAnim;
+    private TextureRegion currentImage;
+    private float timer = 0;
 
     private GameScreen screen;
 
     public DragLauncher(GameScreen gameScreen) {
-        dragAnim = gameScreen.assets.obi;
+        dragAnim = gameScreen.assets.launchPuller;
+        currentImage = dragAnim.getKeyFrame(0);
         screen = gameScreen;
     }
 
@@ -35,17 +39,23 @@ public class DragLauncher {
                 touchPos.set(mousePos.x, mousePos.y);
             }
         } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            timer += delta;
+            currentImage = dragAnim.getKeyFrame(timer);
             dragPos.set(mousePos.x - touchPos.x, mousePos.y - touchPos.y).nor();
-            float strength = MathUtils.clamp(touchPos.dst(mousePos.x, mousePos.y), 0, maxPull);
+            angle = dragPos.angleDeg() - 90;
+            strength = MathUtils.clamp(touchPos.dst(mousePos.x, mousePos.y), 0, maxPull);
             dragPos.scl(strength).add(touchPos);
         } else {
             dragging = false;
+            timer = 0;
         }
     }
 
     public void render(SpriteBatch batch) {
         if (dragging) {
-            batch.draw(dragAnim.getKeyFrame(0), dragPos.x, dragPos.y);
+            System.out.println(angle);
+            batch.draw(currentImage, touchPos.x - currentImage.getRegionWidth()/2f, touchPos.y, currentImage.getRegionWidth() / 2f, 0, currentImage.getRegionWidth(),
+                currentImage.getRegionHeight(), 1f, strength/maxPull, angle);
         }
     }
 

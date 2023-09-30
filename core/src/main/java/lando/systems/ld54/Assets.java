@@ -50,6 +50,8 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> obi; //white lab
     public Animation<TextureRegion> earthSpin;
 
+    public Animation<TextureRegion> launchPuller;
+
     public TextureRegion pixelRegion;
     public TextureRegion fuzzyCircle;
 
@@ -181,6 +183,7 @@ public class Assets implements Disposable {
         obi = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
         earthSpin = new Animation<>(0.05f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
 
+        launchPuller = new Animation<>(.1f, atlas.findRegions("launchdrag/launchdrag"), Animation.PlayMode.LOOP);
         // Fonts
         // TODO - add in some freetype fonts and verify that they work correctly in the web builds
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
