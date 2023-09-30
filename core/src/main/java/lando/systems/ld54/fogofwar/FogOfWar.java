@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.ScreenUtils;
+import lando.systems.ld54.Main;
 
 import java.util.ArrayList;
 
@@ -51,8 +53,11 @@ public class FogOfWar {
 
     public void render(SpriteBatch batch) {
         fogMaskBuffer.begin();
+        ShaderProgram fogObjectShader = Main.game.assets.fogObjectShader;
         batch.setProjectionMatrix(fogMaskCamera.combined);
+        batch.setShader(fogObjectShader);
         batch.begin();
+        fogObjectShader.setUniformf("u_screenBounds", fogMaskCamera.viewportWidth, fogMaskCamera.viewportHeight);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendEquation(GL30.GL_MAX);
 //        batch.setBlendFunction(GL30.GL_SRC_ALPHA, GL30.GL_DST_ALPHA);
@@ -63,6 +68,7 @@ public class FogOfWar {
             if (o.alpha >= 1f) fogObjects.remove(o);
         }
         batch.setBlendFunction(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
+        batch.setShader(null);
         batch.end();
         fogMaskBuffer.end();
         Gdx.gl.glBlendEquation(GL30.GL_FUNC_ADD);

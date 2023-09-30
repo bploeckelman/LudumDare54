@@ -153,6 +153,8 @@ public class GameScreen extends BaseScreen {
         batch.draw(exploredTextureRegion.getTexture(), 0, worldCamera.viewportHeight, worldCamera.viewportWidth, -worldCamera.viewportHeight);
         batch.setShader(null);
 
+        launcher.render(batch);
+        batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth/6, windowCamera.viewportHeight/6);
         batch.end();
     }
 
