@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -49,7 +48,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> yoda; //german shep
     public Animation<TextureRegion> obi; //white lab
     public Animation<TextureRegion> earthSpin;
-
+    public Animation<TextureRegion> playerShip;
     public Animation<TextureRegion> launchPuller;
 
     public TextureRegion pixelRegion;
@@ -182,10 +181,10 @@ public class Assets implements Disposable {
         yoda = new Animation<>(.1f, atlas.findRegions("pets/ross-dog"), Animation.PlayMode.LOOP);
         obi = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
         earthSpin = new Animation<>(0.05f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
-
+        playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/player-ship"), Animation.PlayMode.LOOP);
         launchPuller = new Animation<>(.1f, atlas.findRegions("launchdrag/launchdrag"), Animation.PlayMode.LOOP);
+
         // Fonts
-        // TODO - add in some freetype fonts and verify that they work correctly in the web builds
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
         smallFont.setUseIntegerPositions(false);
         font      = mgr.get("fonts/outfit-medium-40px.fnt");

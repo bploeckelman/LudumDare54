@@ -21,6 +21,7 @@ import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.Asteroid;
+import lando.systems.ld54.objects.PlayerShip;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
@@ -40,6 +41,7 @@ public class GameScreen extends BaseScreen {
     TextureRegion fogMaskTextureRegion;
     FogOfWar fogOfWar;
     Earth earth;
+    PlayerShip playerShip;
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
 
@@ -47,6 +49,7 @@ public class GameScreen extends BaseScreen {
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
         earth = new Earth(assets);
+        playerShip = new PlayerShip(assets);
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
 
@@ -96,9 +99,9 @@ public class GameScreen extends BaseScreen {
             fogOfWar.addFogCircle(touchPoint.x, touchPoint.y, 100);
         }
 
-
         fogOfWar.update(dt);
         earth.update(dt);
+        playerShip.update(dt);
         asteroids.forEach(Asteroid::update);
 
         cameraController.update(dt);
@@ -163,6 +166,7 @@ public class GameScreen extends BaseScreen {
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
         earth.draw(batch, gameWidth / 2f, gameHeight / 2f);
+        playerShip.draw(batch);
         asteroids.forEach(a -> a.draw(batch));
 
         // TEMP - 'world' bounds
