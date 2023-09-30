@@ -13,7 +13,6 @@ import lando.systems.ld54.screens.GameScreen;
 public class DragLauncher {
 
     private boolean dragging = false;
-    private final Vector2 touchPos = new Vector2();
     private final Vector2 dragPos = new Vector2();
     private float strength = 0;
     private float angle = 0;
@@ -21,9 +20,9 @@ public class DragLauncher {
     private float maxPull = 100;
     private Animation<TextureRegion> dragAnim;
     private TextureRegion currentImage;
-    private float timer = 0;
+    private float animTimer = 0;
 
-    private GameScreen screen;
+    private final GameScreen screen;
 
     public DragLauncher(GameScreen gameScreen) {
         dragAnim = gameScreen.assets.launchPuller;
@@ -32,29 +31,36 @@ public class DragLauncher {
     }
 
     public void update(float delta) {
+        animTimer += delta;
         Vector3 mousePos = screen.mousePos;
-        if (!dragging) {
-            dragging = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
-            if (dragging) {
-                touchPos.set(mousePos.x, mousePos.y);
-            }
-        } else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            timer += delta;
-            currentImage = dragAnim.getKeyFrame(timer);
-            dragPos.set(mousePos.x - touchPos.x, mousePos.y - touchPos.y).nor();
-            angle = dragPos.angleDeg() - 90;
-            strength = MathUtils.clamp(touchPos.dst(mousePos.x, mousePos.y), 0, maxPull);
-            dragPos.scl(strength).add(touchPos);
+
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && screen.earth.contains(mousePos)) {
+            dragging = true;
+            animTimer = 0;
+            updateLaunchAngle(mousePos);
+        } else if (dragging && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            updateLaunchAngle(mousePos);
         } else {
             dragging = false;
-            timer = 0;
         }
+    }
+
+    private void updateLaunchAngle(Vector3 mousePos) {
+        currentImage = dragAnim.getKeyFrame(animTimer);
+
+        var earthCenter = screen.earth.centerPosition;
+
+        dragPos.set(mousePos.x - earthCenter.x, mousePos.y - earthCenter.y).nor();
+        angle = dragPos.angleDeg() - 90;
+        strength = MathUtils.clamp(earthCenter.dst(mousePos.x, mousePos.y), 0, maxPull);
+        dragPos.scl(strength).add(earthCenter);
     }
 
     public void render(SpriteBatch batch) {
         if (dragging) {
-            System.out.println(angle);
-            batch.draw(currentImage, touchPos.x - currentImage.getRegionWidth()/2f, touchPos.y, currentImage.getRegionWidth() / 2f, 0, currentImage.getRegionWidth(),
+            var earthCenter = screen.earth.centerPosition;
+            batch.draw(currentImage, earthCenter.x - currentImage.getRegionWidth() / 2f,
+                earthCenter.y, currentImage.getRegionWidth() / 2f, 0, currentImage.getRegionWidth(),
                 currentImage.getRegionHeight(), 1f, strength/maxPull, angle);
         }
     }
