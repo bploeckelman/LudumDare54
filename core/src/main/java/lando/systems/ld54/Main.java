@@ -17,10 +17,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.kotcrab.vis.ui.VisUI;
 import lando.systems.ld54.audio.AudioManager;
-import lando.systems.ld54.screens.*;
+import lando.systems.ld54.screens.BaseScreen;
+import lando.systems.ld54.screens.LaunchScreen;
+import lando.systems.ld54.screens.TitleScreen;
 import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.accessors.*;
 
@@ -105,12 +106,9 @@ public class Main extends ApplicationAdapter {
 
         audioManager = new AudioManager(assets, tween);
 
-        if (Gdx.app.getType() == Application.ApplicationType.WebGL || Config.Debug.show_launch_screen) {
-            setScreen(new LaunchScreen());
-        } else {
-            setScreen(new TitleScreen());
-
-        }
+        var showLaunchScreen = (Gdx.app.getType() == Application.ApplicationType.WebGL || Config.Debug.show_launch_screen);
+        var startingScreen = showLaunchScreen ? new LaunchScreen() : new TitleScreen();
+        setScreen(startingScreen);
     }
 
     public void update(float delta) {

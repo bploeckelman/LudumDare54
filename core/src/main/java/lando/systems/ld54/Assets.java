@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.I18NBundle;
+import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.InputPrompts;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
@@ -155,16 +156,25 @@ public class Assets implements Disposable {
         if (initialized) return 1;
 
         atlas = mgr.get("sprites/sprites.atlas");
+
+        // Initialize asset helpers
+        Asteroids.init(this);
+
+        // String replacement
         strings = mgr.get("i18n/strings", I18NBundle.class);
 
+        // Misc references
         gdx = mgr.get("images/libgdx.png");
 
+        // Animations
         cherry = new Animation<>(.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);
         asuka = new Animation<>(.1f, atlas.findRegions("pets/dog"), Animation.PlayMode.LOOP);
         osha = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
         yoda = new Animation<>(.1f, atlas.findRegions("pets/ross-dog"), Animation.PlayMode.LOOP);
         obi = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
 
+        // Fonts
+        // TODO - add in some freetype fonts and verify that they work correctly in the web builds
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
         smallFont.setUseIntegerPositions(false);
         font      = mgr.get("fonts/outfit-medium-40px.fnt");
@@ -174,6 +184,7 @@ public class Assets implements Disposable {
 
         inputPrompts = new InputPrompts(this);
 
+        // Transition shaders
         randomTransitions = new Array<>();
         blindsShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/blinds.frag");
         fadeShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/dissolve.frag");
