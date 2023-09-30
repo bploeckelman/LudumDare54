@@ -194,7 +194,7 @@ public class Assets implements Disposable {
         largeFont.setUseIntegerPositions(false);
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Abandoned-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 100;
+        parameter.size = 50;
         abandonedFont50 = generator.generateFont(parameter);
         parameter.size = 20;
         abandonedFont20 = generator.generateFont(parameter);

@@ -27,7 +27,7 @@ public class TitleScreenUI extends Group {
 
         TextButton.TextButtonStyle outfitMediumStyle = screen.skin.get("text", TextButton.TextButtonStyle.class);
         TextButton.TextButtonStyle titleScreenButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
-        titleScreenButtonStyle.font = screen.assets.smallFont;
+        titleScreenButtonStyle.font = screen.assets.abandonedFont20;
         titleScreenButtonStyle.fontColor = Color.WHITE;
         titleScreenButtonStyle.up = Assets.Patch.glass.drawable;
         titleScreenButtonStyle.down = Assets.Patch.glass_dim.drawable;
