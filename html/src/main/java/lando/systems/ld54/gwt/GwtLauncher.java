@@ -3,6 +3,9 @@ package lando.systems.ld54.gwt;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
+import com.badlogic.gdx.graphics.g2d.freetype.gwt.FreetypeInjector;
+import com.badlogic.gdx.graphics.g2d.freetype.gwt.inject.OnCompletion;
+import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
 
 /** Launches the GWT application. */
@@ -10,17 +13,24 @@ public class GwtLauncher extends GwtApplication {
         @Override
         public GwtApplicationConfiguration getConfig () {
             // Resizable application, uses available space in browser with no padding:
-            GwtApplicationConfiguration cfg = new GwtApplicationConfiguration(true);
-            cfg.padVertical = 0;
-            cfg.padHorizontal = 0;
-            return cfg;
+//            GwtApplicationConfiguration cfg = new GwtApplicationConfiguration(true);
+//            cfg.padVertical = 0;
+//            cfg.padHorizontal = 0;
+//            return cfg;
             // If you want a fixed size application, comment out the above resizable section,
             // and uncomment below:
-            //return new GwtApplicationConfiguration(640, 480);
+            return new GwtApplicationConfiguration(Config.Screen.window_width, Config.Screen.window_height);
         }
 
         @Override
         public ApplicationListener createApplicationListener () {
             return new Main();
         }
+
+    @Override
+    public void onModuleLoad () {
+        // Replace HtmlLauncher with the class name
+// If your class is called FooBar.java than the line should be FooBar.super.onModuleLoad();
+        FreetypeInjector.inject(GwtLauncher.super::onModuleLoad);
+    }
 }

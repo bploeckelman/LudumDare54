@@ -17,6 +17,12 @@ public class TitleScreen extends BaseScreen {
     }
 
     @Override
+    public void update(float dt) {
+        super.update(dt);
+
+    }
+
+    @Override
     public void renderFrameBuffers(SpriteBatch batch) {
 
     }
