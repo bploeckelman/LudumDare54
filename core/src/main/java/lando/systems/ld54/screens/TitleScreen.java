@@ -10,7 +10,7 @@ import lando.systems.ld54.ui.TitleScreenUI;
 
 public class TitleScreen extends BaseScreen {
 
-    private boolean drawUI = true;
+    private final boolean drawUI = true;
     private Texture background;
 
 

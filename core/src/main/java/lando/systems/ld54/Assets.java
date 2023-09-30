@@ -51,6 +51,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> earthSpin;
 
     public TextureRegion pixelRegion;
+    public TextureRegion fuzzyCircle;
 
     public Array<ShaderProgram> randomTransitions;
     public ShaderProgram starWarsShader;
@@ -71,6 +72,7 @@ public class Assets implements Disposable {
     public ShaderProgram cooldownShader;
     public ShaderProgram influencerShader;
     public ShaderProgram goalShader;
+    public ShaderProgram fogOfWarShader;
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -195,6 +197,8 @@ public class Assets implements Disposable {
         abandonedFont20 = generator.generateFont(parameter);
         generator.dispose();
 
+        fuzzyCircle = atlas.findRegion("fuzzy-circle");
+
         inputPrompts = new InputPrompts(this);
 
         // Transition shaders
@@ -220,6 +224,8 @@ public class Assets implements Disposable {
 
         randomTransitions.add(radialShader);
         randomTransitions.add(pizelizeShader);
+
+        fogOfWarShader = loadShader("shaders/default.vert", "shaders/fog_of_war.frag");
 
         // initialize patch values
         Patch.debug.ninePatch        = new NinePatch(atlas.findRegion("ninepatch/debug"), 2, 2, 2, 2);
