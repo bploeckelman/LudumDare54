@@ -1,51 +1,81 @@
 [
   {
-    "encounterTitle": "New Planet: Cherry's Litterbox",
-    "encounterText": "You have discovered a new planet with Feline smells. They greet you with meows. \n What do you do?",
-    "encounterImageKey": "cherry",
-    "encounterOptions": [
+    "title": "New Planet: Cherry's Litterbox",
+    "text": "You have discovered a new planet with Feline smells. They greet you with meows. \n What do you do?",
+    "imageKey": "cherry",
+    "options": [
       {
-        "optionText": "Meow back",
-        "outcomeType": "DAMAGE",
-        "outcomeValue": 1,
-        "outcomeText": "You meow back and they give you a love bite."
+        "text": "Meow back",
+        "possibleOutcomes": [
+          {
+            "type": "CREDITS",
+            "value": 100,
+            "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+            "weight": 1
+          }
+        ]
       },
       {
-        "optionText": "Ignore them",
-        "outcomeType": "NOTHING",
-        "outcomeValue": 0,
-        "outcomeText": "You ignore them."
+        "text": "Ignore them",
+        "possibleOutcomes": [
+          {
+            "type": "CREDITS",
+            "value": 100,
+            "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+            "weight": 1
+          }
+        ]
       },
       {
-        "optionText": "Attack them",
-        "outcomeType": "DAMAGE",
-        "outcomeValue": 1,
-        "outcomeText": "You attack them and they claw the shit out of you."
+        "text": "Attack them",
+        "possibleOutcomes": [
+          {
+            "type": "CREDITS",
+            "value": 100,
+            "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+            "weight": 1
+          }
+        ]
       }
     ]
   },
   {
-    "encounterTitle": "New Planet: Asuka's Kingdom",
-    "encounterText": "You have arrived at a new planet where Asuka gives you some wet greetings. He is full of love. \n What do you do?",
-    "encounterImageKey": "asuka",
-    "encounterOptions": [
+    "title": "New Planet: Asuka's Kingdom",
+    "text": "You have arrived at a new planet where Asuka gives you some wet greetings. He is full of love. \n What do you do?",
+    "imageKey": "asuka",
+    "options": [
       {
-        "optionText": "Give Nothing",
-        "outcomeType": "DAMAGE",
-        "outcomeValue": 1,
-        "outcomeText": "You are greeted with painful love."
+        "text": "Give Nothing",
+        "possibleOutcomes": [
+          {
+            "type": "CREDITS",
+            "value": 100,
+            "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+            "weight": 1
+          }
+        ]
       },
       {
-        "optionText": "Give Pets",
-        "outcomeType": "NOTHING",
-        "outcomeValue": 0,
-        "outcomeText": "Asuka enjoys it, but wants something more."
+        "text": "Give Pets",
+        "possibleOutcomes": [
+          {
+            "type": "CREDITS",
+            "value": 100,
+            "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+            "weight": 1
+          }
+        ]
       },
       {
-        "optionText": "Give treats",
-        "outcomeType": "HEAL",
-        "outcomeValue": 1,
-        "outcomeText": "Asuka approves."
+        "text": "Give treats",
+        "possibleOutcomes": [
+          {
+            "type": "CREDITS",
+            "value": 100,
+            "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+            "weight": 1
+          }
+        ]
       }
     ]
   }
