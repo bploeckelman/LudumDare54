@@ -3,7 +3,6 @@ package lando.systems.ld54.components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,31 +13,32 @@ import lando.systems.ld54.Config;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.screens.GameScreen;
 import text.formic.Stringf;
+import lando.systems.ld54.objects.Sector;
 
 public class DragLauncher extends InputAdapter {
-
-    private boolean dragging = false;
+    private final GameScreen screen;
     private final Vector3 mousePos = new Vector3();
 
-    private final Vector2 dragPos = new Vector2();
-    private float strength = 0;
-    private float angle = 0;
+    private boolean dragging = false;
 
-    // NOTE - ~100 can't escape the home sector, ~400 can reach all possible goal sectors at 5x5
-    private float maxPull = 400;
-    private Animation<TextureRegion> dragAnim;
+    private final float MAX_PULL_DISTANCE = Sector.HEIGHT / 4;
+    private float pullDistance = 0;
+    private float angle = 0;
+    private float speed = 0;
+    private final Vector2 dragPos = new Vector2();
+
+    private final Animation<TextureRegion> launcherAnimation;
     private TextureRegion currentImage;
+
     private float animTimer = 0;
     private float dragTimer = 0;
 
     private boolean isRevving = false;
 
-    private final GameScreen screen;
-
     public DragLauncher(GameScreen gameScreen) {
-        dragAnim = gameScreen.assets.launchArrow;
-        currentImage = dragAnim.getKeyFrame(0);
         screen = gameScreen;
+        launcherAnimation = gameScreen.assets.launchArrow;
+        currentImage = launcherAnimation.getKeyFrame(0);
     }
 
     @Override
@@ -49,12 +49,6 @@ public class DragLauncher extends InputAdapter {
             mousePos.set(screenX, screenY, 0);
             screen.worldCamera.unproject(mousePos);
             dragging = screen.earth.contains(mousePos);
-
-
-
-
-
-
             if (dragging) {
                 updateLaunchAngle(mousePos);
                 screen.audioManager.playSound(AudioManager.Sounds.engineStart);
@@ -70,11 +64,6 @@ public class DragLauncher extends InputAdapter {
         mousePos.set(screenX, screenY, 0);
         screen.worldCamera.unproject(mousePos);
         updateLaunchAngle(mousePos);
-//        if(screen.assets.engineRevving);
-
-
-
-
         return true;
     }
 
@@ -92,7 +81,7 @@ public class DragLauncher extends InputAdapter {
 
     public void update(float delta) {
         animTimer += delta;
-        currentImage = dragAnim.getKeyFrame(animTimer);
+        currentImage = launcherAnimation.getKeyFrame(animTimer);
         if(dragging) {
             if(dragTimer > .85f) {
                 if(!isRevving) {
@@ -113,16 +102,18 @@ public class DragLauncher extends InputAdapter {
         dragPos.set(earthCenter).sub(mousePos.x, mousePos.y).nor();
         angle = dragPos.angleDeg();
 
-        strength = MathUtils.clamp(earthCenter.dst(mousePos.x, mousePos.y), 0, maxPull);
-        dragPos.scl(strength).add(earthCenter);
+        pullDistance = MathUtils.clamp(earthCenter.dst(mousePos.x, mousePos.y), 0, MAX_PULL_DISTANCE);
+        speed = pullDistance / MAX_PULL_DISTANCE;
+        dragPos.scl(pullDistance).add(earthCenter);
     }
 
     public void render(SpriteBatch batch) {
         if (dragging) {
             var earthCenter = screen.earth.centerPosition;
-            var w = currentImage.getRegionWidth();
-            var h = currentImage.getRegionHeight();
-            var scale = strength / maxPull;
+            var w = MAX_PULL_DISTANCE;
+            float imageScale = currentImage.getRegionWidth() / w;
+            var h = currentImage.getRegionHeight() * imageScale;
+            var scale = pullDistance / MAX_PULL_DISTANCE;
             batch.draw(currentImage,
                 earthCenter.x - w,
                 earthCenter.y - h / 2f,
@@ -138,14 +129,14 @@ public class DragLauncher extends InputAdapter {
 
     private void launchShip() {
         if (Config.Debug.general) {
-            Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, strength));
+            Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, pullDistance));
         }
         dragTimer = 0;
         isRevving = false;
         screen.audioManager.playSound(AudioManager.Sounds.engineLaunch, 1.8f);
         screen.audioManager.loopSound(AudioManager.Sounds.engineRunning, 1.74f);
 
-        // temp
-        screen.launchShip(angle, strength * 5);
+        // speed is 0.2 - 1
+        screen.launchShip(angle, speed);
     }
 }

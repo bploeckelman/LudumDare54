@@ -12,8 +12,8 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Sector {
 
-    private static final float WIDTH = Config.Screen.window_width;
-    private static final float HEIGHT = Config.Screen.window_height;
+    public static final float WIDTH = Config.Screen.window_width;
+    public static final float HEIGHT = Config.Screen.window_height;
     private static final float LINE_WIDTH = 4f;
     private static final Color COLOR = Color.TEAL.cpy().add(0, 0, 0, -0.75f);
 
