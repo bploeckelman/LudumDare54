@@ -191,7 +191,7 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
         // TODO - need to setup DragLauncher as an InputProcessor
         //   so it can be muxed together with this and consume drag events
         //   when the player clicks on earth
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+        if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
             var dx = Gdx.input.getDeltaX() * Time.delta * units_dragged_per_pixel;
             var dy = Gdx.input.getDeltaY() * Time.delta * units_dragged_per_pixel;
             if (dx < 0) moveLeft(dx);

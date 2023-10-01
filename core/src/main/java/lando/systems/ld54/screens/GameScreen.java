@@ -205,8 +205,8 @@ public class GameScreen extends BaseScreen {
 
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
-        planets.forEach(p -> p.render(batch));
         background.render(batch, true);
+        planets.forEach(p -> p.render(batch));
         playerShips.forEach(ps -> ps.draw(batch));
         launcher.render(batch);
         asteroids.forEach(a -> a.draw(batch));
