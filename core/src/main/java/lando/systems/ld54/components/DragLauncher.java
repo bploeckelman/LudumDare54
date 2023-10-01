@@ -22,7 +22,7 @@ public class DragLauncher extends InputAdapter {
     private float strength = 0;
     private float angle = 0;
 
-    private float maxPull = 100;
+    private float maxPull = 500;
     private Animation<TextureRegion> dragAnim;
     private TextureRegion currentImage;
     private float animTimer = 0;

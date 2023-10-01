@@ -2,6 +2,7 @@ package lando.systems.ld54;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -124,6 +125,8 @@ public class Assets implements Disposable {
         public static NinePatch shear;
     }
 
+    public Music mainTheme;
+
     public Sound coin;
 
     public Assets() {
@@ -165,6 +168,9 @@ public class Assets implements Disposable {
             mgr.load("fonts/outfit-medium-20px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-40px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-80px.fnt", BitmapFont.class);
+
+            //Load Music
+            mgr.load("audio/music/mainTheme.ogg", Music.class);
 
             //Load Sounds
             mgr.load("audio/sounds/coin1.ogg", Sound.class);
@@ -317,6 +323,9 @@ public class Assets implements Disposable {
         NinePatches.metal_green                     = new NinePatch(atlas.findRegion("ninepatch/metal-green"),             12, 12, 12, 12);
         NinePatches.metal_yellow                    = new NinePatch(atlas.findRegion("ninepatch/metal-yellow"),            12, 12, 12, 12);
         NinePatches.shear                           = new NinePatch(atlas.findRegion("ninepatch/shear"),                   75, 75, 12, 12);
+
+        // Music
+        mainTheme = mgr.get("audio/music/mainTheme.ogg", Music.class);
 
         // Sounds
         coin = mgr.get("audio/sounds/coin1.ogg", Sound.class);

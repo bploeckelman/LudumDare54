@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.PlanetManager;
+import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.fogofwar.FogOfWar;
@@ -39,6 +41,8 @@ public class GameScreen extends BaseScreen {
     public final Earth earth;
     public final Array<Planet> planets = new Array<Planet>();
     private final Json json = new Json(JsonWriter.OutputType.json);
+
+    public Music levelMusic;
 
     DragLauncher launcher;
 
@@ -64,6 +68,8 @@ public class GameScreen extends BaseScreen {
 
         var planetManager = new PlanetManager(this);
         earth = planetManager.createPlanets(planets);
+
+        levelMusic = audioManager.musics.get(AudioManager.Musics.mainTheme);
 
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
@@ -100,6 +106,7 @@ public class GameScreen extends BaseScreen {
         fogOfWar.addFogCircle(gameWidth/2f, gameHeight/2f, 300);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, launcher, cameraController));
+        levelMusic.play();
     }
 
     @Override

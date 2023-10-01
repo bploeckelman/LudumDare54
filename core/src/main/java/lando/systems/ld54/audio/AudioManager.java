@@ -27,6 +27,7 @@ public class AudioManager implements Disposable {
 
     public enum Musics {
         none
+        , mainTheme
     }
 
     public ObjectMap<Sounds, SoundContainer> sounds = new ObjectMap<>();
@@ -42,6 +43,11 @@ public class AudioManager implements Disposable {
     public AudioManager(Assets assets, TweenManager tween) {
         this.assets = assets;
         this.tween = tween;
+
+
+//        putSound(Musics.mainTheme, assets.mainTheme);
+
+        musics.put(Musics.mainTheme, assets.mainTheme);
 
         putSound(Sounds.coin, assets.coin);
 //        putSound(Sounds.swoosh, assets.swoosh1);
