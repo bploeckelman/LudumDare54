@@ -53,7 +53,6 @@ public class GameScreenUI extends Group {
             barValue = screen.currentShip.fuel / screen.currentShip.FUEL_PER_BAR_LEVEL;
             fuelBar.setValue(barValue);
         }
-        Gdx.app.log("barValue", String.valueOf(barValue));
         fuelBar.setWidth(100f);
         fuelBar.setHeight(10f);
         infoWindow.add(fuelBar).left().pad(5f);
@@ -83,7 +82,6 @@ public class GameScreenUI extends Group {
             barValue = screen.currentShip.fuel / screen.currentShip.FUEL_PER_BAR_LEVEL;
             fuelBar.setValue(barValue);
         }
-        Gdx.app.log("barValue", String.valueOf(barValue));
         scrapValueLabel.setText(String.valueOf(screen.player.scrap));
     }
 
