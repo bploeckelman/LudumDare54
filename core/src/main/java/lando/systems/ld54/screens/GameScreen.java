@@ -37,6 +37,7 @@ public class GameScreen extends BaseScreen {
 
     public final Earth earth;
     public final Array<Planet> planets = new Array<Planet>();
+    private final Json json = new Json(JsonWriter.OutputType.json);
 
     DragLauncher launcher;
 
@@ -262,7 +263,6 @@ public class GameScreen extends BaseScreen {
     private void startEncounter() {
         uiShown = true;
         encounterUI = new EncounterUI(assets, skin, audioManager);
-        Json json = new Json(JsonWriter.OutputType.json);
         var file = Gdx.files.local("encounters/battle_encounters.json");
         Encounter[] encounter = json.fromJson(Encounter[].class, file);
         encounterUI.setEncounter(encounter[MathUtils.random(encounter.length - 1)]);
