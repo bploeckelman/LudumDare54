@@ -20,6 +20,7 @@ public class PlayerShip {
     private float animState;
 
     public boolean trackMovement = false;
+    public int currentSector = -1;
 
     // TODO - should pos be center and we offset by half-size in draw()?
     //  or should pos be bottom left and offset by half-size in getCenter()?
