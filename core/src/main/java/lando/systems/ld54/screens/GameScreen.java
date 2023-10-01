@@ -153,7 +153,7 @@ public class GameScreen extends BaseScreen {
 
         //DEBUG or maybe just the start
         fogOfWar.addFogCircle(gameWidth/2f, gameHeight/2f, 300, 1.5f);
-        fogOfWar.addFogRectangle(799, 400, 1000, 1000, .2f);
+//        fogOfWar.addFogRectangle(799, 400, 1000, 1000, .2f);
 
 
         Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, launcher, cameraController));
