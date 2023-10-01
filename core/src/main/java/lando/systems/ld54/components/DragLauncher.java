@@ -112,6 +112,6 @@ public class DragLauncher extends InputAdapter {
         }
 
         // temp
-        screen.launchShip(angle, strength * 20);
+        screen.launchShip(angle, strength * 5);
     }
 }

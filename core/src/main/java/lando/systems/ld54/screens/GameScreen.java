@@ -156,9 +156,7 @@ public class GameScreen extends BaseScreen {
             x.update(dt);
             if (x.trackMovement) {
                 worldCamera.position.set(x.pos.x, x.pos.y, 0);
-            }
-            if (playerShips.size > 0) {
-                gameScreenUI.setPlayerShip(playerShips.get(playerShips.size - 1));
+                gameScreenUI.setPlayerShip(x);
             }
         });
         asteroids.forEach(Asteroid::update);
