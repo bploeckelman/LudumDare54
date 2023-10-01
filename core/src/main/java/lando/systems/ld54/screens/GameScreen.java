@@ -69,6 +69,7 @@ public class GameScreen extends BaseScreen {
     EncounterUI encounterUI;
     GameScreenUI gameScreenUI;
     MiniMap miniMap;
+    public PlayerShip currentShip;
 
     public GameScreen() {
         background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
@@ -88,7 +89,7 @@ public class GameScreen extends BaseScreen {
         for (int i = 0; i < numSectors; i++) {
             var x = i / SECTORS_WIDE;
             var y = i % SECTORS_WIDE;
-            var sector = new Sector(x, y);
+            var sector = new Sector(x, y, getRandomEncounter());
             sectors.add(sector);
 
             // save index as possible goal
@@ -165,9 +166,11 @@ public class GameScreen extends BaseScreen {
             Gdx.app.exit();
         }
 
+
+        // TODO: DEBUG REMOVE ME
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             if (!encounterShown) {
-                startEncounter();
+                startEncounter(getRandomEncounter());
             } else {
                 finishEncounter();
             }
@@ -191,17 +194,38 @@ public class GameScreen extends BaseScreen {
         background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
-        playerShips.forEach(ship -> {
-            ship.update(dt);
-            if (ship.trackMovement) {
-                cameraController.setCameraPosition(ship.pos.x, ship.pos.y);
-                gameScreenUI.setPlayerShip(ship);
+        playerShips.forEach(x -> {
+            x.update(dt);
+            if (x.trackMovement) {
+                currentShip = x;
+                worldCamera.position.set(x.pos.x, x.pos.y, 0);
+                gameScreenUI.setPlayerShip(currentShip);
             }
         });
         asteroids.forEach(Asteroid::update);
 
         cameraController.update(dt);
+        checkCurrentSector();
         super.update(dt);
+    }
+
+    private void checkCurrentSector() {
+        if (currentShip != null) {
+            for (int i = 0; i < sectors.size - 1; i++) {
+                var sector = sectors.get(i);
+                if (sector.bounds.contains(currentShip.pos)) {
+                    if (currentShip.currentSector != i) {
+                        currentShip.currentSector = i;
+                        if (sector.encounter != null && sector != homeSector && sector != goalSector && !sector.isVisited()) {
+                            startEncounter(sector.encounter);
+                        }
+                        sector.setVisited(true);
+                        Gdx.app.log("Sector", "Entered sector " + i);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -339,14 +363,17 @@ public class GameScreen extends BaseScreen {
         resetWorldCamera();
     }
 
-    private void startEncounter() {
-        encounterShown = true;
-        game.audioManager.stopAllSounds();
-        encounterUI = new EncounterUI(this, assets, skin, audioManager);
+    private Encounter getRandomEncounter() {
         var file = Gdx.files.internal("encounters/battle_encounters.json");
         var encounters = json.fromJson(Array.class, Encounter.class, file);
         var index = MathUtils.random(encounters.size - 1);
-        var encounter = (Encounter) encounters.get(index);
+        return (Encounter) encounters.get(index);
+    }
+
+    private void startEncounter(Encounter encounter) {
+        encounterShown = true;
+        game.audioManager.stopAllSounds();
+        encounterUI = new EncounterUI(this, assets, skin, audioManager);
         encounterUI.setEncounter(encounter);
         uiStage.addActor(encounterUI);
         game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
@@ -360,13 +387,6 @@ public class GameScreen extends BaseScreen {
     }
 
     public void addFuel(float value) {
-        if (playerShips.size > 0) {
-//            PlayerShip currentShip = playerShips.get(playerShips.size - 1);
-//            currentShip.currentFuelLevel += value;
-//            currentShip.STARTING_FUEL += value;
-//            if (currentShip.STARTING_FUEL > currentShip.MAX_FUEL) {
-//                currentShip.STARTING_FUEL = currentShip.MAX_FUEL;
-//            }
-        }
+        // add fuel to player
     }
 }

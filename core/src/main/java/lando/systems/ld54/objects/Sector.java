@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import de.damios.guacamole.gdx.math.IntVector2;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.utils.Time;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
@@ -17,13 +18,16 @@ public class Sector {
     private static final Color COLOR = Color.TEAL.cpy().add(0, 0, 0, -0.75f);
 
     private final IntVector2 coords;
-    private final Rectangle bounds;
+    public final Rectangle bounds;
+    private boolean visited = false;
+    public Encounter encounter = null;
 
     private float animState = 0;
 
-    public Sector(int x, int y) {
+    public Sector(int x, int y, Encounter encounter) {
         this.coords = new IntVector2(x, y);
         this.bounds = new Rectangle(x * WIDTH, y * HEIGHT, WIDTH, HEIGHT);
+        this.encounter = encounter;
     }
 
     public void draw(SpriteBatch batch) {
@@ -35,6 +39,18 @@ public class Sector {
 
     public void draw(ShapeDrawer shapes) {
         shapes.rectangle(bounds, Sector.COLOR, Sector.LINE_WIDTH);
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public boolean setVisited(boolean visited) {
+        return this.visited = visited;
+    }
+
+    public void resetVisited() {
+        this.visited = false;
     }
 
 }
