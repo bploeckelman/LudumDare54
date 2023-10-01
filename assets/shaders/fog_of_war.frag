@@ -16,6 +16,13 @@ varying vec4 v_color;
 varying vec2 v_texCoord;
 
 
+float cubicPulse( float c, float w, float x )
+{
+    x = abs(x - c);
+    if( x>w ) return 0.0;
+    x /= w;
+    return 1.0 - x*x*(3.0-2.0*x);
+}
 
 vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
 vec2 fade(vec2 t) {return t*t*t*(t*(t*6.0-15.0)+10.0);}
@@ -59,10 +66,21 @@ void main() {
     vec4 unexploredColor = texture2D(u_texture1, vec2(v_texCoord.x, v_texCoord.y));
 
     vec2 maskVec = vec2(v_texCoord.x + wiggle.x * cnoise(v_texCoord * 2. + u_time * wiggleSpeedMulti), v_texCoord.y + wiggle.y * cnoise(v_texCoord * 2. - u_time * wiggleSpeedMulti));
+
     vec4 mask = texture2D(u_texture2, maskVec);
 
+    // sample around for hard edge
+    vec2 nextPixel = 1.0 / u_screenSize;
+    vec4 mask1 = texture2D(u_texture2, maskVec + vec2(nextPixel.x, 0));
+    vec4 mask2 = texture2D(u_texture2, maskVec + vec2(-nextPixel.x, 0));
+    vec4 mask3 = texture2D(u_texture2, maskVec + vec2(0, nextPixel.y));
+    vec4 mask4 = texture2D(u_texture2, maskVec + vec2(0, -nextPixel.y));
+    float maskSmooth = (mask.r + mask1.r + mask2.r + mask3.r + mask4.r) / 5.;
+    float edge = cubicPulse(.031, .02, maskSmooth);
+
     vec4 finalColor = mix(exploredColor, unexploredColor, 1. - mask.r);
-    finalColor = mix (exploredColor, finalColor, u_showFog);
+    finalColor = mix(exploredColor, finalColor, u_showFog);
+    finalColor = mix(finalColor, vec4(.2, .2, .5, 1.), edge);
     gl_FragColor = finalColor;
 
 }
