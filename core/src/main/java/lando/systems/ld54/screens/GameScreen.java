@@ -110,7 +110,7 @@ public class GameScreen extends BaseScreen {
         for (int i = 0; i < numSectors; i++) {
             var x = i / SECTORS_WIDE;
             var y = i % SECTORS_WIDE;
-            var sector = new Sector(x, y, getRandomEncounter());
+            var sector = new Sector(this, getRandomEncounter(), x, y);
             sectors.add(sector);
 
             // save index as possible goal
@@ -121,7 +121,15 @@ public class GameScreen extends BaseScreen {
             }
         }
         homeSector = sectors.get(numSectors / 2);
+
+        // TODO - lots of fiddly shit here related to encounters and influencers, need to rework a bit
         homeSector.encounter = null;
+        homeSector.pullPlayerShip.deactivate();
+        homeSector.pushJunk.position.set(
+            homeSector.bounds.x + homeSector.bounds.width / 2f,
+            homeSector.bounds.y + homeSector.bounds.height / 2f
+        );
+
         goalSector = sectors.get(possibleGoals.random());
         goalSector.encounter = null;
 
@@ -222,14 +230,15 @@ public class GameScreen extends BaseScreen {
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
         debris.forEach(d -> d.update(dt));
-        playerShips.forEach(x -> {
-            x.update(dt);
-            if (x.trackMovement) {
-                currentShip = x;
-                cameraController.targetPos.set(x.pos.x, x.pos.y, 0);
+        playerShips.forEach(ship -> {
+            ship.update(dt);
+            if (ship.trackMovement) {
+                currentShip = ship;
+                cameraController.targetPos.set(ship.pos.x, ship.pos.y, 0);
             }
         });
         asteroids.forEach(a -> a.update(dt));
+        sectors.forEach(s -> s.update(dt));
 
         cameraController.update(dt);
         checkCurrentSector();
