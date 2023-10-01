@@ -56,7 +56,6 @@ public class PlayerShip implements Collidable {
         this.size = new Vector2();
         this.rotation = 0;
 
-
         // TODO - this position could be set via the center of the homeSector (passed in)
         // TEMP - manually set initial position and size for now
         this.pos.set(GameScreen.gameWidth / 2f, GameScreen.gameHeight / 2f);
@@ -87,27 +86,22 @@ public class PlayerShip implements Collidable {
         }
 
         fuel = Math.max(0, fuel - vel.len() * dt);
-//        if (vel.isZero()) { return; }
-
-//        // integrate velocity into position
-//        pos.x += dt * vel.x;
-//        pos.y += dt * vel.y;
-//
-//        // slow down over time
-//        vel.scl(DRAG_FRICTION);
 
         float curVelocity = vel.len2();
         if (curVelocity < 1f) {
             trackMovement = false;
-//            vel.setZero();
-            screen.cameraController.targetPos.set(GameScreen.gameWidth/2f, GameScreen.gameHeight/2f, 0);
 
+            // blow up the ship
+            // TODO - only explode when running out of shield / hull
+            //   when we just run out of fuel it should just go derelict and start spinning slowly
             explode();
 
-//            Main.game.audioManager.stopSound(AudioManager.Sounds.engineRunning)
-        } else if (curVelocity < 200f) {
-            trackMovement = false;
-
+            // reset back to home sector for next launch
+            var homeBounds = screen.homeSector.bounds;
+            screen.cameraController.targetPos.set(
+                homeBounds.x + homeBounds.width / 2f,
+                homeBounds.y + homeBounds.height / 2f,
+                0);
         } else {
             // get rotation based on velocity
             rotation = vel.angleDeg();
