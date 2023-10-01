@@ -13,6 +13,11 @@ public class LaunchScreen extends BaseScreen {
         super();
     }
 
+    @Override
+    public void alwaysUpdate(float delta) {
+
+    }
+
     public void update(float dt) {
         if (!exitingScreen && Gdx.input.justTouched()){
             exitingScreen = true;

@@ -159,8 +159,7 @@ public class EncounterUI extends Group {
                     case NOTHING:
                         break;
                 }
-                remove();
-                screen.audioManager.swapMusic(screen.levelMusic, screen.levelMusicLowpass);
+                screen.finishEncounter();
             }
         });
         encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);

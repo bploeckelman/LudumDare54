@@ -28,6 +28,7 @@ import lando.systems.ld54.objects.*;
 import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.ui.GameScreenUI;
 import lando.systems.ld54.ui.MiniMap;
+import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
@@ -146,6 +147,16 @@ public class GameScreen extends BaseScreen {
         gameScreenUI = new GameScreenUI(assets);
         uiStage.addActor(gameScreenUI);
         miniMap = new MiniMap(this);
+    }
+
+    @Override
+    public void alwaysUpdate(float delta) {
+        //uistage and audio should always update even when paused
+        if (encounterShown) {
+            Time.pause_timer = 2f;
+        }
+        uiStage.act(delta);
+        audioManager.update(delta);
     }
 
     @Override
@@ -341,8 +352,9 @@ public class GameScreen extends BaseScreen {
         game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
     }
 
-    private void finishEncounter() {
+    public void finishEncounter() {
         encounterShown = false;
+        Time.pause_timer = 0f;
         encounterUI.remove();
         game.audioManager.swapMusic(levelMusicLowpass, levelMusic);
     }
