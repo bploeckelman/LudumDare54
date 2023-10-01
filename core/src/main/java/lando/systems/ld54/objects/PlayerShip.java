@@ -151,7 +151,7 @@ public class PlayerShip implements Collidable {
             var velY = magnitude * MathUtils.sinDeg(angle);
             var dist = MathUtils.randomSign() * MathUtils.random(5, 10);
             var posX = pos.x + dist * velX;
-            var posY = pos.y + dist * velX;
+            var posY = pos.y + dist * velY;
             var spinDir = MathUtils.randomSign();
             var spin = spinDir * MathUtils.random(2, 15);
             var part = new PlayerShipPart(type, screen.assets, posX, posY);
