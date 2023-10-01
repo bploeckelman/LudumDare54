@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.ui.TitleScreenUI;
 
 public class TitleScreen extends BaseScreen {
@@ -17,6 +18,7 @@ public class TitleScreen extends BaseScreen {
     public TitleScreen() {
         background = Main.game.assets.gdx;
         Gdx.input.setInputProcessor(uiStage);
+        Main.game.audioManager.playMusic(AudioManager.Musics.intro);
     }
 
     @Override

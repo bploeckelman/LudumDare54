@@ -3,6 +3,7 @@ package lando.systems.ld54.components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.screens.GameScreen;
 import text.formic.Stringf;
 
@@ -26,6 +28,9 @@ public class DragLauncher extends InputAdapter {
     private Animation<TextureRegion> dragAnim;
     private TextureRegion currentImage;
     private float animTimer = 0;
+    private float dragTimer = 0;
+
+    private boolean isRevving = false;
 
     private final GameScreen screen;
 
@@ -43,6 +48,12 @@ public class DragLauncher extends InputAdapter {
             mousePos.set(screenX, screenY, 0);
             screen.worldCamera.unproject(mousePos);
             dragging = screen.earth.contains(mousePos);
+            screen.audioManager.playSound(AudioManager.Sounds.engineStart);
+
+
+
+
+
             if (dragging) {
                 updateLaunchAngle(mousePos);
             }
@@ -57,6 +68,10 @@ public class DragLauncher extends InputAdapter {
         mousePos.set(screenX, screenY, 0);
         screen.worldCamera.unproject(mousePos);
         updateLaunchAngle(mousePos);
+//        if(screen.assets.engineRevving);
+
+
+
 
         return true;
     }
@@ -65,6 +80,8 @@ public class DragLauncher extends InputAdapter {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (dragging) {
             dragging = false;
+            screen.audioManager.stopSound(AudioManager.Sounds.engineStart);
+            screen.audioManager.stopSound(AudioManager.Sounds.engineRevving);
             launchShip();
             return true;
         }
@@ -74,6 +91,17 @@ public class DragLauncher extends InputAdapter {
     public void update(float delta) {
         animTimer += delta;
         currentImage = dragAnim.getKeyFrame(animTimer);
+        if(dragging) {
+            if(dragTimer > .85f) {
+                if(!isRevving) {
+                    screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .46f);
+                }
+
+                isRevving = true;
+            }
+            dragTimer+= delta;
+        }
+
     }
 
     private void updateLaunchAngle(Vector3 mousePos) {
@@ -110,6 +138,10 @@ public class DragLauncher extends InputAdapter {
         if (Config.Debug.general) {
             Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, strength));
         }
+        dragTimer = 0;
+        isRevving = false;
+        screen.audioManager.playSound(AudioManager.Sounds.engineLaunch, 1.8f);
+        screen.audioManager.loopSound(AudioManager.Sounds.engineRunning, 1.74f);
 
         // temp
         screen.launchShip(angle, strength * 5);

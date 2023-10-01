@@ -1,10 +1,13 @@
 package lando.systems.ld54.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.Assets;
+import lando.systems.ld54.Main;
+import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.screens.GameScreen;
 
@@ -70,8 +73,13 @@ public class PlayerShip {
         float curVelocity = vel.len2();
         if (curVelocity < 0.1f) {
             vel.setZero();
+//            Main.game.audioManager.stopSound(AudioManager.Sounds.engineRunning)
+
         } else if (curVelocity < 200f) {
             trackMovement = false;
+
+            Main.game.assets.engineRunning.stop();
+            Gdx.app.log("Stopping", "stopping");
         } else {
             // get rotation based on velocity
             rotation = vel.angleDeg();

@@ -23,12 +23,17 @@ public class AudioManager implements Disposable {
     public enum Sounds {
         none
         , coin
+        , engineStart
+        , engineRevving
+        , engineLaunch
+        , engineRunning
     }
 
     public enum Musics {
         none
         , mainTheme
         , mainThemeLowpass
+        , intro
     }
 
     public ObjectMap<Sounds, SoundContainer> sounds = new ObjectMap<>();
@@ -50,8 +55,13 @@ public class AudioManager implements Disposable {
 
         musics.put(Musics.mainTheme, assets.mainTheme);
         musics.put(Musics.mainThemeLowpass, assets.mainThemeLowpass);
+        musics.put(Musics.intro, assets.intro);
 
         putSound(Sounds.coin, assets.coin);
+        putSound(Sounds.engineStart, assets.engineStart);
+        putSound(Sounds.engineRevving, assets.engineRevving);
+        putSound(Sounds.engineLaunch, assets.engineLaunch);
+        putSound(Sounds.engineRunning, assets.engineRunning);
 //        putSound(Sounds.swoosh, assets.swoosh1);
 //        putSound(Sounds.bigswoosh, assets.bigSwoosh1);
 //        putSound(Sounds.grunt, assets.grunt1);

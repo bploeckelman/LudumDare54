@@ -125,10 +125,15 @@ public class Assets implements Disposable {
         public static NinePatch shear;
     }
 
+    public Music intro;
     public Music mainTheme;
     public Music mainThemeLowpass;
 
     public Sound coin;
+    public Sound engineStart;
+    public Sound engineRevving;
+    public Sound engineLaunch;
+    public Sound engineRunning;
 
     public Assets() {
         this(Load.SYNC);
@@ -173,9 +178,14 @@ public class Assets implements Disposable {
             //Load Music
             mgr.load("audio/music/mainTheme.ogg", Music.class);
             mgr.load("audio/music/mainThemeLowpass.ogg", Music.class);
+            mgr.load("audio/music/intro.ogg", Music.class);
 
             //Load Sounds
             mgr.load("audio/sounds/coin1.ogg", Sound.class);
+            mgr.load("audio/sounds/engine-start.ogg", Sound.class);
+            mgr.load("audio/sounds/engine-revving.ogg", Sound.class);
+            mgr.load("audio/sounds/engine-launch.ogg", Sound.class);
+            mgr.load("audio/sounds/engine-running.ogg", Sound.class);
 
         }
 
@@ -329,9 +339,14 @@ public class Assets implements Disposable {
         // Music
         mainTheme = mgr.get("audio/music/mainTheme.ogg", Music.class);
         mainThemeLowpass = mgr.get("audio/music/mainThemeLowpass.ogg", Music.class);
+        intro = mgr.get("audio/music/intro.ogg", Music.class);
 
         // Sounds
         coin = mgr.get("audio/sounds/coin1.ogg", Sound.class);
+        engineStart = mgr.get("audio/sounds/engine-start.ogg", Sound.class);
+        engineRevving = mgr.get("audio/sounds/engine-revving.ogg", Sound.class);
+        engineLaunch = mgr.get("audio/sounds/engine-launch.ogg", Sound.class);
+        engineRunning = mgr.get("audio/sounds/engine-running.ogg", Sound.class);
 
         initialized = true;
         return 1;

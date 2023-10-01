@@ -124,6 +124,7 @@ public class GameScreen extends BaseScreen {
 //        audioManager.playMusic(AudioManager.Musics.mainThemeLowpass);
         levelMusic.setVolume(audioManager.musicVolume.floatValue());
         levelMusic.setLooping(true);
+        levelMusicLowpass.setLooping(true);
         levelMusic.play();
 
         gameScreenUI = new GameScreenUI(assets);
@@ -307,6 +308,7 @@ public class GameScreen extends BaseScreen {
 
     private void startEncounter() {
         encounterShown = true;
+        game.audioManager.stopAllSounds();
         encounterUI = new EncounterUI(this, assets, skin, audioManager);
         var file = Gdx.files.internal("encounters/battle_encounters.json");
         var encounters = json.fromJson(Array.class, Encounter.class, file);
@@ -314,11 +316,13 @@ public class GameScreen extends BaseScreen {
         var encounter = (Encounter) encounters.get(index);
         encounterUI.setEncounter(encounter);
         uiStage.addActor(encounterUI);
+        game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
     }
 
     private void finishEncounter() {
         encounterShown = false;
         encounterUI.remove();
+        game.audioManager.swapMusic(levelMusicLowpass, levelMusic);
     }
 
     public void addFuel(float value) {
