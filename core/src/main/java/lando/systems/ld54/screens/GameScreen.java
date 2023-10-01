@@ -154,6 +154,7 @@ public class GameScreen extends BaseScreen {
 //        audioManager.playMusic(AudioManager.Musics.mainTheme);
 //        audioManager.playMusic(AudioManager.Musics.mainThemeLowpass);
         levelMusic.setVolume(audioManager.musicVolume.floatValue());
+        levelMusicLowpass.setVolume(audioManager.musicVolume.floatValue());
         levelMusic.setLooping(true);
         levelMusicLowpass.setLooping(true);
         levelMusic.play();
