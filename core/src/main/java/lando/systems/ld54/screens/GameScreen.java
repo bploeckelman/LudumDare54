@@ -113,7 +113,9 @@ public class GameScreen extends BaseScreen {
             }
         }
         homeSector = sectors.get(numSectors / 2);
+        homeSector.encounter = null;
         goalSector = sectors.get(possibleGoals.random());
+        goalSector.encounter = null;
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
         int width = Config.Screen.framebuffer_width;
@@ -313,6 +315,7 @@ public class GameScreen extends BaseScreen {
         background.render(batch, true);
 
         sectors.forEach(sector -> sector.draw(assets.shapes));
+        sectors.forEach(sector -> sector.drawEncounter(batch));
         goalSector.draw(batch);
 
         planets.forEach(p -> p.render(batch));

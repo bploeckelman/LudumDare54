@@ -1,12 +1,14 @@
 package lando.systems.ld54.ui;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.*;
 import lando.systems.ld54.Assets;
@@ -18,7 +20,6 @@ import lando.systems.ld54.encounters.EncounterOptionOutcome;
 import lando.systems.ld54.screens.GameScreen;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class EncounterUI extends Group {
     private Assets assets;
@@ -26,14 +27,15 @@ public class EncounterUI extends Group {
     private AudioManager audio;
     private VisWindow encounterWindow;
     private VisLabel encounterTextLabel;
+    VisImage encounterImageBox;
     private GameScreen screen;
+    private float animTimer = 0f;
 
     private String encounterTitle = "";
     private String encounterText = "";
-    private TextureRegion encounterImage;
+    private Animation<TextureRegion> encounterAnimation;
     private ArrayList<EncounterOption> encounterOptions;
     private ArrayList<VisTextButton> optionButtons;
-    private HashMap<String, TextureRegion> textureRegionHashMap = new HashMap<>();
     private VisTextButton.VisTextButtonStyle optionStyle;
 
     public EncounterUI(GameScreen screen, Assets assets, Skin skin, AudioManager audio) {
@@ -42,32 +44,28 @@ public class EncounterUI extends Group {
         this.assets = assets;
         this.skin = skin;
         this.audio = audio;
-        textureRegionHashMap.put("asuka", assets.asuka.getKeyFrame(0));
-        textureRegionHashMap.put("cherry", assets.cherry.getKeyFrame(0));
-        textureRegionHashMap.put("spaceship", assets.playerShip.getKeyFrame(0));
-        textureRegionHashMap.put("nebula", assets.marsSpin.getKeyFrame(0));
-        textureRegionHashMap.put("blackhole", assets.fuzzyCircle);
-        textureRegionHashMap.put("mysteriousplanet", assets.venusSpin.getKeyFrame(0));
-        textureRegionHashMap.put("asteroidfield", assets.fuzzyCircle);
-        textureRegionHashMap.put("abandonedstation", assets.earthSpin.getKeyFrame(0));
-        textureRegionHashMap.put("spacepirates", assets.obi.getKeyFrame(0));
-        textureRegionHashMap.put("meteorshower", assets.mercurySpin.getKeyFrame(0));
-        textureRegionHashMap.put("gasgiantmoon", assets.yoda.getKeyFrame(0));
-        textureRegionHashMap.put("interstellaranomaly", assets.osha.getKeyFrame(0));
-        textureRegionHashMap.put("asteroidmining", assets.earthSpin.getKeyFrame(0));
-        encounterImage = assets.obi.getKeyFrame(0);
+        encounterAnimation = null;
         encounterOptions = new ArrayList<>();
     }
 
     public void setEncounter(Encounter encounter) {
         encounterTitle = encounter.title;
         encounterText = encounter.text;
-        encounterImage = textureRegionHashMap.get(encounter.imageKey);
+        encounterAnimation = assets.encounterAnimationHashMap.get(encounter.imageKey);
         encounterOptions.clear();
         for (EncounterOption option : encounter.options) {
             encounterOptions.add(option);
         }
         initializeUI();
+    }
+
+   @Override
+    public void act(float delta) {
+        super.act(delta);
+        animTimer += delta;
+        if (encounterAnimation != null) {
+            encounterImageBox.setDrawable(new TextureRegionDrawable(encounterAnimation.getKeyFrame(animTimer)));
+        }
     }
 
     public void initializeUI() {
@@ -95,7 +93,7 @@ public class EncounterUI extends Group {
         encounterWindow.add(encounterTitleLabel).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f);
         encounterWindow.row();
 
-        VisImage encounterImageBox = new VisImage(encounterImage);
+        encounterImageBox = new VisImage(encounterAnimation.getKeyFrame(0));
         float size = encounterWindow.getHeight() / 3f;
         encounterWindow.add(encounterImageBox).padTop(10f).padBottom(10f).width(size).height(size);
         encounterWindow.row();

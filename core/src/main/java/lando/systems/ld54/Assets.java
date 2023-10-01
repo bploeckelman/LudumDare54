@@ -20,6 +20,8 @@ import lando.systems.ld54.objects.PlayerShipPart;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 import text.formic.Stringf;
 
+import java.util.HashMap;
+
 public class Assets implements Disposable {
 
     public static String storedPrefsName = "space_limited";
@@ -93,6 +95,7 @@ public class Assets implements Disposable {
     public ShaderProgram plasmaShader;
     public ShaderProgram fogObjectShader;
     public ShaderProgram starfieldShader;
+    public HashMap<String, Animation<TextureRegion>> encounterAnimationHashMap = new HashMap<>();
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -364,6 +367,20 @@ public class Assets implements Disposable {
         engineRevving = mgr.get("audio/sounds/engine-revving.ogg", Sound.class);
         engineLaunch = mgr.get("audio/sounds/engine-launch.ogg", Sound.class);
         engineRunning = mgr.get("audio/sounds/engine-running.ogg", Sound.class);
+
+        encounterAnimationHashMap.put("asuka", asuka);
+        encounterAnimationHashMap.put("cherry", cherry);
+        encounterAnimationHashMap.put("spaceship", playerShip);
+        encounterAnimationHashMap.put("nebula", marsSpin);
+        encounterAnimationHashMap.put("blackhole", marsSpin);
+        encounterAnimationHashMap.put("mysteriousplanet", venusSpin);
+        encounterAnimationHashMap.put("asteroidfield", marsSpin);
+        encounterAnimationHashMap.put("abandonedstation", earthSpin);
+        encounterAnimationHashMap.put("spacepirates", obi);
+        encounterAnimationHashMap.put("meteorshower", mercurySpin);
+        encounterAnimationHashMap.put("gasgiantmoon", yoda);
+        encounterAnimationHashMap.put("interstellaranomaly", osha);
+        encounterAnimationHashMap.put("asteroidmining", earthSpin);
 
         initialized = true;
         return 1;
