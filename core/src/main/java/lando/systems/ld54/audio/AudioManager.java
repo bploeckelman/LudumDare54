@@ -305,6 +305,28 @@ public class AudioManager implements Disposable {
             soundVolume.setValue(level);
     }
 
+    public void swapMusic(Music musicA, Music musicB) {
+        if(musicA.isPlaying()) {
+            float currentPosition = musicA.getPosition();
+            musicB.play();
+            musicB.setPosition(currentPosition);
+            musicA.stop();
+            return;
+        }
+        else if(musicB.isPlaying()) {
+            float currentPosition = musicB.getPosition();
+            musicA.play();
+            musicA.setPosition(currentPosition);
+            musicB.stop();
+            return;
+        }
+        else {
+            return;
+
+        }
+
+    }
+
 }
 
 class SoundContainer {

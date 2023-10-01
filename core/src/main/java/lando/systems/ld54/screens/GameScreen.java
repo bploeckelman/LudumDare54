@@ -139,18 +139,8 @@ public class GameScreen extends BaseScreen {
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            if(levelMusic.isPlaying()) {
-                float currentPosition = levelMusic.getPosition();
-                levelMusicLowpass.play();
-                levelMusicLowpass.setPosition(currentPosition);
-                levelMusic.stop();
-            }
-            else if(levelMusicLowpass.isPlaying()) {
-                float currentPosition = levelMusicLowpass.getPosition();
-                levelMusic.play();
-                levelMusic.setPosition(currentPosition);
-                levelMusicLowpass.stop();
-            }
+            audioManager.swapMusic(levelMusic, levelMusicLowpass);
+
 //            audioManager.fadeMusic(AudioManager.Musics.mainTheme);
 //            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
         }
