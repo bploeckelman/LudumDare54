@@ -71,7 +71,6 @@ public class PlayerShip implements Collidable {
         // update animation
         animState += dt;
         keyframe = anim.getKeyFrame(animState);
-        Gdx.app.log("Fuel amount", String.valueOf(fuel));
         Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
         if (fuel <= 0) {
             Main.game.assets.engineRunning.stop();
@@ -146,6 +145,7 @@ public class PlayerShip implements Collidable {
         // TODO - particle effect
         // TODO - sound effect
         screen.audioManager.playSound(AudioManager.Sounds.explosion);
+        screen.assets.engineRunning.stop();
 
         // instantiate the ship parts
         // TODO - maybe do something cutesy where we line them up all nice then blast them apart,
