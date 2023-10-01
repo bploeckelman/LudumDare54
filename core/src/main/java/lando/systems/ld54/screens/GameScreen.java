@@ -3,7 +3,6 @@ package lando.systems.ld54.screens;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -15,25 +14,24 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
+import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.PlanetManager;
-import lando.systems.ld54.encounters.Encounter;
-import lando.systems.ld54.objects.Earth;
 import lando.systems.ld54.components.DragLauncher;
+import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.fogofwar.FogOfWar;
-import lando.systems.ld54.objects.Asteroid;
-import lando.systems.ld54.objects.Planet;
-import lando.systems.ld54.objects.Background;
-import lando.systems.ld54.objects.PlayerShip;
+import lando.systems.ld54.objects.*;
 import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
 
-    public static float gameWidth = Config.Screen.window_width * 3f;
-    public static float gameHeight = Config.Screen.framebuffer_height * 3f;
+    public static float gameWidth = Config.Screen.window_width * 6f;
+    public static float gameHeight = Config.Screen.window_height * 6f;
 
     public final Vector3 mousePos = new Vector3();
 

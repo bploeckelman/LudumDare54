@@ -228,7 +228,7 @@ public class Assets implements Disposable {
         abandonedFont20 = generator.generateFont(parameter);
         parameter.size = 100;
         abandonedFont100 = generator.generateFont(parameter);
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Starjedi.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Abandoned-Bold.ttf"));
         parameter.size = 50;
         starJediFont50 = generator.generateFont(parameter);
         parameter.size = 20;
