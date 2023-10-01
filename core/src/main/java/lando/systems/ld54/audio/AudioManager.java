@@ -27,6 +27,16 @@ public class AudioManager implements Disposable {
         , engineRevving
         , engineLaunch
         , engineRunning
+        , thud
+        , upgrade
+        , powerup
+        , radar
+        , swoosh
+        , stingAliens1
+        , stingAliens2
+        , stingTriumphant
+        , stingIntense
+        , explosion
     }
 
     public enum Musics {
@@ -64,6 +74,26 @@ public class AudioManager implements Disposable {
         putSound(Sounds.engineRevving, assets.engineRevving);
         putSound(Sounds.engineLaunch, assets.engineLaunch);
         putSound(Sounds.engineRunning, assets.engineRunning);
+        putSound(Sounds.thud, assets.thud1);
+        putSound(Sounds.thud, assets.thud2);
+        putSound(Sounds.thud, assets.thud3);
+        putSound(Sounds.thud, assets.thud4);
+        putSound(Sounds.thud, assets.thud5);
+        putSound(Sounds.thud, assets.thud6);
+        putSound(Sounds.thud, assets.thud7);
+        putSound(Sounds.thud, assets.thud8);
+        putSound(Sounds.upgrade, assets.upgrade1);
+        putSound(Sounds.powerup, assets.powerup1);
+        putSound(Sounds.powerup, assets.powerup2);
+        putSound(Sounds.radar, assets.radar1);
+        putSound(Sounds.swoosh, assets.swoosh1);
+        putSound(Sounds.stingAliens1, assets.stingAliens1);
+        putSound(Sounds.stingAliens2, assets.stingAliens2);
+        putSound(Sounds.stingTriumphant, assets.stingTriumphant);
+        putSound(Sounds.stingIntense, assets.stingIntense);
+        putSound(Sounds.explosion, assets.explosion1);
+        putSound(Sounds.explosion, assets.explosion2);
+        putSound(Sounds.explosion, assets.explosion3);
 //        putSound(Sounds.swoosh, assets.swoosh1);
 //        putSound(Sounds.bigswoosh, assets.bigSwoosh1);
 //        putSound(Sounds.grunt, assets.grunt1);

@@ -143,6 +143,27 @@ public class Assets implements Disposable {
     public Sound engineRevving;
     public Sound engineLaunch;
     public Sound engineRunning;
+    public Sound thud1;
+    public Sound thud2;
+    public Sound thud3;
+    public Sound thud4;
+    public Sound thud5;
+    public Sound thud6;
+    public Sound thud7;
+    public Sound thud8;
+    public Sound upgrade1;
+    public Sound radar1;
+    public Sound powerup1;
+    public Sound powerup2;
+    public Sound swoosh1;
+    public Sound stingAliens1;
+    public Sound stingAliens2;
+    public Sound stingTriumphant;
+    public Sound stingIntense;
+    public Sound explosion1;
+    public Sound explosion2;
+    public Sound explosion3;
+
 
     public Assets() {
         this(Load.SYNC);
@@ -198,6 +219,26 @@ public class Assets implements Disposable {
             mgr.load("audio/sounds/engine-revving.ogg", Sound.class);
             mgr.load("audio/sounds/engine-launch.ogg", Sound.class);
             mgr.load("audio/sounds/engine-running.ogg", Sound.class);
+            mgr.load("audio/sounds/thud1.ogg", Sound.class);
+            mgr.load("audio/sounds/thud2.ogg", Sound.class);
+            mgr.load("audio/sounds/thud3.ogg", Sound.class);
+            mgr.load("audio/sounds/thud4.ogg", Sound.class);
+            mgr.load("audio/sounds/thud5.ogg", Sound.class);
+            mgr.load("audio/sounds/thud6.ogg", Sound.class);
+            mgr.load("audio/sounds/thud7.ogg", Sound.class);
+            mgr.load("audio/sounds/thud8.ogg", Sound.class);
+            mgr.load("audio/sounds/upgrade1.ogg", Sound.class);
+            mgr.load("audio/sounds/radar1.ogg", Sound.class);
+            mgr.load("audio/sounds/powerup1.ogg", Sound.class);
+            mgr.load("audio/sounds/powerup2.ogg", Sound.class);
+            mgr.load("audio/sounds/swoosh1.ogg", Sound.class);
+            mgr.load("audio/sounds/sting-aliens1.ogg", Sound.class);
+            mgr.load("audio/sounds/sting-aliens2.ogg", Sound.class);
+            mgr.load("audio/sounds/sting-triumphant.ogg", Sound.class);
+            mgr.load("audio/sounds/sting-intense.ogg", Sound.class);
+            mgr.load("audio/sounds/explosion1.ogg", Sound.class);
+            mgr.load("audio/sounds/explosion2.ogg", Sound.class);
+            mgr.load("audio/sounds/explosion3.ogg", Sound.class);
 
         }
 
@@ -375,6 +416,31 @@ public class Assets implements Disposable {
         engineRevving = mgr.get("audio/sounds/engine-revving.ogg", Sound.class);
         engineLaunch = mgr.get("audio/sounds/engine-launch.ogg", Sound.class);
         engineRunning = mgr.get("audio/sounds/engine-running.ogg", Sound.class);
+        thud1 = mgr.get("audio/sounds/thud1.ogg", Sound.class);
+        thud2 = mgr.get("audio/sounds/thud2.ogg", Sound.class);
+        thud3 = mgr.get("audio/sounds/thud3.ogg", Sound.class);
+        thud4 = mgr.get("audio/sounds/thud4.ogg", Sound.class);
+        thud5 = mgr.get("audio/sounds/thud5.ogg", Sound.class);
+        thud6 = mgr.get("audio/sounds/thud6.ogg", Sound.class);
+        thud7 = mgr.get("audio/sounds/thud7.ogg", Sound.class);
+        thud8 = mgr.get("audio/sounds/thud8.ogg", Sound.class);
+        upgrade1 = mgr.get("audio/sounds/upgrade1.ogg", Sound.class);
+        radar1 = mgr.get("audio/sounds/radar1.ogg", Sound.class);
+        powerup1 = mgr.get("audio/sounds/powerup1.ogg", Sound.class);
+        powerup2 = mgr.get("audio/sounds/powerup2.ogg", Sound.class);
+        swoosh1 = mgr.get("audio/sounds/swoosh1.ogg", Sound.class);
+
+        stingAliens1 = mgr.get("audio/sounds/sting-aliens1.ogg", Sound.class);
+        stingAliens2 = mgr.get("audio/sounds/sting-aliens2.ogg", Sound.class);
+        stingTriumphant = mgr.get("audio/sounds/sting-triumphant.ogg", Sound.class);
+        stingIntense = mgr.get("audio/sounds/sting-intense.ogg", Sound.class);
+        explosion1 = mgr.get("audio/sounds/explosion1.ogg", Sound.class);
+        explosion2 = mgr.get("audio/sounds/explosion2.ogg", Sound.class);
+        explosion3 = mgr.get("audio/sounds/explosion3.ogg", Sound.class);
+//        = mgr.get("audio/sounds/.ogg", Sound.class);
+//        = mgr.get("audio/sounds/.ogg", Sound.class);
+//        = mgr.get("audio/sounds/.ogg", Sound.class);
+//        = mgr.get("audio/sounds/.ogg", Sound.class);
 
         encounterAnimationHashMap.put("asuka", asuka);
         encounterAnimationHashMap.put("cherry", cherry);

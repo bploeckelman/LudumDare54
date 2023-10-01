@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
 import lando.systems.ld54.physics.CollisionShapeCircle;
@@ -127,6 +128,7 @@ public class PlayerShip implements Collidable {
     public void explode() {
         // TODO - particle effect
         // TODO - sound effect
+        screen.audioManager.playSound(AudioManager.Sounds.explosion);
 
         // instantiate the ship parts
         // TODO - maybe do something cutesy where we line them up all nice then blast them apart,
@@ -250,6 +252,7 @@ public class PlayerShip implements Collidable {
 
     @Override
     public void collidedWith(Collidable object) {
+        screen.audioManager.playSound(AudioManager.Sounds.thud);
 
         if (object instanceof GameBoundry){
             vel.set(0,0);
