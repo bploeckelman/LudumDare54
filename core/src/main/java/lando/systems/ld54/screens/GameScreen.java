@@ -106,6 +106,7 @@ public class GameScreen extends BaseScreen {
         fogOfWar.addFogCircle(gameWidth/2f, gameHeight/2f, 300);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, launcher, cameraController));
+        levelMusic.setLooping(true);
         levelMusic.play();
     }
 
