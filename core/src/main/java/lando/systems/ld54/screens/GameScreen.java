@@ -267,6 +267,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void startEncounter() {
+        Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, cameraController));
         uiShown = true;
         encounterUI = new EncounterUI(assets, skin, audioManager);
         var file = Gdx.files.local("encounters/battle_encounters.json");

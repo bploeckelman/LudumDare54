@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.*;
 import lando.systems.ld54.Assets;
@@ -99,10 +101,50 @@ public class EncounterUI extends Group {
             VisTextButton optionButton = new VisTextButton(option.text, optionStyle);
             optionButton.setHeight(20f);
             optionButton.setStyle(optionStyle);
+            optionButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    optionClicked(option.possibleOutcomes);
+                }
+            });
             encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
             encounterWindow.row();
         }
 
         addActor(encounterWindow);
+    }
+
+    private void optionClicked(EncounterOptionOutcome[] outcomes) {
+        EncounterOptionOutcome outcome = calculateOutcome(outcomes);
+        audio.playSound(AudioManager.Sounds.coin);
+        switch (outcome.type) {
+            case DAMAGE:
+                break;
+            case HEAL:
+                break;
+            case CREDITS:
+                break;
+            case ITEM:
+                break;
+            case NOTHING:
+                break;
+        }
+    }
+
+
+    private EncounterOptionOutcome calculateOutcome(EncounterOptionOutcome[] outcomes) {
+        float totalWeight = 0;
+        for (EncounterOptionOutcome outcome : outcomes) {
+            totalWeight += outcome.weight;
+        }
+        float random = (float) Math.random() * totalWeight;
+        float currentWeight = 0;
+        for (EncounterOptionOutcome outcome : outcomes) {
+            currentWeight += outcome.weight;
+            if (random <= currentWeight) {
+                return outcome;
+            }
+        }
+        return outcomes[0];
     }
 }
