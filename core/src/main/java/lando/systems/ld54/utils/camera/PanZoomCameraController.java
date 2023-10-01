@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -23,6 +24,8 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     private IntMap<Boolean> keys;
 
+    private final float DT_SCALE = 2f;
+
     private final float PAN_SPEED_0 = 10f;
     private final float PAN_SPEED_1 = 100f;
     private final float PAN_SPEED_2 = 500f;
@@ -31,7 +34,7 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
     private float units_dragged_per_pixel = PAN_SPEED_1;
     private float units_panned_per_pixel = PAN_SPEED_2;
 
-    public static final float ZOOM_INITIAL = 1f;
+    public static final float INITIAL_ZOOM = 1f;
     private final float ZOOM_MIN = 0.5f;
     private final float ZOOM_MAX = 4f;
     private final float ZOOM_SCALE_MIN = 2f;
@@ -42,6 +45,10 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     private OrthographicCamera camera;
     private Vector3 tmp = new Vector3();
+    private Vector3 targetPos = new Vector3();
+    private float targetZoom = INITIAL_ZOOM;
+
+    public static Interpolation interpolation = Interpolation.linear;
 
     public PanZoomCameraController(OrthographicCamera camera) {
         reset(camera);
@@ -54,43 +61,50 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
         keys.put(PAN_UP, false);
         keys.put(PAN_DOWN, false);
 
-        camera.zoom = ZOOM_INITIAL;
         this.camera = camera;
         this.camera.update();
+
+        targetZoom = INITIAL_ZOOM;
+        targetPos.set(camera.position.x, camera.position.y, 0);
+    }
+
+    public void update(float dt) {
+        var moveAmount = dt * units_panned_per_pixel;
+        if (keys.get(PAN_LEFT,  false)) moveLeft(moveAmount);
+        if (keys.get(PAN_RIGHT, false)) moveRight(moveAmount);
+        if (keys.get(PAN_UP,    false)) moveUp(moveAmount);
+        if (keys.get(PAN_DOWN,  false)) moveDown(moveAmount);
+
+        var x = interpolation.apply(camera.position.x, targetPos.x, DT_SCALE * dt);
+        var y = interpolation.apply(camera.position.y, targetPos.y, DT_SCALE * dt);
+        camera.position.set(x, y, 0);
+
+        var z = Calc.eerp(camera.zoom, targetZoom, DT_SCALE * dt);
+        camera.zoom = z;
     }
 
     public void moveLeft(float amount) {
         amount = Calc.abs(amount);
-        tmp.set(Vector3.X).nor().scl(amount);
-        camera.position.add(tmp);
+        tmp.set(Vector3.X).scl(amount);
+        targetPos.add(tmp);
     }
 
     public void moveRight(float amount) {
         amount = Calc.abs(amount);
-        tmp.set(Vector3.X).nor().scl(-amount);
-        camera.position.add(tmp);
+        tmp.set(Vector3.X).scl(-amount);
+        targetPos.add(tmp);
     }
 
     public void moveUp(float amount) {
         amount = Calc.abs(amount);
-        tmp.set(Vector3.Y).nor().scl(-amount);
-        camera.position.add(tmp);
+        tmp.set(Vector3.Y).scl(-amount);
+        targetPos.add(tmp);
     }
 
     public void moveDown(float amount) {
         amount = Calc.abs(amount);
-        tmp.set(Vector3.Y).nor().scl(amount);
-        camera.position.add(tmp);
-    }
-
-    public void update(float delta) {
-        // TODO set units_dragged_per_pixel and zoom_speed based on variable params
-
-        var moveAmount = delta * units_panned_per_pixel;
-        if (keys.get(PAN_LEFT, false)) moveLeft(moveAmount);
-        if (keys.get(PAN_RIGHT, false)) moveRight(moveAmount);
-        if (keys.get(PAN_UP, false)) moveUp(moveAmount);
-        if (keys.get(PAN_DOWN, false)) moveDown(moveAmount);
+        tmp.set(Vector3.Y).scl(amount);
+        targetPos.add(tmp);
     }
 
     // --------------------------------------------------------------
@@ -200,10 +214,14 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
     public boolean scrolled(float amountX, float amountY) {
         if (amountY != 0) {
             var sign = Calc.sign(amountY);
-            var zoom = camera.zoom + sign * Time.delta * zoom_scale;
-            camera.zoom = MathUtils.clamp(zoom, ZOOM_MIN, ZOOM_MAX);
+            // NOTE - using Calc.eerp() in update() for exponential scaling
+            //   so don't need to do this fiddly stuff
+//            var zoom = camera.zoom + sign * Time.delta * zoom_scale;
+            var scale = 0.5f;
+            var zoom = camera.zoom + sign * scale;
+            targetZoom = MathUtils.clamp(zoom, ZOOM_MIN, ZOOM_MAX);
             if (Config.Debug.general) {
-                Gdx.app.log("zoom", Stringf.format("%.2f", camera.zoom));
+                Gdx.app.log("ZOOM", Stringf.format("current: %.2f  target: %.2f", camera.zoom, targetZoom));
             }
             return true;
         }

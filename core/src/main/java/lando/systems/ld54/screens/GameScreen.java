@@ -234,7 +234,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void resetWorldCamera() {
-        var initialZoom = PanZoomCameraController.ZOOM_INITIAL;
+        var initialZoom = PanZoomCameraController.INITIAL_ZOOM;
         var centerShiftX = (gameWidth / 2f);
         var centerShiftY = (gameHeight / 2f);
 
