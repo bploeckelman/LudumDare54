@@ -146,12 +146,12 @@ public class PlayerShip implements Collidable {
         for (int i = 0; i < shipPartTypes.length; i++) {
             var type = shipPartTypes[i];
             var angle = MathUtils.random(0, 360);
-            var magnitude = MathUtils.random(10, 20);
+            var magnitude = MathUtils.random(10, 50);
             var velX = magnitude * MathUtils.cosDeg(angle);
             var velY = magnitude * MathUtils.sinDeg(angle);
-            var dist = MathUtils.randomSign() * MathUtils.random(5, 10);
-            var posX = pos.x + dist * velX;
-            var posY = pos.y + dist * velY;
+            var dist = MathUtils.random(10, 40);
+            var posX = pos.x + dist * MathUtils.cosDeg(angle);
+            var posY = pos.y + dist * MathUtils.sinDeg(angle);
             var spinDir = MathUtils.randomSign();
             var spin = spinDir * MathUtils.random(2, 15);
             var part = new PlayerShipPart(type, screen.assets, posX, posY);
@@ -168,12 +168,12 @@ public class PlayerShip implements Collidable {
 
             var radius = 10f;
             var angle = MathUtils.random(0, 360);
-            var magnitude = MathUtils.random(5, 10);
+            var magnitude = MathUtils.random(5, 40);
             var velX = magnitude * MathUtils.cosDeg(angle);
             var velY = magnitude * MathUtils.sinDeg(angle);
-            var dist = MathUtils.randomSign() * MathUtils.random(5, 10);
-            var posX = pos.x + dist * velX;
-            var posY = pos.y + dist * velY;
+            var dist = MathUtils.random(15, 25);
+            var posX = pos.x + dist * MathUtils.cosDeg(angle);
+            var posY = pos.y + dist * MathUtils.sinDeg(angle);
             var spinDir = MathUtils.randomSign();
             var spin = spinDir * MathUtils.random(4, 15);
             var body = new Debris(bodyAnim, posX, posY);

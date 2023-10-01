@@ -26,7 +26,7 @@ public class Debris implements Collidable {
 
     // Override default values in subclasses for different behavior
     public float mass = 4;
-    public float dragFriction = 0.5f;
+    public float dragFriction = 0.9f;
     public float angularMomentum = 0;
 
     // This can also be overridden, but it has to be changed through a setter
