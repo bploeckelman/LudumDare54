@@ -1,6 +1,7 @@
 package lando.systems.ld54;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -21,6 +22,8 @@ import text.formic.Stringf;
 
 public class Assets implements Disposable {
 
+    public static String storedPrefsName = "space_limited";
+    public Preferences preferences;
     public enum Load { ASYNC, SYNC }
 
     public boolean initialized;
@@ -143,6 +146,8 @@ public class Assets implements Disposable {
 
     public Assets(Load load) {
         initialized = false;
+
+        preferences = Gdx.app.getPreferences(storedPrefsName);
 
         // create a single pixel texture and associated region
         Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGBA8888);
@@ -388,4 +393,21 @@ public class Assets implements Disposable {
         return shaderProgram;
     }
 
+    public float getMusicVolume() {
+        return preferences.getFloat("music", .5f);
+    }
+
+    public float getSoundVolume() {
+        return preferences.getFloat("sound", .85f);
+    }
+
+    public void storeMusicVolume(float level) {
+        preferences.putFloat("music", level);
+        preferences.flush();
+    }
+
+    public void storeSoundVolume(float level) {
+        preferences.putFloat("sound", level);
+        preferences.flush();
+    }
 }

@@ -114,8 +114,8 @@ public class AudioManager implements Disposable {
         //musics.put(Musics.mainTheme, assets.mainTheme);
         //musics.put(Musics.mainTheme, assets.mainTheme);
 
-        musicVolume = new MutableFloat(0.55f);
-        soundVolume = new MutableFloat(0.85f);
+        musicVolume = new MutableFloat(assets.getMusicVolume());
+        soundVolume = new MutableFloat(assets.getSoundVolume());
 
         isMusicMuted = false;
         isSoundMuted = false;
@@ -305,12 +305,14 @@ public class AudioManager implements Disposable {
     }
 
     public void setMusicVolume(float level) {
+        assets.storeMusicVolume(level);
         if (isMusicMuted)
             musicVolume.setValue(0f);
         else
             musicVolume.setValue(level);
     }
     public void setSoundVolume(float level) {
+        assets.storeSoundVolume(level);
         if (isSoundMuted)
             soundVolume.setValue(0f);
         else
