@@ -43,6 +43,7 @@ public class GameScreen extends BaseScreen {
     private final Json json = new Json(JsonWriter.OutputType.json);
 
     public Music levelMusic;
+    public Music levelMusicLowpass;
 
     DragLauncher launcher;
 
@@ -70,6 +71,7 @@ public class GameScreen extends BaseScreen {
         earth = planetManager.createPlanets(planets);
 
         levelMusic = audioManager.musics.get(AudioManager.Musics.mainTheme);
+        levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
@@ -106,8 +108,21 @@ public class GameScreen extends BaseScreen {
         fogOfWar.addFogCircle(gameWidth/2f, gameHeight/2f, 300);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, launcher, cameraController));
+//        levelMusic.setLooping(true);
+//        levelMusic.play();
+//        audioManager.playMusic(AudioManager.Musics.mainTheme);
+//        audioManager.playMusic(AudioManager.Musics.mainThemeLowpass);
+        levelMusic.setVolume(audioManager.musicVolume.floatValue());
         levelMusic.setLooping(true);
         levelMusic.play();
+
+//        levelMusicLowpass.setVolume(audioManager.musicVolume.floatValue());
+//        levelMusicLowpass.setLooping(true);
+//        levelMusicLowpass.play();
+
+//        audioManager.fadeMusic(AudioManager.Musics.mainTheme);
+//        audioManager.fadeMusic();
+
     }
 
     @Override
@@ -122,6 +137,22 @@ public class GameScreen extends BaseScreen {
             } else {
                 finishEncounter();
             }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+            if(levelMusic.isPlaying()) {
+                float currentPosition = levelMusic.getPosition();
+                levelMusicLowpass.play();
+                levelMusicLowpass.setPosition(currentPosition);
+                levelMusic.stop();
+            }
+            else if(levelMusicLowpass.isPlaying()) {
+                float currentPosition = levelMusicLowpass.getPosition();
+                levelMusic.play();
+                levelMusic.setPosition(currentPosition);
+                levelMusicLowpass.stop();
+            }
+//            audioManager.fadeMusic(AudioManager.Musics.mainTheme);
+//            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
         }
 
         if (uiShown) {

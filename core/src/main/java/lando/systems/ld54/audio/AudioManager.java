@@ -28,6 +28,7 @@ public class AudioManager implements Disposable {
     public enum Musics {
         none
         , mainTheme
+        , mainThemeLowpass
     }
 
     public ObjectMap<Sounds, SoundContainer> sounds = new ObjectMap<>();
@@ -48,6 +49,7 @@ public class AudioManager implements Disposable {
 //        putSound(Musics.mainTheme, assets.mainTheme);
 
         musics.put(Musics.mainTheme, assets.mainTheme);
+        musics.put(Musics.mainThemeLowpass, assets.mainThemeLowpass);
 
         putSound(Sounds.coin, assets.coin);
 //        putSound(Sounds.swoosh, assets.swoosh1);
@@ -100,7 +102,7 @@ public class AudioManager implements Disposable {
         //musics.put(Musics.mainTheme, assets.mainTheme);
         //musics.put(Musics.mainTheme, assets.mainTheme);
 
-        musicVolume = new MutableFloat(0.15f);
+        musicVolume = new MutableFloat(0.55f);
         soundVolume = new MutableFloat(0.85f);
 
         isMusicMuted = false;

@@ -126,6 +126,7 @@ public class Assets implements Disposable {
     }
 
     public Music mainTheme;
+    public Music mainThemeLowpass;
 
     public Sound coin;
 
@@ -171,6 +172,7 @@ public class Assets implements Disposable {
 
             //Load Music
             mgr.load("audio/music/mainTheme.ogg", Music.class);
+            mgr.load("audio/music/mainThemeLowpass.ogg", Music.class);
 
             //Load Sounds
             mgr.load("audio/sounds/coin1.ogg", Sound.class);
@@ -213,7 +215,7 @@ public class Assets implements Disposable {
         obi = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
         mercurySpin = new Animation<>(0.2f, atlas.findRegions("planets/mercury/mercury-spin"), Animation.PlayMode.LOOP);
         venusSpin = new Animation<>(0.2f, atlas.findRegions("planets/venus/venus-spin"), Animation.PlayMode.LOOP_REVERSED);
-        earthSpin = new Animation<>(0.06f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
+        earthSpin = new Animation<>(0.1f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
         marsSpin = new Animation<>(0.08f, atlas.findRegions("planets/mars/mars-spin"), Animation.PlayMode.LOOP);
         jupiterSpin = new Animation<>(0.04f, atlas.findRegions("planets/gas/gas-spin"), Animation.PlayMode.LOOP);
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/player-ship"), Animation.PlayMode.LOOP);
@@ -326,6 +328,7 @@ public class Assets implements Disposable {
 
         // Music
         mainTheme = mgr.get("audio/music/mainTheme.ogg", Music.class);
+        mainThemeLowpass = mgr.get("audio/music/mainThemeLowpass.ogg", Music.class);
 
         // Sounds
         coin = mgr.get("audio/sounds/coin1.ogg", Sound.class);
