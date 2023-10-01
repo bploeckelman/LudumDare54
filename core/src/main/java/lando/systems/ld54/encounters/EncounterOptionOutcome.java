@@ -3,7 +3,7 @@ package lando.systems.ld54.encounters;
 public class EncounterOptionOutcome {
     public OutcomeType type;
     public float weight;
-    public float value;
+    public int value;
     public String text;
     public enum OutcomeType {
         FUEL,
