@@ -22,12 +22,15 @@ public class EncounterUI extends Group {
     private Skin skin;
     private AudioManager audio;
     private VisWindow encounterWindow;
+    private VisLabel encounterTextLabel;
 
     private String encounterTitle = "";
     private String encounterText = "";
     private TextureRegion encounterImage;
     private ArrayList<EncounterOption> encounterOptions;
+    private ArrayList<VisTextButton> optionButtons;
     private HashMap<String, TextureRegion> textureRegionHashMap = new HashMap<>();
+    private VisTextButton.VisTextButtonStyle optionStyle;
 
     public EncounterUI(Assets assets, Skin skin, AudioManager audio) {
         super();
@@ -81,7 +84,7 @@ public class EncounterUI extends Group {
         encounterWindow.add(encounterImageBox).padTop(10f).padBottom(10f).width(size).height(size);
         encounterWindow.row();
 
-        VisLabel encounterTextLabel = new VisLabel(encounterText);
+        encounterTextLabel = new VisLabel(encounterText);
         Label.LabelStyle textStyle = encounterTitleLabel.getStyle();
         textStyle.font = assets.starJediFont20;
         encounterTextLabel.setStyle(style);
@@ -90,13 +93,13 @@ public class EncounterUI extends Group {
         encounterWindow.add(encounterTextLabel).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f);
         encounterWindow.row();
 
-        VisTextButton.VisTextButtonStyle optionStyle = new VisTextButton.VisTextButtonStyle();
+        optionStyle = new VisTextButton.VisTextButtonStyle();
         optionStyle.font = assets.starJediFont20;
         optionStyle.fontColor = Color.BLACK;
         optionStyle.up = Assets.Patch.glass.drawable;
         optionStyle.down = Assets.Patch.glass_dim.drawable;
         optionStyle.over = Assets.Patch.glass_dim.drawable;
-
+        optionButtons = new ArrayList<>();
         for (EncounterOption option : encounterOptions) {
             VisTextButton optionButton = new VisTextButton(option.text, optionStyle);
             optionButton.setHeight(20f);
@@ -108,6 +111,7 @@ public class EncounterUI extends Group {
                 }
             });
             encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
+            optionButtons.add(optionButton);
             encounterWindow.row();
         }
 
@@ -117,6 +121,18 @@ public class EncounterUI extends Group {
     private void optionClicked(EncounterOptionOutcome[] outcomes) {
         EncounterOptionOutcome outcome = calculateOutcome(outcomes);
         audio.playSound(AudioManager.Sounds.coin);
+        encounterTextLabel.setText(outcome.text);
+        destroyOptions();
+        VisTextButton optionButton = new VisTextButton(outcome.type.name() + " " + outcome.value, optionStyle);
+        optionButton.setHeight(20f);
+        optionButton.setStyle(optionStyle);
+        optionButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                remove();
+            }
+        });
+        encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
         switch (outcome.type) {
             case DAMAGE:
                 break;
@@ -128,6 +144,12 @@ public class EncounterUI extends Group {
                 break;
             case NOTHING:
                 break;
+        }
+    }
+
+    private void destroyOptions() {
+        for (VisTextButton button : optionButtons) {
+            button.remove();
         }
     }
 
