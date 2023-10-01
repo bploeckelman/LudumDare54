@@ -151,6 +151,7 @@ public class EncounterUI extends Group {
                         screen.addFuel(outcome.value);
                         break;
                     case SCRAP:
+                        screen.player.addScrap(outcome.value);
                         break;
                     case RADAR:
                         break;

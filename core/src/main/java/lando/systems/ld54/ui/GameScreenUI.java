@@ -15,12 +15,13 @@ public class GameScreenUI extends Group {
 
     private VisProgressBar fuelBar;
     private Player player;
+    private VisLabel scrapValueLabel;
 
     public GameScreenUI(Assets assets, Player player) {
         super();
         this.player = player;
         setX(Config.Screen.window_width - 100f);
-        setY(Config.Screen.window_height - 100f);
+        setY(Config.Screen.window_height / 2f);
         setWidth(40f);
         setHeight(100f);
         VisTable infoWindow = new VisTable();
@@ -39,6 +40,18 @@ public class GameScreenUI extends Group {
         fuelBar.setWidth(100f);
         fuelBar.setHeight(10f);
         infoWindow.add(fuelBar).left().pad(5f);
+        infoWindow.row();
+
+        VisLabel scrapLabel = new VisLabel("Scrap: ");
+        scrapLabel.setStyle(style);
+        infoWindow.add(scrapLabel).left().pad(5f);
+        infoWindow.row();
+
+        scrapValueLabel = new VisLabel("0");
+        scrapValueLabel.setStyle(style);
+        infoWindow.add(scrapValueLabel).left().pad(5f);
+        infoWindow.row();
+
 
 
         addActor(infoWindow);
@@ -46,6 +59,7 @@ public class GameScreenUI extends Group {
 
     public void update() {
         fuelBar.setValue(player.fuelLevel);
+        scrapValueLabel.setText(String.valueOf(player.scrap));
     }
 
 }
