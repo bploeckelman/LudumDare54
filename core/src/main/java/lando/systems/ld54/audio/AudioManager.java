@@ -34,6 +34,7 @@ public class AudioManager implements Disposable {
         , mainTheme
         , mainThemeLowpass
         , intro
+        , outro
     }
 
     public ObjectMap<Sounds, SoundContainer> sounds = new ObjectMap<>();
@@ -56,6 +57,7 @@ public class AudioManager implements Disposable {
         musics.put(Musics.mainTheme, assets.mainTheme);
         musics.put(Musics.mainThemeLowpass, assets.mainThemeLowpass);
         musics.put(Musics.intro, assets.intro);
+        musics.put(Musics.outro, assets.outro);
 
         putSound(Sounds.coin, assets.coin);
         putSound(Sounds.engineStart, assets.engineStart);

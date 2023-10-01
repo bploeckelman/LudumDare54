@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.utils.typinglabel.TypingLabel;
 
 public class CreditScreen extends BaseScreen {
@@ -74,6 +75,8 @@ public class CreditScreen extends BaseScreen {
         catAnimation = assets.cherry;
         dogAnimation = assets.asuka;
         kittenAnimation = assets.osha;
+
+        game.audioManager.playMusic(AudioManager.Musics.outro);
 
     }
 

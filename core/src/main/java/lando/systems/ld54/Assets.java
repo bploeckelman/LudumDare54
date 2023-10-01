@@ -126,6 +126,7 @@ public class Assets implements Disposable {
     }
 
     public Music intro;
+    public Music outro;
     public Music mainTheme;
     public Music mainThemeLowpass;
 
@@ -179,6 +180,7 @@ public class Assets implements Disposable {
             mgr.load("audio/music/mainTheme.ogg", Music.class);
             mgr.load("audio/music/mainThemeLowpass.ogg", Music.class);
             mgr.load("audio/music/intro.ogg", Music.class);
+            mgr.load("audio/music/outro.ogg", Music.class);
 
             //Load Sounds
             mgr.load("audio/sounds/coin1.ogg", Sound.class);
@@ -340,6 +342,7 @@ public class Assets implements Disposable {
         mainTheme = mgr.get("audio/music/mainTheme.ogg", Music.class);
         mainThemeLowpass = mgr.get("audio/music/mainThemeLowpass.ogg", Music.class);
         intro = mgr.get("audio/music/intro.ogg", Music.class);
+        outro = mgr.get("audio/music/outro.ogg", Music.class);
 
         // Sounds
         coin = mgr.get("audio/sounds/coin1.ogg", Sound.class);
