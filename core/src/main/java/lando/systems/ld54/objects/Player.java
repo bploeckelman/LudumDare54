@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 // Store global stuff for the player
 public class Player {
-    private final int STARTING_FUEL = 2;
+    private final int STARTING_FUEL = 3;
     public final int MAX_FUEL = 8;
     private final float MAX_SCRAP = 500f;
 

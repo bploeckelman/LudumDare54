@@ -25,6 +25,7 @@ public class Sector {
     private boolean visited = false;
     public Encounter encounter;
     public Rectangle encounterBounds;
+    public boolean isEncounterActive = true;
 
     private float animState = 0;
     private float encounterAnimState = 0;

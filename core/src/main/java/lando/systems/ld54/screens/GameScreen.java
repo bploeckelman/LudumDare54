@@ -232,13 +232,16 @@ public class GameScreen extends BaseScreen {
             for (int i = 0; i < sectors.size - 1; i++) {
                 var sector = sectors.get(i);
                 if (sector.bounds.contains(currentShip.pos)) {
+                    if (sector.encounter != null && sector != homeSector && sector != goalSector && sector.isEncounterActive && sector.encounterBounds.contains(currentShip.pos)) {
+                        startEncounter(sector.encounter);
+                        sector.isEncounterActive = false;
+                    }
                     if (currentShip.currentSector != i) {
                         currentShip.currentSector = i;
                         if (sector.encounter != null && sector != homeSector && sector != goalSector && !sector.isVisited()) {
-                            startEncounter(sector.encounter);
+                            Gdx.app.log("Discovered new sector!", "Sector " + i);
                         }
                         sector.setVisited(true);
-                        Gdx.app.log("Sector", "Entered sector " + i);
                     }
                     break;
                 }
