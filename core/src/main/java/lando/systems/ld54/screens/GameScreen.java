@@ -308,8 +308,12 @@ public class GameScreen extends BaseScreen {
 
     public void addFuel(float value) {
         if (playerShips.size > 0) {
-            playerShips.get(playerShips.size - 1).currentFuelLevel += value;
-            playerShips.get(playerShips.size - 1).STARTING_FUEL += value;
+            PlayerShip currentShip = playerShips.get(playerShips.size - 1);
+            currentShip.currentFuelLevel += value;
+            currentShip.STARTING_FUEL += value;
+            if (currentShip.STARTING_FUEL > currentShip.MAX_FUEL) {
+                currentShip.STARTING_FUEL = currentShip.MAX_FUEL;
+            }
         }
     }
 }

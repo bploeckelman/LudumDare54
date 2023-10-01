@@ -8,16 +8,16 @@
         "text": "Help the cat",
         "possibleOutcomes": [
           {
-            "type": "SCRAP",
-            "value": 1,
+            "type": "FUEL",
+            "value": 50,
             "text": "The cat is grateful and gives you a fish.",
-            "weight": 0.3
+            "weight": 0.7
           },
           {
             "type": "FUEL",
             "value": -1,
             "text": "You tried to help the cat, but they attacked you.",
-            "weight": 0.5
+            "weight": 0.1
           },
           {
             "type": "NOTHING",
@@ -121,13 +121,13 @@
             "type": "SCRAP",
             "value": 1,
             "text": "You find valuable minerals on the asteroid's surface.",
-            "weight": 0.6
+            "weight": 0.8
           },
           {
             "type": "FUEL",
             "value": -1,
             "text": "Your spaceship is damaged while attempting to land on the asteroid.",
-            "weight": 0.4
+            "weight": 0.2
           }
         ]
       },
@@ -183,7 +183,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 5,
+            "value": 25,
             "text": "You FUELfully navigate the nebula and continue your journey.",
             "weight": 0.7
           },
@@ -316,7 +316,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 50,
             "text": "You detect unusual energy signatures on the planet's surface, prompting further investigation.",
             "weight": 0.7
           },

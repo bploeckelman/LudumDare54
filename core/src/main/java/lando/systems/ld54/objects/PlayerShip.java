@@ -10,6 +10,7 @@ import lando.systems.ld54.screens.GameScreen;
 
 public class PlayerShip {
 
+    public static final float MAX_FUEL = 500f;
     private static final float DRAG_FRICTION = 0.990f;
     private static final float BOOSTER_SCALE = 1.001f;
     public static float STARTING_FUEL = 50f;
