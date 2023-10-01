@@ -32,6 +32,7 @@ public class PlayerShip implements Collidable {
 
     public boolean trackMovement = false;
     public int currentSector = -1;
+    public float ROTATION_LERP = 80f;
 
     private final Rectangle collisionBounds;
     private final CollisionShapeCircle collisionShape;
@@ -45,6 +46,7 @@ public class PlayerShip implements Collidable {
     public Vector2 size;
     public float fuel;
     public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
+    public float targetRotation;
 
     private final GameScreen screen;
     private long engineSoundID;
@@ -70,6 +72,8 @@ public class PlayerShip implements Collidable {
         this.collisionBounds = new Rectangle(pos.x - size.x/3f, pos.y - size.y /3f, size.x * 2f/3f, size.y * .66f);
         this.collisionShape = new CollisionShapeCircle(size.x /3f, pos.x, pos.y);
         this.fuel = Player.fuelLevel * FUEL_PER_BAR_LEVEL;
+        targetRotation = vel.angleDeg();
+        rotation = targetRotation;
     }
 
     public void update(float dt) {
@@ -89,6 +93,18 @@ public class PlayerShip implements Collidable {
             return;
         }
 
+        float rotationChange = targetRotation - rotation;
+        if (Math.abs(rotationChange) < ROTATION_LERP * dt){
+            rotation = targetRotation;
+        } else {
+            while (rotationChange < -180 || rotationChange > 180){
+                if (rotationChange > 180) rotationChange -= 360;
+                if (rotationChange > 180) rotationChange += 360;
+            }
+            rotation += Math.signum(rotationChange) * ROTATION_LERP * dt;
+        }
+
+
         fuel = Math.max(0, fuel - vel.len() * dt);
 
         float curVelocity = vel.len2();
@@ -103,7 +119,7 @@ public class PlayerShip implements Collidable {
             Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
         } else {
             // get rotation based on velocity
-            rotation = vel.angleDeg();
+            targetRotation = vel.angleDeg();
             float fogClearRadius = 200f;
             if (fuel > 0){
                 fogClearRadius += MathUtils.clamp(10000f / vel.len(), 0, 200f);
@@ -131,6 +147,8 @@ public class PlayerShip implements Collidable {
         engineSoundID = screen.audioManager.loopSound(AudioManager.Sounds.engineRunning, .4f);
         screen.audioManager.playSound(AudioManager.Sounds.engineLaunch);
         Main.game.assets.engineRunning.setVolume(engineSoundID,  Main.game.audioManager.soundVolume.floatValue());
+        targetRotation = vel.angleDeg();
+        rotation = targetRotation;
     }
 
     private static final PlayerShipPart.Type[] shipPartTypes = new PlayerShipPart.Type[] { nose, cabin, cabin, tail };
@@ -230,7 +248,6 @@ public class PlayerShip implements Collidable {
     @Override
     public void setVelocity(float x, float y) {
         vel.set(x, y);
-        // Todo: update rotation
     }
 
     @Override
