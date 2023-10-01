@@ -3,7 +3,9 @@ package lando.systems.ld54.components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -26,6 +28,10 @@ public class DragLauncher extends InputAdapter {
     private float angle = 0;
     private float speed = 0;
     private final Vector2 dragPos = new Vector2();
+
+    private final float SPEED_THRESHOLD = 0.2f;
+    private final Vector2 textPos = new Vector2();
+    private final GlyphLayout text = new GlyphLayout();
 
     private final Animation<TextureRegion> launcherAnimation;
     private TextureRegion currentImage;
@@ -83,11 +89,10 @@ public class DragLauncher extends InputAdapter {
     public void update(float delta) {
         animTimer += delta;
         currentImage = launcherAnimation.getKeyFrame(animTimer);
-        if(dragging) {
+        if (dragging) {
             // adjust speed of pulse by speed pull
             yPulse = MathUtils.sin(animTimer * 10) * 0.1f;
-
-            if(dragTimer > .85f) {
+            if (dragTimer > .85f) {
                 if(!isRevving) {
                     screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .3f);
                 }
@@ -96,7 +101,6 @@ public class DragLauncher extends InputAdapter {
             }
             dragTimer+= delta;
         }
-
     }
 
     private void updateLaunchAngle(Vector3 mousePos) {
@@ -104,11 +108,13 @@ public class DragLauncher extends InputAdapter {
         var earthCenter = screen.earth.centerPosition;
 
         dragPos.set(earthCenter).sub(mousePos.x, mousePos.y).nor();
+        textPos.set(-dragPos.x, -dragPos.y);
         angle = dragPos.angleDeg();
 
         pullDistance = MathUtils.clamp(earthCenter.dst(mousePos.x, mousePos.y), 0, MAX_PULL_DISTANCE);
         speed = pullDistance / MAX_PULL_DISTANCE;
         dragPos.scl(pullDistance).add(earthCenter);
+        textPos.scl(pullDistance + 20).add(earthCenter);
     }
 
     public void render(SpriteBatch batch) {
@@ -128,16 +134,28 @@ public class DragLauncher extends InputAdapter {
                 0.9f + yPulse,
                 angle
             );
+
+            var font = screen.assets.smallFont;
+            if (speed < SPEED_THRESHOLD) {
+                font.setColor(Color.RED);
+            }
+            text.setText(font, Stringf.format("%d%%", (int)(speed * 100)));
+            font.draw(batch, text, textPos.x - text.width / 2, textPos.y + text.height / 2);
+
+            font.setColor(Color.WHITE);
         }
     }
 
     private void launchShip() {
-        if (Config.Debug.general) {
-            Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, pullDistance));
-        }
         dragTimer = 0;
         isRevving = false;
-
+        if (speed < SPEED_THRESHOLD) {
+            // TODO: SOUND? - play engine spin down sound
+            return;
+        }
+        if (Config.Debug.general) {
+            Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, speed));
+        }
 
         // speed is 0.2 - 1
         screen.launchShip(angle, speed);
