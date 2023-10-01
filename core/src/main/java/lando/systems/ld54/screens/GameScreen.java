@@ -427,8 +427,7 @@ public class GameScreen extends BaseScreen {
         var file = Gdx.files.internal("encounters/battle_encounters.json");
         var encounters = json.fromJson(Array.class, Encounter.class, file);
         var index = MathUtils.random(encounters.size - 1);
-//        return (Encounter) encounters.get(index);
-        return (Encounter) encounters.get(0);
+        return (Encounter) encounters.get(index);
     }
 
     private void startEncounter(Encounter encounter) {
