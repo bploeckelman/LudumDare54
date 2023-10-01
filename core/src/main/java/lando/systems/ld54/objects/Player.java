@@ -1,12 +1,14 @@
 package lando.systems.ld54.objects;
 
+import com.badlogic.gdx.math.MathUtils;
+
 // Store global stuff for the player
 public class Player {
-    private final float STARTING_FUEL = 50f;
-    public final float MAX_FUEL = 100f;
+    private final int STARTING_FUEL = 2;
+    public final int MAX_FUEL = 8;
     private final float MAX_SCRAP = 500f;
 
-    public static float fuelLevel;
+    public static int fuelLevel;
     public static float scrap;
 
     public Player() {
@@ -14,11 +16,9 @@ public class Player {
         scrap = 0f;
     }
 
-    public void addFuel(float fuel) {
+    public void addFuel(int fuel) {
         fuelLevel += fuel;
-        if (fuelLevel > MAX_FUEL) {
-            fuelLevel = MAX_FUEL;
-        }
+        fuelLevel = MathUtils.clamp(fuelLevel, STARTING_FUEL, MAX_FUEL);
     }
 
     public void useFuel(float fuel) {

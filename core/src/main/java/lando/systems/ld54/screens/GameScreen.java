@@ -382,7 +382,7 @@ public class GameScreen extends BaseScreen {
         physicsObjects.add(ship);
         ship.launch(angle, power);
         playerShips.add(ship);
-        useFuel(power * .01f); //TODO: debug, place it in the drag controller and limit drag per fuel level
+//        useFuel(power * .01f); //TODO: debug, place it in the drag controller and limit drag per fuel level
 //        resetWorldCamera();
     }
 
@@ -409,7 +409,7 @@ public class GameScreen extends BaseScreen {
         game.audioManager.swapMusic(levelMusicLowpass, levelMusic);
     }
 
-    public void addFuel(float value) {
+    public void addFuel(int value) {
         // add fuel to player
         player.addFuel(value);
     }

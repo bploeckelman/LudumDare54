@@ -17,7 +17,8 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class PlayerShip implements Collidable {
 
-    private static final float DRAG_FRICTION = 0.2f;
+    private static final float DRAG_FRICTION = 0.15f;
+    private static final float FUEL_PER_BAR_LEVEL = 200f;
 
     private float mass = 100;
 
@@ -38,18 +39,20 @@ public class PlayerShip implements Collidable {
     public Vector2 pos;
     public Vector2 vel;
     public Vector2 size;
+    public float fuel;
     public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
 
     private final GameScreen screen;
 
     public PlayerShip(GameScreen gameScreen) {
         this.screen = gameScreen;
-        this.anim = screen.assets.playerShip;
+        this.anim = screen.assets.playerShipActive;
         this.animState = 0;
         this.pos = new Vector2();
         this.vel = new Vector2();
         this.size = new Vector2();
         this.rotation = 0;
+
 
         // TODO - this position could be set via the center of the homeSector (passed in)
         // TEMP - manually set initial position and size for now
@@ -58,13 +61,19 @@ public class PlayerShip implements Collidable {
 
         this.collisionBounds = new Rectangle(pos.x - size.x/3f, pos.y - size.y /3f, size.x * 2f/3f, size.y * .66f);
         this.collisionShape = new CollisionShapeCircle(size.x /3f, pos.x, pos.y);
+        this.fuel = Player.fuelLevel * FUEL_PER_BAR_LEVEL;
     }
 
     public void update(float dt) {
         // update animation
         animState += dt;
         keyframe = anim.getKeyFrame(animState);
+        if (fuel <= 0) {
+            Main.game.assets.engineRunning.stop();
+            this.anim = screen.assets.playerShip;
+        }
 
+        fuel = Math.max(0, fuel - vel.len() * dt);
 //        if (vel.isZero()) { return; }
 
 //        // integrate velocity into position
@@ -86,7 +95,6 @@ public class PlayerShip implements Collidable {
         } else if (curVelocity < 200f) {
             trackMovement = false;
 
-            Main.game.assets.engineRunning.stop();
             Gdx.app.log("Stopping", "stopping");
         } else {
             // get rotation based on velocity
@@ -148,6 +156,9 @@ public class PlayerShip implements Collidable {
 
     @Override
     public float getFriction() {
+        if (fuel > 0) {
+            return 1f;
+        }
         return DRAG_FRICTION;
     }
 

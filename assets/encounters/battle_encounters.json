@@ -9,13 +9,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 50,
+            "value": 1,
             "text": "The cat is grateful and gives you a fish.",
             "weight": 0.7
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "You tried to help the cat, but they attacked you.",
             "weight": 0.1
           },
@@ -38,7 +38,7 @@
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "You tried to help the dog, but they attacked you.",
             "weight": 0.5
           },
@@ -61,7 +61,7 @@
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "You got hit by the flying cat while leaving.",
             "weight": 0.5
           }
@@ -125,7 +125,7 @@
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Your spaceship is damaged while attempting to land on the asteroid.",
             "weight": 0.2
           }
@@ -142,7 +142,7 @@
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "The space station's security systems activate, and you must escape quickly.",
             "weight": 0.5
           }
@@ -159,7 +159,7 @@
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "The aliens view you as a threat and open fire on your ship.",
             "weight": 0.4
           },
@@ -183,13 +183,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 25,
+            "value": 2,
             "text": "You FUELfully navigate the nebula and continue your journey.",
             "weight": 0.7
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Your ship sustains minor damage during the navigation attempt.",
             "weight": 0.3
           }
@@ -206,7 +206,7 @@
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Sending the distress signal attracts the attention of space pirates who attack your ship.",
             "weight": 0.4
           }
@@ -217,13 +217,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 100,
+            "value": 4,
             "text": "After some time, the nebula dissipates, and you can continue your journey unharmed.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "While waiting, your ship experiences minor technical difficulties.",
             "weight": 0.2
           }
@@ -241,13 +241,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Your ship gets too close and is pulled into the black hole, leading to certain doom.",
             "weight": 0.5
           },
           {
             "type": "FUEL",
-            "value": 105,
+            "value": 4,
             "text": "Your research yields valuable data about the black hole without risking your ship.",
             "weight": 0.5
           }
@@ -258,13 +258,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 5,
+            "value": 1,
             "text": "You make groundbreaking observations about the black hole's behavior from a safe distance.",
             "weight": 0.7
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Your ship's systems are affected by the black hole's gravitational forces, causing minor damage.",
             "weight": 0.3
           }
@@ -275,13 +275,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 5,
+            "value": 1,
             "text": "You FUELfully escape the black hole's gravitational pull and avoid any harm.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Escaping the black hole is challenging and results in minor damage to your ship.",
             "weight": 0.2
           }
@@ -299,13 +299,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 20,
+            "value": 2,
             "text": "You find a wealth of valuable resources on the planet's surface.",
             "weight": 0.6
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Your spaceship encounters turbulence during landing, causing minor damage.",
             "weight": 0.4
           }
@@ -316,7 +316,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 50,
+            "value": 2,
             "text": "You detect unusual energy signatures on the planet's surface, prompting further investigation.",
             "weight": 0.7
           },
@@ -333,13 +333,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You depart without incident and continue your exploration of space.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "As you leave the planet, your ship experiences a minor technical malfunction.",
             "weight": 0.2
           }
@@ -357,13 +357,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your skillful navigation allows you to pass through the asteroid field unscathed.",
             "weight": 0.7
           },
           {
             "type": "FUEL",
-            "value": -10,
+            "value": -1,
             "text": "Despite your best efforts, your ship sustains minor damage from asteroid impacts.",
             "weight": 0.3
           }
@@ -374,13 +374,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your onboard systems effectively clear a safe path through the asteroid field.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -10,
+            "value": -1,
             "text": "Your systems malfunction, and attempting to clear the path causes minor damage.",
             "weight": 0.2
           }
@@ -391,13 +391,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You change course and safely bypass the asteroid field without any issues.",
             "weight": 0.9
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Your course change is abrupt and results in minor damage to your ship's systems.",
             "weight": 0.1
           }
@@ -415,13 +415,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You find valuable technology and supplies inside the space station.",
             "weight": 0.6
           },
           {
             "type": "FUEL",
-            "value": -10,
+            "value": -1,
             "text": "The space station's interior is unstable, and your ship sustains minor damage during docking.",
             "weight": 0.4
           }
@@ -432,7 +432,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your scans reveal hidden compartments with useful resources on the space station.",
             "weight": 0.7
           },
@@ -449,13 +449,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You decide to move on, and your journey continues without incident.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "As you depart, your ship experiences a minor technical glitch.",
             "weight": 0.2
           }
@@ -473,13 +473,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your combat skills prevail, and you defeat the space pirates, securing valuable loot.",
             "weight": 0.6
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "The battle is intense, and your ship sustains moderate damage in the process.",
             "weight": 0.4
           }
@@ -490,13 +490,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your negotiation skills convince the pirates to accept FUELs and spare your ship.",
             "weight": 0.7
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Negotiations fail, and the pirates attack your ship, causing moderate damage.",
             "weight": 0.3
           }
@@ -507,13 +507,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your evasive maneuvers allow you to escape the space pirates without any harm.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "While evading, your ship sustains minor damage from enemy fire.",
             "weight": 0.2
           }
@@ -531,13 +531,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 100,
+            "value": 4,
             "text": "Your shields hold up, and you fully navigate through the meteor shower unharmed.",
             "weight": 0.7
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Despite your shields, some meteors breach and cause minor damage to your ship.",
             "weight": 0.3
           }
@@ -548,13 +548,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your quick thinking and technology usage divert the meteor shower FUELfully.",
             "weight": 0.6
           },
           {
             "type": "FUEL",
-            "value": -10,
+            "value": -1,
             "text": "Your attempt to divert the meteors causes minor damage to your ship's systems.",
             "weight": 0.4
           }
@@ -565,13 +565,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 50,
+            "value": 2,
             "text": "The meteor shower subsides, and your ship remains unharmed.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "While waiting, some meteors strike your ship, causing minor damage.",
             "weight": 0.2
           }
@@ -589,13 +589,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You find unique and valuable minerals while collecting samples.",
             "weight": 0.6
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Your landing is rough, causing minor damage to your spaceship.",
             "weight": 0.4
           }
@@ -606,7 +606,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your drones capture valuable data about the moon's geological features.",
             "weight": 0.7
           },
@@ -623,13 +623,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your decision to stay in orbit allows you to continue your journey without incidents.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "While in orbit, your ship's systems experience a minor malfunction.",
             "weight": 0.2
           }
@@ -647,13 +647,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You gather unique scientific data from the anomaly, enhancing your knowledge.",
             "weight": 0.6
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "Approaching the anomaly causes minor damage to your ship's sensors.",
             "weight": 0.4
           }
@@ -664,7 +664,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "Your analysis from a distance yields valuable insights into the anomaly's nature.",
             "weight": 0.7
           },
@@ -681,13 +681,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You change course and continue your journey without encountering any issues.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "As you change course, your ship experiences a minor technical malfunction.",
             "weight": 0.2
           }
@@ -711,7 +711,7 @@
           },
           {
             "type": "FUEL",
-            "value": -10,
+            "value": -1,
             "text": "During mining, an unexpected asteroid collision damages your mining equipment.",
             "weight": 0.4
           }
@@ -739,13 +739,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 1,
             "text": "You decide to move on and continue your exploration without any issues.",
             "weight": 0.8
           },
           {
             "type": "FUEL",
-            "value": -5,
+            "value": -1,
             "text": "As you leave the asteroid field, your ship experiences a minor technical glitch.",
             "weight": 0.2
           }
