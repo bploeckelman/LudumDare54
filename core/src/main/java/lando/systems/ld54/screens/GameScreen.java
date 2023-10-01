@@ -254,6 +254,7 @@ public class GameScreen extends BaseScreen {
                     if (sector.encounter != null && sector != homeSector && sector != goalSector && sector.isEncounterActive && sector.encounterBounds.contains(currentShip.pos)) {
                         startEncounter(sector.encounter);
                         // TODO: SOUND HERE (WOOSH as it scans the sector)
+
                         float fogMargin = 25;
                         fogOfWar.addFogRectangle(sector.bounds.x - fogMargin, sector.bounds.y - fogMargin, sector.bounds.width + fogMargin*2f, sector.bounds.height + fogMargin*2f, .2f);
                         sector.isEncounterActive = false;
@@ -262,7 +263,9 @@ public class GameScreen extends BaseScreen {
                         currentShip.currentSector = i;
                         if (sector.encounter != null && sector != homeSector && sector != goalSector && !sector.isVisited()) {
                             Gdx.app.log("Discovered new sector!", "Sector " + i);
+                            game.audioManager.playSound(AudioManager.Sounds.radar);
                         }
+
                         sector.setVisited(true);
                     }
                     break;

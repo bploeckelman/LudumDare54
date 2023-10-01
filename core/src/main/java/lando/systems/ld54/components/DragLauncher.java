@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.screens.GameScreen;
 import text.formic.Stringf;
@@ -41,6 +42,7 @@ public class DragLauncher extends InputAdapter {
     private float dragTimer = 0;
 
     private boolean isRevving = false;
+    private long revvingSound;
 
     public DragLauncher(GameScreen gameScreen) {
         screen = gameScreen;
@@ -92,13 +94,24 @@ public class DragLauncher extends InputAdapter {
         if (dragging) {
             // adjust speed of pulse by speed pull
             yPulse = MathUtils.sin(animTimer * 10) * 0.1f;
-            if (dragTimer > .85f) {
+            if (dragTimer > .6f) {
                 if(!isRevving) {
-                    screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .3f);
+
+                    revvingSound = screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .3f);
+
                 }
 
                 isRevving = true;
             }
+
+            if(revvingSound != 0) {
+                if(speed >= .2f) {
+                    screen.assets.engineRevving.setVolume(revvingSound, MathUtils.map(.2f, 1f, 0f, Main.game.audioManager.soundVolume.floatValue(), speed));
+                }
+
+
+            }
+//            revvingSound = screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .3f);
             dragTimer+= delta;
         }
     }
@@ -135,7 +148,7 @@ public class DragLauncher extends InputAdapter {
                 angle
             );
 
-            var font = screen.assets.smallFont;
+            var font = screen.assets.abandonedFont20;
             if (speed < SPEED_THRESHOLD) {
                 font.setColor(Color.RED);
             }

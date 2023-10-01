@@ -82,7 +82,7 @@ public class EncounterUI extends Group {
         encounterWindow.align(Align.top | Align.center);
         encounterWindow.setModal(true);
         encounterWindow.setKeepWithinStage(false);
-        encounterWindow.setColor(1f, 1f, 1f, 0.8f);
+        encounterWindow.setColor(.9f, .9f, 1f, 0.9f);
 
         VisLabel encounterTitleLabel = new VisLabel(encounterTitle);
         Label.LabelStyle style = encounterTitleLabel.getStyle();

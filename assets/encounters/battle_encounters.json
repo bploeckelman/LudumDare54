@@ -1,7 +1,7 @@
 [
   {
     "title": "Hostile Space Pirates",
-    "text": "You run afoul of a group of space pirates on their way to plunder other \nhapless spacefarers like yourself \n \nHow do you proceed?",
+    "text": "You run afoul of a group of space pirates on their way to plunder other hapless\nspacefarers like yourself \n \nHow do you proceed?",
     "imageKey": "asuka",
     "options": [
       {
@@ -10,19 +10,19 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Victory is yours! You destroyed them and claimed their fuel as yours.\n\nOnward, to the stars!",
+            "text": "Victory! You destroyed them and claimed their fuel as yours.\n\nOnward, to the stars!",
             "weight": 0.7
           },
           {
             "type": "FUEL",
             "value": -1,
-            "text": "A valiant attempt but they straight-up destroyed you. Like, it wasn't even close\nAnd they stole your fuel! Like jerks.",
+            "text": "A valiant attempt but they straight-up destroyed you. Like, it wasn't even close\nAnd they stole your fuel, like jerks.",
             "weight": 0.1
           },
           {
             "type": "NOTHING",
             "value": 0,
-            "text": "They straight-up destroyed you\n\nLike, it wasn't even close. \n\nAnd they stole your fuel! Like jerks.",
+            "text": "A valiant attempt but they straight-up destroyed you. Like, it wasn't even close\nAnd they stole your fuel, like jerks.",
             "weight": 0.2
           }
         ]
@@ -33,7 +33,7 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "The dog is grateful and gives you a bone.",
+            "text": "Against all odds, the marauders could be reasoned with.\nThey even shared their resources with you! What kind-hearted brigands.",
             "weight": 0.3
           },
           {

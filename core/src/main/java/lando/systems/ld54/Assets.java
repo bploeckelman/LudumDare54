@@ -170,6 +170,8 @@ public class Assets implements Disposable {
     public Sound thud8;
     public Sound upgrade1;
     public Sound radar1;
+    public Sound radar2;
+    public Sound radarReveal;
     public Sound powerup1;
     public Sound powerup2;
     public Sound swoosh1;
@@ -246,6 +248,7 @@ public class Assets implements Disposable {
             mgr.load("audio/sounds/thud8.ogg", Sound.class);
             mgr.load("audio/sounds/upgrade1.ogg", Sound.class);
             mgr.load("audio/sounds/radar1.ogg", Sound.class);
+            mgr.load("audio/sounds/radar2.ogg", Sound.class);
             mgr.load("audio/sounds/powerup1.ogg", Sound.class);
             mgr.load("audio/sounds/powerup2.ogg", Sound.class);
             mgr.load("audio/sounds/swoosh1.ogg", Sound.class);
@@ -460,6 +463,7 @@ public class Assets implements Disposable {
         thud8 = mgr.get("audio/sounds/thud8.ogg", Sound.class);
         upgrade1 = mgr.get("audio/sounds/upgrade1.ogg", Sound.class);
         radar1 = mgr.get("audio/sounds/radar1.ogg", Sound.class);
+        radarReveal = mgr.get("audio/sounds/radar2.ogg", Sound.class);
         powerup1 = mgr.get("audio/sounds/powerup1.ogg", Sound.class);
         powerup2 = mgr.get("audio/sounds/powerup2.ogg", Sound.class);
         swoosh1 = mgr.get("audio/sounds/swoosh1.ogg", Sound.class);
