@@ -206,7 +206,7 @@ public class GameScreen extends BaseScreen {
             if (!encounterShown) {
                 startEncounter(getRandomEncounter());
             } else {
-                finishEncounter();
+                finishEncounter(getRandomEncounter());
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
@@ -252,9 +252,6 @@ public class GameScreen extends BaseScreen {
                 if (sector.bounds.contains(currentShip.pos)) {
                     if (sector.encounter != null && sector != homeSector && sector != goalSector && sector.isEncounterActive && sector.encounterBounds.contains(currentShip.pos)) {
                         startEncounter(sector.encounter);
-                        // TODO: SOUND HERE (WOOSH as it scans the sector)
-                        float fogMargin = 50;
-                        fogOfWar.addFogRectangle(sector.bounds.x - fogMargin, sector.bounds.y - fogMargin, sector.bounds.width + fogMargin*2f, sector.bounds.height + fogMargin*2f, .2f);
                         sector.isEncounterActive = false;
                     }
                     if (currentShip.currentSector != i) {
@@ -446,10 +443,13 @@ public class GameScreen extends BaseScreen {
         game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
     }
 
-    public void finishEncounter() {
+    public void finishEncounter(Encounter encounter) {
         encounterShown = false;
         Time.pause_timer = 0f;
         encounterUI.remove();
+        // TODO: SOUND HERE (WOOSH as it scans the sector)
+        float fogMargin = 50;
+        fogOfWar.addFogRectangle(encounter.sector.bounds.x - fogMargin, encounter.sector.bounds.y - fogMargin, encounter.sector.bounds.width + fogMargin*2f, encounter.sector.bounds.height + fogMargin*2f, .2f);
         game.audioManager.swapMusic(levelMusicLowpass, levelMusic);
     }
 

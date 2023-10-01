@@ -30,6 +30,7 @@ public class EncounterUI extends Group {
     VisImage encounterImageBox;
     private GameScreen screen;
     private float animTimer = 0f;
+    private Encounter encounter;
 
     private String encounterTitle = "";
     private String encounterText = "";
@@ -53,6 +54,7 @@ public class EncounterUI extends Group {
         encounterText = encounter.text;
         encounterAnimation = assets.encounterAnimationHashMap.get(encounter.imageKey);
         encounterOptions.clear();
+        this.encounter = encounter;
         for (EncounterOption option : encounter.options) {
             encounterOptions.add(option);
         }
@@ -161,7 +163,7 @@ public class EncounterUI extends Group {
                     case NOTHING:
                         break;
                 }
-                screen.finishEncounter();
+                screen.finishEncounter(encounter);
             }
         });
         encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
