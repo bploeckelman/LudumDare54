@@ -240,6 +240,9 @@ public class GameScreen extends BaseScreen {
                 if (sector.bounds.contains(currentShip.pos)) {
                     if (sector.encounter != null && sector != homeSector && sector != goalSector && sector.isEncounterActive && sector.encounterBounds.contains(currentShip.pos)) {
                         startEncounter(sector.encounter);
+                        // TODO: SOUND HERE (WOOSH as it scans the sector)
+                        float fogMargin = 25;
+                        fogOfWar.addFogRectangle(sector.bounds.x - fogMargin, sector.bounds.y - fogMargin, sector.bounds.width + fogMargin*2f, sector.bounds.height + fogMargin*2f, .2f);
                         sector.isEncounterActive = false;
                     }
                     if (currentShip.currentSector != i) {
