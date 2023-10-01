@@ -73,6 +73,8 @@ public class PlayerShip {
         float curVelocity = vel.len2();
         if (curVelocity < 0.1f) {
             vel.setZero();
+            // TODO: blow it up or something
+
 //            Main.game.audioManager.stopSound(AudioManager.Sounds.engineRunning)
 
         } else if (curVelocity < 200f) {
@@ -83,7 +85,7 @@ public class PlayerShip {
         } else {
             // get rotation based on velocity
             rotation = vel.angleDeg();
-            fogOfWar.addFogCircle(pos.x, pos.y, 200);
+            fogOfWar.addFogCircle(pos.x, pos.y, 200, vel.len()/ 100f);
         }
     }
 

@@ -16,11 +16,12 @@ public class FogCircle extends FogObject {
     private Texture texture;
 
 
-    public FogCircle(float x, float y, float radius) {
+    public FogCircle(float x, float y, float radius, float transitionScale) {
         this.centerX = x;
         this.centerY = y;
         this.radius = radius;
         this.alpha = 0f;
+        this.transitionScale = transitionScale;
         texture = Main.game.assets.whitePixel;
 
     }

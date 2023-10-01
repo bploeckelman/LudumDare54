@@ -49,7 +49,7 @@ public class FogOfWar {
         accum += dt;
         for (int i = fogObjects.size() -1 ; i >= 0; i--) {
             FogObject o = fogObjects.get(i);
-            o.alpha += dt * 2f;
+            o.alpha += dt * 2f * o.transitionScale;
 
         }
     }
@@ -78,7 +78,7 @@ public class FogOfWar {
 
     }
 
-    public void addFogCircle(float x, float y, float radius) {
-        fogObjects.add(new FogCircle(x * scale, y * scale, radius * scale));
+    public void addFogCircle(float x, float y, float radius, float transitionScale) {
+        fogObjects.add(new FogCircle(x * scale, y * scale, radius * scale, transitionScale));
     }
 }
