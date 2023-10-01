@@ -53,7 +53,7 @@ public class PlayerShip implements Collidable {
 
     public PlayerShip(GameScreen gameScreen) {
         this.screen = gameScreen;
-        this.anim = screen.assets.playerShipActive;
+        this.anim = screen.assets.playerShip;
         this.animState = 0;
         this.pos = new Vector2();
         this.vel = new Vector2();
@@ -124,6 +124,9 @@ public class PlayerShip implements Collidable {
                 fogClearRadius += MathUtils.clamp(10000f / vel.len(), 0, 200f);
             }
             screen.fogOfWar.addFogCircle(pos.x, pos.y, fogClearRadius, vel.len()/ 100f);
+        }
+        if (fuel > 0){
+            screen.particles.addRocketPropulsionParticles(this);
         }
     }
 

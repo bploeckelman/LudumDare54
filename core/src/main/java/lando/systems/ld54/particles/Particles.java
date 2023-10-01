@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Assets;
+import lando.systems.ld54.objects.PlayerShip;
 import lando.systems.ld54.utils.Utils;
 
 public class Particles implements Disposable {
@@ -68,7 +69,70 @@ public class Particles implements Disposable {
     // ------------------------------------------------------------------------
 
 
+    public void addRocketPropulsionParticles(PlayerShip ship) {
+        float positionFiddle = 1f;
+        Vector2 vel = ship.vel;
+        tempVec2.set(-20, 0).rotateDeg(ship.rotation);
+        float centerX = ship.pos.x + tempVec2.x;
+        float centerY = ship.pos.y + tempVec2.y;
+        tempVec2.set(-20, 8).rotateDeg(ship.rotation);
+        float leftX = ship.pos.x + tempVec2.x;
+        float leftY = ship.pos.y + tempVec2.y;
+        tempVec2.set(-20, -8).rotateDeg(ship.rotation);
+        float rightX = ship.pos.x + tempVec2.x;
+        float rightY = ship.pos.y + tempVec2.y;
 
+        for (int i = 0; i < 10; i++){
+            activeParticles.get(Layer.background).add(Particle.initializer(particlePool.obtain())
+                .keyframe(assets.particles.circle)
+                .startPos(centerX + MathUtils.random(-positionFiddle, positionFiddle), centerY + MathUtils.random(-positionFiddle, positionFiddle))
+                .velocity(vel.x * MathUtils.random(-.25f, -.1f), vel.y * MathUtils.random(-.25f, -.1f))
+                .startColor(1f, 0f, 0f,1f)
+                .endColor(.5f,.5f,0,0)
+                .startSize(2)
+                .endSize(1f)
+                .timeToLive(MathUtils.random(.1f, .3f))
+                .init()
+            );
+
+            activeParticles.get(Layer.background).add(Particle.initializer(particlePool.obtain())
+                .keyframe(assets.particles.circle)
+                .startPos(leftX + MathUtils.random(-positionFiddle, positionFiddle), leftY + MathUtils.random(-positionFiddle, positionFiddle))
+                .velocity(vel.x * MathUtils.random(-.25f, -.1f), vel.y * MathUtils.random(-.25f, -.1f))
+                .startColor(1f, 0f, 0f,1f)
+                .endColor(1f,1f,0,0)
+                .startSize(2)
+                .endSize(1f)
+                .timeToLive(MathUtils.random(.1f, .3f))
+                .init()
+            );
+            activeParticles.get(Layer.background).add(Particle.initializer(particlePool.obtain())
+                .keyframe(assets.particles.circle)
+                .startPos(rightX + MathUtils.random(-positionFiddle, positionFiddle), rightY + MathUtils.random(-positionFiddle, positionFiddle))
+                .velocity(vel.x * MathUtils.random(-.25f, -.1f), vel.y * MathUtils.random(-.25f, -.1f))
+                .startColor(1f, 0f, 0f,1f)
+                .endColor(1f,1f,0,0)
+                .startSize(2)
+                .endSize(1f)
+                .timeToLive(MathUtils.random(.1f, .3f))
+                .init()
+            );
+
+            // Smokes
+//            activeParticles.get(Layer.background).add(Particle.initializer(particlePool.obtain())
+//                .keyframe(assets.particles.circle)
+//                .startPos(centerX + MathUtils.random(-positionFiddle, positionFiddle), centerY + MathUtils.random(-positionFiddle, positionFiddle))
+//                .velocity(vel.x * MathUtils.random(-.25f, -.1f), vel.y * MathUtils.random(-.25f, -.1f))
+//                .startColor(.3f, .3f, .3f,.5f)
+//                .endColor(.3f,.3f,.3f,.5f)
+//                .startSize(1f)
+//                .endSize(1f)
+//                .timeToLive(MathUtils.random(.3f, .6f))
+//                .init()
+//            );
+        }
+
+    }
 
     public void shipExplode(float inX, float inY) {
         for (int i = 0; i < 20; i++) {
