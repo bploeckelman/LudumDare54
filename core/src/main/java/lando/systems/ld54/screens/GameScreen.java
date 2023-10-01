@@ -367,7 +367,7 @@ public class GameScreen extends BaseScreen {
         worldCamera.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCamera.position.set(0, 0, 0);
         worldCamera.translate(centerShiftX, centerShiftY);
-        worldCamera.zoom = initialZoom;
+//        worldCamera.zoom = initialZoom;
         worldCamera.update();
 
         if (cameraController == null) {
@@ -383,7 +383,7 @@ public class GameScreen extends BaseScreen {
         ship.launch(angle, power);
         playerShips.add(ship);
         useFuel(power * .01f); //TODO: debug, place it in the drag controller and limit drag per fuel level
-        resetWorldCamera();
+//        resetWorldCamera();
     }
 
     private Encounter getRandomEncounter() {

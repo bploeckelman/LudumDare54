@@ -17,6 +17,8 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Asteroid implements Collidable {
 
+    public float friction = .7f;
+    public float mass;
 
     public TextureRegion region;
     public Vector2 initialPos;
@@ -44,6 +46,7 @@ public class Asteroid implements Collidable {
         this.initialSize = new Vector2(region.getRegionWidth(), region.getRegionHeight());
         this.pos = initialPos.cpy();
         this.size = initialSize.cpy();
+        this.mass = size.x * size.y / 1000f;
         this.velocity = new Vector2(0, 0);
         this.range = new Vector2(default_range, default_range);
         this.updateFloat = false;
@@ -79,12 +82,12 @@ public class Asteroid implements Collidable {
 
     @Override
     public float getFriction() {
-        return 0.9f;
+        return friction;
     }
 
     @Override
     public float getMass() {
-        return 1;
+        return mass;
     }
 
     @Override

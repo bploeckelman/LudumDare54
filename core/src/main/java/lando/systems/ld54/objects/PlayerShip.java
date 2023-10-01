@@ -19,7 +19,7 @@ public class PlayerShip implements Collidable {
 
     private static final float DRAG_FRICTION = 0.2f;
 
-    private float mass = 10;
+    private float mass = 100;
 
     private Animation<TextureRegion> anim;
     private TextureRegion keyframe;
@@ -78,6 +78,7 @@ public class PlayerShip implements Collidable {
         if (curVelocity < 1f) {
             trackMovement = false;
 //            vel.setZero();
+            screen.cameraController.targetPos.set(GameScreen.gameWidth/2f, GameScreen.gameHeight/2f, 0);
 
             explode();
 

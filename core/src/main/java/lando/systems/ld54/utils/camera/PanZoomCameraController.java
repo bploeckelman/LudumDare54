@@ -48,7 +48,7 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
         this.camera = camera;
         this.camera.update();
 
-        targetZoom = INITIAL_ZOOM;
+//        targetZoom = INITIAL_ZOOM;
         targetPos.set(camera.position.x, camera.position.y, 0);
     }
 
