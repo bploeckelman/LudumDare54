@@ -2,7 +2,7 @@
   {
     "encounterTitle": "New Planet: Cherry's Litterbox",
     "encounterText": "You have discovered a new planet with Feline smells. They greet you with meows. \n What do you do?",
-    "encounterImage": "cherry",
+    "encounterImageKey": "cherry",
     "encounterOptions": [
       {
         "optionText": "Meow back",
@@ -27,7 +27,7 @@
   {
     "encounterTitle": "New Planet: Asuka's Kingdom",
     "encounterText": "You have arrived at a new planet where Asuka gives you some wet greetings. He is full of love. \n What do you do?",
-    "encounterImage": "asuka",
+    "encounterImageKey": "asuka",
     "encounterOptions": [
       {
         "optionText": "Give Nothing",

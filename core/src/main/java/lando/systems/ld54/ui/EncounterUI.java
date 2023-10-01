@@ -13,6 +13,7 @@ import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.encounters.Encounter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EncounterUI extends Group {
     private Assets assets;
@@ -24,35 +25,28 @@ public class EncounterUI extends Group {
     private String encounterText = "";
     private TextureRegion encounterImage;
     private ArrayList<EncounterOption> encounterOptions;
+    private HashMap<String, TextureRegion> textureRegionHashMap = new HashMap<>();
 
     public EncounterUI(Assets assets, Skin skin, AudioManager audio) {
         super();
         this.assets = assets;
         this.skin = skin;
         this.audio = audio;
-        encounterTitle = "Space Pirate";
-        encounterText = "You have encountered a brave space pirate! He is a good boy. \n" +
-            "His tail is wagging and he is ready to play. However, you never know its true intention. \n" +
-            "You can either fight, flee, or give treats.";
-        encounterImage = assets.asuka.getKeyFrame(0);
+        textureRegionHashMap.put("asuka", assets.asuka.getKeyFrame(0));
+        textureRegionHashMap.put("cherry", assets.cherry.getKeyFrame(0));
+        encounterImage = assets.obi.getKeyFrame(0);
         encounterOptions = new ArrayList<>();
-        EncounterOption option1 = new EncounterOption("Fight", EncounterOption.OutcomeType.DAMAGE, 1f);
-        EncounterOption option2 = new EncounterOption("Flee", EncounterOption.OutcomeType.NOTHING, 0f);
-        EncounterOption option3 = new EncounterOption("Give Treats", EncounterOption.OutcomeType.HEAL, 1f);
-        encounterOptions.add(option1);
-        encounterOptions.add(option2);
-        encounterOptions.add(option3);
-        initializeUI();
     }
 
     public void setEncounter(Encounter encounter) {
         encounterTitle = encounter.encounterTitle;
         encounterText = encounter.encounterText;
-        encounterImage = encounter.encounterImage;
+        encounterImage = textureRegionHashMap.get(encounter.encounterImageKey);
         encounterOptions.clear();
         for (EncounterOption option : encounter.encounterOptions) {
             encounterOptions.add(option);
         }
+        initializeUI();
     }
 
     public void initializeUI() {
@@ -60,7 +54,7 @@ public class EncounterUI extends Group {
         Window.WindowStyle glassWindowStyle = new Window.WindowStyle(defaultWindowStyle);
         glassWindowStyle.background = Assets.Patch.metal.drawable;
 
-        Rectangle encounterWindowBound = new Rectangle(0, 0, Config.Screen.window_width, Config.Screen.window_height);
+        Rectangle encounterWindowBound = new Rectangle(Config.Screen.window_width / 8, 0, Config.Screen.window_width * 3 / 4, Config.Screen.window_height);
 
         encounterWindow = new VisWindow("", glassWindowStyle);
         encounterWindow.setSize(encounterWindowBound.width, encounterWindowBound.height);
@@ -73,7 +67,7 @@ public class EncounterUI extends Group {
 
         VisLabel encounterTitleLabel = new VisLabel(encounterTitle);
         Label.LabelStyle style = encounterTitleLabel.getStyle();
-        style.font = assets.starJediFont100;
+        style.font = assets.starJediFont50;
         encounterTitleLabel.setStyle(style);
         encounterTitleLabel.setAlignment(Align.center);
         encounterTitleLabel.setColor(Color.BLACK);

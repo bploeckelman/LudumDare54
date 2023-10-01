@@ -6,6 +6,6 @@ import lando.systems.ld54.ui.EncounterOption;
 public class Encounter {
     public String encounterTitle;
     public String encounterText;
-    public TextureRegion encounterImage;
+    public String encounterImageKey;
     public EncounterOption[] encounterOptions;
 }
