@@ -117,6 +117,7 @@ public class SettingsUI extends Group {
         //settingsWindow.setColor(Color.RED);
 
         Label settingLabel = new Label("Settings", skin, "large");
+//        settingLabel.getStyle().font = assets.abandonedFont50;
         settingsWindow.add(settingLabel).padBottom(40f).padTop(40f);
         settingsWindow.row();
         Label musicVolumeLabel = new Label("Music Volume", skin);
@@ -150,7 +151,7 @@ public class SettingsUI extends Group {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 audio.setSoundVolume(soundSlider.getValue());
-                audio.playSound(AudioManager.Sounds.coin);
+                audio.playSound(AudioManager.Sounds.radarPing);
             }
         });
         settingsWindow.add(soundSlider).padBottom(10f).width(settingsWindow.getWidth() - 100f);
@@ -173,7 +174,7 @@ public class SettingsUI extends Group {
         TextButton.TextButtonStyle outfitMediumStyle = skin.get("text", TextButton.TextButtonStyle.class);
         TextButton.TextButtonStyle settingsButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
 //        settingsButtonStyle.font = assets.smallFont;
-        settingsButtonStyle.font = assets.abandonedFont50;
+        settingsButtonStyle.font = assets.abandonedFont20;
         settingsButtonStyle.fontColor = Color.BLACK;
         settingsButtonStyle.up = Assets.Patch.glass.drawable;
         settingsButtonStyle.down = Assets.Patch.glass_dim.drawable;

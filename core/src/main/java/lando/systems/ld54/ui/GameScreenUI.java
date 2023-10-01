@@ -55,9 +55,11 @@ public class GameScreenUI extends Group {
         infoWindow.align(Align.center);
         VisLabel fuelLabel = new VisLabel("Fuel");
         Label.LabelStyle style = new Label.LabelStyle();
-        style.font = assets.smallFont;
+//        style.font = assets.smallFont;
+        style.font = assets.abandonedFont20;
         fuelLabel.setStyle(style);
         infoWindow.add(fuelLabel).colspan(4).padBottom(5f);
+//        fuelLabel.setColor(Color.BLACK);
         infoWindow.row();
 
         fuelBar = new VisProgressBar(0f, 1f, 0.01f, true);
@@ -101,6 +103,7 @@ public class GameScreenUI extends Group {
         infoWindow.add(fuelBarImage).width(20f).height(20f);
         infoWindow.row();
         VisLabel scrapLabel = new VisLabel("Scrap: ");
+
         scrapLabel.setStyle(style);
         infoWindow.add(scrapLabel).left().pad(5f).colspan(4).padTop(10f);
         infoWindow.row();
