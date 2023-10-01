@@ -15,7 +15,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "You tried to help the cat, but they attacked you.",
             "weight": 0.1
           },
@@ -38,7 +38,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "You tried to help the dog, but they attacked you.",
             "weight": 0.5
           },
@@ -61,7 +61,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "You got hit by the flying cat while leaving.",
             "weight": 0.5
           }
@@ -125,7 +125,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Your spaceship is damaged while attempting to land on the asteroid.",
             "weight": 0.2
           }
@@ -142,7 +142,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "The space station's security systems activate, and you must escape quickly.",
             "weight": 0.5
           }
@@ -159,7 +159,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "The aliens view you as a threat and open fire on your ship.",
             "weight": 0.4
           },
@@ -189,7 +189,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Your ship sustains minor damage during the navigation attempt.",
             "weight": 0.3
           }
@@ -206,7 +206,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Sending the distress signal attracts the attention of space pirates who attack your ship.",
             "weight": 0.4
           }
@@ -223,7 +223,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "While waiting, your ship experiences minor technical difficulties.",
             "weight": 0.2
           }
@@ -241,7 +241,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Your ship gets too close and is pulled into the black hole, leading to certain doom.",
             "weight": 0.5
           },
@@ -264,7 +264,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Your ship's systems are affected by the black hole's gravitational forces, causing minor damage.",
             "weight": 0.3
           }
@@ -281,7 +281,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Escaping the black hole is challenging and results in minor damage to your ship.",
             "weight": 0.2
           }
@@ -305,7 +305,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Your spaceship encounters turbulence during landing, causing minor damage.",
             "weight": 0.4
           }
@@ -339,7 +339,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "As you leave the planet, your ship experiences a minor technical malfunction.",
             "weight": 0.2
           }
@@ -363,7 +363,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -10,
             "text": "Despite your best efforts, your ship sustains minor damage from asteroid impacts.",
             "weight": 0.3
           }
@@ -380,7 +380,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -10,
             "text": "Your systems malfunction, and attempting to clear the path causes minor damage.",
             "weight": 0.2
           }
@@ -397,7 +397,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Your course change is abrupt and results in minor damage to your ship's systems.",
             "weight": 0.1
           }
@@ -421,7 +421,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -10,
             "text": "The space station's interior is unstable, and your ship sustains minor damage during docking.",
             "weight": 0.4
           }
@@ -455,7 +455,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "As you depart, your ship experiences a minor technical glitch.",
             "weight": 0.2
           }
@@ -479,7 +479,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "The battle is intense, and your ship sustains moderate damage in the process.",
             "weight": 0.4
           }
@@ -496,7 +496,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Negotiations fail, and the pirates attack your ship, causing moderate damage.",
             "weight": 0.3
           }
@@ -513,7 +513,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "While evading, your ship sustains minor damage from enemy fire.",
             "weight": 0.2
           }
@@ -537,7 +537,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Despite your shields, some meteors breach and cause minor damage to your ship.",
             "weight": 0.3
           }
@@ -554,7 +554,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -10,
             "text": "Your attempt to divert the meteors causes minor damage to your ship's systems.",
             "weight": 0.4
           }
@@ -571,7 +571,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "While waiting, some meteors strike your ship, causing minor damage.",
             "weight": 0.2
           }
@@ -595,7 +595,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Your landing is rough, causing minor damage to your spaceship.",
             "weight": 0.4
           }
@@ -687,7 +687,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "As you change course, your ship experiences a minor technical malfunction.",
             "weight": 0.2
           }
@@ -745,7 +745,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "As you leave the asteroid field, your ship experiences a minor technical glitch.",
             "weight": 0.2
           }
