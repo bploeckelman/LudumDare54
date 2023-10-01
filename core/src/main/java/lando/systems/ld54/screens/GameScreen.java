@@ -136,7 +136,12 @@ public class GameScreen extends BaseScreen {
         background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
-        playerShips.forEach(x -> x.update(dt));
+        playerShips.forEach(x -> {
+            x.update(dt);
+            if (x.trackMovement) {
+                worldCamera.position.set(x.pos.x, x.pos.y, 0);
+            }
+        });
         asteroids.forEach(Asteroid::update);
 
         cameraController.update(dt);
@@ -266,6 +271,8 @@ public class GameScreen extends BaseScreen {
         var ship = new PlayerShip(assets, fogOfWar);
         ship.launch(angle, power);
         playerShips.add(ship);
+
+        resetWorldCamera();
     }
 
     private void startEncounter() {

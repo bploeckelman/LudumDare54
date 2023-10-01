@@ -110,6 +110,10 @@ public class DragLauncher extends InputAdapter {
         if (Config.Debug.general) {
             Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, strength));
         }
+
+        // temp
+        strength *= 20;
+
         screen.launchShip(angle, strength);
     }
 }

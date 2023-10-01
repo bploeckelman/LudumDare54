@@ -9,20 +9,12 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.IntMap;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.utils.Calc;
 import lando.systems.ld54.utils.Time;
 import text.formic.Stringf;
 
 public class PanZoomCameraController extends GestureDetector.GestureAdapter implements InputProcessor {
-
-    private final int PAN_LEFT = Input.Keys.D;
-    private final int PAN_RIGHT = Input.Keys.A;
-    private final int PAN_UP = Input.Keys.S;
-    private final int PAN_DOWN = Input.Keys.W;
-
-    private IntMap<Boolean> keys;
 
     private final float DT_SCALE = 2f;
 
@@ -45,17 +37,13 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     public static Interpolation interpolation = Interpolation.linear;
 
+    private boolean dragZoom = false;
+
     public PanZoomCameraController(OrthographicCamera camera) {
         reset(camera);
     }
 
     public void reset(OrthographicCamera camera) {
-        keys = new IntMap<>();
-        keys.put(PAN_LEFT, false);
-        keys.put(PAN_RIGHT, false);
-        keys.put(PAN_UP, false);
-        keys.put(PAN_DOWN, false);
-
         this.camera = camera;
         this.camera.update();
 
@@ -65,10 +53,6 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     public void update(float dt) {
         var moveAmount = dt * units_panned_per_pixel;
-        if (keys.get(PAN_LEFT,  false)) moveLeft(moveAmount);
-        if (keys.get(PAN_RIGHT, false)) moveRight(moveAmount);
-        if (keys.get(PAN_UP,    false)) moveUp(moveAmount);
-        if (keys.get(PAN_DOWN,  false)) moveDown(moveAmount);
 
         var x = interpolation.apply(camera.position.x, targetPos.x, DT_SCALE * dt);
         var y = interpolation.apply(camera.position.y, targetPos.y, DT_SCALE * dt);
@@ -138,7 +122,8 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
-        return false;
+        targetZoom = MathUtils.clamp(distance / initialDistance, MIN_ZOOM, MAX_ZOOM);
+        return true;
     }
 
     @Override
@@ -156,13 +141,11 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     @Override
     public boolean keyDown(int keycode) {
-        keys.put(keycode, true);
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        keys.put(keycode, false);
         return false;
     }
 
@@ -173,11 +156,16 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        dragZoom =  (button == Input.Buttons.LEFT && pointer == 0);
+        return dragZoom;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (dragZoom) {
+            dragZoom = false;
+            return true;
+        }
         return false;
     }
 
@@ -188,19 +176,16 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        // TODO - need to setup DragLauncher as an InputProcessor
-        //   so it can be muxed together with this and consume drag events
-        //   when the player clicks on earth
-        if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
-            var dx = Gdx.input.getDeltaX() * Time.delta * units_dragged_per_pixel;
-            var dy = Gdx.input.getDeltaY() * Time.delta * units_dragged_per_pixel;
-            if (dx < 0) moveLeft(dx);
-            if (dx > 0) moveRight(dx);
-            if (dy < 0) moveUp(dy);
-            if (dy > 0) moveDown(dy);
-            return true;
-        }
-        return false;
+        if (!dragZoom) { return false; }
+
+        var dx = Gdx.input.getDeltaX() * Time.delta * units_dragged_per_pixel;
+        var dy = Gdx.input.getDeltaY() * Time.delta * units_dragged_per_pixel;
+        if (dx < 0) moveLeft(dx);
+        if (dx > 0) moveRight(dx);
+        if (dy < 0) moveUp(dy);
+        if (dy > 0) moveDown(dy);
+
+        return true;
     }
 
     @Override
@@ -225,5 +210,4 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
         }
         return false;
     }
-
 }

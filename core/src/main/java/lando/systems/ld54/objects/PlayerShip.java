@@ -16,6 +16,8 @@ public class PlayerShip {
     private TextureRegion keyframe;
     private float animState;
 
+    public boolean trackMovement = false;
+
     // TODO - should pos be center and we offset by half-size in draw()?
     //  or should pos be bottom left and offset by half-size in getCenter()?
     //  or should we use a Circle object and use circle .pos / .radius to find draw corner?
@@ -45,8 +47,9 @@ public class PlayerShip {
         animState += dt;
         keyframe = anim.getKeyFrame(animState);
 
-        // get rotation based on velocity
-        rotation = vel.angleDeg();
+        System.out.println(vel.len2());
+
+        if (vel.isZero()) { return; }
 
         // integrate velocity into position
         pos.x += dt * vel.x;
@@ -54,7 +57,14 @@ public class PlayerShip {
 
         // slow down over time
         vel.scl(DRAG_FRICTION);
-        if (vel.len2() > .01f) {
+        float curVelocity = vel.len2();
+        if (curVelocity < 0.1f) {
+            vel.setZero();
+        } else if (curVelocity < 200f) {
+            trackMovement = false;
+        } else {
+            // get rotation based on velocity
+            rotation = vel.angleDeg();
             fogOfWar.addFogCircle(pos.x, pos.y, 200);
         }
     }
@@ -76,6 +86,7 @@ public class PlayerShip {
     }
 
     public void launch(float angle, float power) {
+        trackMovement = true;
         vel.set(1, 0).setAngleDeg(angle).scl(power);
     }
 
