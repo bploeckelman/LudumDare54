@@ -66,7 +66,7 @@ public class EncounterUI extends Group {
         encounterWindow.setPosition(encounterWindowBound.x, encounterWindowBound.y);
         encounterWindow.setMovable(false);
         encounterWindow.align(Align.top | Align.center);
-        encounterWindow.setModal(false);
+        encounterWindow.setModal(true);
         encounterWindow.setKeepWithinStage(false);
         encounterWindow.setColor(1f, 1f, 1f, 0.8f);
 
