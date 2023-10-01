@@ -62,7 +62,7 @@
           {
             "type": "DAMAGE",
             "value": 1,
-            "text": "You got hit by the flying cat",
+            "text": "You got hit by the flying cat while leaving.",
             "weight": 0.5
           }
         ]
