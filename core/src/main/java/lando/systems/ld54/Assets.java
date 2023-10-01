@@ -370,17 +370,17 @@ public class Assets implements Disposable {
 
         encounterAnimationHashMap.put("asuka", asuka);
         encounterAnimationHashMap.put("cherry", cherry);
-        encounterAnimationHashMap.put("spaceship", playerShip);
-        encounterAnimationHashMap.put("nebula", marsSpin);
-        encounterAnimationHashMap.put("blackhole", marsSpin);
-        encounterAnimationHashMap.put("mysteriousplanet", venusSpin);
-        encounterAnimationHashMap.put("asteroidfield", marsSpin);
-        encounterAnimationHashMap.put("abandonedstation", earthSpin);
+        encounterAnimationHashMap.put("spaceship", asuka);
+        encounterAnimationHashMap.put("nebula", cherry);
+        encounterAnimationHashMap.put("blackhole", obi);
+        encounterAnimationHashMap.put("mysteriousplanet", cherry);
+        encounterAnimationHashMap.put("asteroidfield", asuka);
+        encounterAnimationHashMap.put("abandonedstation", osha);
         encounterAnimationHashMap.put("spacepirates", obi);
-        encounterAnimationHashMap.put("meteorshower", mercurySpin);
+        encounterAnimationHashMap.put("meteorshower", obi);
         encounterAnimationHashMap.put("gasgiantmoon", yoda);
         encounterAnimationHashMap.put("interstellaranomaly", osha);
-        encounterAnimationHashMap.put("asteroidmining", earthSpin);
+        encounterAnimationHashMap.put("asteroidmining", yoda);
 
         initialized = true;
         return 1;

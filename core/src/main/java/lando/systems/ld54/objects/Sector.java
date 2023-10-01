@@ -47,10 +47,17 @@ public class Sector {
     }
 
     public void drawEncounter(SpriteBatch batch) {
+        if (isEncounterActive) {
+            batch.setColor(Color.WHITE);
+        }
+        else {
+            batch.setColor(1f, 1f, 1f, 0.5f);
+        }
         if (encounter != null) {
             encounterAnimState += Time.delta;
             batch.draw(Main.game.assets.encounterAnimationHashMap.get(encounter.imageKey).getKeyFrame(encounterAnimState), encounterBounds.x, encounterBounds.y, encounterBounds.width, encounterBounds.height);
         }
+        batch.setColor(Color.WHITE);
     }
 
     public void draw(ShapeDrawer shapes) {
