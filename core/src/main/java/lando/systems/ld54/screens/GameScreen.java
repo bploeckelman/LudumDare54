@@ -203,6 +203,7 @@ public class GameScreen extends BaseScreen {
 
         // TODO: DEBUG REMOVE ME
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            Config.Debug.general = true;
             if (!encounterShown) {
                 startEncounter(getRandomEncounter());
             } else {
@@ -427,7 +428,12 @@ public class GameScreen extends BaseScreen {
         var file = Gdx.files.internal("encounters/battle_encounters.json");
         var encounters = json.fromJson(Array.class, Encounter.class, file);
         var index = MathUtils.random(encounters.size - 1);
-        return (Encounter) encounters.get(index);
+        if(!Config.Debug.general) {
+            return (Encounter) encounters.get(index);
+        }
+        else {
+            return (Encounter) encounters.get(1);
+        }
     }
 
     private void startEncounter(Encounter encounter) {
@@ -437,8 +443,12 @@ public class GameScreen extends BaseScreen {
         encounterUI = new EncounterUI(this, assets, skin, audioManager);
         encounterUI.setEncounter(encounter);
         uiStage.addActor(encounterUI);
-        encounter.sector.pullPlayerShip.deactivate();
-        encounter.sector.pushJunk.deactivate();
+
+        if(!Config.Debug.general) {
+            encounter.sector.pullPlayerShip.deactivate();
+            encounter.sector.pushJunk.deactivate();
+        }
+
         game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
     }
 
@@ -447,8 +457,14 @@ public class GameScreen extends BaseScreen {
         Time.pause_timer = 0f;
         encounterUI.remove();
         // TODO: SOUND HERE (WOOSH as it scans the sector)
+        game.audioManager.playSound(AudioManager.Sounds.radarReveal, 2f);
+//        game.audioManager.playSound(AudioManager.Sounds.radarPing, 2f);
+        Gdx.app.log("Logging the finish Encounter", "True");
         float fogMargin = 50;
-        fogOfWar.addFogRectangle(encounter.sector.bounds.x - fogMargin, encounter.sector.bounds.y - fogMargin, encounter.sector.bounds.width + fogMargin*2f, encounter.sector.bounds.height + fogMargin*2f, .2f);
+        if(!Config.Debug.general) {
+            fogOfWar.addFogRectangle(encounter.sector.bounds.x - fogMargin, encounter.sector.bounds.y - fogMargin, encounter.sector.bounds.width + fogMargin*2f, encounter.sector.bounds.height + fogMargin*2f, .2f);
+        }
+
         game.audioManager.swapMusic(levelMusicLowpass, levelMusic);
     }
 

@@ -45,7 +45,7 @@
           {
             "type": "NOTHING",
             "value": 0,
-            "text": "You tried to help the dog, but they didn't notice you.",
+            "text": "Diplomacy was... not effective.\n\nThey stole your fuel, like a bully stealing lunch money from a nerd in an 80s movie.",
             "weight": 0.2
           }
         ]
