@@ -29,6 +29,7 @@ import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.*;
 import lando.systems.ld54.ui.EncounterUI;
+import lando.systems.ld54.ui.GameScreenUI;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
@@ -59,8 +60,9 @@ public class GameScreen extends BaseScreen {
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
     float accum;
-    public boolean uiShown = false;
+    public boolean encounterShown = false;
     EncounterUI encounterUI;
+    GameScreenUI gameScreenUI;
 
     public GameScreen() {
         background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
@@ -116,13 +118,8 @@ public class GameScreen extends BaseScreen {
         levelMusic.setLooping(true);
         levelMusic.play();
 
-//        levelMusicLowpass.setVolume(audioManager.musicVolume.floatValue());
-//        levelMusicLowpass.setLooping(true);
-//        levelMusicLowpass.play();
-
-//        audioManager.fadeMusic(AudioManager.Musics.mainTheme);
-//        audioManager.fadeMusic();
-
+        gameScreenUI = new GameScreenUI(assets);
+        uiStage.addActor(gameScreenUI);
     }
 
     @Override
@@ -132,7 +129,7 @@ public class GameScreen extends BaseScreen {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            if (!uiShown) {
+            if (!encounterShown) {
                 startEncounter();
             } else {
                 finishEncounter();
@@ -145,9 +142,7 @@ public class GameScreen extends BaseScreen {
 //            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
         }
 
-        if (uiShown) {
-            uiStage.act();
-        }
+        uiStage.act();
 
         accum += dt;
         worldCamera.unproject(mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -161,6 +156,9 @@ public class GameScreen extends BaseScreen {
             x.update(dt);
             if (x.trackMovement) {
                 worldCamera.position.set(x.pos.x, x.pos.y, 0);
+            }
+            if (playerShips.size > 0) {
+                gameScreenUI.setPlayerShip(playerShips.get(playerShips.size - 1));
             }
         });
         asteroids.forEach(Asteroid::update);
@@ -218,9 +216,8 @@ public class GameScreen extends BaseScreen {
         }
         batch.end();
 
-        if (uiShown) {
-            uiStage.draw();
-        }
+        uiStage.draw();
+
     }
 
     /**
@@ -290,6 +287,7 @@ public class GameScreen extends BaseScreen {
 
     public void launchShip(float angle, float power) {
         var ship = new PlayerShip(assets, fogOfWar);
+        gameScreenUI.setPlayerShip(ship);
         ship.launch(angle, power);
         playerShips.add(ship);
 
@@ -297,7 +295,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void startEncounter() {
-        uiShown = true;
+        encounterShown = true;
         encounterUI = new EncounterUI(this, assets, skin, audioManager);
         var file = Gdx.files.local("encounters/battle_encounters.json");
         Encounter[] encounter = json.fromJson(Encounter[].class, file);
@@ -306,7 +304,14 @@ public class GameScreen extends BaseScreen {
     }
 
     private void finishEncounter() {
-        uiShown = false;
+        encounterShown = false;
         encounterUI.remove();
+    }
+
+    public void addFuel(float value) {
+        if (playerShips.size > 0) {
+            playerShips.get(playerShips.size - 1).currentFuelLevel += value;
+            playerShips.get(playerShips.size - 1).STARTING_FUEL += value;
+        }
     }
 }

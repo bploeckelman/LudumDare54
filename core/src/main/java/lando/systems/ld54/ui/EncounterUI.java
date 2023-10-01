@@ -145,23 +145,24 @@ public class EncounterUI extends Group {
         optionButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                screen.uiShown = false;
+                screen.encounterShown = false;
+                switch (outcome.type) {
+                    case FUEL:
+                        screen.addFuel(outcome.value);
+                        break;
+                    case SCRAP:
+                        break;
+                    case RADAR:
+                        break;
+                    case BOMB:
+                        break;
+                    case NOTHING:
+                        break;
+                }
                 remove();
             }
         });
         encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
-        switch (outcome.type) {
-            case FUEL:
-                break;
-            case SCRAP:
-                break;
-            case RADAR:
-                break;
-            case BOMB:
-                break;
-            case NOTHING:
-                break;
-        }
     }
 
     private void destroyOptions() {

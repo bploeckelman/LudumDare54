@@ -21,7 +21,7 @@
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "You tried to help the cat, but they didn't notice you.",
             "weight": 0.2
           }
@@ -44,7 +44,7 @@
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "You tried to help the dog, but they didn't notice you.",
             "weight": 0.2
           }
@@ -55,7 +55,7 @@
         "possibleOutcomes": [
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "You watched and left.",
             "weight": 0.5
           },
@@ -165,7 +165,7 @@
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "The aliens are indifferent and don't engage with you.",
             "weight": 0.2
           }
@@ -183,7 +183,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 5,
             "text": "You FUELfully navigate the nebula and continue your journey.",
             "weight": 0.7
           },
@@ -217,7 +217,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 100,
             "text": "After some time, the nebula dissipates, and you can continue your journey unharmed.",
             "weight": 0.8
           },
@@ -247,7 +247,7 @@
           },
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 105,
             "text": "Your research yields valuable data about the black hole without risking your ship.",
             "weight": 0.5
           }
@@ -258,7 +258,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 5,
             "text": "You make groundbreaking observations about the black hole's behavior from a safe distance.",
             "weight": 0.7
           },
@@ -275,7 +275,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 5,
             "text": "You FUELfully escape the black hole's gravitational pull and avoid any harm.",
             "weight": 0.8
           },
@@ -299,7 +299,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 20,
             "text": "You find a wealth of valuable resources on the planet's surface.",
             "weight": 0.6
           },
@@ -316,13 +316,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You detect unusual energy signatures on the planet's surface, prompting further investigation.",
             "weight": 0.7
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "Your observations from orbit reveal nothing of interest.",
             "weight": 0.3
           }
@@ -333,7 +333,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You depart without incident and continue your exploration of space.",
             "weight": 0.8
           },
@@ -357,7 +357,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your skillful navigation allows you to pass through the asteroid field unscathed.",
             "weight": 0.7
           },
@@ -374,7 +374,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your onboard systems effectively clear a safe path through the asteroid field.",
             "weight": 0.8
           },
@@ -391,7 +391,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You change course and safely bypass the asteroid field without any issues.",
             "weight": 0.9
           },
@@ -415,7 +415,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You find valuable technology and supplies inside the space station.",
             "weight": 0.6
           },
@@ -432,13 +432,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your scans reveal hidden compartments with useful resources on the space station.",
             "weight": 0.7
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "Your scans do not detect anything remarkable about the space station.",
             "weight": 0.3
           }
@@ -449,7 +449,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You decide to move on, and your journey continues without incident.",
             "weight": 0.8
           },
@@ -473,7 +473,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your combat skills prevail, and you defeat the space pirates, securing valuable loot.",
             "weight": 0.6
           },
@@ -490,7 +490,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your negotiation skills convince the pirates to accept FUELs and spare your ship.",
             "weight": 0.7
           },
@@ -507,7 +507,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your evasive maneuvers allow you to escape the space pirates without any harm.",
             "weight": 0.8
           },
@@ -531,7 +531,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your shields hold up, and you FUELfully navigate through the meteor shower unharmed.",
             "weight": 0.7
           },
@@ -548,7 +548,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your quick thinking and technology usage divert the meteor shower FUELfully.",
             "weight": 0.6
           },
@@ -565,7 +565,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "The meteor shower subsides, and your ship remains unharmed.",
             "weight": 0.8
           },
@@ -589,7 +589,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You find unique and valuable minerals while collecting samples.",
             "weight": 0.6
           },
@@ -606,13 +606,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your drones capture valuable data about the moon's geological features.",
             "weight": 0.7
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "The drone deployment reveals no significant findings.",
             "weight": 0.3
           }
@@ -623,7 +623,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your decision to stay in orbit allows you to continue your journey without incidents.",
             "weight": 0.8
           },
@@ -647,7 +647,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You gather unique scientific data from the anomaly, enhancing your knowledge.",
             "weight": 0.6
           },
@@ -664,13 +664,13 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "Your analysis from a distance yields valuable insights into the anomaly's nature.",
             "weight": 0.7
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "Despite your advanced equipment, no remarkable data is obtained.",
             "weight": 0.3
           }
@@ -681,7 +681,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You change course and continue your journey without encountering any issues.",
             "weight": 0.8
           },
@@ -728,7 +728,7 @@
           },
           {
             "type": "NOTHING",
-            "value": 1,
+            "value": 0,
             "text": "The mining drones do not uncover any remarkable resources in the selected asteroids.",
             "weight": 0.3
           }
@@ -739,7 +739,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 1,
+            "value": 10,
             "text": "You decide to move on and continue your exploration without any issues.",
             "weight": 0.8
           },
