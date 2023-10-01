@@ -3,10 +3,12 @@
 <module rename-to="html">
   <inherits name="lando.systems.ld54.GdxDefinition" />
 
-    <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld53.physics.Collision" />
+    <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.physics.Collision" />
     <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.Encounter" />
     <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.EncounterOption" />
     <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.EncounterOptionOutcome" />
+    <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.particles.Particle" />
+
 
     <collapse-all-properties />
   <add-linker name="xsiframe"/>
