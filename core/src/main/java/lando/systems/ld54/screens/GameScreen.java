@@ -409,5 +409,6 @@ public class GameScreen extends BaseScreen {
 
     public void addFuel(float value) {
         // add fuel to player
+        player.addFuel(value);
     }
 }
