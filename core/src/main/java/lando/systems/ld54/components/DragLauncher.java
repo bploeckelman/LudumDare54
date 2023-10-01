@@ -29,6 +29,7 @@ public class DragLauncher extends InputAdapter {
 
     private final Animation<TextureRegion> launcherAnimation;
     private TextureRegion currentImage;
+    private float yPulse = 0;
 
     private float animTimer = 0;
     private float dragTimer = 0;
@@ -83,6 +84,9 @@ public class DragLauncher extends InputAdapter {
         animTimer += delta;
         currentImage = launcherAnimation.getKeyFrame(animTimer);
         if(dragging) {
+            // adjust speed of pulse by speed pull
+            yPulse = MathUtils.sin(animTimer * 10) * 0.1f;
+
             if(dragTimer > .85f) {
                 if(!isRevving) {
                     screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .46f);
@@ -121,7 +125,7 @@ public class DragLauncher extends InputAdapter {
                 h / 2f,
                 w, h,
                 scale,
-                1f,
+                0.9f + yPulse,
                 angle
             );
         }
