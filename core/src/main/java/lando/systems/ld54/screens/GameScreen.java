@@ -25,6 +25,7 @@ import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.*;
+import lando.systems.ld54.particles.Particles;
 import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.Influencer;
 import lando.systems.ld54.physics.PhysicsSystem;
@@ -79,6 +80,7 @@ public class GameScreen extends BaseScreen {
     public Array<Collidable> physicsObjects;
     public Array<Influencer> influencers;
     public boolean isLaunchPhase = false;
+    public Particles particles;
 
     public GameScreen() {
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
@@ -170,6 +172,7 @@ public class GameScreen extends BaseScreen {
         gameScreenUI = new GameScreenUI(assets, this);
         uiStage.addActor(gameScreenUI);
         miniMap = new MiniMap(this);
+        particles = new Particles(assets);
     }
 
     @Override
@@ -230,6 +233,7 @@ public class GameScreen extends BaseScreen {
 
         cameraController.update(dt);
         checkCurrentSector();
+        particles.update(dt);
         super.update(dt);
     }
 
@@ -325,6 +329,8 @@ public class GameScreen extends BaseScreen {
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
         background.render(batch, true);
+        particles.draw(batch, Particles.Layer.background);
+
 
         sectors.forEach(sector -> sector.draw(assets.shapes));
         sectors.forEach(sector -> sector.drawEncounter(batch));
@@ -344,6 +350,7 @@ public class GameScreen extends BaseScreen {
             }
         }
         launcher.render(batch);
+        particles.draw(batch, Particles.Layer.middle);
         batch.end();
     }
 
@@ -371,6 +378,10 @@ public class GameScreen extends BaseScreen {
         batch.draw(assets.noiseTexture, -margin / 2f, -margin / 2f, gameWidth + margin, gameHeight + margin);
         batch.end();
         batch.setShader(null);
+
+        batch.begin();
+        particles.draw(batch, Particles.Layer.overFog);
+        batch.end();
     }
 
     private void resetWorldCamera() {

@@ -136,6 +136,7 @@ public class PlayerShip implements Collidable {
     private static final PlayerShipPart.Type[] shipPartTypes = new PlayerShipPart.Type[] { nose, cabin, cabin, tail };
     public void explode() {
         // TODO - particle effect
+        screen.particles.shipExplode(pos.x, pos.y);
 
         screen.audioManager.playSound(AudioManager.Sounds.explosion);
         screen.assets.engineRunning.stop();

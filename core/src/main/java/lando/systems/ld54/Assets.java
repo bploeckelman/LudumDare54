@@ -54,6 +54,10 @@ public class Assets implements Disposable {
     public Texture whitePixel;
     public Texture starsTexture;
 
+    public Particles particles;
+    public Array<Animation<TextureRegion>> numberParticles;
+
+
     public Animation<TextureRegion> asuka;
     public Animation<TextureRegion> cherry;
     public Animation<TextureRegion> osha;
@@ -133,6 +137,17 @@ public class Assets implements Disposable {
         public static NinePatch metal_green;
         public static NinePatch metal_yellow;
         public static NinePatch shear;
+    }
+
+    public static class Particles {
+        public TextureRegion circle;
+        public TextureRegion sparkle;
+        public TextureRegion smoke;
+        public TextureRegion ring;
+        public TextureRegion dollar;
+        public TextureRegion blood;
+        public TextureRegion sparks;
+        public TextureRegion line;
     }
 
     public Music intro;
@@ -330,6 +345,20 @@ public class Assets implements Disposable {
         fuzzyCircle = atlas.findRegion("fuzzy-circle");
 
         inputPrompts = new InputPrompts(this);
+
+        particles = new Particles();
+        particles.circle  = atlas.findRegion("particles/circle");
+        particles.ring    = atlas.findRegion("particles/ring");
+        particles.smoke   = atlas.findRegion("particles/smoke");
+        particles.sparkle = atlas.findRegion("particles/sparkle");
+        particles.dollar  = atlas.findRegion("particles/dollars");
+        particles.blood   = atlas.findRegion("characters/blood-stain");
+        particles.sparks  = atlas.findRegion("particles/sparks");
+        particles.line    = atlas.findRegion("particles/line");
+        numberParticles = new Array<>();
+        for (int i = 0; i <= 9; ++i) {
+            numberParticles.add(new Animation<>(0.1f, atlas.findRegions("particles/font-points-" + i)));
+        }
 
         // Transition shaders
         randomTransitions = new Array<>();
