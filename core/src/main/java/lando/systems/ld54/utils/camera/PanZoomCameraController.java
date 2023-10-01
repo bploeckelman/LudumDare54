@@ -33,7 +33,7 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     private OrthographicCamera camera;
     private final Vector3 tmp = new Vector3();
-    private final Vector3 targetPos = new Vector3();
+    public final Vector3 targetPos = new Vector3();
     private float targetZoom = INITIAL_ZOOM;
 
     public static Interpolation interpolation = Interpolation.linear;

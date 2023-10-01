@@ -20,16 +20,16 @@ public class DebugInfo {
         assets.font.getData().setScale(.5f);
         assets.font.draw(assets.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, y);
         y -= spacing;
-//        long physicsSmooth = 0;
-//        long longestPhysics = 0;
-//        for (long p : physicsMS){
-//            physicsSmooth += p;
-//            longestPhysics = Math.max(longestPhysics, p);
-//        }
-//        physicsSmooth /= Math.max(1, physicsMS.size);
-//        assets.font.draw(assets.batch, "Physics: " + physicsSmooth+"ms", 0, y);
-//        y -= spacing;
-//        assets.font.draw(assets.batch, "Longest Step: " + longestPhysics+"ms", 0, y);
+        long physicsSmooth = 0;
+        long longestPhysics = 0;
+        for (long p : physicsMS){
+            physicsSmooth += p;
+            longestPhysics = Math.max(longestPhysics, p);
+        }
+        physicsSmooth /= Math.max(1, physicsMS.size);
+        assets.font.draw(assets.batch, "Physics: " + physicsSmooth+"ms", 0, y);
+        y -= spacing;
+        assets.font.draw(assets.batch, "Longest Step: " + longestPhysics+"ms", 0, y);
 
         assets.font.getData().setScale(1);
         assets.batch.end();

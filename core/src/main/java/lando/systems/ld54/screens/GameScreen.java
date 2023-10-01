@@ -25,11 +25,16 @@ import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.*;
+import lando.systems.ld54.physics.Collidable;
+import lando.systems.ld54.physics.Influencer;
+import lando.systems.ld54.physics.PhysicsSystem;
 import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.ui.GameScreenUI;
 import lando.systems.ld54.ui.MiniMap;
 import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
+
+import java.util.ArrayList;
 
 public class GameScreen extends BaseScreen {
 
@@ -70,8 +75,14 @@ public class GameScreen extends BaseScreen {
     GameScreenUI gameScreenUI;
     MiniMap miniMap;
     public PlayerShip currentShip;
+    PhysicsSystem physics;
+    Array<Collidable> physicsObjects;
+    Array<Influencer> influencers;
 
     public GameScreen() {
+        physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
+        physicsObjects = new Array<>();
+        influencers = new Array<>();
         background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
@@ -83,7 +94,8 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
         Asteroids.createTestAsteroids(asteroids);
-
+        physicsObjects.addAll(asteroids)
+        ;
         var possibleGoals = new IntArray();
         var numSectors = SECTORS_WIDE * SECTORS_HIGH;
         for (int i = 0; i < numSectors; i++) {
@@ -183,6 +195,7 @@ public class GameScreen extends BaseScreen {
         }
 
         miniMap.update(dt);
+        physics.update(dt, physicsObjects, influencers);
 
         uiStage.act();
 
@@ -198,7 +211,7 @@ public class GameScreen extends BaseScreen {
             x.update(dt);
             if (x.trackMovement) {
                 currentShip = x;
-                worldCamera.position.set(x.pos.x, x.pos.y, 0);
+                cameraController.targetPos.set(x.pos.x, x.pos.y, 0);
                 gameScreenUI.setPlayerShip(currentShip);
             }
         });
@@ -275,6 +288,7 @@ public class GameScreen extends BaseScreen {
         miniMap.render(batch);
         if (Config.Debug.general) {
             batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
+
         }
         batch.end();
 
@@ -306,6 +320,11 @@ public class GameScreen extends BaseScreen {
 
         // TEMP - 'world' bounds
         assets.shapes.rectangle(0, 0, gameWidth, gameHeight, Color.MAGENTA, 4);
+        if (Config.Debug.general){
+            for (Collidable collidable : physicsObjects) {
+                collidable.renderDebug(assets.shapes);
+            }
+        }
         batch.end();
     }
 
@@ -356,6 +375,7 @@ public class GameScreen extends BaseScreen {
 
     public void launchShip(float angle, float power) {
         var ship = new PlayerShip(assets, fogOfWar);
+        physicsObjects.add(ship);
         gameScreenUI.setPlayerShip(ship);
         ship.launch(angle, power);
         playerShips.add(ship);

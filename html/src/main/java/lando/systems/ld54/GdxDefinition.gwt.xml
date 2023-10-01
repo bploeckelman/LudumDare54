@@ -19,8 +19,10 @@
   <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.Encounter" />
   <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.EncounterOption" />
   <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.EncounterOptionOutcome" />
+  <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld53.physics.Collision" />
 
-  <entry-point class="lando.systems.ld54.gwt.GwtLauncher" />
+
+    <entry-point class="lando.systems.ld54.gwt.GwtLauncher" />
 
   <set-configuration-property name="gdx.assetpath" value="../assets" />
   <set-configuration-property name="xsiframe.failIfScriptTag" value="FALSE"/>

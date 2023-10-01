@@ -1,19 +1,27 @@
 package lando.systems.ld54.objects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.fogofwar.FogOfWar;
+import lando.systems.ld54.physics.Collidable;
+import lando.systems.ld54.physics.CollisionShape;
+import lando.systems.ld54.physics.CollisionShapeCircle;
 import lando.systems.ld54.screens.GameScreen;
+import space.earlygrey.shapedrawer.ShapeDrawer;
 
-public class PlayerShip {
+public class PlayerShip implements Collidable {
 
-    private static final float DRAG_FRICTION = 0.99f;
+    private static final float DRAG_FRICTION = 0.2f;
+
+    private float mass = 10;
 
     private Animation<TextureRegion> anim;
     private TextureRegion keyframe;
@@ -21,6 +29,9 @@ public class PlayerShip {
 
     public boolean trackMovement = false;
     public int currentSector = -1;
+
+    private final Rectangle collisionBounds;
+    private final CollisionShapeCircle collisionShape;
 
     // TODO - should pos be center and we offset by half-size in draw()?
     //  or should pos be bottom left and offset by half-size in getCenter()?
@@ -44,6 +55,8 @@ public class PlayerShip {
         // TEMP - manually set initial position and size for now
         this.pos.set(GameScreen.gameWidth / 2f, GameScreen.gameHeight / 2f);
         this.size.set(128, 128);
+        collisionBounds = new Rectangle(pos.x - size.x/3f, pos.y - size.y /3f, size.x * 2f/3f, size.y * .66f);
+        collisionShape = new CollisionShapeCircle(size.x /3f, pos.x, pos.y);
     }
 
     public void update(float dt) {
@@ -53,15 +66,16 @@ public class PlayerShip {
 
         if (vel.isZero()) { return; }
 
-        // integrate velocity into position
-        pos.x += dt * vel.x;
-        pos.y += dt * vel.y;
-
-        // slow down over time
-        vel.scl(DRAG_FRICTION);
+//        // integrate velocity into position
+//        pos.x += dt * vel.x;
+//        pos.y += dt * vel.y;
+//
+//        // slow down over time
+//        vel.scl(DRAG_FRICTION);
 
         float curVelocity = vel.len2();
         if (curVelocity < 0.1f) {
+            trackMovement = false;
             vel.setZero();
             // TODO: blow it up or something
 
@@ -79,9 +93,9 @@ public class PlayerShip {
         }
     }
 
-    public void setVel(float angle, float power) {
-        vel.set(1, 0).setAngleDeg(angle).scl(power);
-    }
+//    public void setVel(float angle, float power) {
+//        vel.set(1, 0).setAngleDeg(angle).scl(power);
+//    }
 
     public void draw(SpriteBatch batch) {
         batch.draw(keyframe,
@@ -100,4 +114,71 @@ public class PlayerShip {
         vel.set(1, 0).setAngleDeg(angle).scl(power);
     }
 
+    @Override
+    public void renderDebug(ShapeDrawer shapes) {
+        shapes.filledCircle(collisionShape.center, collisionShape.radius, Color.YELLOW);
+    }
+
+    @Override
+    public float getFriction() {
+        return DRAG_FRICTION;
+    }
+
+    @Override
+    public float getMass() {
+        return mass;
+    }
+
+    @Override
+    public Vector2 getVelocity() {
+        return vel;
+    }
+
+    @Override
+    public void setVelocity(Vector2 newVel) {
+        setVelocity(newVel.x, newVel.y);
+    }
+
+    @Override
+    public void setVelocity(float x, float y) {
+        vel.set(x, y);
+        // Todo: update rotation
+    }
+
+    @Override
+    public Vector2 getPosition() {
+        return pos;
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        collisionShape.center.set(x, y);
+        collisionBounds.setPosition(x - size.x/2f, y - size.y/2f);
+        pos.set(x, y);
+    }
+
+    @Override
+    public void setPosition(Vector2 newPos) {
+        setPosition(newPos.x, newPos.y);
+    }
+
+    @Override
+    public Rectangle getCollisionBounds() {
+        return collisionBounds;
+    }
+
+    @Override
+    public CollisionShape getCollisionShape() {
+        return collisionShape;
+    }
+
+    @Override
+    public void collidedWith(Collidable object) {
+
+    }
+
+    @Override
+    public boolean shouldCollideWith(Collidable object) {
+        return true;
+    }
 }
