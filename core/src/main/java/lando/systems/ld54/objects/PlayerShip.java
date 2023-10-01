@@ -16,6 +16,8 @@ import lando.systems.ld54.screens.GameScreen;
 import lando.systems.ld54.utils.Time;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
+import static lando.systems.ld54.objects.PlayerShipPart.Type.*;
+
 public class PlayerShip implements Collidable {
 
     private static final float DRAG_FRICTION = 0.4f;
@@ -131,62 +133,53 @@ public class PlayerShip implements Collidable {
         Main.game.assets.engineRunning.setVolume(engineSoundID,  Main.game.audioManager.soundVolume.floatValue());
     }
 
+    private static final PlayerShipPart.Type[] shipPartTypes = new PlayerShipPart.Type[] { nose, cabin, cabin, tail };
     public void explode() {
         // TODO - particle effect
-        // TODO - sound effect
+
         screen.audioManager.playSound(AudioManager.Sounds.explosion);
         screen.assets.engineRunning.stop();
 
-        // instantiate the ship parts
         // TODO - maybe do something cutesy where we line them up all nice then blast them apart,
         //   but for now just get them onscreen
-        var nose = new PlayerShipPart(PlayerShipPart.Type.nose, screen.assets, pos.x, pos.y);
-        var cabin1 = new PlayerShipPart(PlayerShipPart.Type.cabin, screen.assets, pos.x, pos.y);
-        var cabin2 = new PlayerShipPart(PlayerShipPart.Type.cabin, screen.assets, pos.x, pos.y);
-        var tail = new PlayerShipPart(PlayerShipPart.Type.tail, screen.assets, pos.x, pos.y);
-
-        // placeholder ranges just to have them move a bit on spawn
-        var angle1 = MathUtils.random(0, 360);
-        var angle2a = MathUtils.random(0, 360);
-        var angle2b = MathUtils.random(0, 360);
-        var angle3 = MathUtils.random(0, 360);
-        var mag1 = MathUtils.random(30, 60);
-        var mag2a = MathUtils.random(30, 60);
-        var mag2b = MathUtils.random(30, 60);
-        var mag3 = MathUtils.random(30, 60);
-
-        nose.setVelocity(MathUtils.cosDeg(angle1) * mag1, MathUtils.sinDeg(angle1) * mag1);
-        cabin1.setVelocity(MathUtils.cosDeg(angle2a) * mag2a, MathUtils.sinDeg(angle2a) * mag2a);
-        cabin2.setVelocity(MathUtils.cosDeg(angle2b) * mag2b, MathUtils.sinDeg(angle2b) * mag2b);
-        tail.setVelocity(MathUtils.cosDeg(angle3) * mag3, MathUtils.sinDeg(angle3) * mag3);
-
-        // continue spinning
-        nose.angularMomentum = MathUtils.randomSign() * MathUtils.random(1, 10);
-        cabin1.angularMomentum = MathUtils.randomSign() * MathUtils.random(2, 8);
-        cabin2.angularMomentum = MathUtils.randomSign() * MathUtils.random(2, 8);
-        tail.angularMomentum = MathUtils.randomSign() * MathUtils.random(3, 12);
-
-        screen.debris.addAll(nose, cabin1, cabin2, tail);
-        screen.physicsObjects.addAll(nose, cabin1, cabin2, tail);
+        // instantiate ship parts making sure to separate them a bit on init to reduce jitter when they get pushed out of overlap
+        for (int i = 0; i < shipPartTypes.length; i++) {
+            var type = shipPartTypes[i];
+            var angle = MathUtils.random(0, 360);
+            var magnitude = MathUtils.random(10, 20);
+            var velX = magnitude * MathUtils.cosDeg(angle);
+            var velY = magnitude * MathUtils.sinDeg(angle);
+            var dist = MathUtils.randomSign() * MathUtils.random(5, 10);
+            var posX = pos.x + dist * velX;
+            var posY = pos.y + dist * velX;
+            var spinDir = MathUtils.randomSign();
+            var spin = spinDir * MathUtils.random(2, 15);
+            var part = new PlayerShipPart(type, screen.assets, posX, posY);
+            part.setVelocity(velX, velY);
+            part.angularMomentum = spin;
+            screen.debris.add(part);
+            screen.physicsObjects.add(part);
+        }
 
         // instantiate astronaut debris
         var numBodies = MathUtils.random(1, 4);
         for (int i = 0; i < numBodies; i++) {
             var bodyAnim = screen.assets.astronautBodies.random();
-            var body = new Debris(bodyAnim, pos.x, pos.y);
 
-            var angle = MathUtils.random(0, 360);
-            var magnitude = MathUtils.random(50, 80);
-            var vx = MathUtils.cosDeg(angle * magnitude);
-            var vy = MathUtils.sinDeg(angle * magnitude);
             var radius = 10f;
+            var angle = MathUtils.random(0, 360);
+            var magnitude = MathUtils.random(5, 10);
+            var velX = magnitude * MathUtils.cosDeg(angle);
+            var velY = magnitude * MathUtils.sinDeg(angle);
+            var dist = MathUtils.randomSign() * MathUtils.random(5, 10);
+            var posX = pos.x + dist * velX;
+            var posY = pos.y + dist * velY;
             var spinDir = MathUtils.randomSign();
-            var spin = MathUtils.random(4, 15);
-
-            body.setVelocity(vx, vy);
+            var spin = spinDir * MathUtils.random(4, 15);
+            var body = new Debris(bodyAnim, posX, posY);
+            body.setVelocity(velX, velY);
             body.setRadius(radius);
-            body.angularMomentum = spin * spinDir;
-
+            body.angularMomentum = spin;
             screen.debris.add(body);
             screen.physicsObjects.add(body);
         }
