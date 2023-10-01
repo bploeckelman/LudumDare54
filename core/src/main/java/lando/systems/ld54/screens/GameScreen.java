@@ -43,6 +43,7 @@ public class GameScreen extends BaseScreen {
 
     public final Earth earth;
     public final Array<Planet> planets = new Array<>();
+    public final Array<Sector> sectors = new Array<>();
     public final Array<Asteroid> asteroids = new Array<>();
     public final Array<PlayerShip> playerShips = new Array<>();
     private final Json json = new Json(JsonWriter.OutputType.json);
@@ -78,6 +79,12 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
         Asteroids.createTestAsteroids(asteroids);
+        for (int i = 0; i < SECTORS_WIDE * SECTORS_HIGH; i++) {
+            var x = i / SECTORS_WIDE;
+            var y = i % SECTORS_WIDE;
+            var sector = new Sector(x, y);
+            sectors.add(sector);
+        }
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
         int width = Config.Screen.framebuffer_width;
@@ -231,6 +238,9 @@ public class GameScreen extends BaseScreen {
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
         background.render(batch, true);
+
+        sectors.forEach(sector -> sector.draw(assets.shapes));
+
         planets.forEach(p -> p.render(batch));
         playerShips.forEach(ps -> ps.draw(batch));
         launcher.render(batch);
@@ -254,6 +264,7 @@ public class GameScreen extends BaseScreen {
 
         // TEMP - 'world' bounds
         assets.shapes.rectangle(0, 0, gameWidth, gameHeight, Color.MAGENTA, 4);
+        sectors.forEach(sector -> sector.draw(assets.shapes));
         batch.end();
 
         // Background
