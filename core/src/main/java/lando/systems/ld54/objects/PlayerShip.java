@@ -17,8 +17,8 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class PlayerShip implements Collidable {
 
-    private static final float DRAG_FRICTION = 0.15f;
-    private static final float FUEL_PER_BAR_LEVEL = 200f;
+    private static final float DRAG_FRICTION = 0.4f;
+    private static final float FUEL_PER_BAR_LEVEL = 300f;
 
     private float mass = 100;
 
@@ -99,7 +99,11 @@ public class PlayerShip implements Collidable {
         } else {
             // get rotation based on velocity
             rotation = vel.angleDeg();
-            screen.fogOfWar.addFogCircle(pos.x, pos.y, 200, vel.len()/ 100f);
+            float fogClearRadius = 200f;
+            if (fuel > 0){
+                fogClearRadius += MathUtils.clamp(10000f / vel.len(), 0, 200f);
+            }
+            screen.fogOfWar.addFogCircle(pos.x, pos.y, fogClearRadius, vel.len()/ 100f);
         }
     }
 

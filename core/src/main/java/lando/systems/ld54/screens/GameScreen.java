@@ -382,7 +382,7 @@ public class GameScreen extends BaseScreen {
 
     public void launchShip(float angle, float speed) {
         // speed is 0 - 1
-        var power = 400 * speed;
+        var power = 300 * speed;
         var ship = new PlayerShip(this);
         physicsObjects.add(ship);
         ship.launch(angle, power);
