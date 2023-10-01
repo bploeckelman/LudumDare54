@@ -330,7 +330,6 @@ public class GameScreen extends BaseScreen {
         planets.forEach(p -> p.render(batch));
         playerShips.forEach(ps -> ps.draw(batch));
         debris.forEach(d -> d.draw(batch));
-        launcher.render(batch);
 
         asteroids.forEach(a -> a.draw(batch));
 
@@ -341,6 +340,7 @@ public class GameScreen extends BaseScreen {
                 collidable.renderDebug(assets.shapes);
             }
         }
+        launcher.render(batch);
         batch.end();
     }
 
