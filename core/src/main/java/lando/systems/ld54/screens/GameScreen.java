@@ -226,7 +226,7 @@ public class GameScreen extends BaseScreen {
                 cameraController.targetPos.set(x.pos.x, x.pos.y, 0);
             }
         });
-        asteroids.forEach(Asteroid::update);
+        asteroids.forEach(a -> a.update(dt));
 
         cameraController.update(dt);
         checkCurrentSector();

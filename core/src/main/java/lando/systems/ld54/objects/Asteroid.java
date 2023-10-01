@@ -28,6 +28,7 @@ public class Asteroid implements Collidable {
     public Vector2 velocity;
     public Vector2 size;
     public Vector2 range;
+    private float rotationSpeed;
 
     private final Rectangle collisionBounds;
     private final CollisionShapeCircle collisionShape;
@@ -52,6 +53,7 @@ public class Asteroid implements Collidable {
         this.updateFloat = false;
         this.collisionBounds = new Rectangle(pos.x - size.x/2, pos.y - size.y /2, size.x, size.y);
         this.collisionShape = new CollisionShapeCircle(size.x/2f, pos.x, pos.y);
+        this.rotationSpeed = MathUtils.random(-30f, 30f);
 //        updateFloatTween();
     }
 
@@ -66,12 +68,15 @@ public class Asteroid implements Collidable {
 //        updateFloatTween();
 //    }
 
+    private float animTime = 0;
+
     public void draw(SpriteBatch batch) {
-        batch.draw(region, pos.x - size.x/2f, pos.y - size.y/2f, size.x, size.y);
+        float rotation = animTime * rotationSpeed;
+        batch.draw(region, pos.x - size.x/2f, pos.y - size.y/2f, size.x / 2, size.y / 2, size.x, size.y, 1, 1, rotation);
     }
 
-    public void update() {
-
+    public void update(float dt) {
+        animTime += dt;
     }
 
 
