@@ -197,11 +197,11 @@ public class Assets implements Disposable {
         osha = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
         yoda = new Animation<>(.1f, atlas.findRegions("pets/ross-dog"), Animation.PlayMode.LOOP);
         obi = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
-        mercurySpin = new Animation<>(0.05f, atlas.findRegions("planets/mercury/mercury-spin"), Animation.PlayMode.LOOP);
-        venusSpin = new Animation<>(0.05f, atlas.findRegions("planets/venus/venus-spin"), Animation.PlayMode.LOOP);
-        earthSpin = new Animation<>(0.05f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
-        marsSpin = new Animation<>(0.05f, atlas.findRegions("planets/mars/mars-spin"), Animation.PlayMode.LOOP);
-        jupiterSpin = new Animation<>(0.05f, atlas.findRegions("planets/gas/gas-spin"), Animation.PlayMode.LOOP);
+        mercurySpin = new Animation<>(0.2f, atlas.findRegions("planets/mercury/mercury-spin"), Animation.PlayMode.LOOP);
+        venusSpin = new Animation<>(0.2f, atlas.findRegions("planets/venus/venus-spin"), Animation.PlayMode.LOOP_REVERSED);
+        earthSpin = new Animation<>(0.06f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
+        marsSpin = new Animation<>(0.08f, atlas.findRegions("planets/mars/mars-spin"), Animation.PlayMode.LOOP);
+        jupiterSpin = new Animation<>(0.04f, atlas.findRegions("planets/gas/gas-spin"), Animation.PlayMode.LOOP);
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/player-ship"), Animation.PlayMode.LOOP);
         launchArrow = new Animation<>(.1f, atlas.findRegions("launch-arrow/launch-arrow"), Animation.PlayMode.LOOP);
 
