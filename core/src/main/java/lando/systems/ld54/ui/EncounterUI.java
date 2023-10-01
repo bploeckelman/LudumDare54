@@ -39,11 +39,11 @@ public class EncounterUI extends Group {
     }
 
     public void setEncounter(Encounter encounter) {
-        encounterTitle = encounter.encounterTitle;
-        encounterText = encounter.encounterText;
-        encounterImage = textureRegionHashMap.get(encounter.encounterImageKey);
+        encounterTitle = encounter.title;
+        encounterText = encounter.text;
+        encounterImage = textureRegionHashMap.get(encounter.imageKey);
         encounterOptions.clear();
-        for (EncounterOption option : encounter.encounterOptions) {
+        for (EncounterOption option : encounter.options) {
             encounterOptions.add(option);
         }
         initializeUI();
@@ -96,7 +96,7 @@ public class EncounterUI extends Group {
         optionStyle.over = Assets.Patch.glass_dim.drawable;
 
         for (EncounterOption option : encounterOptions) {
-            VisTextButton optionButton = new VisTextButton(option.optionText, optionStyle);
+            VisTextButton optionButton = new VisTextButton(option.text, optionStyle);
             optionButton.setHeight(20f);
             optionButton.setStyle(optionStyle);
             encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);

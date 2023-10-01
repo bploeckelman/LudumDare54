@@ -1,51 +1,111 @@
 [
   {
-    "encounterTitle": "The Battle of the Cats and Dogs",
-    "encounterText": "You met a cat and a dog. They are fighting. What do you do?",
-    "encounterImageKey": "asuka",
-    "encounterOptions": [
+    "title": "Battle of the Cats and Dogs",
+    "text": "You met a cat and a dog. They are fighting. What do you do?",
+    "imageKey": "asuka",
+    "options": [
       {
-        "optionText": "Help the cat",
-        "outcomeType": "DAMAGE",
-        "outcomeValue": 1,
-        "outcomeText": "The cat is grateful and gives you a love bite."
+        "text": "Help the cat",
+        "possibleOutcomes": [
+          {
+            "type": "HEAL",
+            "value": 1,
+            "text": "The cat is grateful and gives you a fish.",
+            "weight": 0.3
+          },
+          {
+            "type": "DAMAGE",
+            "value": 1,
+            "text": "You tried to help the cat, but they attacked you.",
+            "weight": 0.5
+          },
+          {
+            "type": "NOTHING",
+            "value": 1,
+            "text": "You tried to help the cat, but they didn't notice you.",
+            "weight": 0.2
+          }
+        ]
       },
       {
-        "optionText": "Help the dog",
-        "outcomeType": "HEAL",
-        "outcomeValue": 1,
-        "outcomeText": "The dog is grateful and gives you a bone."
+        "text": "Help the dog",
+        "possibleOutcomes": [
+          {
+            "type": "HEAL",
+            "value": 1,
+            "text": "The dog is grateful and gives you a bone.",
+            "weight": 0.3
+          },
+          {
+            "type": "DAMAGE",
+            "value": 1,
+            "text": "You tried to help the dog, but they attacked you.",
+            "weight": 0.5
+          },
+          {
+            "type": "NOTHING",
+            "value": 1,
+            "text": "You tried to help the dog, but they didn't notice you.",
+            "weight": 0.2
+          }
+        ]
       },
       {
-        "optionText": "Help neither",
-        "outcomeType": "NOTHING",
-        "outcomeValue": 0,
-        "outcomeText": "You walk away."
+        "text": "Help neither",
+        "possibleOutcomes": [
+          {
+            "type": "NOTHING",
+            "value": 1,
+            "text": "You watched and left.",
+            "weight": 0.5
+          },
+          {
+            "type": "DAMAGE",
+            "value": 1,
+            "text": "You got hit by the flying cat",
+            "weight": 0.5
+          }
+        ]
       }
     ]
   },
   {
-    "encounterTitle": "Alien Invasion",
-    "encounterText": "Aliens have invaded the planet. What do you do?",
-    "encounterImageKey": "cherry",
-    "encounterOptions": [
+    "title": "Alien Invasion",
+    "text": "Aliens have invaded the planet. What do you do?",
+    "imageKey": "cherry",
+    "options": [
         {
-            "optionText": "Fight the aliens",
-            "outcomeType": "DAMAGE",
-            "outcomeValue": 1,
-            "outcomeText": "You fight the aliens and win."
+            "text": "Fight the aliens",
+            "possibleOutcomes": [
+              {
+                "type": "CREDITS",
+                "value": 100,
+                "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+                "weight": 1
+              }
+            ]
         },
         {
-            "optionText": "Join the aliens",
-            "outcomeType": "HEAL",
-            "outcomeValue": 1,
-            "outcomeText": "You join the aliens and they give you a spaceship."
+            "text": "Join the aliens",
+            "possibleOutcomes": [
+              {
+                "type": "CREDITS",
+                "value": 500,
+                "text": "They were peaceful bunch, they offer credits.",
+                "weight": 1
+              }
+            ]
         },
         {
-            "optionText": "Do nothing",
-            "outcomeType": "NOTHING",
-            "outcomeValue": 0,
-            "outcomeText": "You do nothing."
+            "text": "Do nothing",
+            "possibleOutcomes": [
+              {
+                "type": "NOTHING",
+                "value": 0,
+                "text": "Nothing happened",
+                "weight": 1
+              }
+            ]
         }
     ]
   }
