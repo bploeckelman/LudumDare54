@@ -406,12 +406,14 @@ public class GameScreen extends BaseScreen {
         var file = Gdx.files.internal("encounters/battle_encounters.json");
         var encounters = json.fromJson(Array.class, Encounter.class, file);
         var index = MathUtils.random(encounters.size - 1);
-        return (Encounter) encounters.get(index);
+//        return (Encounter) encounters.get(index);
+        return (Encounter) encounters.get(0);
     }
 
     private void startEncounter(Encounter encounter) {
         encounterShown = true;
         game.audioManager.stopAllSounds();
+        game.audioManager.playSound(AudioManager.Sounds.stingIntense);
         encounterUI = new EncounterUI(this, assets, skin, audioManager);
         encounterUI.setEncounter(encounter);
         uiStage.addActor(encounterUI);

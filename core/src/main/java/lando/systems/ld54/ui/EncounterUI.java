@@ -101,10 +101,12 @@ public class EncounterUI extends Group {
         encounterTextLabel = new VisLabel(encounterText);
         Label.LabelStyle textStyle = encounterTitleLabel.getStyle();
         textStyle.font = assets.starJediFont20;
+        textStyle.font.getData().setLineHeight(25f);
+
         encounterTextLabel.setStyle(style);
         encounterTextLabel.setAlignment(Align.left);
         encounterTextLabel.setColor(Color.BLACK);
-        encounterWindow.add(encounterTextLabel).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f);
+        encounterWindow.add(encounterTextLabel).padTop(10f).padBottom(1f).width(encounterWindow.getWidth() - 100f);
         encounterWindow.row();
 
         optionStyle = new VisTextButton.VisTextButtonStyle();

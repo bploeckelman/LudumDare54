@@ -1,34 +1,34 @@
 [
   {
-    "title": "Battle of the Cats and Dogs",
-    "text": "You met a cat and a dog. They are fighting. What do you do?",
+    "title": "Hostile Space Pirates",
+    "text": "You run afoul of a group of space pirates on their way to plunder other \nhapless spacefarers like yourself \n \nHow do you proceed?",
     "imageKey": "asuka",
     "options": [
       {
-        "text": "Help the cat",
+        "text": "Attack the brigands!",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "The cat is grateful and gives you a fish.",
+            "text": "Victory is yours! You destroyed them and claimed their fuel as yours.\n\nOnward, to the stars!",
             "weight": 0.7
           },
           {
             "type": "FUEL",
             "value": -1,
-            "text": "You tried to help the cat, but they attacked you.",
+            "text": "A valiant attempt but they straight-up destroyed you. Like, it wasn't even close\nAnd they stole your fuel! Like jerks.",
             "weight": 0.1
           },
           {
             "type": "NOTHING",
             "value": 0,
-            "text": "You tried to help the cat, but they didn't notice you.",
+            "text": "They straight-up destroyed you\n\nLike, it wasn't even close. \n\nAnd they stole your fuel! Like jerks.",
             "weight": 0.2
           }
         ]
       },
       {
-        "text": "Help the dog",
+        "text": "Can we talk it out?",
         "possibleOutcomes": [
           {
             "type": "SCRAP",

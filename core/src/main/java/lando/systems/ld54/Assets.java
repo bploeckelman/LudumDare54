@@ -308,7 +308,8 @@ public class Assets implements Disposable {
         font.setUseIntegerPositions(false);
         largeFont = mgr.get("fonts/outfit-medium-80px.fnt");
         largeFont.setUseIntegerPositions(false);
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Abandoned-Bold.ttf"));
+//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Abandoned-Bold.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/zekton.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 50;
         abandonedFont50 = generator.generateFont(parameter);
@@ -316,7 +317,8 @@ public class Assets implements Disposable {
         abandonedFont20 = generator.generateFont(parameter);
         parameter.size = 100;
         abandonedFont100 = generator.generateFont(parameter);
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Abandoned-Bold.ttf"));
+//        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Abandoned-Bold.ttf"));
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/zekton.ttf"));
         parameter.size = 50;
         starJediFont50 = generator.generateFont(parameter);
         parameter.size = 20;
