@@ -13,6 +13,7 @@ import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.encounters.Encounter;
+import lando.systems.ld54.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class EncounterUI extends Group {
     private AudioManager audio;
     private VisWindow encounterWindow;
     private VisLabel encounterTextLabel;
+    private GameScreen screen;
 
     private String encounterTitle = "";
     private String encounterText = "";
@@ -32,8 +34,9 @@ public class EncounterUI extends Group {
     private HashMap<String, TextureRegion> textureRegionHashMap = new HashMap<>();
     private VisTextButton.VisTextButtonStyle optionStyle;
 
-    public EncounterUI(Assets assets, Skin skin, AudioManager audio) {
+    public EncounterUI(GameScreen screen, Assets assets, Skin skin, AudioManager audio) {
         super();
+        this.screen = screen;
         this.assets = assets;
         this.skin = skin;
         this.audio = audio;
@@ -129,6 +132,7 @@ public class EncounterUI extends Group {
         optionButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                screen.uiShown = false;
                 remove();
             }
         });

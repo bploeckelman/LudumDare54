@@ -55,7 +55,7 @@ public class GameScreen extends BaseScreen {
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
     float accum;
-    boolean uiShown = false;
+    public boolean uiShown = false;
     EncounterUI encounterUI;
 
     public GameScreen() {
@@ -263,7 +263,7 @@ public class GameScreen extends BaseScreen {
 
     private void startEncounter() {
         uiShown = true;
-        encounterUI = new EncounterUI(assets, skin, audioManager);
+        encounterUI = new EncounterUI(this, assets, skin, audioManager);
         var file = Gdx.files.local("encounters/battle_encounters.json");
         Encounter[] encounter = json.fromJson(Encounter[].class, file);
         encounterUI.setEncounter(encounter[MathUtils.random(encounter.length - 1)]);
