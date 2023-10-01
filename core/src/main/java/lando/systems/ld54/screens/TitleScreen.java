@@ -22,6 +22,11 @@ public class TitleScreen extends BaseScreen {
     }
 
     @Override
+    public void alwaysUpdate(float delta) {
+
+    }
+
+    @Override
     public void update(float dt) {
         super.update(dt);
     }

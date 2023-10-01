@@ -27,6 +27,8 @@ import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.*;
 import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.ui.GameScreenUI;
+import lando.systems.ld54.ui.MiniMap;
+import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
@@ -66,6 +68,7 @@ public class GameScreen extends BaseScreen {
     public boolean encounterShown = false;
     EncounterUI encounterUI;
     GameScreenUI gameScreenUI;
+    MiniMap miniMap;
 
     public GameScreen() {
         background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
@@ -128,6 +131,8 @@ public class GameScreen extends BaseScreen {
 
         //DEBUG or maybe just the start
         fogOfWar.addFogCircle(gameWidth/2f, gameHeight/2f, 300, 1.5f);
+        fogOfWar.addFogRectangle(799, 400, 1000, 1000, .2f);
+
 
         Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, launcher, cameraController));
 //        levelMusic.setLooping(true);
@@ -141,6 +146,17 @@ public class GameScreen extends BaseScreen {
 
         gameScreenUI = new GameScreenUI(assets);
         uiStage.addActor(gameScreenUI);
+        miniMap = new MiniMap(this);
+    }
+
+    @Override
+    public void alwaysUpdate(float delta) {
+        //uistage and audio should always update even when paused
+        if (encounterShown) {
+            Time.pause_timer = 2f;
+        }
+        uiStage.act(delta);
+        audioManager.update(delta);
     }
 
     @Override
@@ -162,6 +178,8 @@ public class GameScreen extends BaseScreen {
 //            audioManager.fadeMusic(AudioManager.Musics.mainTheme);
 //            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
         }
+
+        miniMap.update(dt);
 
         uiStage.act();
 
@@ -230,6 +248,7 @@ public class GameScreen extends BaseScreen {
 
         batch.setShader(null);
         launcher.render(batch);
+        miniMap.render(batch);
         if (Config.Debug.general) {
             batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
         }
@@ -333,20 +352,21 @@ public class GameScreen extends BaseScreen {
         game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
     }
 
-    private void finishEncounter() {
+    public void finishEncounter() {
         encounterShown = false;
+        Time.pause_timer = 0f;
         encounterUI.remove();
         game.audioManager.swapMusic(levelMusicLowpass, levelMusic);
     }
 
     public void addFuel(float value) {
         if (playerShips.size > 0) {
-            PlayerShip currentShip = playerShips.get(playerShips.size - 1);
-            currentShip.currentFuelLevel += value;
-            currentShip.STARTING_FUEL += value;
-            if (currentShip.STARTING_FUEL > currentShip.MAX_FUEL) {
-                currentShip.STARTING_FUEL = currentShip.MAX_FUEL;
-            }
+//            PlayerShip currentShip = playerShips.get(playerShips.size - 1);
+//            currentShip.currentFuelLevel += value;
+//            currentShip.STARTING_FUEL += value;
+//            if (currentShip.STARTING_FUEL > currentShip.MAX_FUEL) {
+//                currentShip.STARTING_FUEL = currentShip.MAX_FUEL;
+//            }
         }
     }
 }

@@ -13,10 +13,7 @@ import lando.systems.ld54.screens.GameScreen;
 
 public class PlayerShip {
 
-    public static final float MAX_FUEL = 500f;
-    private static final float DRAG_FRICTION = 0.990f;
-    private static final float BOOSTER_SCALE = 1.001f;
-    public static float STARTING_FUEL = 50f;
+    private static final float DRAG_FRICTION = 0.99f;
 
     private Animation<TextureRegion> anim;
     private TextureRegion keyframe;
@@ -33,8 +30,6 @@ public class PlayerShip {
     public Vector2 size;
     public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
     private FogOfWar fogOfWar;
-    public float currentFuelLevel = STARTING_FUEL;
-    private final float FUEL_BURN_RATE = 100f;
 
     public PlayerShip(Assets assets, FogOfWar fogOfWar) {
         this.anim = assets.playerShip;
@@ -61,14 +56,8 @@ public class PlayerShip {
         pos.x += dt * vel.x;
         pos.y += dt * vel.y;
 
-        // slow down over time after fuel runs out
-        if (currentFuelLevel <= 0) {
-            vel.scl(DRAG_FRICTION);
-            currentFuelLevel = 0;
-        } else {
-            vel.scl(BOOSTER_SCALE);
-            currentFuelLevel -= dt * FUEL_BURN_RATE;
-        }
+        // slow down over time
+        vel.scl(DRAG_FRICTION);
 
         float curVelocity = vel.len2();
         if (curVelocity < 0.1f) {

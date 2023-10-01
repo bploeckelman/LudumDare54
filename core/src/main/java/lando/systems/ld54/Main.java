@@ -119,6 +119,7 @@ public class Main extends ApplicationAdapter {
         // update things that must update every tick
         Time.update();
         tween.update(Time.delta);
+        currentScreen.alwaysUpdate(Time.delta);
 
         // handle a pause
         if (Time.pause_timer > 0) {

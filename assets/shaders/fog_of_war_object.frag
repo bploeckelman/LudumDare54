@@ -22,6 +22,16 @@ void main() {
         finalColor = vec4(filled, filled, filled, filled);
     } else {
         // draw Square
+        float width = v_color.r * 3000.;
+        float height = v_color.g * 3000.;
+        float shapeDimX = width / 100.;
+        float shapeDimY = height / 100.;
+        float leftEdge = smoothstep(.01 / shapeDimX, .15 / shapeDimX, v_texCoord.x);
+        float rightEdge = smoothstep(1. - (.01 /shapeDimX), 1. - (.15 / shapeDimX), v_texCoord.x);
+        float topEdge = smoothstep(.01 / shapeDimY, .15 /shapeDimY, v_texCoord.y);
+        float bottomEdge = smoothstep(1. - (.01 / shapeDimY), 1. - (.15 / shapeDimY), v_texCoord.y);
+        float finalValue = leftEdge * rightEdge * topEdge * bottomEdge * v_color.a;
+        finalColor = vec4(finalValue, finalValue, finalValue, finalValue);
     }
     gl_FragColor = finalColor;
 

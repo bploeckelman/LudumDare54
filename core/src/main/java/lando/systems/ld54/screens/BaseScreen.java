@@ -55,6 +55,12 @@ public abstract class BaseScreen implements Disposable {
     @Override
     public void dispose() {}
 
+    /**
+     * Update something in the screen even when the Time.pause_for thing is being processed
+     * @param delta
+     */
+    public abstract void alwaysUpdate(float delta);
+
     public void update(float delta) {
         windowCamera.update();
         if (worldCamera != null) {
