@@ -27,6 +27,7 @@ import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.*;
 import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.ui.GameScreenUI;
+import lando.systems.ld54.ui.MiniMap;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
@@ -66,6 +67,7 @@ public class GameScreen extends BaseScreen {
     public boolean encounterShown = false;
     EncounterUI encounterUI;
     GameScreenUI gameScreenUI;
+    MiniMap miniMap;
 
     public GameScreen() {
         background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
@@ -143,6 +145,7 @@ public class GameScreen extends BaseScreen {
 
         gameScreenUI = new GameScreenUI(assets);
         uiStage.addActor(gameScreenUI);
+        miniMap = new MiniMap(this);
     }
 
     @Override
@@ -164,6 +167,8 @@ public class GameScreen extends BaseScreen {
 //            audioManager.fadeMusic(AudioManager.Musics.mainTheme);
 //            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
         }
+
+        miniMap.update(dt);
 
         uiStage.act();
 
@@ -232,6 +237,7 @@ public class GameScreen extends BaseScreen {
 
         batch.setShader(null);
         launcher.render(batch);
+        miniMap.render(batch);
         if (Config.Debug.general) {
             batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
         }
