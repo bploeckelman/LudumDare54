@@ -19,7 +19,7 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 public class PlayerShip implements Collidable {
 
     private static final float DRAG_FRICTION = 0.4f;
-    private static final float FUEL_PER_BAR_LEVEL = 300f;
+    public static final float FUEL_PER_BAR_LEVEL = 300f;
 
     private float mass = 100;
     private float health = 100;
@@ -194,6 +194,7 @@ public class PlayerShip implements Collidable {
         // remove this ship from drawing and physics since it is now in pieces
         screen.playerShips.removeValue(this, true);
         screen.physicsObjects.removeValue(this, true);
+        screen.isLaunchPhase = true;
     }
 
     private void resetCameraToHomeSector() {

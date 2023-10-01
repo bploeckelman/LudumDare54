@@ -78,6 +78,7 @@ public class GameScreen extends BaseScreen {
     public PhysicsSystem physics;
     public Array<Collidable> physicsObjects;
     public Array<Influencer> influencers;
+    public boolean isLaunchPhase = false;
 
     public GameScreen() {
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
@@ -166,7 +167,7 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass.setLooping(true);
         levelMusic.play();
 
-        gameScreenUI = new GameScreenUI(assets, player);
+        gameScreenUI = new GameScreenUI(assets, this);
         uiStage.addActor(gameScreenUI);
         miniMap = new MiniMap(this);
     }
@@ -373,6 +374,7 @@ public class GameScreen extends BaseScreen {
         var initialZoom = PanZoomCameraController.INITIAL_ZOOM;
         var centerShiftX = (gameWidth / 2f);
         var centerShiftY = (gameHeight / 2f);
+        isLaunchPhase = true;
 
         worldCamera = new OrthographicCamera();
         worldCamera.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
@@ -390,6 +392,7 @@ public class GameScreen extends BaseScreen {
 
     public void launchShip(float angle, float speed) {
         // speed is 0 - 1
+        isLaunchPhase = false;
         var power = 300 * speed;
         var ship = new PlayerShip(this);
         physicsObjects.add(ship);
