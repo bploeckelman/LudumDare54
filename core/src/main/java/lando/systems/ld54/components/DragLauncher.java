@@ -24,7 +24,8 @@ public class DragLauncher extends InputAdapter {
     private float strength = 0;
     private float angle = 0;
 
-    private float maxPull = 100;
+    // NOTE - ~100 can't escape the home sector, ~400 can reach all possible goal sectors at 5x5
+    private float maxPull = 400;
     private Animation<TextureRegion> dragAnim;
     private TextureRegion currentImage;
     private float animTimer = 0;

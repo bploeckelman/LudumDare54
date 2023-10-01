@@ -16,10 +16,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonWriter;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.PlanetManager;
@@ -46,6 +43,9 @@ public class GameScreen extends BaseScreen {
     public final Array<Sector> sectors = new Array<>();
     public final Array<Asteroid> asteroids = new Array<>();
     public final Array<PlayerShip> playerShips = new Array<>();
+    public final Sector homeSector;
+    public final Sector goalSector;
+
     private final Json json = new Json(JsonWriter.OutputType.json);
 
     public Music levelMusic;
@@ -79,12 +79,24 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
         Asteroids.createTestAsteroids(asteroids);
-        for (int i = 0; i < SECTORS_WIDE * SECTORS_HIGH; i++) {
+
+        var possibleGoals = new IntArray();
+        var numSectors = SECTORS_WIDE * SECTORS_HIGH;
+        for (int i = 0; i < numSectors; i++) {
             var x = i / SECTORS_WIDE;
             var y = i % SECTORS_WIDE;
             var sector = new Sector(x, y);
             sectors.add(sector);
+
+            // save index as possible goal
+            // if this sector is on an edge
+            if (x == 0 || x == SECTORS_WIDE - 1
+             || y == 0 || y == SECTORS_HIGH - 1) {
+                possibleGoals.add(i);
+            }
         }
+        homeSector = sectors.get(numSectors / 2);
+        goalSector = sectors.get(possibleGoals.random());
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
         int width = Config.Screen.framebuffer_width;
@@ -241,10 +253,12 @@ public class GameScreen extends BaseScreen {
         background.render(batch, true);
 
         sectors.forEach(sector -> sector.draw(assets.shapes));
+        goalSector.draw(batch);
 
         planets.forEach(p -> p.render(batch));
         playerShips.forEach(ps -> ps.draw(batch));
         launcher.render(batch);
+
         asteroids.forEach(a -> a.draw(batch));
 
         // TEMP - 'world' bounds
