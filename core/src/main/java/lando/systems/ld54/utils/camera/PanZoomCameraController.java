@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.screens.GameScreen;
 import lando.systems.ld54.utils.Calc;
 import lando.systems.ld54.utils.Time;
 import text.formic.Stringf;
@@ -52,14 +53,14 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
     }
 
     public void update(float dt) {
-        var moveAmount = dt * units_panned_per_pixel;
-
         var x = interpolation.apply(camera.position.x, targetPos.x, DT_SCALE * dt);
         var y = interpolation.apply(camera.position.y, targetPos.y, DT_SCALE * dt);
         camera.position.set(x, y, 0);
 
         var z = Calc.eerp(camera.zoom, targetZoom, DT_SCALE * dt);
         camera.zoom = z;
+
+        clampController();
     }
 
     public void moveLeft(float amount) {
@@ -84,6 +85,22 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
         amount = Calc.abs(amount);
         tmp.set(Vector3.Y).scl(amount);
         targetPos.add(tmp);
+    }
+
+    public void setCameraPosition(float x, float y) {
+        // no lerp - position will get clamped in update
+        camera.position.set(x, y, 0);
+        targetPos.set(x, y, 0);
+    }
+
+    public void clampController() {
+        float boundX = camera.viewportWidth * camera.zoom / 2f;
+        float boundY = camera.viewportHeight * camera.zoom / 2f;
+
+        float x = MathUtils.clamp(camera.position.x, boundX, GameScreen.gameWidth - boundX);
+        float y = MathUtils.clamp(camera.position.y, boundY, GameScreen.gameHeight - boundY);
+
+        camera.position.set(x, y, 0);
     }
 
     // --------------------------------------------------------------

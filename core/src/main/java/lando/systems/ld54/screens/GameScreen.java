@@ -173,11 +173,11 @@ public class GameScreen extends BaseScreen {
         background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
-        playerShips.forEach(x -> {
-            x.update(dt);
-            if (x.trackMovement) {
-                worldCamera.position.set(x.pos.x, x.pos.y, 0);
-                gameScreenUI.setPlayerShip(x);
+        playerShips.forEach(ship -> {
+            ship.update(dt);
+            if (ship.trackMovement) {
+                cameraController.setCameraPosition(ship.pos.x, ship.pos.y);
+                gameScreenUI.setPlayerShip(ship);
             }
         });
         asteroids.forEach(Asteroid::update);
