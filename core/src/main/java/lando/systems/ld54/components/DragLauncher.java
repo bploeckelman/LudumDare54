@@ -48,7 +48,7 @@ public class DragLauncher extends InputAdapter {
             mousePos.set(screenX, screenY, 0);
             screen.worldCamera.unproject(mousePos);
             dragging = screen.earth.contains(mousePos);
-            screen.audioManager.playSound(AudioManager.Sounds.engineStart);
+
 
 
 
@@ -56,6 +56,7 @@ public class DragLauncher extends InputAdapter {
 
             if (dragging) {
                 updateLaunchAngle(mousePos);
+                screen.audioManager.playSound(AudioManager.Sounds.engineStart);
             }
         }
         return dragging;
