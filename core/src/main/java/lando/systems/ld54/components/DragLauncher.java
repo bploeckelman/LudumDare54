@@ -57,7 +57,7 @@ public class DragLauncher extends InputAdapter {
         } else {
             mousePos.set(screenX, screenY, 0);
             screen.worldCamera.unproject(mousePos);
-            dragging = screen.earth.contains(mousePos);
+            dragging = screen.isLaunchPhase && screen.earth.contains(mousePos);
             if (dragging) {
                 updateLaunchAngle(mousePos);
                 screen.audioManager.playSound(AudioManager.Sounds.engineStart);
