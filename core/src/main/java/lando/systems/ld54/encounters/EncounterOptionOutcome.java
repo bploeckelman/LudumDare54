@@ -1,15 +1,15 @@
-package lando.systems.ld54.ui;
+package lando.systems.ld54.encounters;
 
 public class EncounterOptionOutcome {
     public OutcomeType type;
     public float weight;
     public float value;
     public String text;
-    enum OutcomeType {
-        DAMAGE,
-        HEAL,
-        CREDITS,
-        ITEM,
+    public enum OutcomeType {
+        FUEL,
+        SCRAP,
+        RADAR,
+        BOMB,
         NOTHING
     }
     public EncounterOptionOutcome() {

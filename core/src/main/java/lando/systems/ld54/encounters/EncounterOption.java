@@ -1,4 +1,4 @@
-package lando.systems.ld54.ui;
+package lando.systems.ld54.encounters;
 
 public class EncounterOption {
     public String text;

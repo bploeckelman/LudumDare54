@@ -13,6 +13,8 @@ import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.encounters.Encounter;
+import lando.systems.ld54.encounters.EncounterOption;
+import lando.systems.ld54.encounters.EncounterOptionOutcome;
 import lando.systems.ld54.screens.GameScreen;
 
 import java.util.ArrayList;
@@ -42,6 +44,17 @@ public class EncounterUI extends Group {
         this.audio = audio;
         textureRegionHashMap.put("asuka", assets.asuka.getKeyFrame(0));
         textureRegionHashMap.put("cherry", assets.cherry.getKeyFrame(0));
+        textureRegionHashMap.put("spaceship", assets.playerShip.getKeyFrame(0));
+        textureRegionHashMap.put("nebula", assets.marsSpin.getKeyFrame(0));
+        textureRegionHashMap.put("blackhole", assets.fuzzyCircle);
+        textureRegionHashMap.put("mysteriousplanet", assets.venusSpin.getKeyFrame(0));
+        textureRegionHashMap.put("asteroidfield", assets.fuzzyCircle);
+        textureRegionHashMap.put("abandonedstation", assets.earthSpin.getKeyFrame(0));
+        textureRegionHashMap.put("spacepirates", assets.obi.getKeyFrame(0));
+        textureRegionHashMap.put("meteorshower", assets.mercurySpin.getKeyFrame(0));
+        textureRegionHashMap.put("gasgiantmoon", assets.yoda.getKeyFrame(0));
+        textureRegionHashMap.put("interstellaranomaly", assets.osha.getKeyFrame(0));
+        textureRegionHashMap.put("asteroidmining", assets.earthSpin.getKeyFrame(0));
         encounterImage = assets.obi.getKeyFrame(0);
         encounterOptions = new ArrayList<>();
     }
@@ -138,13 +151,13 @@ public class EncounterUI extends Group {
         });
         encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
         switch (outcome.type) {
-            case DAMAGE:
+            case FUEL:
                 break;
-            case HEAL:
+            case SCRAP:
                 break;
-            case CREDITS:
+            case RADAR:
                 break;
-            case ITEM:
+            case BOMB:
                 break;
             case NOTHING:
                 break;
