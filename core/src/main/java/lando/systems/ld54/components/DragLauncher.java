@@ -22,7 +22,7 @@ public class DragLauncher extends InputAdapter {
     private float strength = 0;
     private float angle = 0;
 
-    private float maxPull = 500;
+    private float maxPull = 100;
     private Animation<TextureRegion> dragAnim;
     private TextureRegion currentImage;
     private float animTimer = 0;
@@ -112,8 +112,6 @@ public class DragLauncher extends InputAdapter {
         }
 
         // temp
-        strength *= 20;
-
-        screen.launchShip(angle, strength);
+        screen.launchShip(angle, strength * 20);
     }
 }

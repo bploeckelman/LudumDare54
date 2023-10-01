@@ -47,8 +47,6 @@ public class PlayerShip {
         animState += dt;
         keyframe = anim.getKeyFrame(animState);
 
-        System.out.println(vel.len2());
-
         if (vel.isZero()) { return; }
 
         // integrate velocity into position
