@@ -53,8 +53,9 @@ public class DragLauncher {
 
         var earthCenter = screen.earth.centerPosition;
 
-        dragPos.set(mousePos.x - earthCenter.x, mousePos.y - earthCenter.y).nor();
-        angle = dragPos.angleDeg() - 90;
+        dragPos.set(earthCenter).sub(mousePos.x, mousePos.y).nor();
+        angle = dragPos.angleDeg();
+
         strength = MathUtils.clamp(earthCenter.dst(mousePos.x, mousePos.y), 0, maxPull);
         dragPos.scl(strength).add(earthCenter);
     }
@@ -62,26 +63,23 @@ public class DragLauncher {
     public void render(SpriteBatch batch) {
         if (dragging) {
             var earthCenter = screen.earth.centerPosition;
-//            batch.draw(currentImage, earthCenter.x,
-//                earthCenter.y - currentImage.getRegionHeight() / 2f, 0,currentImage.getRegionHeight() / 2f,
-//                currentImage.getRegionWidth(), currentImage.getRegionHeight(), -strength/maxPull, 1f,angle - 90);
+            var w = currentImage.getRegionWidth();
+            var h = currentImage.getRegionHeight();
+            var scale = strength / maxPull;
             batch.draw(currentImage,
-                earthCenter.x - currentImage.getRegionWidth() / 2f,
-                earthCenter.y,
-                currentImage.getRegionWidth() / 2f,
+                earthCenter.x,
+                earthCenter.y - h / 2f,
                 0,
-                currentImage.getRegionWidth(),
-                currentImage.getRegionHeight(),
-                1f, strength/maxPull,
+                h / 2f,
+                w, h,
+                scale,
+                1f,
                 angle
             );
         }
     }
 
     private void launchShip() {
-        // launch angle is backwards
-//        screen.launchShip(angle - 180, strength);
-
         if (Config.Debug.general) {
             Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, strength));
         }
