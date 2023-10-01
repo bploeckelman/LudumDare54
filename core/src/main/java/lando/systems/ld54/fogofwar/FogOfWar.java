@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Main;
 
@@ -80,5 +81,13 @@ public class FogOfWar {
 
     public void addFogCircle(float x, float y, float radius, float transitionScale) {
         fogObjects.add(new FogCircle(x * scale, y * scale, radius * scale, transitionScale));
+    }
+
+    public void addFogRectangle(Rectangle rectangle, float transitionScale) {
+        addFogRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height, transitionScale);
+    }
+
+    public void addFogRectangle(float x, float y, float width, float height, float transitionScale) {
+        fogObjects.add(new FogRectangle(x * scale, y * scale, width * scale, height * scale, transitionScale));
     }
 }
