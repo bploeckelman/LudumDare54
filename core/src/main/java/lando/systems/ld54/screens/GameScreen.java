@@ -12,12 +12,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.PlanetManager;
+import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.objects.Earth;
 import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.fogofwar.FogOfWar;
@@ -101,8 +102,12 @@ public class GameScreen extends BaseScreen {
             Gdx.app.exit();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E) && !uiShown) {
-            startEncounter();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            if (!uiShown) {
+                startEncounter();
+            } else {
+                finishEncounter();
+            }
         }
 
         if (uiShown) {
@@ -229,7 +234,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void resetWorldCamera() {
-        var initialZoom = PanZoomCameraController.ZOOM_INITIAL;
+        var initialZoom = PanZoomCameraController.INITIAL_ZOOM;
         var centerShiftX = (gameWidth / 2f);
         var centerShiftY = (gameHeight / 2f);
 
@@ -257,6 +262,10 @@ public class GameScreen extends BaseScreen {
     private void startEncounter() {
         uiShown = true;
         encounterUI = new EncounterUI(assets, skin, audioManager);
+        Json json = new Json(JsonWriter.OutputType.json);
+        var file = Gdx.files.local("encounters/battle_encounters.json");
+        Encounter[] encounter = json.fromJson(Encounter[].class, file);
+        encounterUI.setEncounter(encounter[MathUtils.random(encounter.length - 1)]);
         uiStage.addActor(encounterUI);
     }
 

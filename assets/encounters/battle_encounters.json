@@ -2,7 +2,7 @@
   {
     "encounterTitle": "The Battle of the Cats and Dogs",
     "encounterText": "You met a cat and a dog. They are fighting. What do you do?",
-    "encounterImage": "asuka",
+    "encounterImageKey": "asuka",
     "encounterOptions": [
       {
         "optionText": "Help the cat",
@@ -27,7 +27,7 @@
   {
     "encounterTitle": "Alien Invasion",
     "encounterText": "Aliens have invaded the planet. What do you do?",
-    "encounterImage": "asuka",
+    "encounterImageKey": "cherry",
     "encounterOptions": [
         {
             "optionText": "Fight the aliens",

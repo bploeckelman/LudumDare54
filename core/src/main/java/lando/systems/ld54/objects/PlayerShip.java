@@ -71,9 +71,6 @@ public class PlayerShip {
 
     public void launch(float angle, float power) {
         vel.set(1, 0).setAngleDeg(angle).scl(power);
-
-//        setVel(angle, power);
-//        vel.set(power, 0).rotateDeg(shipAngle + 90);
     }
 
 }

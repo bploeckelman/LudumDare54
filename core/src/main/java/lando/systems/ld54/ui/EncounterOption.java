@@ -4,6 +4,7 @@ public class EncounterOption {
     public String optionText;
     public OutcomeType outcomeType;
     public float outcomeValue;
+    public String outcomeText;
     enum OutcomeType {
         DAMAGE,
         HEAL,
@@ -11,11 +12,17 @@ public class EncounterOption {
         ITEM,
         NOTHING
     }
-    public String outcomeText;
+    public EncounterOption() {
+        this.optionText = "";
+        this.outcomeType = OutcomeType.NOTHING;
+        this.outcomeValue = 0;
+        this.outcomeText = "";
+    }
 
-    public EncounterOption(String optionText, OutcomeType outcomeType, float outcomeValue) {
+    public EncounterOption(String optionText, OutcomeType outcomeType, float outcomeValue, String outcomeText) {
         this.optionText = optionText;
         this.outcomeType = outcomeType;
         this.outcomeValue = outcomeValue;
+        this.outcomeText = outcomeText;
     }
 }
