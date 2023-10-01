@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Config;
@@ -24,6 +25,7 @@ import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.Asteroid;
 import lando.systems.ld54.objects.Planet;
+import lando.systems.ld54.objects.Background;
 import lando.systems.ld54.objects.PlayerShip;
 import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
@@ -41,6 +43,7 @@ public class GameScreen extends BaseScreen {
 
     DragLauncher launcher;
 
+    private Background background;
     FrameBuffer foggedBuffer;
     FrameBuffer exploredBuffer;
     FrameBuffer fogMaskBuffer;
@@ -56,6 +59,7 @@ public class GameScreen extends BaseScreen {
     EncounterUI encounterUI;
 
     public GameScreen() {
+        background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
 
@@ -126,6 +130,7 @@ public class GameScreen extends BaseScreen {
             fogOfWar.addFogCircle(touchPoint.x, touchPoint.y, 100);
         }
 
+        background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
         playerShips.forEach(x -> x.update(dt));
@@ -201,6 +206,7 @@ public class GameScreen extends BaseScreen {
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
         planets.forEach(p -> p.render(batch));
+        background.render(batch, true);
         playerShips.forEach(ps -> ps.draw(batch));
         launcher.render(batch);
         asteroids.forEach(a -> a.draw(batch));
@@ -219,7 +225,7 @@ public class GameScreen extends BaseScreen {
         ScreenUtils.clear(Color.BLACK);
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
-        batch.draw(assets.pixel, 100, 100, 5, 5);
+        background.render(batch, false);
 
         // TEMP - 'world' bounds
         assets.shapes.rectangle(0, 0, gameWidth, gameHeight, Color.MAGENTA, 4);

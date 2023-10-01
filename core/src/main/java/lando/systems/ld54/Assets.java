@@ -47,6 +47,7 @@ public class Assets implements Disposable {
     public Texture gdx;
     public Texture noiseTexture;
     public Texture whitePixel;
+    public Texture starsTexture;
 
     public Animation<TextureRegion> asuka;
     public Animation<TextureRegion> cherry;
@@ -86,6 +87,7 @@ public class Assets implements Disposable {
     public ShaderProgram fogOfWarShader;
     public ShaderProgram plasmaShader;
     public ShaderProgram fogObjectShader;
+    public ShaderProgram starfieldShader;
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -157,6 +159,8 @@ public class Assets implements Disposable {
             mgr.load("images/libgdx.png", Texture.class);
             mgr.load("images/noise.png", Texture.class);
             mgr.load("images/pixel.png", Texture.class);
+            mgr.load("images/stars.png", Texture.class);
+
 
             mgr.load("fonts/outfit-medium-20px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-40px.fnt", BitmapFont.class);
@@ -189,7 +193,11 @@ public class Assets implements Disposable {
         gdx = mgr.get("images/libgdx.png");
         whitePixel = mgr.get("images/pixel.png");
         noiseTexture = mgr.get("images/noise.png");
+        noiseTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         noiseTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        starsTexture = mgr.get("images/stars.png");
+        starsTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        starsTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         // Animations
         cherry = new Animation<>(.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);
@@ -260,6 +268,7 @@ public class Assets implements Disposable {
         fogOfWarShader = loadShader("shaders/default.vert", "shaders/fog_of_war.frag");
         plasmaShader = loadShader("shaders/default.vert", "shaders/plasma.frag");
         fogObjectShader = loadShader("shaders/default.vert", "shaders/fog_of_war_object.frag");
+        starfieldShader = loadShader("shaders/default.vert", "shaders/starfield.frag");
 
         // initialize patch values
         Patch.debug.ninePatch        = new NinePatch(atlas.findRegion("ninepatch/debug"), 2, 2, 2, 2);
