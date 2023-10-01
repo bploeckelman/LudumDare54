@@ -17,10 +17,12 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.assets.Asteroids;
+import lando.systems.ld54.assets.PlanetManager;
 import lando.systems.ld54.objects.Earth;
 import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.Asteroid;
+import lando.systems.ld54.objects.Planet;
 import lando.systems.ld54.objects.PlayerShip;
 import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
@@ -32,7 +34,8 @@ public class GameScreen extends BaseScreen {
 
     public final Vector3 mousePos = new Vector3();
 
-    public Earth earth;
+    public final Earth earth;
+    public final Array<Planet> planets = new Array<Planet>();
 
     DragLauncher launcher;
 
@@ -53,7 +56,10 @@ public class GameScreen extends BaseScreen {
     public GameScreen() {
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
-        earth = new Earth(assets,gameWidth / 2f, gameHeight / 2f);
+
+        var planetManager = new PlanetManager(this);
+        earth = planetManager.createPlanets(planets);
+
         asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
 
@@ -115,7 +121,7 @@ public class GameScreen extends BaseScreen {
         }
 
         fogOfWar.update(dt);
-        earth.update(dt);
+        planets.forEach(p -> p.update(dt));
         playerShips.forEach(x -> x.update(dt));
         asteroids.forEach(Asteroid::update);
 
@@ -188,7 +194,7 @@ public class GameScreen extends BaseScreen {
 
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
-        earth.render(batch);
+        planets.forEach(p -> p.render(batch));
         playerShips.forEach(ps -> ps.draw(batch));
         launcher.render(batch);
         asteroids.forEach(a -> a.draw(batch));
