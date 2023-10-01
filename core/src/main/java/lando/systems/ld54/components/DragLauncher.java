@@ -2,6 +2,7 @@ package lando.systems.ld54.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,9 +13,11 @@ import lando.systems.ld54.Config;
 import lando.systems.ld54.screens.GameScreen;
 import text.formic.Stringf;
 
-public class DragLauncher {
+public class DragLauncher extends InputAdapter {
 
     private boolean dragging = false;
+    private final Vector3 mousePos = new Vector3();
+
     private final Vector2 dragPos = new Vector2();
     private float strength = 0;
     private float angle = 0;
@@ -32,20 +35,44 @@ public class DragLauncher {
         screen = gameScreen;
     }
 
-    public void update(float delta) {
-        animTimer += delta;
-        Vector3 mousePos = screen.mousePos;
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (button != Input.Buttons.LEFT || pointer > 0) {
+            dragging = false;
+        } else {
+            mousePos.set(screenX, screenY, 0);
+            screen.worldCamera.unproject(mousePos);
+            dragging = screen.earth.contains(mousePos);
+            if (dragging) {
+                updateLaunchAngle(mousePos);
+            }
+        }
+        return dragging;
+    }
 
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && screen.earth.contains(mousePos)) {
-            dragging = true;
-            animTimer = 0;
-            updateLaunchAngle(mousePos);
-        } else if (dragging && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            updateLaunchAngle(mousePos);
-        } else if (dragging) {
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if (!dragging) { return false; }
+
+        mousePos.set(screenX, screenY, 0);
+        screen.worldCamera.unproject(mousePos);
+        updateLaunchAngle(mousePos);
+
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (dragging) {
             dragging = false;
             launchShip();
+            return true;
         }
+        return false;
+    }
+
+    public void update(float delta) {
+        animTimer += delta;
     }
 
     private void updateLaunchAngle(Vector3 mousePos) {
@@ -85,5 +112,4 @@ public class DragLauncher {
         }
         screen.launchShip(angle, strength);
     }
-
 }

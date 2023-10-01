@@ -99,6 +99,8 @@ public class GameScreen extends BaseScreen {
 
         //DEBUG
         fogOfWar.addFogCircle(gameWidth/2f, gameHeight/2f, 300);
+
+        Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, launcher, cameraController));
     }
 
     @Override
@@ -254,7 +256,6 @@ public class GameScreen extends BaseScreen {
 
         if (cameraController == null) {
             cameraController = new PanZoomCameraController(worldCamera);
-            Gdx.input.setInputProcessor(cameraController);
         } else {
             cameraController.reset(worldCamera);
         }
@@ -267,7 +268,6 @@ public class GameScreen extends BaseScreen {
     }
 
     private void startEncounter() {
-        Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, cameraController));
         uiShown = true;
         encounterUI = new EncounterUI(assets, skin, audioManager);
         var file = Gdx.files.local("encounters/battle_encounters.json");
