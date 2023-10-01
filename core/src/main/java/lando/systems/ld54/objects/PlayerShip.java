@@ -1,6 +1,5 @@
 package lando.systems.ld54.objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +13,7 @@ import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
 import lando.systems.ld54.physics.CollisionShapeCircle;
 import lando.systems.ld54.screens.GameScreen;
+import lando.systems.ld54.utils.Time;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class PlayerShip implements Collidable {
@@ -56,9 +56,13 @@ public class PlayerShip implements Collidable {
         this.size = new Vector2();
         this.rotation = 0;
 
-        // TODO - this position could be set via the center of the homeSector (passed in)
-        // TEMP - manually set initial position and size for now
-        this.pos.set(GameScreen.gameWidth / 2f, GameScreen.gameHeight / 2f);
+        var homeBounds = screen.homeSector.bounds;
+        this.pos.set(
+            homeBounds.x + homeBounds.width / 2f,
+            homeBounds.y + homeBounds.height / 2f
+        );
+
+        // TEMP - manually set initial size for now
         this.size.set(128, 128);
 
         this.collisionBounds = new Rectangle(pos.x - size.x/3f, pos.y - size.y /3f, size.x * 2f/3f, size.y * .66f);
@@ -71,17 +75,15 @@ public class PlayerShip implements Collidable {
         animState += dt;
         keyframe = anim.getKeyFrame(animState);
         Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
+
         if (fuel <= 0) {
             Main.game.assets.engineRunning.stop();
-
-
-
-            this.anim = screen.assets.playerShip;
-
+            anim = screen.assets.playerShip; // revert to idle animation
         }
 
         if (health <= 0) {
             explode();
+            Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
             return;
         }
 
@@ -96,12 +98,7 @@ public class PlayerShip implements Collidable {
             //   when we just run out of fuel it should just go derelict and start spinning slowly
             explode();
 
-            // reset back to home sector for next launch
-            var homeBounds = screen.homeSector.bounds;
-            screen.cameraController.targetPos.set(
-                homeBounds.x + homeBounds.width / 2f,
-                homeBounds.y + homeBounds.height / 2f,
-                0);
+            Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
         } else {
             // get rotation based on velocity
             rotation = vel.angleDeg();
@@ -132,7 +129,6 @@ public class PlayerShip implements Collidable {
         engineSoundID = screen.audioManager.loopSound(AudioManager.Sounds.engineRunning, .4f);
         screen.audioManager.playSound(AudioManager.Sounds.engineLaunch);
         Main.game.assets.engineRunning.setVolume(engineSoundID,  Main.game.audioManager.soundVolume.floatValue());
-
     }
 
     public void explode() {
@@ -198,6 +194,14 @@ public class PlayerShip implements Collidable {
         // remove this ship from drawing and physics since it is now in pieces
         screen.playerShips.removeValue(this, true);
         screen.physicsObjects.removeValue(this, true);
+    }
+
+    private void resetCameraToHomeSector() {
+        var homeBounds = screen.homeSector.bounds;
+        screen.cameraController.targetPos.set(
+            homeBounds.x + homeBounds.width / 2f,
+            homeBounds.y + homeBounds.height / 2f,
+            0);
     }
 
     @Override
