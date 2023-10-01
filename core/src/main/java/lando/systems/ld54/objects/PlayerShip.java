@@ -79,7 +79,6 @@ public class PlayerShip implements Collidable {
     public void update(float dt) {
         // update animation
         animState += dt;
-        keyframe = anim.getKeyFrame(animState);
         Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
 
         if (fuel <= 0) {
@@ -129,6 +128,7 @@ public class PlayerShip implements Collidable {
     }
 
     public void draw(SpriteBatch batch) {
+        keyframe = anim.getKeyFrame(animState);
         batch.draw(keyframe,
             pos.x - size.x / 2f,
             pos.y - size.y / 2f,
