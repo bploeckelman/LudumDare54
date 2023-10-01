@@ -67,9 +67,9 @@ public class DragLauncher {
             var h = currentImage.getRegionHeight();
             var scale = strength / maxPull;
             batch.draw(currentImage,
-                earthCenter.x,
+                earthCenter.x - w,
                 earthCenter.y - h / 2f,
-                0,
+                w,
                 h / 2f,
                 w, h,
                 scale,
