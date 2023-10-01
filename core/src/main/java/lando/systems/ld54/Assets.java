@@ -96,6 +96,8 @@ public class Assets implements Disposable {
     public ShaderProgram plasmaShader;
     public ShaderProgram fogObjectShader;
     public ShaderProgram starfieldShader;
+    public ShaderProgram minimapShader;
+
     public HashMap<String, Animation<TextureRegion>> encounterAnimationHashMap = new HashMap<>();
 
     public enum Patch {
@@ -347,6 +349,7 @@ public class Assets implements Disposable {
         cooldownShader = loadShader("shaders/default.vert", "shaders/cooldown.frag");
         influencerShader = loadShader("shaders/default.vert", "shaders/influencer.frag");
         goalShader = loadShader("shaders/default.vert", "shaders/goal.frag");
+        minimapShader = loadShader("shaders/default.vert", "shaders/minimap.frag");
 
         randomTransitions.add(radialShader);
         randomTransitions.add(pizelizeShader);
