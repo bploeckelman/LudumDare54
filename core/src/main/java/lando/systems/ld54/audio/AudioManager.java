@@ -30,7 +30,7 @@ public class AudioManager implements Disposable {
         , thud
         , upgrade
         , powerup
-        , radar
+        , radarPing
         , radarReveal
         , swoosh
         , stingAliens1
@@ -87,7 +87,7 @@ public class AudioManager implements Disposable {
         putSound(Sounds.powerup, assets.powerup1);
         putSound(Sounds.powerup, assets.powerup2);
 //        putSound(Sounds.radar, assets.radar1);
-        putSound(Sounds.radar, assets.radar1);
+        putSound(Sounds.radarPing, assets.radar1);
         putSound(Sounds.radarReveal, assets.radar2);
         putSound(Sounds.swoosh, assets.swoosh1);
         putSound(Sounds.stingAliens1, assets.stingAliens1);

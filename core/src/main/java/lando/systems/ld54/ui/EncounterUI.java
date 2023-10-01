@@ -84,7 +84,7 @@ public class EncounterUI extends Group {
         encounterWindow.align(Align.top | Align.center);
         encounterWindow.setModal(true);
         encounterWindow.setKeepWithinStage(false);
-        encounterWindow.setColor(.9f, .9f, 1f, 0.9f);
+        encounterWindow.setColor(.8f, .9f, 1f, 0.9f);
 
         VisLabel encounterTitleLabel = new VisLabel(encounterTitle);
         Label.LabelStyle style = encounterTitleLabel.getStyle();
@@ -166,7 +166,7 @@ public class EncounterUI extends Group {
                 screen.finishEncounter(encounter);
             }
         });
-        encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
+        encounterWindow.add(optionButton).padTop(10f).padBottom(1f).width(encounterWindow.getWidth() - 100f).height(50f);
     }
 
     private void destroyOptions() {

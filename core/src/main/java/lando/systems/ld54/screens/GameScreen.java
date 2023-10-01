@@ -258,7 +258,7 @@ public class GameScreen extends BaseScreen {
                         currentShip.currentSector = i;
                         if (sector.encounter != null && sector != homeSector && sector != goalSector && !sector.isVisited()) {
                             Gdx.app.log("Discovered new sector!", "Sector " + i);
-                            game.audioManager.playSound(AudioManager.Sounds.radar);
+                            game.audioManager.playSound(AudioManager.Sounds.radarPing);
                         }
 
                         sector.setVisited(true);

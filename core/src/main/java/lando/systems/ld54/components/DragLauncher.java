@@ -106,7 +106,7 @@ public class DragLauncher extends InputAdapter {
 
             if(revvingSound != 0) {
                 if(speed >= .2f) {
-                    screen.assets.engineRevving.setVolume(revvingSound, MathUtils.map(.2f, 1f, 0f, Main.game.audioManager.soundVolume.floatValue(), speed));
+                    screen.assets.engineRevving.setVolume(revvingSound, MathUtils.map(.2f, 1f, 0f, Main.game.audioManager.soundVolume.floatValue() * .8f, speed));
                 }
 
 
