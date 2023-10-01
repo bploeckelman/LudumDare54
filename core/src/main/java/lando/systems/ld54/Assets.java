@@ -12,13 +12,12 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.InputPrompts;
+import lando.systems.ld54.objects.PlayerShipPart;
 import space.earlygrey.shapedrawer.ShapeDrawer;
+import text.formic.Stringf;
 
 public class Assets implements Disposable {
 
@@ -60,8 +59,10 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> earthSpin;
     public Animation<TextureRegion> marsSpin;
     public Animation<TextureRegion> jupiterSpin;
-    public Animation<TextureRegion> playerShip;
     public Animation<TextureRegion> launchArrow;
+    public Animation<TextureRegion> playerShip;
+    public Animation<TextureRegion> playerShipActive;
+    public ObjectMap<PlayerShipPart.Type, Animation<TextureRegion>> playerShipParts;
 
     public TextureRegion pixelRegion;
     public TextureRegion fuzzyCircle;
@@ -230,8 +231,16 @@ public class Assets implements Disposable {
         earthSpin = new Animation<>(0.1f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
         marsSpin = new Animation<>(0.08f, atlas.findRegions("planets/mars/mars-spin"), Animation.PlayMode.LOOP);
         jupiterSpin = new Animation<>(0.04f, atlas.findRegions("planets/gas/gas-spin"), Animation.PlayMode.LOOP);
-        playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/player-ship"), Animation.PlayMode.LOOP);
         launchArrow = new Animation<>(.1f, atlas.findRegions("launch-arrow/launch-arrow"), Animation.PlayMode.LOOP);
+        playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/idle/player-ship-idle"), Animation.PlayMode.LOOP);
+        playerShipActive = new Animation<>(.1f, atlas.findRegions("ships/player/active/player-ship"), Animation.PlayMode.LOOP);
+        playerShipParts = new ObjectMap<>();
+        for (var part : PlayerShipPart.Type.values()) {
+            var suffix = (part == PlayerShipPart.Type.cabin) ? "-b" : ""; // cabin has two variants, this always uses the second
+            var name = Stringf.format("ships/player/parts/ship-part-%1$s/ship-part-%1$s%2$s", part.name(), suffix);
+            var anim = new Animation<TextureRegion>(.1f, atlas.findRegions(name), Animation.PlayMode.LOOP);
+            playerShipParts.put(part, anim);
+        }
 
         // Fonts
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");

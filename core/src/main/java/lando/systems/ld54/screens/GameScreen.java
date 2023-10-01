@@ -34,8 +34,6 @@ import lando.systems.ld54.ui.MiniMap;
 import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
-import java.util.ArrayList;
-
 public class GameScreen extends BaseScreen {
 
     public static int SECTORS_WIDE = 5;
@@ -50,6 +48,7 @@ public class GameScreen extends BaseScreen {
     public final Array<Sector> sectors = new Array<>();
     public final Array<Asteroid> asteroids = new Array<>();
     public final Array<PlayerShip> playerShips = new Array<>();
+    public final Array<PlayerShipPart> playerShipParts = new Array<>();
     public final Sector homeSector;
     public final Sector goalSector;
 
@@ -58,27 +57,27 @@ public class GameScreen extends BaseScreen {
     public Music levelMusic;
     public Music levelMusicLowpass;
 
-    DragLauncher launcher;
+    public DragLauncher launcher;
 
-    private Background background;
-    FrameBuffer foggedBuffer;
-    FrameBuffer exploredBuffer;
-    FrameBuffer fogMaskBuffer;
-    TextureRegion foggedTextureRegion;
-    TextureRegion exploredTextureRegion;
-    TextureRegion fogMaskTextureRegion;
-    FogOfWar fogOfWar;
-    PanZoomCameraController cameraController;
-    float accum;
+    public Background background;
+    public FrameBuffer foggedBuffer;
+    public FrameBuffer exploredBuffer;
+    public FrameBuffer fogMaskBuffer;
+    public TextureRegion foggedTextureRegion;
+    public TextureRegion exploredTextureRegion;
+    public TextureRegion fogMaskTextureRegion;
+    public FogOfWar fogOfWar;
+    public PanZoomCameraController cameraController;
+    public float accum;
     public boolean encounterShown = false;
-    EncounterUI encounterUI;
-    GameScreenUI gameScreenUI;
-    MiniMap miniMap;
+    public EncounterUI encounterUI;
+    public GameScreenUI gameScreenUI;
+    public MiniMap miniMap;
     public PlayerShip currentShip;
-    PhysicsSystem physics;
-    Array<Collidable> physicsObjects;
-    Array<Influencer> influencers;
     public Player player;
+    public PhysicsSystem physics;
+    public Array<Collidable> physicsObjects;
+    public Array<Influencer> influencers;
 
     public GameScreen() {
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
@@ -210,6 +209,7 @@ public class GameScreen extends BaseScreen {
         background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
+        playerShipParts.forEach(p -> p.update(dt));
         playerShips.forEach(x -> {
             x.update(dt);
             if (x.trackMovement) {
@@ -316,6 +316,7 @@ public class GameScreen extends BaseScreen {
 
         planets.forEach(p -> p.render(batch));
         playerShips.forEach(ps -> ps.draw(batch));
+        playerShipParts.forEach(p -> p.draw(batch));
         launcher.render(batch);
 
         asteroids.forEach(a -> a.draw(batch));
@@ -376,7 +377,7 @@ public class GameScreen extends BaseScreen {
     }
 
     public void launchShip(float angle, float power) {
-        var ship = new PlayerShip(assets, fogOfWar);
+        var ship = new PlayerShip(this);
         physicsObjects.add(ship);
         ship.launch(angle, power);
         playerShips.add(ship);
