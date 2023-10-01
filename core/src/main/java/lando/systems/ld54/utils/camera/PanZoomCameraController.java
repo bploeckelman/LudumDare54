@@ -171,9 +171,15 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
         return false;
     }
 
+
+    Vector3 initialPos = new Vector3();
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         dragZoom =  (button == Input.Buttons.LEFT && pointer == 0);
+        if (dragZoom) {
+            initialPos.set(screenX, screenY, 0);
+            camera.unproject(initialPos);
+        }
         return dragZoom;
     }
 
@@ -191,16 +197,24 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
         return false;
     }
 
+    Vector3 draggedPosition = new Vector3();
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if (!dragZoom) { return false; }
 
-        var dx = Gdx.input.getDeltaX() * Time.delta * units_dragged_per_pixel;
-        var dy = Gdx.input.getDeltaY() * Time.delta * units_dragged_per_pixel;
-        if (dx < 0) moveLeft(dx);
-        if (dx > 0) moveRight(dx);
-        if (dy < 0) moveUp(dy);
-        if (dy > 0) moveDown(dy);
+//        var dx = Gdx.input.getDeltaX() * Time.delta * units_dragged_per_pixel;
+//        var dy = Gdx.input.getDeltaY() * Time.delta * units_dragged_per_pixel;
+//        if (dx < 0) moveLeft(dx);
+//        if (dx > 0) moveRight(dx);
+//        if (dy < 0) moveUp(dy);
+//        if (dy > 0) moveDown(dy);
+        draggedPosition.set(screenX, screenY, 0);
+        camera.unproject(draggedPosition);
+
+        float dx = initialPos.x - draggedPosition.x;
+        float dy = initialPos.y - draggedPosition.y;
+        targetPos.x = initialPos.x + dx * camera.zoom;
+        targetPos.y = initialPos.y + dy * camera.zoom;
 
         return true;
     }
