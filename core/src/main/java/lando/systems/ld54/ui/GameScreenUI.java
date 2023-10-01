@@ -8,15 +8,17 @@ import com.kotcrab.vis.ui.widget.VisProgressBar;
 import com.kotcrab.vis.ui.widget.VisTable;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.objects.Player;
 import lando.systems.ld54.objects.PlayerShip;
 
 public class GameScreenUI extends Group {
 
     private VisProgressBar fuelBar;
-    private PlayerShip currentPlayerShip;
+    private Player player;
 
-    public GameScreenUI(Assets assets) {
+    public GameScreenUI(Assets assets, Player player) {
         super();
+        this.player = player;
         setX(Config.Screen.window_width - 100f);
         setY(Config.Screen.window_height - 100f);
         setWidth(40f);
@@ -32,8 +34,8 @@ public class GameScreenUI extends Group {
         infoWindow.add(fuelLabel).left().pad(5f);
         infoWindow.row();
 
-        fuelBar = new VisProgressBar(0f, 500f, 1f, false);
-        fuelBar.setValue(0f);
+        fuelBar = new VisProgressBar(0f, player.MAX_FUEL, 1f, false);
+        fuelBar.setValue(player.fuelLevel);
         fuelBar.setWidth(100f);
         fuelBar.setHeight(10f);
         infoWindow.add(fuelBar).left().pad(5f);
@@ -42,8 +44,8 @@ public class GameScreenUI extends Group {
         addActor(infoWindow);
     }
 
-    public void setPlayerShip(PlayerShip playerShip) {
-        currentPlayerShip = playerShip;
+    public void update() {
+        fuelBar.setValue(player.fuelLevel);
     }
 
 }

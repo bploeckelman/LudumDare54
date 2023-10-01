@@ -78,6 +78,7 @@ public class GameScreen extends BaseScreen {
     PhysicsSystem physics;
     Array<Collidable> physicsObjects;
     Array<Influencer> influencers;
+    public Player player;
 
     public GameScreen() {
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
@@ -86,6 +87,7 @@ public class GameScreen extends BaseScreen {
         background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
         launcher = new DragLauncher(this);
         fogOfWar = new FogOfWar(gameWidth, gameHeight);
+        player = new Player();
 
         var planetManager = new PlanetManager(this);
         earth = planetManager.createPlanets(planets);
@@ -157,7 +159,7 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass.setLooping(true);
         levelMusic.play();
 
-        gameScreenUI = new GameScreenUI(assets);
+        gameScreenUI = new GameScreenUI(assets, player);
         uiStage.addActor(gameScreenUI);
         miniMap = new MiniMap(this);
     }
@@ -169,6 +171,7 @@ public class GameScreen extends BaseScreen {
             Time.pause_timer = 2f;
         }
         uiStage.act(delta);
+        gameScreenUI.update();
         audioManager.update(delta);
     }
 
@@ -212,7 +215,6 @@ public class GameScreen extends BaseScreen {
             if (x.trackMovement) {
                 currentShip = x;
                 cameraController.targetPos.set(x.pos.x, x.pos.y, 0);
-                gameScreenUI.setPlayerShip(currentShip);
             }
         });
         asteroids.forEach(Asteroid::update);
@@ -376,7 +378,6 @@ public class GameScreen extends BaseScreen {
     public void launchShip(float angle, float power) {
         var ship = new PlayerShip(assets, fogOfWar);
         physicsObjects.add(ship);
-        gameScreenUI.setPlayerShip(ship);
         ship.launch(angle, power);
         playerShips.add(ship);
 

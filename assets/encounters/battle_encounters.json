@@ -531,8 +531,8 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
-            "text": "Your shields hold up, and you FUELfully navigate through the meteor shower unharmed.",
+            "value": 100,
+            "text": "Your shields hold up, and you fully navigate through the meteor shower unharmed.",
             "weight": 0.7
           },
           {
@@ -565,7 +565,7 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 10,
+            "value": 50,
             "text": "The meteor shower subsides, and your ship remains unharmed.",
             "weight": 0.8
           },
@@ -629,7 +629,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "While in orbit, your ship's systems experience a minor malfunction.",
             "weight": 0.2
           }
@@ -653,7 +653,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -5,
             "text": "Approaching the anomaly causes minor damage to your ship's sensors.",
             "weight": 0.4
           }
@@ -711,7 +711,7 @@
           },
           {
             "type": "FUEL",
-            "value": -1,
+            "value": -10,
             "text": "During mining, an unexpected asteroid collision damages your mining equipment.",
             "weight": 0.4
           }
