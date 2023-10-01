@@ -45,6 +45,7 @@ public class PlayerShip implements Collidable {
     public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
 
     private final GameScreen screen;
+    private long engineSoundID;
 
     public PlayerShip(GameScreen gameScreen) {
         this.screen = gameScreen;
@@ -70,9 +71,15 @@ public class PlayerShip implements Collidable {
         // update animation
         animState += dt;
         keyframe = anim.getKeyFrame(animState);
+        Gdx.app.log("Fuel amount", String.valueOf(fuel));
+        Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
         if (fuel <= 0) {
             Main.game.assets.engineRunning.stop();
+
+
+
             this.anim = screen.assets.playerShip;
+
         }
 
         if (health <= 0) {
@@ -102,7 +109,6 @@ public class PlayerShip implements Collidable {
         } else if (curVelocity < 200f) {
             trackMovement = false;
 
-            Gdx.app.log("Stopping", "stopping");
         } else {
             // get rotation based on velocity
             rotation = vel.angleDeg();
@@ -129,6 +135,11 @@ public class PlayerShip implements Collidable {
     public void launch(float angle, float power) {
         trackMovement = true;
         vel.set(1, 0).setAngleDeg(angle).scl(power);
+//         = screen.audioManager.playSound(AudioManager.Sounds.engineLaunch, 1.4f);
+        engineSoundID = screen.audioManager.loopSound(AudioManager.Sounds.engineRunning, .4f);
+        screen.audioManager.playSound(AudioManager.Sounds.engineLaunch);
+        Main.game.assets.engineRunning.setVolume(engineSoundID,  Main.game.audioManager.soundVolume.floatValue());
+
     }
 
     public void explode() {
@@ -258,7 +269,7 @@ public class PlayerShip implements Collidable {
 
     @Override
     public void collidedWith(Collidable object) {
-        screen.audioManager.playSound(AudioManager.Sounds.thud);
+        screen.audioManager.playSound(AudioManager.Sounds.thud, .5f);
 
         // assumes max velocity is 300
         float speedModifier = vel.len() / 75; // 4x damage for full speed

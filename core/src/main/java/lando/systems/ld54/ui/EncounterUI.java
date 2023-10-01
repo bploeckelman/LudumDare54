@@ -134,7 +134,8 @@ public class EncounterUI extends Group {
 
     private void optionClicked(EncounterOptionOutcome[] outcomes) {
         EncounterOptionOutcome outcome = calculateOutcome(outcomes);
-        audio.playSound(AudioManager.Sounds.coin);
+//        audio.playSound(AudioManager.Sounds.coin);
+        audio.playSound(AudioManager.Sounds.stingAliens2);
         encounterTextLabel.setText(outcome.text);
         destroyOptions();
         VisTextButton optionButton = new VisTextButton(outcome.type.name() + " " + outcome.value, optionStyle);

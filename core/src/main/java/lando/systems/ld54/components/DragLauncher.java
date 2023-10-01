@@ -89,7 +89,7 @@ public class DragLauncher extends InputAdapter {
 
             if(dragTimer > .85f) {
                 if(!isRevving) {
-                    screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .46f);
+                    screen.audioManager.loopSound(AudioManager.Sounds.engineRevving, .3f);
                 }
 
                 isRevving = true;
@@ -137,8 +137,7 @@ public class DragLauncher extends InputAdapter {
         }
         dragTimer = 0;
         isRevving = false;
-        screen.audioManager.playSound(AudioManager.Sounds.engineLaunch, 1.8f);
-        screen.audioManager.loopSound(AudioManager.Sounds.engineRunning, 1.74f);
+
 
         // speed is 0.2 - 1
         screen.launchShip(angle, speed);
