@@ -12,9 +12,13 @@
   <inherits name="com.ray3k.tenpatch.tenpatch" />
   <inherits name="formic" />
   <inherits name="guacamole_gdx_gwt" />
-  <inherits name="lando.systems.ld54.Main" />
   <inherits name="regexodus.regexodus" />
   <inherits name="space.earlygrey.shapedrawer" />
+  <inherits name="lando.systems.ld54.Main" />
+
+  <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.Encounter" />
+  <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.EncounterOption" />
+  <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.EncounterOptionOutcome" />
 
   <entry-point class="lando.systems.ld54.gwt.GwtLauncher" />
 

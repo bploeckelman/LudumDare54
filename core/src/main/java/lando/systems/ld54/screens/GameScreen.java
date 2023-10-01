@@ -34,13 +34,17 @@ import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
 
-    public static float gameWidth = Config.Screen.window_width * 6f;
-    public static float gameHeight = Config.Screen.window_height * 6f;
+    public static int SECTORS_WIDE = 5;
+    public static int SECTORS_HIGH = 5;
+    public static float gameWidth = Config.Screen.window_width * SECTORS_WIDE;
+    public static float gameHeight = Config.Screen.window_height * SECTORS_HIGH;
 
     public final Vector3 mousePos = new Vector3();
 
     public final Earth earth;
-    public final Array<Planet> planets = new Array<Planet>();
+    public final Array<Planet> planets = new Array<>();
+    public final Array<Asteroid> asteroids = new Array<>();
+    public final Array<PlayerShip> playerShips = new Array<>();
     private final Json json = new Json(JsonWriter.OutputType.json);
 
     public Music levelMusic;
@@ -56,8 +60,6 @@ public class GameScreen extends BaseScreen {
     TextureRegion exploredTextureRegion;
     TextureRegion fogMaskTextureRegion;
     FogOfWar fogOfWar;
-    Array<PlayerShip> playerShips = new Array<>();
-    Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
     float accum;
     public boolean encounterShown = false;
@@ -75,7 +77,6 @@ public class GameScreen extends BaseScreen {
         levelMusic = audioManager.musics.get(AudioManager.Musics.mainTheme);
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
-        asteroids = new Array<>();
         Asteroids.createTestAsteroids(asteroids);
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
@@ -256,10 +257,11 @@ public class GameScreen extends BaseScreen {
         batch.end();
 
         // Background
+        var margin = 400;
         batch.setShader(assets.plasmaShader);
         batch.begin();
         assets.plasmaShader.setUniformf("u_time", accum);
-        batch.draw(assets.noiseTexture, -200, -200, gameWidth + 400, gameHeight + 400);
+        batch.draw(assets.noiseTexture, -margin / 2f, -margin / 2f, gameWidth + margin, gameHeight + margin);
         batch.end();
         batch.setShader(null);
     }
@@ -295,9 +297,11 @@ public class GameScreen extends BaseScreen {
     private void startEncounter() {
         encounterShown = true;
         encounterUI = new EncounterUI(this, assets, skin, audioManager);
-        var file = Gdx.files.local("encounters/battle_encounters.json");
-        Encounter[] encounter = json.fromJson(Encounter[].class, file);
-        encounterUI.setEncounter(encounter[MathUtils.random(encounter.length - 1)]);
+        var file = Gdx.files.internal("encounters/battle_encounters.json");
+        var encounters = json.fromJson(Array.class, Encounter.class, file);
+        var index = MathUtils.random(encounters.size - 1);
+        var encounter = (Encounter) encounters.get(index);
+        encounterUI.setEncounter(encounter);
         uiStage.addActor(encounterUI);
     }
 

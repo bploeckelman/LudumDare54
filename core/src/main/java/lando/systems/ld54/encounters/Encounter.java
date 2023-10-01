@@ -5,4 +5,5 @@ public class Encounter {
     public String text;
     public String imageKey;
     public EncounterOption[] options;
+    public Encounter() {}
 }
