@@ -1,13 +1,9 @@
 package lando.systems.ld54.ui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisImage;
@@ -16,8 +12,6 @@ import com.kotcrab.vis.ui.widget.VisProgressBar;
 import com.kotcrab.vis.ui.widget.VisTable;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
-import lando.systems.ld54.objects.Player;
-import lando.systems.ld54.objects.PlayerShip;
 import lando.systems.ld54.screens.GameScreen;
 import lando.systems.ld54.utils.Utils;
 
@@ -37,9 +31,10 @@ public class GameScreenUI extends Group {
         add(Color.ORANGE); //3
         add(Color.YELLOW); //4
         add(Color.LIME); //5
-        add(Color.GREEN); //6
-        add(Color.BLUE);//7
-        add(Color.PURPLE); //8
+        add(Color.OLIVE); //6
+        add(Color.GREEN); //7
+        add(Color.BLUE);//8
+        add(Color.PURPLE); //9
     }};
 
     public GameScreenUI(Assets assets, GameScreen screen) {
