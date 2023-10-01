@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.Assets;
+import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.screens.GameScreen;
 
 public class PlayerShip {
@@ -23,9 +24,11 @@ public class PlayerShip {
     public Vector2 vel;
     public Vector2 size;
     public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
+    private FogOfWar fogOfWar;
 
-    public PlayerShip(Assets assets) {
+    public PlayerShip(Assets assets, FogOfWar fogOfWar) {
         this.anim = assets.playerShip;
+        this.fogOfWar = fogOfWar;
         this.animState = 0;
         this.pos = new Vector2();
         this.vel = new Vector2();
@@ -51,6 +54,9 @@ public class PlayerShip {
 
         // slow down over time
         vel.scl(DRAG_FRICTION);
+        if (vel.len2() > .01f) {
+            fogOfWar.addFogCircle(pos.x, pos.y, 200);
+        }
     }
 
     public void setVel(float angle, float power) {

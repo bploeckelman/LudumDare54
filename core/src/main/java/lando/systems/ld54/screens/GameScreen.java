@@ -261,7 +261,7 @@ public class GameScreen extends BaseScreen {
     }
 
     public void launchShip(float angle, float power) {
-        var ship = new PlayerShip(assets);
+        var ship = new PlayerShip(assets, fogOfWar);
         ship.launch(angle, power);
         playerShips.add(ship);
     }
