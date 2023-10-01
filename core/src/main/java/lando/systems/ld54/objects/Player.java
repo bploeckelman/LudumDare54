@@ -21,6 +21,13 @@ public class Player {
         }
     }
 
+    public void useFuel(float fuel) {
+        fuelLevel -= fuel;
+        if (fuelLevel < 0) {
+            fuelLevel = 0;
+        }
+    }
+
     public void addScrap(float scrap) {
         Player.scrap += scrap;
         if (Player.scrap > MAX_SCRAP) {
