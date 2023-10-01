@@ -126,12 +126,6 @@ public class GameScreen extends BaseScreen {
 
         launcher.update(dt);
 
-        if (Gdx.input.isTouched()){
-            Vector3 touchPoint = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            worldCamera.unproject(touchPoint);
-            fogOfWar.addFogCircle(touchPoint.x, touchPoint.y, 100);
-        }
-
         background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));

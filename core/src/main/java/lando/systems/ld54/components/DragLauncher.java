@@ -73,10 +73,10 @@ public class DragLauncher extends InputAdapter {
 
     public void update(float delta) {
         animTimer += delta;
+        currentImage = dragAnim.getKeyFrame(animTimer);
     }
 
     private void updateLaunchAngle(Vector3 mousePos) {
-        currentImage = dragAnim.getKeyFrame(animTimer);
 
         var earthCenter = screen.earth.centerPosition;
 
