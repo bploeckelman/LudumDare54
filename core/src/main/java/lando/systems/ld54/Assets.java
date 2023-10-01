@@ -38,6 +38,10 @@ public class Assets implements Disposable {
     public BitmapFont largeFont;
     public BitmapFont abandonedFont20;
     public BitmapFont abandonedFont50;
+    public BitmapFont abandonedFont100;
+    public BitmapFont starJediFont20;
+    public BitmapFont starJediFont50;
+    public BitmapFont starJediFont100;
 
     public Texture pixel;
     public Texture gdx;
@@ -214,6 +218,15 @@ public class Assets implements Disposable {
         abandonedFont50 = generator.generateFont(parameter);
         parameter.size = 20;
         abandonedFont20 = generator.generateFont(parameter);
+        parameter.size = 100;
+        abandonedFont100 = generator.generateFont(parameter);
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Starjedi.ttf"));
+        parameter.size = 50;
+        starJediFont50 = generator.generateFont(parameter);
+        parameter.size = 20;
+        starJediFont20 = generator.generateFont(parameter);
+        parameter.size = 100;
+        starJediFont100 = generator.generateFont(parameter);
         generator.dispose();
 
         fuzzyCircle = atlas.findRegion("fuzzy-circle");

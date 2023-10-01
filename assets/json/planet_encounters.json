@@ -1,0 +1,52 @@
+[
+  {
+    "encounterTitle": "New Planet: Cherry's Litterbox",
+    "encounterText": "You have discovered a new planet with Feline smells. They greet you with meows. \n What do you do?",
+    "encounterImage": "cherry",
+    "encounterOptions": [
+      {
+        "optionText": "Meow back",
+        "outcomeType": "DAMAGE",
+        "outcomeValue": 1,
+        "outcomeText": "You meow back and they give you a love bite."
+      },
+      {
+        "optionText": "Ignore them",
+        "outcomeType": "NOTHING",
+        "outcomeValue": 0,
+        "outcomeText": "You ignore them."
+      },
+      {
+        "optionText": "Attack them",
+        "outcomeType": "DAMAGE",
+        "outcomeValue": 1,
+        "outcomeText": "You attack them and they claw the shit out of you."
+      }
+    ]
+  },
+  {
+    "encounterTitle": "New Planet: Asuka's Kingdom",
+    "encounterText": "You have arrived at a new planet where Asuka gives you some wet greetings. He is full of love. \n What do you do?",
+    "encounterImage": "asuka",
+    "encounterOptions": [
+      {
+        "optionText": "Give Nothing",
+        "outcomeType": "DAMAGE",
+        "outcomeValue": 1,
+        "outcomeText": "You are greeted with painful love."
+      },
+      {
+        "optionText": "Give Pets",
+        "outcomeType": "NOTHING",
+        "outcomeValue": 0,
+        "outcomeText": "Asuka enjoys it, but wants something more."
+      },
+      {
+        "optionText": "Give treats",
+        "outcomeType": "HEAL",
+        "outcomeValue": 1,
+        "outcomeText": "Asuka approves."
+      }
+    ]
+  }
+]

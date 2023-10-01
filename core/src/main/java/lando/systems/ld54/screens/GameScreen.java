@@ -3,6 +3,7 @@ package lando.systems.ld54.screens;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -21,6 +22,7 @@ import lando.systems.ld54.components.DragLauncher;
 import lando.systems.ld54.fogofwar.FogOfWar;
 import lando.systems.ld54.objects.Asteroid;
 import lando.systems.ld54.objects.PlayerShip;
+import lando.systems.ld54.ui.EncounterUI;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
 public class GameScreen extends BaseScreen {
@@ -45,6 +47,8 @@ public class GameScreen extends BaseScreen {
     Array<Asteroid> asteroids;
     PanZoomCameraController cameraController;
     float accum;
+    boolean uiShown = false;
+    EncounterUI encounterUI;
 
     public GameScreen() {
         launcher = new DragLauncher(this);
@@ -89,6 +93,14 @@ public class GameScreen extends BaseScreen {
     public void update(float dt) {
         if (Gdx.app.getType() == Application.ApplicationType.Desktop && Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E) && !uiShown) {
+            startEncounter();
+        }
+
+        if (uiShown) {
+            uiStage.act();
         }
 
         accum += dt;
@@ -159,6 +171,10 @@ public class GameScreen extends BaseScreen {
             batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
         }
         batch.end();
+
+        if (uiShown) {
+            uiStage.draw();
+        }
     }
 
     /**
@@ -232,4 +248,14 @@ public class GameScreen extends BaseScreen {
         playerShips.add(ship);
     }
 
+    private void startEncounter() {
+        uiShown = true;
+        encounterUI = new EncounterUI(assets, skin, audioManager);
+        uiStage.addActor(encounterUI);
+    }
+
+    private void finishEncounter() {
+        uiShown = false;
+        encounterUI.remove();
+    }
 }
