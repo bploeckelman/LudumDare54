@@ -38,6 +38,7 @@ public class Sector {
         this.coords = new IntVector2(x, y);
         this.bounds = new Rectangle(x * WIDTH, y * HEIGHT, WIDTH, HEIGHT);
         this.encounter = encounter;
+        this.encounter.sector = this;
         // create 100x100 encounter bounds random in sector
         // TODO - these rands should be based on some fraction of a sector size
         this.encounterBounds = new Rectangle(

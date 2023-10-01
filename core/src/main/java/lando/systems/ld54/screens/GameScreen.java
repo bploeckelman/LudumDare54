@@ -441,6 +441,8 @@ public class GameScreen extends BaseScreen {
         encounterUI = new EncounterUI(this, assets, skin, audioManager);
         encounterUI.setEncounter(encounter);
         uiStage.addActor(encounterUI);
+        encounter.sector.pullPlayerShip.deactivate();
+        encounter.sector.pushJunk.deactivate();
         game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
     }
 
