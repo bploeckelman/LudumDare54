@@ -218,7 +218,6 @@ public class GameScreen extends BaseScreen {
 
         miniMap.update(dt);
         physics.update(dt, physicsObjects, influencers);
-
         uiStage.act();
 
         accum += dt;

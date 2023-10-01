@@ -71,6 +71,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> launchArrow;
     public Animation<TextureRegion> playerShip;
     public Animation<TextureRegion> playerShipActive;
+    public Animation<TextureRegion> pickupsFuel;
     public ObjectMap<PlayerShipPart.Type, Animation<TextureRegion>> playerShipParts;
     public Array<Animation<TextureRegion>> astronautBodies;
 
@@ -304,6 +305,7 @@ public class Assets implements Disposable {
         launchArrow = new Animation<>(.1f, atlas.findRegions("launch-arrow/launch-arrow"), Animation.PlayMode.LOOP);
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/idle/player-ship-idle"), Animation.PlayMode.LOOP);
         playerShipActive = new Animation<>(.1f, atlas.findRegions("ships/player/active/player-ship"), Animation.PlayMode.LOOP);
+        pickupsFuel = new Animation<>(.1f, atlas.findRegions("pickups-fuel/pickup-fuel"), Animation.PlayMode.LOOP);
         playerShipParts = new ObjectMap<>();
         for (var part : PlayerShipPart.Type.values()) {
             var suffix = (part == PlayerShipPart.Type.cabin) ? "-b" : ""; // cabin has two variants, this always uses the second

@@ -64,7 +64,7 @@ public class Utils {
     }
 
     public static TextureRegion getColoredTextureRegion(Color color) {
-        Pixmap pixMap = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
+        Pixmap pixMap = new Pixmap(30, 20, Pixmap.Format.RGBA8888);
         pixMap.setColor(color);
         pixMap.fill();
         TextureRegion textureRegion = new TextureRegion(new Texture(pixMap));
