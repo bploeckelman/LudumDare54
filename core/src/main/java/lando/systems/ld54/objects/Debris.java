@@ -18,17 +18,20 @@ public class Debris implements Collidable {
     private final Vector2 vel;
     private final Rectangle collisionBounds;
     private final CollisionShapeCircle collisionShape;
-
     private final Animation<TextureRegion> anim;
+
     private TextureRegion keyframe;
     private float stateTime;
     private float rotation;
 
-    // Override default values in subclasses
-    public float radius = 32;
+    // Override default values in subclasses for different behavior
     public float mass = 4;
     public float dragFriction = 0.5f;
     public float angularMomentum = 0;
+
+    // This can also be overridden, but it has to be changed through a setter
+    // because it ties to collision bounds and shape
+    private float radius = 32;
 
     public Debris(Animation<TextureRegion> anim, float x, float y) {
         this.pos = new Vector2(x, y);
@@ -39,6 +42,14 @@ public class Debris implements Collidable {
         this.keyframe = anim.getKeyFrames()[0];
         this.stateTime = 0;
         this.rotation = MathUtils.random(0, 360);
+    }
+
+    // TODO - might need to separate sprite radius (size) from collision radius,
+    //  but this if fine for now just to have a way to modify it per instance
+    public void setRadius(float newRadius) {
+        radius = newRadius;
+        this.collisionBounds.set(pos.x - radius, pos.y - radius, radius * 2, radius * 2);
+        this.collisionShape.set(radius, pos.x, pos.y);
     }
 
     public void update(float dt) {
