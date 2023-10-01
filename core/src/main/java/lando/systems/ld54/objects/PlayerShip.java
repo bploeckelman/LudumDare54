@@ -22,6 +22,7 @@ public class PlayerShip implements Collidable {
     private static final float FUEL_PER_BAR_LEVEL = 300f;
 
     private float mass = 100;
+    private float health = 100;
 
     private Animation<TextureRegion> anim;
     private TextureRegion keyframe;
@@ -72,6 +73,11 @@ public class PlayerShip implements Collidable {
         if (fuel <= 0) {
             Main.game.assets.engineRunning.stop();
             this.anim = screen.assets.playerShip;
+        }
+
+        if (health <= 0) {
+            explode();
+            return;
         }
 
         fuel = Math.max(0, fuel - vel.len() * dt);
@@ -254,7 +260,12 @@ public class PlayerShip implements Collidable {
     public void collidedWith(Collidable object) {
         screen.audioManager.playSound(AudioManager.Sounds.thud);
 
-        if (object instanceof GameBoundry){
+        // assumes max velocity is 300
+        float speedModifier = vel.len() / 75; // 4x damage for full speed
+        health -= object.getMass() * speedModifier;
+        System.out.println(health);
+
+        if (object instanceof GameBoundry) {
             vel.set(0,0);
         }
     }
