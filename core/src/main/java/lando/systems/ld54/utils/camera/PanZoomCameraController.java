@@ -35,17 +35,12 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
     private float units_panned_per_pixel = PAN_SPEED_2;
 
     public static final float INITIAL_ZOOM = 1f;
-    private final float ZOOM_MIN = 0.5f;
-    private final float ZOOM_MAX = 4f;
-    private final float ZOOM_SCALE_MIN = 2f;
-    private final float ZOOM_SCALE_MAX = 5f;
-
-    // TODO - scale based on current zoom level (zoom faster when farther away, slower when closer)
-    private float zoom_scale = ZOOM_SCALE_MIN + (ZOOM_SCALE_MAX - ZOOM_SCALE_MIN) / 2f;
+    private static final float MIN_ZOOM = 0.4f;
+    private static final float MAX_ZOOM = 4f;
 
     private OrthographicCamera camera;
-    private Vector3 tmp = new Vector3();
-    private Vector3 targetPos = new Vector3();
+    private final Vector3 tmp = new Vector3();
+    private final Vector3 targetPos = new Vector3();
     private float targetZoom = INITIAL_ZOOM;
 
     public static Interpolation interpolation = Interpolation.linear;
@@ -193,13 +188,16 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
+        // TODO - need to setup DragLauncher as an InputProcessor
+        //   so it can be muxed together with this and consume drag events
+        //   when the player clicks on earth
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             var dx = Gdx.input.getDeltaX() * Time.delta * units_dragged_per_pixel;
             var dy = Gdx.input.getDeltaY() * Time.delta * units_dragged_per_pixel;
-            if (dx > 0) moveLeft(dx);
-            if (dx < 0) moveRight(dx);
-            if (dy > 0) moveUp(dy);
-            if (dy < 0) moveDown(dy);
+            if (dx < 0) moveLeft(dx);
+            if (dx > 0) moveRight(dx);
+            if (dy < 0) moveUp(dy);
+            if (dy > 0) moveDown(dy);
             return true;
         }
         return false;
@@ -219,7 +217,7 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 //            var zoom = camera.zoom + sign * Time.delta * zoom_scale;
             var scale = 0.5f;
             var zoom = camera.zoom + sign * scale;
-            targetZoom = MathUtils.clamp(zoom, ZOOM_MIN, ZOOM_MAX);
+            targetZoom = MathUtils.clamp(zoom, MIN_ZOOM, MAX_ZOOM);
             if (Config.Debug.general) {
                 Gdx.app.log("ZOOM", Stringf.format("current: %.2f  target: %.2f", camera.zoom, targetZoom));
             }
