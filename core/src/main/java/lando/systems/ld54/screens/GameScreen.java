@@ -82,6 +82,11 @@ public class GameScreen extends BaseScreen {
     public GameScreen() {
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
         physicsObjects = new Array<>();
+        physicsObjects.add(new GameBoundry(0, 0, gameWidth, 0));
+        physicsObjects.add(new GameBoundry(gameWidth, 0, gameWidth, gameHeight));
+        physicsObjects.add(new GameBoundry(gameWidth, gameHeight, 0, gameHeight));
+        physicsObjects.add(new GameBoundry(0, gameHeight, 0, 0));
+
         influencers = new Array<>();
         background = new Background(this, new Rectangle(0, 0, gameWidth, gameHeight));
         launcher = new DragLauncher(this);

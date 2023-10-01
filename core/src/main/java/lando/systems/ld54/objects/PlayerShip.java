@@ -217,6 +217,9 @@ public class PlayerShip implements Collidable {
     @Override
     public void collidedWith(Collidable object) {
 
+        if (object instanceof GameBoundry){
+            vel.set(0,0);
+        }
     }
 
     @Override
