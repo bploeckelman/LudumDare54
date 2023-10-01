@@ -48,7 +48,7 @@ public class GameScreen extends BaseScreen {
     public final Array<Sector> sectors = new Array<>();
     public final Array<Asteroid> asteroids = new Array<>();
     public final Array<PlayerShip> playerShips = new Array<>();
-    public final Array<PlayerShipPart> playerShipParts = new Array<>();
+    public final Array<Debris> debris = new Array<>();
     public final Sector homeSector;
     public final Sector goalSector;
 
@@ -217,7 +217,7 @@ public class GameScreen extends BaseScreen {
         background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
-        playerShipParts.forEach(p -> p.update(dt));
+        debris.forEach(d -> d.update(dt));
         playerShips.forEach(x -> {
             x.update(dt);
             if (x.trackMovement) {
@@ -328,7 +328,7 @@ public class GameScreen extends BaseScreen {
 
         planets.forEach(p -> p.render(batch));
         playerShips.forEach(ps -> ps.draw(batch));
-        playerShipParts.forEach(p -> p.draw(batch));
+        debris.forEach(d -> d.draw(batch));
         launcher.render(batch);
 
         asteroids.forEach(a -> a.draw(batch));

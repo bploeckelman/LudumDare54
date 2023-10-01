@@ -68,6 +68,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> playerShip;
     public Animation<TextureRegion> playerShipActive;
     public ObjectMap<PlayerShipPart.Type, Animation<TextureRegion>> playerShipParts;
+    public Array<Animation<TextureRegion>> astronautBodies;
 
     public TextureRegion pixelRegion;
     public TextureRegion fuzzyCircle;
@@ -249,6 +250,13 @@ public class Assets implements Disposable {
             var anim = new Animation<TextureRegion>(.1f, atlas.findRegions(name), Animation.PlayMode.LOOP);
             playerShipParts.put(part, anim);
         }
+        astronautBodies = new Array<>();
+        astronautBodies.add(new Animation<>(.1f, atlas.findRegions("debris/debris-astrodog-a"), Animation.PlayMode.LOOP));
+        astronautBodies.add(new Animation<>(.1f, atlas.findRegions("debris/debris-astronaut-a"), Animation.PlayMode.LOOP));
+        astronautBodies.add(new Animation<>(.1f, atlas.findRegions("debris/debris-astronaut-b"), Animation.PlayMode.LOOP));
+        astronautBodies.add(new Animation<>(.1f, atlas.findRegions("debris/debris-girl-a"), Animation.PlayMode.LOOP));
+        astronautBodies.add(new Animation<>(.1f, atlas.findRegions("debris/debris-girl-b"), Animation.PlayMode.LOOP));
+        astronautBodies.add(new Animation<>(.1f, atlas.findRegions("debris/debris-skeleton-a"), Animation.PlayMode.LOOP));
 
         // Fonts
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");

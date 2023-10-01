@@ -132,23 +132,39 @@ public class PlayerShip implements Collidable {
         // TODO - maybe do something cutesy where we line them up all nice then blast them apart,
         //   but for now just get them onscreen
         var nose = new PlayerShipPart(PlayerShipPart.Type.nose, screen.assets, pos.x, pos.y);
-        var cabin = new PlayerShipPart(PlayerShipPart.Type.cabin, screen.assets, pos.x, pos.y);
+        var cabin1 = new PlayerShipPart(PlayerShipPart.Type.cabin, screen.assets, pos.x, pos.y);
+        var cabin2 = new PlayerShipPart(PlayerShipPart.Type.cabin, screen.assets, pos.x, pos.y);
         var tail = new PlayerShipPart(PlayerShipPart.Type.tail, screen.assets, pos.x, pos.y);
         // placeholder ranges just to have them move a bit on spawn
         var angle1 = MathUtils.random(0, 360);
-        var angle2 = MathUtils.random(0, 360);
+        var angle2a = MathUtils.random(0, 360);
+        var angle2b = MathUtils.random(0, 360);
         var angle3 = MathUtils.random(0, 360);
         var mag1 = MathUtils.random(30, 60);
-        var mag2 = MathUtils.random(30, 60);
+        var mag2a = MathUtils.random(30, 60);
+        var mag2b = MathUtils.random(30, 60);
         var mag3 = MathUtils.random(30, 60);
         nose.setVelocity(MathUtils.cosDeg(angle1) * mag1, MathUtils.sinDeg(angle1) * mag1);
-        cabin.setVelocity(MathUtils.cosDeg(angle2) * mag2, MathUtils.sinDeg(angle2) * mag2);
+        cabin1.setVelocity(MathUtils.cosDeg(angle2a) * mag2a, MathUtils.sinDeg(angle2a) * mag2a);
+        cabin2.setVelocity(MathUtils.cosDeg(angle2b) * mag2b, MathUtils.sinDeg(angle2b) * mag2b);
         tail.setVelocity(MathUtils.cosDeg(angle3) * mag3, MathUtils.sinDeg(angle3) * mag3);
-        screen.playerShipParts.addAll(nose, cabin, tail);
-        screen.physicsObjects.addAll(nose, cabin, tail);
+        screen.debris.addAll(nose, cabin1, cabin2, tail);
+        screen.physicsObjects.addAll(nose, cabin1, cabin2, tail);
+
+        // instantiate astronaut debris
+        var numBodies = MathUtils.random(1, 4);
+        for (int i = 0; i < numBodies; i++) {
+            var body = new Debris(anim, pos.x, pos.y);
+            var angle = MathUtils.random(0, 360);
+            var magnitude = MathUtils.random(50, 80);
+            var vx = MathUtils.cosDeg(angle * magnitude);
+            var vy = MathUtils.sinDeg(angle * magnitude);
+            body.setVelocity(vx, vy);
+            screen.debris.add(body);
+            screen.physicsObjects.add(body);
+        }
 
         // remove this ship
-        // NOTE - this might be janky, not sure if it would cause problems removing them this way
         screen.playerShips.removeValue(this, true);
         screen.physicsObjects.removeValue(this, true);
     }
