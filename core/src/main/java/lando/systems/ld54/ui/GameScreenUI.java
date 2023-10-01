@@ -44,7 +44,6 @@ public class GameScreenUI extends Group {
 
     public void setPlayerShip(PlayerShip playerShip) {
         currentPlayerShip = playerShip;
-        fuelBar.setValue(currentPlayerShip.currentFuelLevel);
     }
 
 }
