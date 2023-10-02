@@ -7,8 +7,11 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Align;
 import lando.systems.ld54.Assets;
+import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 
@@ -19,6 +22,9 @@ public class IntroScreen extends BaseScreen {
     PerspectiveCamera perspectiveCamera;
     GlyphLayout layout;
     BitmapFont font;
+
+    // Last day Magic numbers
+    Rectangle skipButtonRect = new Rectangle(Config.Screen.window_width - 250, 20, 200, 60);
 
     String text = "\n\n" +
         "Space. \n\n" +
@@ -100,13 +106,19 @@ public class IntroScreen extends BaseScreen {
         perspectiveCamera.update();
     }
 
+    Vector3 mousePos = new Vector3();
     @Override
     public void update(float dt) {
         float speedMultiplier = 1.0f;
 
         if (Gdx.input.isTouched()){
-            speedMultiplier = 10f;
+            mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            windowCamera.unproject(mousePos);
+            if (!skipButtonRect.contains(mousePos.x, mousePos.y)) {
+                speedMultiplier = 10f;
+            }
         }
+
         accum += 75*dt * speedMultiplier;
 //        accum = MathUtils.clamp(accum, 0, layout.height);
         if (accum > layout.height && Gdx.input.justTouched()) {
@@ -114,6 +126,13 @@ public class IntroScreen extends BaseScreen {
         }
         if (accum >= layout.height + 500f) {
             launchGame();
+        }
+        if (Gdx.input.justTouched()) {
+            mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            windowCamera.unproject(mousePos);
+            if (skipButtonRect.contains(mousePos.x, mousePos.y)) {
+                launchGame();
+            }
         }
     }
 
@@ -150,6 +169,17 @@ public class IntroScreen extends BaseScreen {
         font.draw(batch, text, 0, accum, worldCamera.viewportWidth, Align.center, true);
         font.getData().setScale(1.0f);
 //        batch.draw(textTexture, 0, 0, 1024, layout.height);
+        batch.end();
+
+        batch.setProjectionMatrix(windowCamera.combined);
+        batch.begin();
+        Assets.Patch.glass.ninePatch.draw(batch, skipButtonRect.x, skipButtonRect.y, skipButtonRect.width, skipButtonRect.height);
+
+        BitmapFont skipFont = assets.abandonedFont50;
+        skipFont.getData().setScale(.6f);
+        assets.layout.setText(skipFont, "Skip Intro", Color.WHITE, 200, Align.center, false);
+        skipFont.draw(batch, assets.layout, skipButtonRect.x, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
+        skipFont.getData().setScale(1f);
         batch.end();
     }
 }
