@@ -16,31 +16,31 @@
           {
             "type": "FUEL",
             "value": -1,
-            "text": "A valiant attempt but they straight-up roasted you. \n\nLike, it wasn't even close\n\nAND they stole your fuel! Jerks.",
+            "text": "A valiant attempt but they straight-up SMOKED you. \n\nLike, it wasn't even close\n\nAND they stole your fuel! Jerks.",
             "weight": 0.3
           }
         ]
       },
       {
-        "text": "Can we talk it out?",
+        "text": "Maybe we can talk it out?",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Against all odds, the marauders could be reasoned with.\nThey even shared their resources with you! How kind-hearted of the filthy space rats.",
-            "weight": 0.3
+            "text": "Against all odds, the marauders could be reasoned with!\n\nThey even shared their resources with you. \n\nHow kind-hearted of those filthy space rats!",
+            "weight": 1.0
           },
           {
             "type": "FUEL",
             "value": -1,
-            "text": "Diplomacy was... not effective.\n\nThey stole your fuel, like a bully stealing lunch money from a nerd in an 80s movie.",
-            "weight": 0.5
+            "text": "Diplomacy was... not effective.\n\nLike a bully stealing lunch money from the nerdy kid in an 80s movie, they stole your fuel. \n\nAnd your dignity.",
+            "weight": 1.0
           },
           {
             "type": "NOTHING",
             "value": 0,
             "text": "Diplomacy was... not effective.\n\nThey stole your fuel, like a bully stealing lunch money from a nerd in an 80s movie.",
-            "weight": 0.2
+            "weight": 0.0
           }
         ]
       }
@@ -57,7 +57,7 @@
               {
                 "type": "SCRAP",
                 "value": 100,
-                "text": "You wipe out their nascent civilization to plunder their planet's meager resources\n\nHonestly, kind of a dick move. Maybe you should talk to someone?",
+                "text": "You wipe out the nascent civilization to plunder their planet's meager resources\n\nHonestly, kind of a dick move. \n\nAnd unnecessary! Have you considered therapy?",
                 "weight": 1
               }
             ]
@@ -67,7 +67,7 @@
             "possibleOutcomes": [
               {
                 "type": "SCRAP",
-                "value": -500,
+                "value": 500,
                 "text": "Turns out, violence WASN'T the answer!\n\nThey share their meager resources with you in a stunning display of \ninterplanetary generosity.",
                 "weight": 1
               }
@@ -79,7 +79,7 @@
               {
                 "type": "NOTHING",
                 "value": 0,
-                "text": "You avoided them and... that was it?\n\nHow unsatisfying, narratively speaking.",
+                "text": "You avoided them! And. . . \n\n. . . that's' it?\n\nHow narratively unsatisfying.",
                 "weight": 1
               }
             ]

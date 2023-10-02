@@ -107,13 +107,13 @@ public class EncounterUI extends Group {
 
         encounterTextLabel.setStyle(style);
         encounterTextLabel.setAlignment(Align.left);
-        encounterTextLabel.setColor(Color.BLACK);
-        encounterWindow.add(encounterTextLabel).padBottom(5f).width(encounterWindow.getWidth() - 100f).height(150f).align(Align.topLeft);
+        encounterTextLabel.setColor(Color.YELLOW);
+        encounterWindow.add(encounterTextLabel).padLeft(25f).padBottom(5f).width(encounterWindow.getWidth() - 100f).height(150f).align(Align.topLeft);
         encounterWindow.row();
 
         optionStyle = new VisTextButton.VisTextButtonStyle();
         optionStyle.font = assets.starJediFont20;
-        optionStyle.fontColor = Color.BLACK;
+        optionStyle.fontColor = Color.YELLOW;
         optionStyle.up = Assets.Patch.glass.drawable;
         optionStyle.down = Assets.Patch.glass_dim.drawable;
         optionStyle.over = Assets.Patch.glass_dim.drawable;
@@ -178,7 +178,7 @@ public class EncounterUI extends Group {
                 screen.finishEncounter(encounter);
             }
         });
-        encounterWindow.add(optionButton).padTop(75f).padBottom(1f).width(encounterWindow.getWidth() - 106f).height(50f);
+        encounterWindow.add(optionButton).padTop(45f).padBottom(10f).width(encounterWindow.getWidth() - 106f).height(85f);
     }
 
     private void destroyOptions() {

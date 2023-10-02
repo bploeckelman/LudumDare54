@@ -47,6 +47,7 @@ public class PlayerShip implements Collidable {
     public Vector2 vel;
     public Vector2 size;
     public float fuel;
+    public float currentMaxFuel;
     public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
     public float targetRotation;
     private boolean inactive = false;
@@ -75,6 +76,7 @@ public class PlayerShip implements Collidable {
         this.collisionBounds = new Rectangle(pos.x - size.x/3f, pos.y - size.y /3f, size.x * 2f/3f, size.y * .66f);
         this.collisionShape = new CollisionShapeCircle(size.x /3f, pos.x, pos.y);
         this.fuel = screen.player.fuelLevel * FUEL_PER_BAR_LEVEL;
+        this.currentMaxFuel = fuel;
         targetRotation = vel.angleDeg();
         rotation = targetRotation;
     }
@@ -82,7 +84,8 @@ public class PlayerShip implements Collidable {
     public void update(float dt) {
         // update animation
         animState += dt;
-        Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
+        Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / currentMaxFuel * Main.game.audioManager.soundVolume.floatValue());
+//        Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
 
         if (fuel <= 0 && !inactive) { // don't show idle when inactive
             Main.game.assets.engineRunning.stop();

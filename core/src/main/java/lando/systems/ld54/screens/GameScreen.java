@@ -212,7 +212,7 @@ public class GameScreen extends BaseScreen {
             if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
 //            Config.Debug.general = true;
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(0);
+                    Encounter encounter = encounters.get(1);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
