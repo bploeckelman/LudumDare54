@@ -3,7 +3,9 @@ package lando.systems.ld54.screens;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.equations.Expo;
+import aurelienribon.tweenengine.primitives.MutableFloat;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,9 +16,7 @@ import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.ui.TitleScreenUI;
-import lando.systems.ld54.utils.accessors.FloatAccessor;
 import lando.systems.ld54.utils.accessors.Vector2Accessor;
-import org.w3c.dom.Text;
 
 public class TitleScreen extends BaseScreen {
 
@@ -25,10 +25,12 @@ public class TitleScreen extends BaseScreen {
     private Vector2 titleScreenWordsBlueTrailPos;
     private Vector2 titleScreenWordsBlueTrailSize;
     private Vector2 ePos;
-    private Float eRot = 0f;
+    private MutableFloat eRot = new MutableFloat(0f);
     private Vector2 cPos;
     private Vector2 kPos;
     private Texture background;
+    private Texture backgroundEmpty;
+    private Texture backgroundTrash;
     private Texture titleScreenWordsNoCek;
     private Texture titleScreenWordsWhiteTrail;
     private Animation<TextureRegion> mercury;
@@ -39,10 +41,11 @@ public class TitleScreen extends BaseScreen {
     private boolean showShip = false;
     private boolean exploded = false;
     private float explosionAccum = 0f;
+    private MutableFloat mercuryAlpha = new MutableFloat(1f);
 
 
     public TitleScreen() {
-        background = Main.game.assets.titleBackground;
+        background = Main.game.assets.titleBackgroundTrash;
         titleScreenWordsNoCek = Main.game.assets.titleScreenWordsNoCek;
         titleScreenWordsWhiteTrail = Main.game.assets.titleScreenWordsWhiteTrail;
         mercury = Main.game.assets.mercurySpin;
@@ -77,18 +80,22 @@ public class TitleScreen extends BaseScreen {
                 exploded = true;
                 swapBackgroundText = true;
             }))
+
+//            // letters falling out
             .beginParallel()
+                .push(Tween.to(mercuryAlpha, -1, 1f)
+                    .target(0f))
                 .push(Tween.to(ePos, Vector2Accessor.XY, 1f)
-                    .target(0f, -50f))
-                .push(Tween.to(cPos, Vector2Accessor.XY, 1f)
+                    .target(0f, -100f))
+                .push(Tween.to(cPos, Vector2Accessor.XY, 1.5f)
                     .ease(Expo.OUT)
-                    .target(0f, -70f))
-                .push(Tween.to(kPos, Vector2Accessor.XY, 1f)
+                    .target(0f, -150f))
+                .push(Tween.to(kPos, Vector2Accessor.XY, 2f)
                     .ease(Expo.OUT)
-                    .target(0f, -80f))
-                .push(Tween.to(eRot, FloatAccessor.VALUE, 1f)
+                    .target(0f, -200f))
+                .push(Tween.to(eRot, -1, 1f)
                     .ease(Expo.OUT)
-                    .target(Float.valueOf(360f)))
+                    .target(20f))
             .end()
             // rocket starts here
             .push(Tween.call((type, source) -> {
@@ -138,18 +145,20 @@ public class TitleScreen extends BaseScreen {
             if (swapBackgroundText) {
                 batch.draw(titleScreenWordsWhiteTrail, 0, 0, width, height);
                 //void	draw(Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY, float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY)
-                batch.draw(assets.titleScreenWordsBlueE,ePos.x, ePos.y, 0f, 0f, width, height, 1f, 1f, eRot, 0, 0, assets.titleScreenWordsBlueE.getWidth(), assets.titleScreenWordsBlueE.getHeight(), false, false);
+                batch.draw(assets.titleScreenWordsBlueE,ePos.x, ePos.y, 900f, 500f, width, height, 1f, 1f, eRot.floatValue(), 0, 0, assets.titleScreenWordsBlueE.getWidth(), assets.titleScreenWordsBlueE.getHeight(), false, false);
                 batch.draw(assets.titleScreenWordsBlueC,cPos.x, cPos.y, width, height);
                 batch.draw(assets.titleScreenWordsBlueK,kPos.x, kPos.y, width, height);
             }
             else {
                 batch.draw(titleScreenWordsBlueTrail, titleScreenWordsBlueTrailPos.x, titleScreenWordsBlueTrailPos.y, titleScreenWordsBlueTrailSize.x, titleScreenWordsBlueTrailSize.y);
             }
+            batch.setColor(1f, 1f, 1f, mercuryAlpha.floatValue());
             batch.draw(mercuryKeyframe, 940, 370, mercuryKeyframe.getRegionWidth() * 4, mercuryKeyframe.getRegionHeight() * 4);
+            batch.setColor(Color.WHITE);
             // rotate the ship so it's heading toward mercury
             float rotation = (float) Math.atan2(370 - shipPos.y, 940 - shipPos.x);
             if (exploded) {
-                batch.draw(explosionKeyframe, 940, 370, 300, 300);
+                batch.draw(explosionKeyframe, 840, 240, 500, 500);
             }
             if (showShip) {
                 batch.draw(shipKeyframe, shipPos.x, shipPos.y, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, (float) Math.toDegrees(rotation));

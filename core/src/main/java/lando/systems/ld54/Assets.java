@@ -65,6 +65,8 @@ public class Assets implements Disposable {
     public Texture titleScreenWordsWhiteTrail;
     public Texture titleScreenWordsWhite;
     public Texture titleScreenWordsNoCek;
+    public Texture titleBackgroundEmpty;
+    public Texture titleBackgroundTrash;
 
     public Particles particles;
     public Array<Animation<TextureRegion>> numberParticles;
@@ -281,7 +283,8 @@ public class Assets implements Disposable {
             mgr.load("titlescreen/title-screen-words-white-trail_00.png", Texture.class);
             mgr.load("titlescreen/title-screen-words-white_00.png", Texture.class);
             mgr.load("titlescreen/title-screen-words-no-cek.png", Texture.class);
-
+            mgr.load("titlescreen/background-empty.png", Texture.class);
+            mgr.load("titlescreen/background-trash.png", Texture.class);
 
             mgr.load("fonts/outfit-medium-20px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-40px.fnt", BitmapFont.class);
@@ -369,6 +372,8 @@ public class Assets implements Disposable {
         titleScreenWordsWhiteTrail = mgr.get("titlescreen/title-screen-words-white-trail_00.png");
         titleScreenWordsWhite = mgr.get("titlescreen/title-screen-words-white_00.png");
         titleScreenWordsNoCek = mgr.get("titlescreen/title-screen-words-no-cek.png");
+        titleBackgroundEmpty = mgr.get("titlescreen/background-empty.png");
+        titleBackgroundTrash = mgr.get("titlescreen/background-trash.png");
 
         // Animations
         cherry = new Animation<>(.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);
