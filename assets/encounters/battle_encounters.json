@@ -2,8 +2,8 @@
   {
     "title": "Hostile Space Pirates",
     "text": "You run afoul of a group of space pirates on their way to plunder other hapless\nspacefarers like yourself \n \nHow do you proceed?",
-    "imageKey": "starveFox",
-    "characterKey": "mal9000",
+    "imageKey": "arwing",
+    "characterKey": "starveFox",
     "type": "BATTLE",
     "options": [
       {
@@ -45,8 +45,8 @@
   {
     "title": "Alien Nation",
     "text": "You come across a planet populated by a species you've never seen before!\n\nThese creatures must be. . .",
-    "imageKey": "nagilum",
-    "characterKey": "",
+    "imageKey": "enterprise",
+    "characterKey": "nagilum",
     "type": "BATTLE",
     "options": [
         {
@@ -345,7 +345,7 @@
   {
     "title": "Bounty Hunters",
     "text": "You encounter a ragtag group of bounty hunters. \n\nWhat do you do?",
-    "imageKey": "spacepirates",
+    "imageKey": "discoveryone",
     "characterKey": "mal9000",
     "type": "BATTLE",
     "options": [
@@ -556,7 +556,7 @@
     "title": "Stellar Orbs",
     "text": "You encounter what appears to be a flying recreational vehicle.\n\nThe crew consists of a handsome rogue and a . . . talking dog-man? \n\nWhat do you do?",
     "imageKey": "spaceballs",
-    "characterKey": "",
+    "characterKey": "dogonaut",
     "type": "BATTLE",
     "options": [
       {
@@ -598,7 +598,7 @@
     "title": "An Odyssey in Space",
     "text": "You encounter a ship that appears to have a sentient onboard computer. \n\nWhat do you do?",
     "imageKey": "discoveryone",
-    "characterKey": "",
+    "characterKey": "mal9000",
     "options": [
       {
         "text": "Open the pod bay doors",
@@ -639,7 +639,7 @@
     "title": "Murder Sun",
     "text": "Is that a moon?\n\nNo, I think it's a space station. \n\nWhat do you do?",
     "imageKey": "deathstar",
-    "characterKey": "",
+    "characterKey": "emporer",
     "type": "BATTLE",
     "options": [
       {
@@ -681,7 +681,7 @@
     "title": "Weight Impact",
     "text": "Honestly, I've never played Mass Effect, but I hear good things.. \n\nWhat do you do in it?",
     "imageKey": "normandy",
-    "characterKey": "",
+    "characterKey": "philosoraptor",
    "type": "BATTLE",
     "options": [
       {
@@ -765,7 +765,7 @@
     "title": "You Know This One",
     "text": "You come upon a ship that has seen countless adventures over the years, \nwith many, many different crews. \n\nWhat do you do?",
     "imageKey": "enterprise",
-    "characterKey": "",
+    "characterKey": "catonaut",
     "type": "BATTLE",
     "options": [
       {
@@ -888,7 +888,7 @@
     ]
   },
   {
-    "title": "22",
+    "title": "We slipped in some education",
     "text": "More meteors. \n\nAlthough actually, wait - aren't these meteoroids?\n\nWhich one is it?",
     "imageKey": "meteorshower",
     "characterKey": "",

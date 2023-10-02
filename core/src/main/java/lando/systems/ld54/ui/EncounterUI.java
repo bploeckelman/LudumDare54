@@ -68,6 +68,7 @@ public class EncounterUI extends Group {
         }
 
         if (encounter.characterKey != null && encounter.characterKey != "") {
+            System.out.println(encounter.characterKey);
             characterAnimation = assets.encounterAnimationHashMap.get(encounter.characterKey);
             if (characterAnimation != null) {
                 characterFrames = new ObjectMap<>();

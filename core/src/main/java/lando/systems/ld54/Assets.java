@@ -105,6 +105,11 @@ public class Assets implements Disposable {
     public Array<Animation<TextureRegion>> mal9000;
     public Array<Animation<TextureRegion>> nagilum;
     public Array<Animation<TextureRegion>> starveFox;
+    public Animation<TextureRegion> emporer;
+    public Animation<TextureRegion> dogonaut;
+    public Animation<TextureRegion> catonaut;
+    public Animation<TextureRegion> philosoraptor;
+
     public Animation<TextureRegion> discoveryOne;
     public Animation<TextureRegion> spaceBalls;
     public Animation<TextureRegion> deathStar;
@@ -438,6 +443,11 @@ public class Assets implements Disposable {
         starveFox.add(new Animation<>(.1f, atlas.findRegions("encounters/starve-fox/starve-fox-idle/starve-fox-idle"), Animation.PlayMode.LOOP));
         starveFox.add(new Animation<>(.1f, atlas.findRegions("encounters/starve-fox/starve-fox-chat-b/starve-fox-chat-b"), Animation.PlayMode.LOOP));
 
+        emporer = new Animation<>(.1f, atlas.findRegions("encounters/emporer/emporer-chat"), Animation.PlayMode.LOOP);
+        philosoraptor = new Animation<>(.1f, atlas.findRegions("encounters/philosoraptor/philosoraptor-chat"), Animation.PlayMode.LOOP);
+        catonaut = new Animation<>(.1f, atlas.findRegions("encounters/catonaut/catonaut-chat"), Animation.PlayMode.LOOP);
+        dogonaut = new Animation<>(.1f, atlas.findRegions("encounters/dogonaut/doggonaut-chat"), Animation.PlayMode.LOOP);
+
         discoveryOne = new Animation<>(.1f, atlas.findRegions("encounters/odyssey/2001"), Animation.PlayMode.LOOP);
         spaceBalls = new Animation<>(.1f, atlas.findRegions("encounters/rv/spaceballs-rv"), Animation.PlayMode.LOOP);
         deathStar = new Animation<>(.1f, atlas.findRegions("encounters/deathstar/deathstar"), Animation.PlayMode.LOOP);
@@ -651,7 +661,10 @@ public class Assets implements Disposable {
         encounterAnimationHashMap.put("starveFox", starveFox.get(1));
         encounterAnimationHashMap.put("nagilum", nagilum.get(0));
         encounterAnimationHashMap.put("mal9000", mal9000.get(1));
-
+        encounterAnimationHashMap.put("emporer", emporer);
+        encounterAnimationHashMap.put("philosoraptor", philosoraptor);
+        encounterAnimationHashMap.put("dogonaut", dogonaut);
+        encounterAnimationHashMap.put("catonaut", catonaut);
 
         initialized = true;
         return 1;
