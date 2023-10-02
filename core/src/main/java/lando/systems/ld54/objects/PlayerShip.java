@@ -22,6 +22,7 @@ import static lando.systems.ld54.objects.PlayerShipPart.Type.*;
 public class PlayerShip implements Collidable {
 
     public static final float MAX_SPEED = 400f;
+    public static final float MIN_SPEED_THRUSTING = 75f;
 
     private static final float DRAG_FRICTION = 0.4f;
     public static final float FUEL_PER_BAR_LEVEL = 450f;
@@ -305,6 +306,9 @@ public class PlayerShip implements Collidable {
         if (vel.len2() > MAX_SPEED * MAX_SPEED) {
             vel.nor().scl(MAX_SPEED);
         }
+        if (fuel > 0 && vel.len2() < MIN_SPEED_THRUSTING * MIN_SPEED_THRUSTING) {
+            vel.nor().scl(MIN_SPEED_THRUSTING);
+        }
     }
 
     @Override
@@ -342,7 +346,11 @@ public class PlayerShip implements Collidable {
 
         // assumes max velocity is 300
         if (!isShielded) {
-            float speedModifier = vel.len() / 125; // 4x damage for full speed
+            float damageMultiplier = .1f;
+            if (object instanceof Asteroid){
+                damageMultiplier = .9f;
+            }
+            float speedModifier = vel.len() / 125 * damageMultiplier; // 4x damage for full speed
             health -= object.getMass() * speedModifier;
             System.out.println(health);
         }
