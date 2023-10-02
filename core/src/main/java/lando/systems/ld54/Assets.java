@@ -195,6 +195,7 @@ public class Assets implements Disposable {
         public TextureRegion blood;
         public TextureRegion sparks;
         public TextureRegion line;
+        public Animation<TextureRegion> explosion;
     }
 
     public Music intro;
@@ -492,6 +493,7 @@ public class Assets implements Disposable {
         particles.blood   = atlas.findRegion("characters/blood-stain");
         particles.sparks  = atlas.findRegion("particles/sparks");
         particles.line    = atlas.findRegion("particles/line");
+        particles.explosion = explosion;
         numberParticles = new Array<>();
         for (int i = 0; i <= 9; ++i) {
             numberParticles.add(new Animation<>(0.1f, atlas.findRegions("particles/font-points-" + i)));

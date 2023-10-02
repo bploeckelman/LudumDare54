@@ -224,6 +224,37 @@ public class Particles implements Disposable {
         }
     }
 
+    private final Vector2 cache = new Vector2();
+    public void shipExplode(PlayerShip ship) {
+        // front
+        cache.set(ship.size.x / 2, 0).rotateDeg(ship.rotation).add(ship.pos);
+        addShipExplosion(cache, MathUtils.random(3, 8));
+
+        // back
+        cache.set(ship.size.x / 4, 0).rotateDeg(ship.rotation + 180).add(ship.pos);
+        addShipExplosion(cache, MathUtils.random(4, 10));
+    }
+
+    private void addShipExplosion(Vector2 pos, int explosionCount) {
+        for (int i = 0; i < explosionCount; i++) {
+            float angle = MathUtils.random(0f, 360f);
+            float speed = MathUtils.random(5f, 50f);
+            float size = MathUtils.random(75f, 500f);
+            float rotation = MathUtils.random(0, 360);
+            activeParticles.get(Layer.middle).add(Particle.initializer(particlePool.obtain())
+                .animation(assets.particles.explosion)
+                .startPos(pos.x, pos.y)
+                .velocity(MathUtils.cosDeg(angle) * speed, MathUtils.sinDeg(angle) * speed)
+                .startSize(5f)
+                .endSize(size)
+                .startRotation(rotation)
+                .endRotation(rotation + MathUtils.random(5, 20))
+                .timeToLive(MathUtils.random(0.5f, 2f))
+                .init()
+            );
+        }
+    }
+
     public void bodySplatter(Body body) {
         var color = Color.RED.cpy();
         color.a = 0.25f;
@@ -242,5 +273,4 @@ public class Particles implements Disposable {
             );
         }
     }
-
 }

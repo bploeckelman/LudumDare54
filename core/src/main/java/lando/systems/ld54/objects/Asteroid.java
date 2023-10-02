@@ -51,8 +51,19 @@ public class Asteroid implements Collidable, JunkInfluencible {
         this.initialPos = new Vector2(x, y);
         this.initialSize = new Vector2(region.getRegionWidth(), region.getRegionHeight());
         this.pos = initialPos.cpy();
-        this.size = initialSize.cpy().scl(MathUtils.random(0.5f, 1.75f));
-        this.mass = size.x * size.y / 600f;
+        this.size = initialSize.cpy();
+
+        var astSize = MathUtils.random();
+        if (astSize > 0.75) {
+            // large 160x160
+            this.size.scl(2);
+        } else if (astSize > 0.5) {
+            // medium 120x 120
+            this.size.scl(1.5f);
+        } // level 1 and 2 are 80x80
+        // small adjustment to size
+        this.size.scl(MathUtils.random(0.92f, 1.08f));
+        this.mass = this.size.x * this.size.y / 600f;
         this.health = mass * 2f;
         this.velocity = new Vector2(0, 0);
         this.range = new Vector2(default_range, default_range);

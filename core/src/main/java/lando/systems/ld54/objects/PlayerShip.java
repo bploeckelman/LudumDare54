@@ -196,7 +196,8 @@ public class PlayerShip implements Collidable {
 
     public void explode() {
         // TODO - particle effect
-        screen.particles.shipExplode(pos.x, pos.y);
+        //screen.particles.shipExplode(pos.x, pos.y);
+        screen.particles.shipExplode(this);
 
         screen.audioManager.playSound(AudioManager.Sounds.explosion);
         screen.assets.engineRunning.stop();
