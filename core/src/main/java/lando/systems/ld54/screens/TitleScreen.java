@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Config;
@@ -18,8 +19,6 @@ import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.ui.TitleScreenUI;
 import lando.systems.ld54.utils.accessors.Vector2Accessor;
-
-import java.awt.event.MouseEvent;
 
 public class TitleScreen extends BaseScreen {
 
@@ -150,11 +149,6 @@ public class TitleScreen extends BaseScreen {
         }
         if (exploded2) {
             explosionAccum2 += dt;
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            // log mousepos
-            Gdx.app.log("mouse", "x: " + Gdx.input.getX() + " y: " + Gdx.input.getY());
-
         }
     }
 
