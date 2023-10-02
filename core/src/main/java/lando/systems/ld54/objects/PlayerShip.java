@@ -49,6 +49,7 @@ public class PlayerShip implements Collidable {
     public float fuel;
     public float rotation; // relative to orientation in texture, if facing right, no adjustment needed for angle values
     public float targetRotation;
+    private boolean inactive = false;
 
     private final GameScreen screen;
     private long engineSoundID;
@@ -83,6 +84,8 @@ public class PlayerShip implements Collidable {
         animState += dt;
         Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
 
+        if (inactive) { return; }
+
         if (fuel <= 0) {
             Main.game.assets.engineRunning.stop();
             anim = screen.assets.playerShip; // revert to idle animation
@@ -111,11 +114,9 @@ public class PlayerShip implements Collidable {
         float curVelocity = vel.len2();
         if (curVelocity < 1f) {
             trackMovement = false;
-
-            // blow up the ship
-            // TODO - only explode when running out of shield / hull
-            //   when we just run out of fuel it should just go derelict and start spinning slowly
-            explode();
+            screen.isLaunchPhase = inactive = true;
+            anim = screen.assets.playerShipInactive;
+            keyframe = anim.getKeyFrame(0);
 
             Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
         } else {
