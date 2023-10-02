@@ -2,13 +2,12 @@ package lando.systems.ld54.particles;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Assets;
+import lando.systems.ld54.objects.Body;
 import lando.systems.ld54.objects.PlayerShip;
-import lando.systems.ld54.utils.Utils;
 
 public class Particles implements Disposable {
 
@@ -172,6 +171,25 @@ public class Particles implements Disposable {
                     .startSize(size)
                     .endSize(5f)
                     .timeToLive(MathUtils.random(2f, 4f))
+                .init()
+            );
+        }
+    }
+
+    public void bodySplatter(Body body) {
+        var color = Color.RED.cpy();
+        color.a = 0.25f;
+        for (int i = 0; i < 10; i++) {
+            float x = body.getPosition().x + MathUtils.random(-15f, 15f);
+            float y = body.getPosition().y + MathUtils.random(-15f, 15f);
+            float size = MathUtils.random(10f, 30f);
+            activeParticles.get(Layer.background).add(Particle.initializer(particlePool.obtain())
+                .keyframe(assets.bloodSplatters.random())
+                .startPos(x, y)
+                .velocity(body.getVelocity().x, body.getVelocity().y)
+                .startColor(color)
+                .startSize(size)
+                .persist()
                 .init()
             );
         }

@@ -195,22 +195,7 @@ public class PlayerShip implements Collidable {
         var numBodies = MathUtils.random(1, 4);
         Stats.numAstronautsEjected += numBodies;
         for (int i = 0; i < numBodies; i++) {
-            var bodyAnim = screen.assets.astronautBodies.random();
-
-            var radius = 10f;
-            var angle = MathUtils.random(0, 360);
-            var magnitude = MathUtils.random(5, 40);
-            var velX = magnitude * MathUtils.cosDeg(angle);
-            var velY = magnitude * MathUtils.sinDeg(angle);
-            var dist = MathUtils.random(15, 25);
-            var posX = pos.x + dist * MathUtils.cosDeg(angle);
-            var posY = pos.y + dist * MathUtils.sinDeg(angle);
-            var spinDir = MathUtils.randomSign();
-            var spin = spinDir * MathUtils.random(4, 15);
-            var body = new Debris(screen, bodyAnim, posX, posY);
-            body.setVelocity(velX, velY);
-            body.setRadius(radius);
-            body.angularMomentum = spin;
+            var body = new Body(screen, pos.x, pos.y);
             screen.debris.add(body);
             screen.physicsObjects.add(body);
         }
@@ -305,7 +290,12 @@ public class PlayerShip implements Collidable {
         System.out.println(health);
 
         if (object instanceof GameBoundry) {
+            // TODO - maybe reflect instead so parts
             vel.set(0,0);
+        }
+
+        if (object instanceof Body) {
+            screen.particles.bodySplatter((Body) object);
         }
     }
 

@@ -55,8 +55,8 @@ public class Debris implements Collidable, JunkInfluencible {
     //  but this if fine for now just to have a way to modify it per instance
     public void setRadius(float newRadius) {
         radius = newRadius;
-        this.collisionBounds.set(pos.x - radius, pos.y - radius, radius * 2, radius * 2);
-        this.collisionShape.set(radius, pos.x, pos.y);
+        collisionBounds.set(pos.x - radius, pos.y - radius, radius * 2, radius * 2);
+        collisionShape.set(radius, pos.x, pos.y);
     }
 
     public void update(float dt) {
