@@ -23,7 +23,7 @@ public class InfluenceRenderer {
     }
 
     public InfluenceRenderer(Influencer influencer, Color color, ShaderProgram shaderProgram) {
-        this.color = color;
+        this.color = color.cpy();
         this.influencer = influencer;
         shader = shaderProgram;
         this.accum = 0;

@@ -21,6 +21,8 @@ public class PullPlayerShipInfluencer implements Influencer {
 
     private boolean active;
 
+    public Color overrideColor = null;
+
     public PullPlayerShipInfluencer(GameScreen screen, float x, float y) {
         COLOR.a = 0.8f;
 
@@ -49,6 +51,20 @@ public class PullPlayerShipInfluencer implements Influencer {
         }
     }
 
+    public void setStrength(float newValue) {
+        strength.setNewValue(newValue, 0.1f);
+    }
+
+    public void setRange(float newValue) {
+        range.setNewValue(newValue, 0.1f);
+    }
+
+    public void overrideColor(Color newColor) {
+        overrideColor = newColor.cpy();
+        overrideColor.a = 0.8f;
+        influenceRenderer.color.set(overrideColor);
+    }
+
     @Override
     public float getStrength() {
         return strength.getValue();
@@ -68,7 +84,7 @@ public class PullPlayerShipInfluencer implements Influencer {
     public void debugRender(SpriteBatch batch) {
         // TODO - update interface so this takes a ShapeDrawer and draw a circle or whatever
         var shapes = screen.assets.shapes;
-        shapes.setColor(COLOR);
+        shapes.setColor(overrideColor != null ? overrideColor : COLOR);
         shapes.circle(position.x, position.y, getRange(), 1f);
         shapes.setColor(Color.WHITE);
     }

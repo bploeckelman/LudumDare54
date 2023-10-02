@@ -1,8 +1,8 @@
 {
   "title": "The Undiscovered Country",
   "text": "A mysterious ancient space station appears in front of you.\nIt contains unfathomable wormhole technology that could finally release us\nfrom this junk filled hell space. Dare we try it?\n\nThe only way out is through, let's go!",
-  "imageKey": "spaceballs",
-  "characterKey": "abandonedstation",
+  "imageKey": "podcity",
+  "characterKey": "asuka",
   "type": "GOAL",
   "options": [
     {

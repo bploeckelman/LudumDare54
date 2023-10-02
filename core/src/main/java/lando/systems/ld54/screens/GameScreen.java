@@ -254,6 +254,9 @@ public class GameScreen extends BaseScreen {
         );
         homeSector.pushJunk.setRange(350);
         goalSector.isGoal = true;
+        goalSector.pullPlayerShip.setStrength(1000);
+        goalSector.pullPlayerShip.setRange(200);
+        goalSector.pullPlayerShip.overrideColor(Color.GOLD);
     }
 
     @Override
