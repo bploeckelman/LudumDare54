@@ -21,7 +21,8 @@ public class TitleScreen extends BaseScreen {
 //        Main.game.audioManager.playMusic(AudioManager.Musics.intro);
         assets.intro.setLooping(true);
         assets.intro.play();
-        assets.intro.setVolume(.7f);
+//        assets.intro.setVolume(audioManager.musicVolume.floatValue());
+        audioManager.playMusic(AudioManager.Musics.intro);
     }
 
     @Override

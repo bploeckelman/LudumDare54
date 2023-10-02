@@ -457,7 +457,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "I mean... it WAS a little obvious to capitalize the titles and all, but subtlety is hit-or-miss.",
+            "text": "Maybe it WAS a little obvious to capitalize the titles and all, but subtlety is hit-or-miss.",
             "weight": 0.6
           }
         ]
@@ -468,7 +468,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "It didn't always work, but he really made a lot of bold storytelling choices.\n\nAnd come on - Hugh Jackman? SWOON CITY",
+            "text": "They didn't always work, but The Prestige had a lot of bold storytelling choices.\n\nAnd come on - Hugh Jackman? SWOON CITY",
             "weight": 0.7
           }
         ]
@@ -497,7 +497,7 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nKind of a size queen, are we?",
+            "text": "Going right for the biggest one...\n\nSize queen much?",
             "weight": 0.6
           }
         ]

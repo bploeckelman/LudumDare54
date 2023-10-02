@@ -232,6 +232,7 @@ public class PlayerShip implements Collidable {
     private void becomeDerelict() {
         Stats.numShipsDerelict++;
 
+        screen.audioManager.playSound(AudioManager.Sounds.explosion);
         var type = derelict;
         var angle = MathUtils.random(0, 360);
         var magnitude = MathUtils.random(5, 20);
