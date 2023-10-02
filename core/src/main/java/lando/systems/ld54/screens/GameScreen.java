@@ -111,6 +111,7 @@ public class GameScreen extends BaseScreen {
     }
 
     public GameScreen(boolean transitioning) {
+        Stats.reset();
         this.transitioning = transitioning;
 
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));

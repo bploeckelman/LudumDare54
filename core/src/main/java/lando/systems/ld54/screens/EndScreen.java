@@ -64,7 +64,7 @@ public class EndScreen extends BaseScreen {
         float timeScale = 1f;
         if (Gdx.input.justTouched() && label.hasEnded() && !exitingScreen){
             exitingScreen = true;
-            game.setScreen(new CreditScreen(), assets.heartShader, 1.5f);
+            game.setScreen(new StatsScreen(), assets.dreamyShader, 1.5f);
         }
         if (Gdx.input.isTouched()) {
             timeScale = 8f;
