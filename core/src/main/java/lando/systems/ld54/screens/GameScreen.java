@@ -480,10 +480,16 @@ public class GameScreen extends BaseScreen {
     private void placeSatellites(Planet planet) {
         var vector = new Vector2();
         float satellitePath = planet.size * 1.5f;
-        for (int i = 0; i < MathUtils.random(3, 6); i++) {
+
+        int satelliteCount = MathUtils.random(8, 14);
+        float aveAngle = 360f / satelliteCount;
+        while (satelliteCount-- > 0) {
             vector.set(satellitePath + MathUtils.random(30f), 0);
-            vector.rotateDeg(MathUtils.random(360f)).add(planet.centerPosition);
-            var satellite = new Satellite(assets.satellites.random(), vector.x, vector.y);
+
+            float angle = aveAngle * satelliteCount + MathUtils.random(-5f, 5f);
+            vector.rotateDeg(angle).add(planet.centerPosition);
+
+            var satellite = new Satellite(planet, assets.satellites.random(), vector.x, vector.y);
             physicsObjects.add(satellite);
             debris.add(satellite);
         }
