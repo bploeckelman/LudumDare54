@@ -1,5 +1,9 @@
 package lando.systems.ld54.screens;
 
+import aurelienribon.tweenengine.BaseTween;
+import aurelienribon.tweenengine.Timeline;
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -86,7 +90,10 @@ public class GameScreen extends BaseScreen {
     public Particles particles;
     public Array<Encounter> encounters;
 
+    public Sector showSectorTransition;
+
     public boolean transitioning;
+    public Vector2 tempVec2 = new Vector2();
 
     public GameScreen() {
         this(false);
@@ -275,6 +282,13 @@ public class GameScreen extends BaseScreen {
                 cameraController.targetPos.set(ship.pos.x, ship.pos.y, 0);
             }
         });
+
+        if (showSectorTransition != null){
+            tempVec2 = showSectorTransition.bounds.getCenter(tempVec2);
+            cameraController.targetPos.set(tempVec2.x, tempVec2.y, 0);
+            cameraController.targetZoom = 1.6f;
+        }
+
         for (int i = asteroids.size -1; i >= 0; i--){
             Asteroid a = asteroids.get(i);
             a.update(dt);
@@ -516,7 +530,17 @@ public class GameScreen extends BaseScreen {
         Gdx.app.log("Logging the finish Encounter", "True");
         float fogMargin = 50;
         if(!Config.Debug.general) {
+            showSectorTransition = encounter.sector;
             fogOfWar.addFogRectangle(encounter.sector.bounds.x - fogMargin, encounter.sector.bounds.y - fogMargin, encounter.sector.bounds.width + fogMargin*2f, encounter.sector.bounds.height + fogMargin*2f, .2f);
+            Timeline.createSequence()
+                .pushPause(2f)
+                .push(Tween.call(new TweenCallback() {
+                    @Override
+                    public void onEvent(int type, BaseTween<?> source) {
+                        showSectorTransition = null;
+                    }
+                }))
+                .start(game.tween);
         }
 
         game.audioManager.swapMusic();
