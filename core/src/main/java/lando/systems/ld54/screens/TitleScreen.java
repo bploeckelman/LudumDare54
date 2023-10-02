@@ -27,6 +27,8 @@ public class TitleScreen extends BaseScreen {
     private Vector2 ePos;
     private MutableFloat eRot = new MutableFloat(0f);
     private Vector2 cPos;
+    private MutableFloat cRot = new MutableFloat(0f);
+    private MutableFloat kRot = new MutableFloat(0f);
     private Vector2 kPos;
     private Texture background;
     private Texture backgroundEmpty;
@@ -83,19 +85,25 @@ public class TitleScreen extends BaseScreen {
 
 //            // letters falling out
             .beginParallel()
-                .push(Tween.to(mercuryAlpha, -1, 1f)
+                .push(Tween.to(mercuryAlpha, -1, 3f)
                     .target(0f))
                 .push(Tween.to(ePos, Vector2Accessor.XY, 1f)
                     .target(0f, -100f))
                 .push(Tween.to(cPos, Vector2Accessor.XY, 1.5f)
                     .ease(Expo.OUT)
-                    .target(0f, -150f))
+                    .target(0f, -120f))
                 .push(Tween.to(kPos, Vector2Accessor.XY, 2f)
                     .ease(Expo.OUT)
-                    .target(0f, -200f))
+                    .target(0f, -100f))
                 .push(Tween.to(eRot, -1, 1f)
                     .ease(Expo.OUT)
                     .target(20f))
+                .push(Tween.to(cRot, -1, 1.5f)
+                    .ease(Expo.OUT)
+                    .target(40f))
+                .push(Tween.to(kRot, -1, 2f)
+                    .ease(Expo.OUT)
+                    .target(10f))
             .end()
             // rocket starts here
             .push(Tween.call((type, source) -> {
@@ -103,7 +111,7 @@ public class TitleScreen extends BaseScreen {
                 showShip = true;
             }))
             .push(Tween.to(shipPos, Vector2Accessor.XY, .5f)
-                .target(940, 370))
+                .target(Config.Screen.window_width + 100, 370))
             .push(Tween.call((type, source) -> {
                 showShip = false;
             }))
@@ -146,8 +154,8 @@ public class TitleScreen extends BaseScreen {
                 batch.draw(titleScreenWordsWhiteTrail, 0, 0, width, height);
                 //void	draw(Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY, float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY)
                 batch.draw(assets.titleScreenWordsBlueE,ePos.x, ePos.y, 900f, 500f, width, height, 1f, 1f, eRot.floatValue(), 0, 0, assets.titleScreenWordsBlueE.getWidth(), assets.titleScreenWordsBlueE.getHeight(), false, false);
-                batch.draw(assets.titleScreenWordsBlueC,cPos.x, cPos.y, width, height);
-                batch.draw(assets.titleScreenWordsBlueK,kPos.x, kPos.y, width, height);
+                batch.draw(assets.titleScreenWordsBlueC,cPos.x, cPos.y, 1000f, 500f, width, height, 1f, 1f, cRot.floatValue(), 0, 0, assets.titleScreenWordsBlueC.getWidth(), assets.titleScreenWordsBlueC.getHeight(), false, false);
+                batch.draw(assets.titleScreenWordsBlueK,kPos.x, kPos.y, width, height, 1100f, 500f, 1f, 1f, kRot.floatValue(), 0, 0, assets.titleScreenWordsBlueK.getWidth(), assets.titleScreenWordsBlueK.getHeight(), false, false);
             }
             else {
                 batch.draw(titleScreenWordsBlueTrail, titleScreenWordsBlueTrailPos.x, titleScreenWordsBlueTrailPos.y, titleScreenWordsBlueTrailSize.x, titleScreenWordsBlueTrailSize.y);
