@@ -82,6 +82,9 @@ public class TitleScreen extends BaseScreen {
                 .ease(Expo.OUT)
                 .target(Float.valueOf(360f)))
             .end()
+            .push(Tween.call((type, source) -> {
+                drawUI = true;
+            }))
             .start(tween);
     }
 
