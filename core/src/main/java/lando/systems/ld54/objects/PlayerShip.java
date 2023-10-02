@@ -100,7 +100,7 @@ public class PlayerShip implements Collidable {
         } else {
             while (rotationChange < -180 || rotationChange > 180){
                 if (rotationChange > 180) rotationChange -= 360;
-                if (rotationChange > 180) rotationChange += 360;
+                if (rotationChange < -180) rotationChange += 360;
             }
             rotation += Math.signum(rotationChange) * ROTATION_LERP * dt;
         }
