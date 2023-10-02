@@ -319,7 +319,7 @@ public class GameScreen extends BaseScreen {
             }
                                    if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(9);
+                    Encounter encounter = encounters.get(23);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }

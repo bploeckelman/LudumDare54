@@ -679,40 +679,40 @@
   },
   {
     "title": "Weight Impact",
-    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "text": "Honestly, I've never played this one, but I hear good things.. \n\nWhat do you do?",
+    "imageKey": "normandy",
     "characterKey": "asuka",
    "type": "BATTLE",
     "options": [
       {
-        "text": "Begin mining operations on the largest asteroid",
+        "text": "Try to have sex with an alien?",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "That's the whole thing with this one, right?",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "???",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "It's supposed to be a classic, but I just never found the time.\n\nMaybe someday.",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "???",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "There are just many games, you know?\n\nHard to keep up.",
             "weight": 0.8
           }
         ]
@@ -797,6 +797,48 @@
             "type": "FUEL",
             "value": 1,
             "text": "Honestly, as far as IPs go, it's got a pretty deep bench\n\nWe could do this for years to come.",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "20",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+    "characterKey": "asuka",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
             "weight": 0.8
           }
         ]
@@ -891,6 +933,48 @@
     "title": "23",
     "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
     "imageKey": "asteroidmining",
+    "characterKey": "asuka",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "The Final Destination",
+    "text": "You encounter what appears to be a floating space-city.\n\nBasically an an enormous terrarium.\n\nWhat do you do?",
+    "imageKey": "podcity",
     "characterKey": "asuka",
   "type": "BATTLE",
     "options": [
