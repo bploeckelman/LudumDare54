@@ -531,8 +531,6 @@ public class GameScreen extends BaseScreen {
         }
         launchesSinceEncounterScan++;
         launchesSinceEncounterShield++;
-//        useFuel(power * .01f); //TODO: debug, place it in the drag controller and limit drag per fuel level
-//        resetWorldCamera();
     }
 
     private Encounter getRandomEncounter() {
@@ -632,7 +630,6 @@ public class GameScreen extends BaseScreen {
             if (sector.distanceFromEarth == 0) continue;
             if (sector.isGoal) continue;
             if (sector.isEncounterActive){
-                // TODO: exclude Final
                 lowestDistance = Math.min(lowestDistance, sector.distanceFromEarth);
                 if (sector.scanned) {
                     scanHelperActive = true;

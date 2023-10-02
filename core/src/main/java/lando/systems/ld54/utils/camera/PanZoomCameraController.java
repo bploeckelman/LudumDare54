@@ -19,14 +19,6 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
 
     private final float DT_SCALE = 2f;
 
-    private final float PAN_SPEED_0 = 10f;
-    private final float PAN_SPEED_1 = 100f;
-    private final float PAN_SPEED_2 = 500f;
-
-    // TODO - scale based on zoom level
-    private float units_dragged_per_pixel = PAN_SPEED_1;
-    private float units_panned_per_pixel = PAN_SPEED_2;
-
     public static final float INITIAL_ZOOM = 1f;
     private static final float MIN_ZOOM = 0.4f;
     private static final float MAX_ZOOM = 4f;
