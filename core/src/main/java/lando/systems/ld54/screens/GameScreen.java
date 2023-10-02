@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.Stats;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.PlanetManager;
 import lando.systems.ld54.audio.AudioManager;
@@ -206,6 +207,7 @@ public class GameScreen extends BaseScreen {
         if (Gdx.app.getType() == Application.ApplicationType.Desktop && Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
+        Stats.runDuration += dt;
 
         // TODO: DEBUG REMOVE ME
         {
@@ -448,6 +450,7 @@ public class GameScreen extends BaseScreen {
         var ship = new PlayerShip(this);
         physicsObjects.add(ship);
         ship.launch(angle, power);
+        Stats.numLaunches++;
         playerShips.add(ship);
 //        useFuel(power * .01f); //TODO: debug, place it in the drag controller and limit drag per fuel level
 //        resetWorldCamera();
@@ -467,6 +470,7 @@ public class GameScreen extends BaseScreen {
 
     private void startEncounter(Encounter encounter) {
         encounterShown = true;
+        Stats.numEncounters++;
 //        game.audioManager.stopAllSounds();
         assets.engineRunning.stop();
         game.audioManager.playSound(AudioManager.Sounds.stingIntense);

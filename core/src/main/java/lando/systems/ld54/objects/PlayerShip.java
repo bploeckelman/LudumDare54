@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.Stats;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
@@ -118,6 +119,7 @@ public class PlayerShip implements Collidable {
             trackMovement = false;
             screen.isLaunchPhase = inactive = true;
             anim = screen.assets.playerShipInactive;
+            Stats.numShipsDerelict++;
             keyframe = anim.getKeyFrame(0);
 
             Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
@@ -167,6 +169,7 @@ public class PlayerShip implements Collidable {
         screen.audioManager.playSound(AudioManager.Sounds.explosion);
         screen.assets.engineRunning.stop();
 
+        Stats.numShipsExploded++;
         // TODO - maybe do something cutesy where we line them up all nice then blast them apart,
         //   but for now just get them onscreen
         // instantiate ship parts making sure to separate them a bit on init to reduce jitter when they get pushed out of overlap
@@ -190,6 +193,7 @@ public class PlayerShip implements Collidable {
 
         // instantiate astronaut debris
         var numBodies = MathUtils.random(1, 4);
+        Stats.numAstronautsEjected += numBodies;
         for (int i = 0; i < numBodies; i++) {
             var bodyAnim = screen.assets.astronautBodies.random();
 
