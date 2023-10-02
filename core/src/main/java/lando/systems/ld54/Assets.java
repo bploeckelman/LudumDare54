@@ -327,8 +327,9 @@ public class Assets implements Disposable {
         astronautBodies.add(new Animation<>(.1f, atlas.findRegions("debris/debris-skeleton-a"), Animation.PlayMode.LOOP));
 
         satellites = new Array<>();
-        satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/satellite1"), Animation.PlayMode.LOOP));
-        satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/satellite2"), Animation.PlayMode.LOOP));
+        satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-a"), Animation.PlayMode.LOOP));
+        satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-b"), Animation.PlayMode.LOOP));
+        satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-c"), Animation.PlayMode.LOOP));
 
         // Fonts
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
