@@ -57,10 +57,9 @@ public class GameScreenUI {
         batch.setColor(Color.WHITE);
         batch.draw(Main.game.assets.pickupsFuel.getKeyFrame(accum), bounds.x + 5f, bounds.y + bounds.height - 80f, 60f, 60f);
 
-        //draw fuelBox1 next to the pickupsFuel
         for (int i = 0; i < screen.player.fuelLevel; i++) {
-            Animation<TextureRegion> batteryAnimation = Main.game.assets.batteryEmpty;
-            int row = MathUtils.floor(i / 4);
+            Animation<TextureRegion> batteryAnimation;
+            int row = i / 4;
             if (i < MathUtils.floor(fuelLevel)) {
                 batteryAnimation = Main.game.assets.batteryGreen;
             }
