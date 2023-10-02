@@ -86,6 +86,15 @@ public class Assets implements Disposable {
     public Array<Animation<TextureRegion>> satellites;
 
     // encounter objects
+    public Array<Animation<TextureRegion>> mal9000;
+    public Array<Animation<TextureRegion>> nagilum;
+    public Array<Animation<TextureRegion>> starveFox;
+    public Animation<TextureRegion> discoveryOne;
+    public Animation<TextureRegion> deathStar;
+    public Animation<TextureRegion> normandy;
+    public Animation<TextureRegion> intergalactivcEagle5;
+    public Animation<TextureRegion> arwing;
+    public Animation<TextureRegion> enterprise;
     public Animation<TextureRegion> podCity;
 
     public TextureRegion pixelRegion;
@@ -369,6 +378,23 @@ public class Assets implements Disposable {
         satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-b"), Animation.PlayMode.LOOP));
         satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-c"), Animation.PlayMode.LOOP));
 
+        mal9000 = new Array<>();
+        mal9000.add(new Animation<>(.1f, atlas.findRegions("encounters/mal9000/mal-9000-idle/mal-9000-idle"), Animation.PlayMode.LOOP));
+        mal9000.add(new Animation<>(.1f, atlas.findRegions("encounters/mal9000/mal-9000-chat-a/mal-9000-chat-a"), Animation.PlayMode.LOOP));
+
+        nagilum = new Array<>();
+        nagilum.add(new Animation<>(.1f, atlas.findRegions("encounters/nagilum/Nagilum-idle"), Animation.PlayMode.LOOP));
+
+        starveFox = new Array<>();
+        starveFox.add(new Animation<>(.1f, atlas.findRegions("encounters/starve-fox/starve-fox-idle/starve-fox-idle"), Animation.PlayMode.LOOP));
+        starveFox.add(new Animation<>(.1f, atlas.findRegions("encounters/starve-fox/starve-fox-chat-b/starve-fox-chat-b"), Animation.PlayMode.LOOP));
+
+        discoveryOne = new Animation<>(.1f, atlas.findRegions("encounters/odyssey/2001"), Animation.PlayMode.LOOP);
+        deathStar = new Animation<>(.1f, atlas.findRegions("encounters/deathstar/deathstar"), Animation.PlayMode.LOOP);
+        normandy = new Animation<>(.1f, atlas.findRegions("encounters/normandy/masseffect-normandy"), Animation.PlayMode.LOOP);
+        intergalactivcEagle5  = new Animation<>(.1f, atlas.findRegions("encounters/rv/spaceballs-rv"), Animation.PlayMode.LOOP);
+        arwing  = new Animation<>(.1f, atlas.findRegions("encounters/arwing/starfox-arwing"), Animation.PlayMode.LOOP);
+        enterprise = new Animation<>(.1f, atlas.findRegions("encounters/enterprise/startrek-enterprise"), Animation.PlayMode.LOOP);
         podCity = new Animation<>(.1f, atlas.findRegions("encounters/pod-city/pod-city"), Animation.PlayMode.LOOP);
 
         // Fonts
