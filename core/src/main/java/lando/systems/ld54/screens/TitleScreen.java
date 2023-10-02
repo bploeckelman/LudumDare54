@@ -5,6 +5,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.equations.Expo;
 import aurelienribon.tweenengine.primitives.MutableFloat;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -17,6 +18,8 @@ import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.ui.TitleScreenUI;
 import lando.systems.ld54.utils.accessors.Vector2Accessor;
+
+import java.awt.event.MouseEvent;
 
 public class TitleScreen extends BaseScreen {
 
@@ -40,10 +43,16 @@ public class TitleScreen extends BaseScreen {
     private boolean swapBackgroundText = false;
     private Animation<TextureRegion> ship;
     private Vector2 shipPos;
+    private Vector2 shipPos2 = new Vector2(Config.Screen.window_width, Config.Screen.window_height + 100f);
+    private Vector2 shipTargetPos2 = new Vector2(500f, 500f);
     private boolean showShip = false;
+    private boolean showShip2 = true;
     private boolean exploded = false;
+    private boolean exploded2 = false;
     private float explosionAccum = 0f;
+    private float explosionAccum2 = 0f;
     private MutableFloat mercuryAlpha = new MutableFloat(1f);
+    private Vector2 shipTargetPos = new Vector2(Config.Screen.window_width + 100, Config.Screen.window_height - 100);
 
 
     public TitleScreen() {
@@ -54,7 +63,7 @@ public class TitleScreen extends BaseScreen {
         titleScreenWordsBlueTrail = assets.titleScreenWordsBlueTrail;
         titleScreenWordsBlueTrailPos = new Vector2(Config.Screen.window_width / 2f, Config.Screen.window_height / 2f);
         titleScreenWordsBlueTrailSize = new Vector2(0, 0);
-        shipPos = new Vector2(300f, 800f);
+        shipPos = new Vector2(100f, -100f);
         ship = Main.game.assets.playerShipActive;
 
         ePos = new Vector2(0f, 0f);
@@ -85,35 +94,44 @@ public class TitleScreen extends BaseScreen {
 
 //            // letters falling out
             .beginParallel()
-                .push(Tween.to(mercuryAlpha, -1, 3f)
+                .push(Tween.to(mercuryAlpha, -1, 2f)
                     .target(0f))
-                .push(Tween.to(ePos, Vector2Accessor.XY, 1f)
-                    .target(0f, -100f))
+                .beginSequence()
+                    .push(Tween.to(ePos, Vector2Accessor.XY, 1f)
+                        .target(0f, -50f))
+                    .push(Tween.call((type, source) -> {
+                        showShip = true;
+                    }))
+                    .push(Tween.to(shipPos, Vector2Accessor.XY, 1f)
+                        .target(shipTargetPos.x, shipTargetPos.y))
+                .end()
                 .push(Tween.to(cPos, Vector2Accessor.XY, 1.5f)
                     .ease(Expo.OUT)
-                    .target(0f, -120f))
+                    .target(0f, -90f))
                 .push(Tween.to(kPos, Vector2Accessor.XY, 2f)
                     .ease(Expo.OUT)
-                    .target(0f, -100f))
+                    .target(0f, -120f))
                 .push(Tween.to(eRot, -1, 1f)
                     .ease(Expo.OUT)
-                    .target(20f))
+                    .target(-20f))
                 .push(Tween.to(cRot, -1, 1.5f)
                     .ease(Expo.OUT)
-                    .target(40f))
+                    .target(-30f))
                 .push(Tween.to(kRot, -1, 2f)
                     .ease(Expo.OUT)
-                    .target(10f))
+                    .target(-40f))
+                .push(Tween.call((type, source) -> {
+                    drawUI = true;
+                    showShip = false;
+                }))
             .end()
             // rocket starts here
+            .push(Tween.to(shipPos2, Vector2Accessor.XY, 1f)
+                .ease(Expo.IN)
+                .target(shipTargetPos2.x, shipTargetPos2.y))
             .push(Tween.call((type, source) -> {
-                drawUI = true;
-                showShip = true;
-            }))
-            .push(Tween.to(shipPos, Vector2Accessor.XY, .5f)
-                .target(Config.Screen.window_width + 100, 370))
-            .push(Tween.call((type, source) -> {
-                showShip = false;
+                showShip2 = false;
+                exploded2 = true;
             }))
             .start(tween);
     }
@@ -129,6 +147,14 @@ public class TitleScreen extends BaseScreen {
         accum+=dt;
         if (exploded) {
             explosionAccum += dt;
+        }
+        if (exploded2) {
+            explosionAccum2 += dt;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            // log mousepos
+            Gdx.app.log("mouse", "x: " + Gdx.input.getX() + " y: " + Gdx.input.getY());
+
         }
     }
 
@@ -149,13 +175,20 @@ public class TitleScreen extends BaseScreen {
             TextureRegion mercuryKeyframe = mercury.getKeyFrame(accum);
             TextureRegion shipKeyframe = ship.getKeyFrame(accum);
             TextureRegion explosionKeyframe = Main.game.assets.explosion.getKeyFrame(explosionAccum);
+            TextureRegion explosionKeyframe2 = Main.game.assets.explosion.getKeyFrame(explosionAccum2);
             batch.draw(background, 0, 0, width, height);
+            if (showShip) {
+                batch.draw(shipKeyframe, shipPos.x, shipPos.y, shipKeyframe.getRegionWidth(), shipKeyframe.getRegionHeight(), shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, calculateRotation(shipPos, shipTargetPos));
+            }
+            if (showShip2) {
+                batch.draw(shipKeyframe, shipPos2.x, shipPos2.y, shipKeyframe.getRegionWidth(), shipKeyframe.getRegionHeight(), shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, calculateRotation(shipPos2, shipTargetPos2));
+            }
             if (swapBackgroundText) {
                 batch.draw(titleScreenWordsWhiteTrail, 0, 0, width, height);
                 //void	draw(Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY, float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY)
-                batch.draw(assets.titleScreenWordsBlueE,ePos.x, ePos.y, 900f, 500f, width, height, 1f, 1f, eRot.floatValue(), 0, 0, assets.titleScreenWordsBlueE.getWidth(), assets.titleScreenWordsBlueE.getHeight(), false, false);
-                batch.draw(assets.titleScreenWordsBlueC,cPos.x, cPos.y, 1000f, 500f, width, height, 1f, 1f, cRot.floatValue(), 0, 0, assets.titleScreenWordsBlueC.getWidth(), assets.titleScreenWordsBlueC.getHeight(), false, false);
-                batch.draw(assets.titleScreenWordsBlueK,kPos.x, kPos.y, width, height, 1100f, 500f, 1f, 1f, kRot.floatValue(), 0, 0, assets.titleScreenWordsBlueK.getWidth(), assets.titleScreenWordsBlueK.getHeight(), false, false);
+                batch.draw(assets.titleScreenWordsBlueE,ePos.x, ePos.y, 945f, 290, width, height, 1f, 1f, eRot.floatValue(), 0, 0, assets.titleScreenWordsBlueE.getWidth(), assets.titleScreenWordsBlueE.getHeight(), false, false);
+                batch.draw(assets.titleScreenWordsBlueC,cPos.x, cPos.y, 1020, 290, width, height, 1f, 1f, cRot.floatValue(), 0, 0, assets.titleScreenWordsBlueC.getWidth(), assets.titleScreenWordsBlueC.getHeight(), false, false);
+                batch.draw(assets.titleScreenWordsBlueK,kPos.x, kPos.y, 1100, 290, width, height, 1f, 1f, kRot.floatValue(), 0, 0, assets.titleScreenWordsBlueK.getWidth(), assets.titleScreenWordsBlueK.getHeight(), false, false);
             }
             else {
                 batch.draw(titleScreenWordsBlueTrail, titleScreenWordsBlueTrailPos.x, titleScreenWordsBlueTrailPos.y, titleScreenWordsBlueTrailSize.x, titleScreenWordsBlueTrailSize.y);
@@ -163,13 +196,11 @@ public class TitleScreen extends BaseScreen {
             batch.setColor(1f, 1f, 1f, mercuryAlpha.floatValue());
             batch.draw(mercuryKeyframe, 940, 370, mercuryKeyframe.getRegionWidth() * 4, mercuryKeyframe.getRegionHeight() * 4);
             batch.setColor(Color.WHITE);
-            // rotate the ship so it's heading toward mercury
-            float rotation = (float) Math.atan2(370 - shipPos.y, 940 - shipPos.x);
             if (exploded) {
                 batch.draw(explosionKeyframe, 840, 240, 500, 500);
             }
-            if (showShip) {
-                batch.draw(shipKeyframe, shipPos.x, shipPos.y, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, (float) Math.toDegrees(rotation));
+            if (exploded2) {
+                batch.draw(explosionKeyframe2, shipTargetPos2.x, shipTargetPos2.y, 300f, 300f);
             }
             // draw text "LD45" with font assets.freeTypeFont
             assets.abandonedFont50.draw(batch, "LD54", 50, 100);
@@ -179,6 +210,11 @@ public class TitleScreen extends BaseScreen {
         if (drawUI) {
             uiStage.draw();
         }
+    }
+
+    private float calculateRotation(Vector2 shipStartingPos, Vector2 shipDestinationPos) {
+        var rotation = Math.atan2(shipDestinationPos.y - shipStartingPos.y, shipDestinationPos.x - shipStartingPos.x);
+        return (float) Math.toDegrees(rotation);
     }
 
     @Override
