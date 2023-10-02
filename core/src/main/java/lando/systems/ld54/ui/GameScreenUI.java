@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.Stats;
 import lando.systems.ld54.screens.GameScreen;
 import lando.systems.ld54.utils.Utils;
 
@@ -40,7 +41,7 @@ public class GameScreenUI {
         pulseTimer+=dt;
         if (screen.currentShip != null && !screen.currentShip.isReset) {
             fuelLevel= screen.currentShip.fuel / screen.currentShip.FUEL_PER_BAR_LEVEL;
-            health = screen.currentShip.health / screen.currentShip.MAX_HEALTH;
+            health = MathUtils.clamp(screen.currentShip.health / screen.currentShip.MAX_HEALTH, 0f, 1f);
         } else {
             fuelLevel = screen.player.fuelLevel;
             health = 1f;
@@ -109,16 +110,16 @@ public class GameScreenUI {
         float healthBarWidth = 160f;
         float healthBarHeight = 20f;
         float healthBarX = bounds.x + 80f;
-        float healthBarY = endOfBatteriesY - 70f;
-        float healthBarSmoothedHealth = MathUtils.lerp(0f, healthBarWidth, health);
-        // Health Bar that goes down from right to left
+        float healthBarY = bounds.y + bounds.height - 120f;
         batch.setColor(Color.RED);
         batch.draw(Main.game.assets.whitePixel, healthBarX, healthBarY, healthBarWidth, healthBarHeight);
         batch.setColor(Color.FOREST);
-        batch.draw(Main.game.assets.whitePixel, healthBarX, healthBarY, healthBarSmoothedHealth, healthBarHeight);
+        batch.draw(Main.game.assets.whitePixel, healthBarX, healthBarY, healthBarWidth * health, healthBarHeight);
         batch.setColor(Color.WHITE);
 
-
+        // Show number of encounters
+        String encounters = "Encounters: " + Stats.numEncounters + " / 23";
+        Main.game.assets.starJediFont20.draw(batch, encounters, bounds.x + 20f, healthBarY - 30f);
 
     }
 }

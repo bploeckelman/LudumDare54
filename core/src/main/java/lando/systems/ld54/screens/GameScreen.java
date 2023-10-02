@@ -470,7 +470,6 @@ public class GameScreen extends BaseScreen {
 
     private void startEncounter(Encounter encounter) {
         encounterShown = true;
-        Stats.numEncounters++;
 //        game.audioManager.stopAllSounds();
         assets.engineRunning.stop();
         game.audioManager.playSound(AudioManager.Sounds.stingIntense);
@@ -489,6 +488,7 @@ public class GameScreen extends BaseScreen {
 
     public void finishEncounter(Encounter encounter) {
         encounterShown = false;
+        Stats.numEncounters++;
         Time.pause_timer = 0f;
         encounterUI.remove();
         // TODO: SOUND HERE (WOOSH as it scans the sector)
