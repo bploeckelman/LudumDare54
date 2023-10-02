@@ -2,7 +2,7 @@ package lando.systems.ld54;
 
 public class Config {
 
-    public static final String window_title = "Ludum Dare 54";
+    public static final String window_title = "Start Wreck: The Finite Frontier";
 
     public static class Debug {
         public static boolean general = false;
