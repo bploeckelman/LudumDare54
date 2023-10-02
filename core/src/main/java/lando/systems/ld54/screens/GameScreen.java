@@ -349,7 +349,7 @@ public class GameScreen extends BaseScreen {
                     if (currentShip.currentSector != i) {
                         currentShip.currentSector = i;
                         if (sector.encounter != null && sector != homeSector && !sector.isVisited()) {
-                            Gdx.app.log("Discovered new sector!", "Sector " + i);
+//                            Gdx.app.log("Discovered new sector!", "Sector " + i);
                             game.audioManager.playSound(AudioManager.Sounds.radarPing);
                         }
 
@@ -557,10 +557,9 @@ public class GameScreen extends BaseScreen {
         encounterUI.setEncounter(encounter);
         uiStage.addActor(encounterUI);
 
-        if(!Config.Debug.general) {
-            encounter.sector.pullPlayerShip.deactivate();
-            encounter.sector.pushJunk.deactivate();
-        }
+        encounter.sector.pullPlayerShip.deactivate();
+        encounter.sector.pushJunk.deactivate();
+
 
         game.audioManager.swapMusic();
 //        game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
@@ -578,7 +577,7 @@ public class GameScreen extends BaseScreen {
         // TODO: SOUND HERE (WOOSH as it scans the sector)
         game.audioManager.playSound(AudioManager.Sounds.radarReveal, 1.0f);
 //        game.audioManager.playSound(AudioManager.Sounds.radarPing, 2f);
-        Gdx.app.log("Logging the finish Encounter", "True");
+//        Gdx.app.log("Logging the finish Encounter", "True");
         float fogMargin = 50;
         if(!Config.Debug.general) {
             float currentZoom = cameraController.targetZoom;

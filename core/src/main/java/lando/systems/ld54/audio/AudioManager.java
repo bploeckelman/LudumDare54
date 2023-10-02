@@ -364,7 +364,7 @@ public class AudioManager implements Disposable {
 
         if(assets.mainTheme.isPlaying()) {
             float currentPosition = assets.mainTheme.getPosition();
-            Gdx.app.log("Current position musicA:", String.valueOf(currentPosition));
+//            Gdx.app.log("Current position musicA:", String.valueOf(currentPosition));
             assets.mainThemeLowpass.play();
             assets.mainThemeLowpass.setPosition(currentPosition);
             assets.mainTheme.stop();
@@ -374,7 +374,7 @@ public class AudioManager implements Disposable {
         }
         else if(assets.mainThemeLowpass.isPlaying()) {
             float currentPosition = assets.mainThemeLowpass.getPosition();
-            Gdx.app.log("Current position musicB :", String.valueOf(currentPosition));
+//            Gdx.app.log("Current position musicB :", String.valueOf(currentPosition));
             assets.mainTheme.play();
             assets.mainTheme.setPosition(currentPosition);
             assets.mainThemeLowpass.stop();

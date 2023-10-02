@@ -159,7 +159,7 @@ public class Asteroid implements Collidable, JunkInfluencible {
         if (object instanceof PlayerShip){
             float dotProduct = Math.abs(tempVec.set(object.getPosition()).sub(pos).nor().dot(object.getVelocity()));
             health -= dotProduct * .07f;
-            Gdx.app.log("Asteroid", "Asteroid Health: " +health );
+//            Gdx.app.log("Asteroid", "Asteroid Health: " +health );
         } else if (object instanceof Asteroid) {
 
         }

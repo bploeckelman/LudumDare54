@@ -227,7 +227,7 @@ public class PanZoomCameraController extends GestureDetector.GestureAdapter impl
             var zoom = camera.zoom + sign * scale;
             targetZoom = MathUtils.clamp(zoom, MIN_ZOOM, MAX_ZOOM);
             if (Config.Debug.general) {
-                Gdx.app.log("ZOOM", Stringf.format("current: %.2f  target: %.2f", camera.zoom, targetZoom));
+//                Gdx.app.log("ZOOM", Stringf.format("current: %.2f  target: %.2f", camera.zoom, targetZoom));
             }
             return true;
         }

@@ -178,7 +178,7 @@ public class DragLauncher extends InputAdapter {
             return;
         }
         if (Config.Debug.general) {
-            Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, speed));
+//            Gdx.app.log("LAUNCH", Stringf.format("angle: %.1f  mag: %.1f", angle, speed));
         }
 
         // speed is 0.2 - 1
