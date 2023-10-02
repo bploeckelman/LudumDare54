@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.kotcrab.vis.ui.widget.*;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
@@ -42,6 +44,9 @@ public class EncounterUI extends Group {
     private ArrayList<VisTextButton> optionButtons;
     private VisTextButton.VisTextButtonStyle optionStyle;
 
+    private ObjectMap<TextureRegion, TextureRegionDrawable> encounterFrames = new ObjectMap();
+    private ObjectMap<TextureRegion, TextureRegionDrawable> characterFrames;
+
     public EncounterUI(GameScreen screen, Assets assets, Skin skin, AudioManager audio) {
         super();
         this.screen = screen;
@@ -57,8 +62,18 @@ public class EncounterUI extends Group {
         encounterTitle = encounter.title;
         encounterText = encounter.text;
         encounterAnimation = assets.encounterAnimationHashMap.get(encounter.imageKey);
+        for (var enFrame : encounterAnimation.getKeyFrames()) {
+            encounterFrames.put(enFrame, new TextureRegionDrawable(enFrame));
+        }
+
         if (encounter.characterKey != null && encounter.characterKey != "") {
             characterAnimation = assets.encounterAnimationHashMap.get(encounter.characterKey);
+            if (characterAnimation != null) {
+                characterFrames = new ObjectMap<>();
+                for (var charFrame : characterAnimation.getKeyFrames()) {
+                    characterFrames.put(charFrame, new TextureRegionDrawable(charFrame));
+                }
+            }
         }
 
         encounterOptions.clear();
@@ -74,11 +89,11 @@ public class EncounterUI extends Group {
         super.act(delta);
         animTimer += delta;
         if (encounterAnimation != null) {
-            encounterImageBox.setDrawable(new TextureRegionDrawable(encounterAnimation.getKeyFrame(animTimer)));
+            encounterImageBox.setDrawable(encounterFrames.get(encounterAnimation.getKeyFrame(animTimer)));
         }
 
         if (characterAnimation != null) {
-            characterImageBox.setDrawable(new TextureRegionDrawable(characterAnimation.getKeyFrame(animTimer)));
+            characterImageBox.setDrawable(characterFrames.get(characterAnimation.getKeyFrame(animTimer)));
         }
     }
 
