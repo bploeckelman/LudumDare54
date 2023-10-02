@@ -588,6 +588,7 @@ public class Assets implements Disposable {
         encounterAnimationHashMap.put("deathstar", deathStar);
         encounterAnimationHashMap.put("discoveryone", discoveryOne);
         encounterAnimationHashMap.put("spaceballs", spaceBalls);
+        encounterAnimationHashMap.put("arwing", arwing);
 
         initialized = true;
         return 1;

@@ -565,29 +565,29 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "You're surrounded by assholes!\n\nAt least ",
+            "text": "You're surrounded by assholes, but at least you have clean air. \n\nIt's canned, but that's how it goes sometimes, ya know? ",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Order a pizza",
+        "text": "Use the schwartz",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "Can you believe Mel Brooks is still alive?\n\nHe's a national treasure!\n\nJust an incredible body of work.",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "Go from suck to blow",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "Incredible wordplay.\n\nThe 80s were a different time.",
             "weight": 0.8
           }
         ]
@@ -628,7 +628,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "This would be SO great if you were high.\n\nMaybe next time . . .",
+            "text": "This would be great if you were high.\n\nMaybe next time . . .",
             "weight": 0.8
           }
         ]
@@ -722,7 +722,7 @@
   {
     "title": "Solar Canine",
     "text": "You encounter a ship with a distinct pointed shape.\n\nIt appears well-suited for low-polygon space travel.\n\nHow do you proceed?",
-    "imageKey": "asteroidmining",
+    "imageKey": "arwing",
     "characterKey": "asuka",
   "type": "BATTLE",
     "options": [
