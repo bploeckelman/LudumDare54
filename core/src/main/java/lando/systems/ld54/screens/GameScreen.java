@@ -51,7 +51,7 @@ public class GameScreen extends BaseScreen {
     public static float gameWidth = Config.Screen.window_width * SECTORS_WIDE;
     public static float gameHeight = Config.Screen.window_height * SECTORS_HIGH;
 
-    public static final int LAUNCHES_FOR_SCAN = 3;
+    public static final int LAUNCHES_FOR_SCAN = 1;
     public static final int LAUNCHES_FOR_SHIELD = 4;
 
     public final Vector3 mousePos = new Vector3();
@@ -424,13 +424,13 @@ public class GameScreen extends BaseScreen {
             for (int i = 0; i < sectors.size - 1; i++) {
                 var sector = sectors.get(i);
                 if (sector.bounds.contains(currentShip.pos)) {
-                    if (sector.encounter != null && sector != homeSector && sector != goalSector && sector.isEncounterActive && sector.encounterBounds.contains(currentShip.pos)) {
+                    if (sector.encounter != null && sector != homeSector && sector.isEncounterActive && sector.encounterBounds.contains(currentShip.pos)) {
                         startEncounter(sector.encounter);
                         sector.isEncounterActive = false;
                     }
                     if (currentShip.currentSector != i) {
                         currentShip.currentSector = i;
-                        if (sector.encounter != null && sector != homeSector && sector != goalSector && !sector.isVisited()) {
+                        if (sector.encounter != null && sector != homeSector && !sector.isVisited()) {
                             Gdx.app.log("Discovered new sector!", "Sector " + i);
                             game.audioManager.playSound(AudioManager.Sounds.radarPing);
                         }
@@ -713,6 +713,7 @@ public class GameScreen extends BaseScreen {
         float closestDistance = Float.MAX_VALUE;
         for (Sector sector : sectors){
             if (sector.distanceFromEarth == 0) continue;
+            if (sector.isGoal) continue;
             if (sector.isEncounterActive){
                 // TODO: exclude Final
                 lowestDistance = Math.min(lowestDistance, sector.distanceFromEarth);
@@ -729,7 +730,11 @@ public class GameScreen extends BaseScreen {
         }
 
 
-        if (!scanHelperActive && launchesSinceEncounterScan > LAUNCHES_FOR_SCAN && closestUnscannedNonBossSector != null && playerShips.size == 0){
+        if (closestUnscannedNonBossSector == null) {
+            closestUnscannedNonBossSector = goalSector;
+        }
+
+        if (!scanHelperActive && launchesSinceEncounterScan > LAUNCHES_FOR_SCAN  && playerShips.size == 0){
             launchesSinceEncounterScan = 0;
             closestUnscannedNonBossSector.scan();
         }
