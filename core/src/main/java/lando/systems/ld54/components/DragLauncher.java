@@ -21,6 +21,7 @@ import lando.systems.ld54.objects.Sector;
 public class DragLauncher extends InputAdapter {
     private final GameScreen screen;
     private final Vector3 mousePos = new Vector3();
+    private final Vector2 tempVec = new Vector2();
 
     private boolean dragging = false;
 
@@ -161,6 +162,11 @@ public class DragLauncher extends InputAdapter {
             font.draw(batch, text, textPos.x - text.width / 2, textPos.y + text.height / 2);
 
             font.setColor(Color.WHITE);
+
+            if (speed >= SPEED_THRESHOLD) {
+                tempVec.set(1, 0).setAngleDeg(angle).scl(60);
+                batch.draw(screen.assets.playerShip.getKeyFrame(0), earthCenter.x - 60+  tempVec.x, earthCenter.y - 60 + tempVec.y, 64, 64, 128, 128, 1, 1, tempVec.angleDeg());
+            }
         }
     }
 

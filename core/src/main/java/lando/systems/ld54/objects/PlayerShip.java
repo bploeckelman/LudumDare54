@@ -183,7 +183,9 @@ public class PlayerShip implements Collidable {
 
     public void launch(float angle, float power) {
         trackMovement = true;
-        vel.set(1, 0).setAngleDeg(angle).scl(power);
+        vel.set(1, 0).setAngleDeg(angle);
+        pos.add(vel.x * 60, vel.y * 60);
+        vel.scl(power);
 //         = screen.audioManager.playSound(AudioManager.Sounds.engineLaunch, 1.4f);
         engineSoundID = screen.audioManager.loopSound(AudioManager.Sounds.engineRunning, .4f);
         screen.audioManager.playSound(AudioManager.Sounds.engineLaunch);
