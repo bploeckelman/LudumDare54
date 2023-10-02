@@ -47,7 +47,6 @@ public class GameScreenUI {
         } else {
             fuelLevel = screen.player.fuelLevel;
         }
-        Gdx.app.log("fuelLevel", "" + fuelLevel);
     }
 
     public void render(SpriteBatch batch) {
