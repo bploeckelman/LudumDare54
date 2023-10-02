@@ -2,6 +2,7 @@ package lando.systems.ld54.audio;
 
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.primitives.MutableFloat;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
@@ -352,19 +353,23 @@ public class AudioManager implements Disposable {
             soundVolume.setValue(level);
     }
 
-    public void swapMusic(Music musicA, Music musicB) {
-        if(musicA.isPlaying()) {
-            float currentPosition = musicA.getPosition();
-            musicB.play();
-            musicB.setPosition(currentPosition);
-            musicA.stop();
+    public void swapMusic() {
+
+        if(assets.mainTheme.isPlaying()) {
+            float currentPosition = assets.mainTheme.getPosition();
+            Gdx.app.log("Current position musicA:", String.valueOf(currentPosition));
+            assets.mainThemeLowpass.play();
+            assets.mainThemeLowpass.setPosition(currentPosition);
+            assets.mainTheme.stop();
+
             return;
         }
-        else if(musicB.isPlaying()) {
-            float currentPosition = musicB.getPosition();
-            musicA.play();
-            musicA.setPosition(currentPosition);
-            musicB.stop();
+        else if(assets.mainThemeLowpass.isPlaying()) {
+            float currentPosition = assets.mainThemeLowpass.getPosition();
+            Gdx.app.log("Current position musicB :", String.valueOf(currentPosition));
+            assets.mainTheme.play();
+            assets.mainTheme.setPosition(currentPosition);
+            assets.mainThemeLowpass.stop();
             return;
         }
         else {

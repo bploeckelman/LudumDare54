@@ -11,19 +11,13 @@
             "type": "FUEL",
             "value": 1,
             "text": "Victory! You destroyed them and claimed their fuel as yours.\n\nOnward, to the stars!",
-            "weight": 0.0
+            "weight": 0.7
           },
           {
             "type": "FUEL",
             "value": -1,
             "text": "A valiant attempt but they straight-up roasted you. \n\nLike, it wasn't even close\n\nAND they stole your fuel! Jerks.",
-            "weight": 1.0
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "A valiant attempt but they straight-up roasted you. \n\nIt wasn't even close\n\nAND they stole your fuel! Jerks.",
-            "weight": 0.0
+            "weight": 0.3
           }
         ]
       },
@@ -49,60 +43,43 @@
             "weight": 0.2
           }
         ]
-      },
-      {
-        "text": "Help neither",
-        "possibleOutcomes": [
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "You watched and left.",
-            "weight": 0.5
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "You got hit by the flying cat while leaving.",
-            "weight": 0.5
-          }
-        ]
       }
     ]
   },
   {
-    "title": "Alien Invasion",
-    "text": "Aliens have invaded the planet. What do you do?",
+    "title": "Alien Encounter",
+    "text": "You come across a planet populated by a species you've never seen before!\n\nThey must be. . .",
     "imageKey": "cherry",
     "options": [
         {
-            "text": "Fight the aliens",
+            "text": "Destroyed!",
             "possibleOutcomes": [
               {
                 "type": "SCRAP",
                 "value": 100,
-                "text": "They were super weak and peaceful bunch. \n They had no chance, but some credits got destroyed.",
+                "text": "You wipe out their nascent civilization to plunder their planet's meager resources\n\nHonestly, kind of a dick move. Maybe you should talk to someone?",
                 "weight": 1
               }
             ]
         },
         {
-            "text": "Join the aliens",
+            "text": "Befriended!",
             "possibleOutcomes": [
               {
                 "type": "SCRAP",
-                "value": 500,
-                "text": "They were peaceful bunch, they offer credits.",
+                "value": -500,
+                "text": "Turns out, violence WASN'T the answer!\n\nThey share their meager resources with you in a stunning display of \ninterplanetary generosity.",
                 "weight": 1
               }
             ]
         },
         {
-            "text": "Do nothing",
+            "text": "Ignored!",
             "possibleOutcomes": [
               {
                 "type": "NOTHING",
                 "value": 0,
-                "text": "Nothing happened",
+                "text": "You avoided them and... that was it?\n\nHow unsatisfying, narratively speaking.",
                 "weight": 1
               }
             ]

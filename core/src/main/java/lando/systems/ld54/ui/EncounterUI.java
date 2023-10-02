@@ -144,7 +144,16 @@ public class EncounterUI extends Group {
         audio.playSound(AudioManager.Sounds.stingAliens2);
         encounterTextLabel.setText(outcome.text);
         destroyOptions();
-        VisTextButton optionButton = new VisTextButton(outcome.type.name() + " " + outcome.value, optionStyle);
+        VisTextButton optionButton = new VisTextButton("You collect: " + outcome.value + " " + outcome.type.name().toLowerCase() , optionStyle);
+        if(outcome.value == 0) {
+            optionButton.setText("Continue");
+        }
+        else if (outcome.value > 0) {
+            optionButton.setText("Collect " + outcome.value + " " + outcome.type.name().toLowerCase());
+        }
+        else if (outcome.value < 0) {
+            optionButton.setText("Lose " + Math.abs(outcome.value) + " " + outcome.type.name().toLowerCase());
+        }
         optionButton.setHeight(20f);
         optionButton.setStyle(optionStyle);
         optionButton.addListener(new ClickListener() {

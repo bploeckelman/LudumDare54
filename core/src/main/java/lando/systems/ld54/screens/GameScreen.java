@@ -177,7 +177,11 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass.setVolume(audioManager.musicVolume.floatValue());
         levelMusic.setLooping(true);
         levelMusicLowpass.setLooping(true);
-        levelMusic.play();
+//        levelMusic.play();
+
+//        audioManager.playMusic(AudioManager.Musics.mainTheme);
+        assets.mainTheme.play();
+        assets.intro.stop();
 
         gameScreenUI = new GameScreenUI(assets, this);
         uiStage.addActor(gameScreenUI);
@@ -207,7 +211,7 @@ public class GameScreen extends BaseScreen {
         // TODO: DEBUG REMOVE ME
         {
             if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-                Config.Debug.general = true;
+//            Config.Debug.general = true;
                 if (!encounterShown) {
                     Encounter encounter = encounters.get(0);
                     encounter.sector = sectors.get(0);
@@ -218,7 +222,8 @@ public class GameScreen extends BaseScreen {
                 sectors.forEach(Sector::scan);
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-                audioManager.swapMusic(levelMusic, levelMusicLowpass);
+                audioManager.swapMusic();
+
 //            audioManager.fadeMusic(AudioManager.Musics.mainTheme);
 //            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
             }
@@ -435,17 +440,18 @@ public class GameScreen extends BaseScreen {
         var file = Gdx.files.internal("encounters/battle_encounters.json");
         encounters = json.fromJson(Array.class, Encounter.class, file);
         var index = MathUtils.random(encounters.size - 1);
-        if(!Config.Debug.general) {
+//        if(!Config.Debug.general) {
             return (Encounter) encounters.get(index);
-        }
-        else {
-            return (Encounter) encounters.get(1);
-        }
+//        }
+//        else {
+//            return (Encounter) encounters.get(1);
+//        }
     }
 
     private void startEncounter(Encounter encounter) {
         encounterShown = true;
-        game.audioManager.stopAllSounds();
+//        game.audioManager.stopAllSounds();
+        assets.engineRunning.stop();
         game.audioManager.playSound(AudioManager.Sounds.stingIntense);
         encounterUI = new EncounterUI(this, assets, skin, audioManager);
         encounterUI.setEncounter(encounter);
@@ -456,7 +462,8 @@ public class GameScreen extends BaseScreen {
             encounter.sector.pushJunk.deactivate();
         }
 
-        game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
+        game.audioManager.swapMusic();
+//        game.audioManager.swapMusic(levelMusic, levelMusicLowpass);
     }
 
     public void finishEncounter(Encounter encounter) {
@@ -464,7 +471,7 @@ public class GameScreen extends BaseScreen {
         Time.pause_timer = 0f;
         encounterUI.remove();
         // TODO: SOUND HERE (WOOSH as it scans the sector)
-        game.audioManager.playSound(AudioManager.Sounds.radarReveal, 2f);
+        game.audioManager.playSound(AudioManager.Sounds.radarReveal, 1.0f);
 //        game.audioManager.playSound(AudioManager.Sounds.radarPing, 2f);
         Gdx.app.log("Logging the finish Encounter", "True");
         float fogMargin = 50;
@@ -472,7 +479,7 @@ public class GameScreen extends BaseScreen {
             fogOfWar.addFogRectangle(encounter.sector.bounds.x - fogMargin, encounter.sector.bounds.y - fogMargin, encounter.sector.bounds.width + fogMargin*2f, encounter.sector.bounds.height + fogMargin*2f, .2f);
         }
 
-        game.audioManager.swapMusic(levelMusicLowpass, levelMusic);
+        game.audioManager.swapMusic();
     }
 
     public void addFuel(int value) {

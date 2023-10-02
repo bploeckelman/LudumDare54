@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Main;
+import lando.systems.ld54.audio.AudioManager;
 
 public class IntroScreen extends BaseScreen {
 
@@ -36,6 +37,7 @@ public class IntroScreen extends BaseScreen {
         font.getData().setScale(1f);
 
         // TODO: Start intro Music
+//        audioManager.playMusic(AudioManager.Musics.intro);
 
         perspectiveCamera = new PerspectiveCamera(90, 1280, 800);
         perspectiveCamera.far=10000;
@@ -64,6 +66,7 @@ public class IntroScreen extends BaseScreen {
     private void launchGame() {
         if (!exitingScreen){
             exitingScreen = true;
+//            game.audioManager.stopMusic();
             game.setScreen(new GameScreen(), assets.cubeShader, 3f);
         }
     }

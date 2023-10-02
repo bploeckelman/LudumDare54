@@ -38,8 +38,7 @@ public class TitleScreenUI extends Group {
         startGameButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                screen.audioManager.stopAllSounds();
-                screen.audioManager.stopMusic();
+//                screen.audioManager.stopAllSounds();
                 screen.exitingScreen = true;
                 Gdx.input.setInputProcessor(null);
                 screen.game.setScreen(new IntroScreen(), Main.game.assets.simpleZoomeShader, .5f);
