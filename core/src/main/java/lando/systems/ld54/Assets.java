@@ -75,6 +75,11 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> playerShipActive;
     public Animation<TextureRegion> playerShipInactive;
     public Animation<TextureRegion> pickupsFuel;
+    public Animation<TextureRegion> batteryRed;
+    public Animation<TextureRegion> batteryYellow;
+    public Animation<TextureRegion> batteryGreen;
+    public Animation<TextureRegion> batteryOrange;
+    public Animation<TextureRegion> batteryEmpty;
     public ObjectMap<PlayerShipPart.Type, Animation<TextureRegion>> playerShipParts;
     public Array<Animation<TextureRegion>> astronautBodies;
     public Array<Animation<TextureRegion>> satellites;
@@ -318,6 +323,11 @@ public class Assets implements Disposable {
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/idle/player-ship-idle"), Animation.PlayMode.LOOP);
         playerShipActive = new Animation<>(.1f, atlas.findRegions("ships/player/active/player-ship-active"), Animation.PlayMode.LOOP);
         playerShipInactive = new Animation<>(.1f, atlas.findRegions("ships/player/inactive/player-ship-inert"), Animation.PlayMode.LOOP);
+        batteryEmpty = new Animation<>(.1f, atlas.findRegions("batteries/battery-empty"), Animation.PlayMode.LOOP);
+        batteryGreen = new Animation<>(.1f, atlas.findRegions("batteries/battery-green"), Animation.PlayMode.LOOP);
+        batteryYellow = new Animation<>(.1f, atlas.findRegions("batteries/battery-yellow"), Animation.PlayMode.LOOP);
+        batteryRed = new Animation<>(.1f, atlas.findRegions("batteries/battery-red"), Animation.PlayMode.LOOP);
+        batteryOrange = new Animation<>(.1f, atlas.findRegions("batteries/battery-orange"), Animation.PlayMode.LOOP);
         pickupsFuel = new Animation<>(.1f, atlas.findRegions("pickups-fuel/pickup-fuel"), Animation.PlayMode.LOOP);
         playerShipParts = new ObjectMap<>();
         for (var part : PlayerShipPart.Type.values()) {

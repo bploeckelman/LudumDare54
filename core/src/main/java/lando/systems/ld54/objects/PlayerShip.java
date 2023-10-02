@@ -54,6 +54,7 @@ public class PlayerShip implements Collidable {
 
     private final GameScreen screen;
     private long engineSoundID;
+    public boolean isReset = false;
 
     public PlayerShip(GameScreen gameScreen) {
         this.screen = gameScreen;
@@ -216,6 +217,7 @@ public class PlayerShip implements Collidable {
     }
 
     private void resetCameraToHomeSector() {
+        isReset = true;
         var homeBounds = screen.homeSector.bounds;
         screen.cameraController.targetPos.set(
             homeBounds.x + homeBounds.width / 2f,
