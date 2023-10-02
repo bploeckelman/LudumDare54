@@ -35,9 +35,9 @@ public class MiniMap {
 
     public void update(float dt) {
         accum += dt;
-        if (screen.worldCamera.position.x < GameScreen.gameWidth/2) {
+        if (screen.worldCamera.position.x < GameScreen.gameWidth/3) {
             targetBounds.x = screen.windowCamera.viewportWidth - WIDTH - 5;
-        } else {
+        } else  if (screen.worldCamera.position.x > GameScreen.gameWidth * 2f/ 3f){
             targetBounds.x = 5;
         }
         if (targetBounds.x != bounds.x){
