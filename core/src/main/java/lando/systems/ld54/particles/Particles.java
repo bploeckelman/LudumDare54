@@ -134,18 +134,40 @@ public class Particles implements Disposable {
 
     }
 
-    public void shipExplode(float inX, float inY) {
+    public void debrisExplode(float inX, float inY) {
         for (int i = 0; i < 20; i++) {
+            float angle = MathUtils.random(0f, 360f);
+            float speed = MathUtils.random(0f, 40f);
+            float x = inX + MathUtils.random(-20f, 20f);
+            float y = inY + MathUtils.random(-20f, 20f);
+            float size = MathUtils.random(10f, 30f);
+            activeParticles.get(Layer.middle).add(Particle.initializer(particlePool.obtain())
+                .keyframe(assets.particles.smoke)
+                .startPos(x, y)
+                .velocity(MathUtils.cosDeg(angle) * speed, MathUtils.sinDeg(angle) * speed)
+                .startColor(1f, 1f, 1f,1f)
+                .endColor(0,0,0,0)
+                .startSize(size)
+                .endSize(5f)
+                .timeToLive(MathUtils.random(2f, 4f))
+                .init()
+            );
+        }
+    }
+
+    public void shipExplode(float inX, float inY) {
+        for (int i = 0; i < 30; i++) {
             float angle = MathUtils.random(0f, 360f);
             float speed = MathUtils.random(0f, 100f);
             float x = inX + MathUtils.random(-100f, 100f);
             float y = inY + MathUtils.random(-100f, 100f);
             float size = MathUtils.random(60f, 200f);
+            float color = MathUtils.random(.3f, 1f);
             activeParticles.get(Layer.middle).add(Particle.initializer(particlePool.obtain())
                 .keyframe(assets.particles.smoke)
                 .startPos(x, y)
                 .velocity(MathUtils.cosDeg(angle) * speed, MathUtils.sinDeg(angle) * speed)
-                    .startColor(1f, 1f, 1f,1f)
+                    .startColor(color, color, color,1f)
                     .endColor(0,0,0,0)
                     .startSize(size)
                     .endSize(5f)

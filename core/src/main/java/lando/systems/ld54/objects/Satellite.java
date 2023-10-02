@@ -5,14 +5,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.physics.Collidable;
+import lando.systems.ld54.screens.GameScreen;
+import org.ietf.jgss.GSSCredential;
 
 public class Satellite extends Debris {
     private final Planet planet;
     private final Vector2 angleVector = new Vector2();
     private boolean free = false;
 
-    public Satellite(Planet planet, Animation<TextureRegion> anim, float x, float y) {
-        super(anim, x, y);
+    public Satellite(GameScreen screen, Planet planet, Animation<TextureRegion> anim, float x, float y) {
+        super(screen, anim, x, y);
 
         this.planet = planet;
         angleVector.set(x, y).sub(planet.centerPosition);

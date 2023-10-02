@@ -31,13 +31,13 @@ public class Asteroids {
         }
     }
 
-    public static void createTestAsteroids(Array<Asteroid> array) {
+    public static void createTestAsteroids(GameScreen screen, Array<Asteroid> array) {
         for (var level : Asteroids.Level.values()) {
             for (int i = 0; i < 60; i++) {
                 var region = Asteroids.getRandomAsteroid(level);
                 var x = MathUtils.random(0, GameScreen.gameWidth);
                 var y = MathUtils.random(0, GameScreen.gameHeight);
-                var asteroid = new Asteroid(region, x, y);
+                var asteroid = new Asteroid(screen, region, x, y);
                 array.add(asteroid);
             }
         }

@@ -2,6 +2,7 @@ package lando.systems.ld54.objects;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.equations.Linear;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,13 +14,16 @@ import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
 import lando.systems.ld54.physics.CollisionShapeCircle;
 import lando.systems.ld54.physics.influencers.JunkInfluencible;
+import lando.systems.ld54.screens.GameScreen;
 import lando.systems.ld54.utils.accessors.Vector2Accessor;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Asteroid implements Collidable, JunkInfluencible {
 
+    GameScreen screen;
     public float friction = .7f;
     public float mass;
+    public float health;
 
     public TextureRegion region;
     public Vector2 initialPos;
@@ -34,6 +38,8 @@ public class Asteroid implements Collidable, JunkInfluencible {
     private final Rectangle collisionBounds;
     private final CollisionShapeCircle collisionShape;
 
+    public boolean alive;
+
     private Tween floatTween;
     private boolean updateFloat;
 
@@ -42,16 +48,19 @@ public class Asteroid implements Collidable, JunkInfluencible {
     private static final float min_duration = 1;
     private static final float max_duration = 5;
 
-    public Asteroid(TextureRegion region, float x, float y) {
+    public Asteroid(GameScreen screen, TextureRegion region, float x, float y) {
+        this.screen = screen;
         this.region = region;
         this.initialPos = new Vector2(x, y);
         this.initialSize = new Vector2(region.getRegionWidth(), region.getRegionHeight());
         this.pos = initialPos.cpy();
         this.size = initialSize.cpy();
-        this.mass = size.x * size.y / 1000f;
+        this.mass = size.x * size.y / 600f;
+        this.health = mass * 2f;
         this.velocity = new Vector2(0, 0);
         this.range = new Vector2(default_range, default_range);
         this.updateFloat = false;
+        this.alive = true;
         this.collisionBounds = new Rectangle(pos.x - size.x/2, pos.y - size.y /2, size.x, size.y);
         this.collisionShape = new CollisionShapeCircle(size.x/2f, pos.x, pos.y);
         this.rotationSpeed = MathUtils.random(-30f, 30f);
@@ -78,6 +87,11 @@ public class Asteroid implements Collidable, JunkInfluencible {
 
     public void update(float dt) {
         animTime += dt;
+        if (health <= 0){
+            // remove from list
+            screen.particles.debrisExplode(pos.x, pos.y);
+            alive = false;
+        }
     }
 
 
@@ -138,9 +152,16 @@ public class Asteroid implements Collidable, JunkInfluencible {
         return collisionShape;
     }
 
+    Vector2 tempVec = new Vector2();
     @Override
     public void collidedWith(Collidable object) {
+        if (object instanceof PlayerShip){
+            float dotProduct = Math.abs(tempVec.set(object.getPosition()).sub(pos).nor().dot(object.getVelocity()));
+            health -= dotProduct * .07f;
+            Gdx.app.log("Asteroid", "Asteroid Health: " +health );
+        } else if (object instanceof Asteroid) {
 
+        }
     }
 
     @Override

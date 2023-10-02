@@ -11,10 +11,12 @@ import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
 import lando.systems.ld54.physics.CollisionShapeCircle;
 import lando.systems.ld54.physics.influencers.JunkInfluencible;
+import lando.systems.ld54.screens.GameScreen;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Debris implements Collidable, JunkInfluencible {
 
+    GameScreen screen;
     private final Vector2 pos;
     private final Vector2 vel;
     private final Rectangle collisionBounds;
@@ -26,7 +28,7 @@ public class Debris implements Collidable, JunkInfluencible {
     private float rotation;
 
     // Override default values in subclasses for different behavior
-    public float mass = 4;
+    public float mass = 10;
     public float dragFriction = 0.9f;
     public float angularMomentum = 0;
 
@@ -34,12 +36,16 @@ public class Debris implements Collidable, JunkInfluencible {
     // because it ties to collision bounds and shape
     private float radius = 32;
 
-    public Debris(Animation<TextureRegion> anim, float x, float y) {
+    public boolean alive;
+
+    public Debris(GameScreen screen, Animation<TextureRegion> anim, float x, float y) {
+        this.screen = screen;
         this.pos = new Vector2(x, y);
         this.vel = Vector2.Zero.cpy();
         this.collisionBounds = new Rectangle(pos.x - radius, pos.y - radius, radius * 2, radius * 2);
         this.collisionShape = new CollisionShapeCircle(radius, pos.x, pos.y);
         this.anim = anim;
+        this.alive = true;
         this.keyframe = anim.getKeyFrames()[0];
         this.stateTime = 0;
         this.rotation = MathUtils.random(0, 360);
@@ -56,6 +62,9 @@ public class Debris implements Collidable, JunkInfluencible {
     public void update(float dt) {
         stateTime += dt;
         rotation += dt * angularMomentum;
+        if (!alive){
+            screen.particles.debrisExplode(pos.x, pos.y);
+        }
     }
 
     public void draw(SpriteBatch batch) {
@@ -133,6 +142,9 @@ public class Debris implements Collidable, JunkInfluencible {
     @Override
     public void collidedWith(Collidable object) {
         // NOTE - callback on collision so something can be done with whatever was collided with
+        if (object instanceof PlayerShip) {
+            alive = false;
+        }
     }
 
     @Override

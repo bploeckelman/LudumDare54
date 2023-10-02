@@ -179,7 +179,7 @@ public class PlayerShip implements Collidable {
             var posY = pos.y + dist * MathUtils.sinDeg(angle);
             var spinDir = MathUtils.randomSign();
             var spin = spinDir * MathUtils.random(2, 15);
-            var part = new PlayerShipPart(type, screen.assets, posX, posY);
+            var part = new PlayerShipPart(screen, type, screen.assets, posX, posY);
             part.setVelocity(velX, velY);
             part.angularMomentum = spin;
             screen.debris.add(part);
@@ -201,7 +201,7 @@ public class PlayerShip implements Collidable {
             var posY = pos.y + dist * MathUtils.sinDeg(angle);
             var spinDir = MathUtils.randomSign();
             var spin = spinDir * MathUtils.random(4, 15);
-            var body = new Debris(bodyAnim, posX, posY);
+            var body = new Debris(screen, bodyAnim, posX, posY);
             body.setVelocity(velX, velY);
             body.setRadius(radius);
             body.angularMomentum = spin;
@@ -291,7 +291,7 @@ public class PlayerShip implements Collidable {
         screen.audioManager.playSound(AudioManager.Sounds.thud, .5f);
 
         // assumes max velocity is 300
-        float speedModifier = vel.len() / 75; // 4x damage for full speed
+        float speedModifier = vel.len() / 125; // 4x damage for full speed
         health -= object.getMass() * speedModifier;
         System.out.println(health);
 

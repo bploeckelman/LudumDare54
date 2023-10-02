@@ -104,7 +104,7 @@ public class GameScreen extends BaseScreen {
         levelMusic = audioManager.musics.get(AudioManager.Musics.mainTheme);
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
-        Asteroids.createTestAsteroids(asteroids);
+        Asteroids.createTestAsteroids(this, asteroids);
         physicsObjects.addAll(asteroids);
 
         var possibleGoals = new IntArray();
@@ -240,7 +240,14 @@ public class GameScreen extends BaseScreen {
         background.update(dt);
         fogOfWar.update(dt);
         planets.forEach(p -> p.update(dt));
-        debris.forEach(d -> d.update(dt));
+        for (int i = debris.size-1; i >= 0; i--) {
+            Debris d = debris.get(i);
+            d.update(dt);
+            if (!d.alive) {
+                debris.removeIndex(i);
+                physicsObjects.removeValue(d, true);
+            }
+        }
         playerShips.forEach(ship -> {
             ship.update(dt);
             if (ship.trackMovement) {
@@ -248,7 +255,15 @@ public class GameScreen extends BaseScreen {
                 cameraController.targetPos.set(ship.pos.x, ship.pos.y, 0);
             }
         });
-        asteroids.forEach(a -> a.update(dt));
+        for (int i = asteroids.size -1; i >= 0; i--){
+            Asteroid a = asteroids.get(i);
+            a.update(dt);
+            if (!a.alive) {
+                asteroids.removeIndex(i);
+                physicsObjects.removeValue(a, true);
+            }
+        }
+
         sectors.forEach(s -> s.update(dt));
 
         cameraController.update(dt);
@@ -501,7 +516,7 @@ public class GameScreen extends BaseScreen {
             float angle = aveAngle * satelliteCount + MathUtils.random(-5f, 5f);
             vector.rotateDeg(angle).add(planet.centerPosition);
 
-            var satellite = new Satellite(planet, assets.satellites.random(), vector.x, vector.y);
+            var satellite = new Satellite(this, planet, assets.satellites.random(), vector.x, vector.y);
             physicsObjects.add(satellite);
             debris.add(satellite);
         }
