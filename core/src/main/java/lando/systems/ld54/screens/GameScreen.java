@@ -186,6 +186,7 @@ public class GameScreen extends BaseScreen {
         gameScreenUI = new GameScreenUI(assets, this);
         uiStage.addActor(gameScreenUI);
         miniMap = new MiniMap(this);
+        gameScreenUI = new GameScreenUI(this);
         particles = new Particles(assets);
 
         placeSatellites(earth);
@@ -198,7 +199,7 @@ public class GameScreen extends BaseScreen {
             Time.pause_timer = 2f;
         }
         uiStage.act(delta);
-        gameScreenUI.update();
+        gameScreenUI.update(delta);
         audioManager.update(delta);
     }
 
@@ -327,6 +328,7 @@ public class GameScreen extends BaseScreen {
         batch.setShader(null);
         launcher.render(batch);
         miniMap.render(batch);
+        gameScreenUI.render(batch);
         if (Config.Debug.general) {
             batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
             uiStage.setDebugAll(true);
@@ -334,8 +336,8 @@ public class GameScreen extends BaseScreen {
             uiStage.setDebugAll(false);
         }
         batch.end();
-
         uiStage.draw();
+
 
     }
 

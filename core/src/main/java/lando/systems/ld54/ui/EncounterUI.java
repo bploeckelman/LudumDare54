@@ -91,7 +91,7 @@ public class EncounterUI extends Group {
         style.font = assets.starJediFont50;
         encounterTitleLabel.setStyle(style);
         encounterTitleLabel.setAlignment(Align.center);
-        encounterTitleLabel.setColor(Color.BLACK);
+        encounterTitleLabel.setColor(Color.CYAN);
         encounterWindow.add(encounterTitleLabel).padTop(20f).padBottom(10f).width(encounterWindow.getWidth() - 100f);
         encounterWindow.row();
 
@@ -142,6 +142,7 @@ public class EncounterUI extends Group {
         EncounterOptionOutcome outcome = calculateOutcome(outcomes);
 //        audio.playSound(AudioManager.Sounds.coin);
         audio.playSound(AudioManager.Sounds.stingAliens2);
+        encounterWindow.setBackground(new TextureRegionDrawable(new TextureRegion(assets.encounterOutcomeTexture)));
         encounterTextLabel.setText(outcome.text);
         destroyOptions();
         VisTextButton optionButton = new VisTextButton("You collect: " + outcome.value + " " + outcome.type.name().toLowerCase() , optionStyle);

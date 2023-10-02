@@ -1,142 +1,57 @@
 package lando.systems.ld54.ui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
-import com.kotcrab.vis.ui.widget.VisImage;
-import com.kotcrab.vis.ui.widget.VisLabel;
-import com.kotcrab.vis.ui.widget.VisProgressBar;
-import com.kotcrab.vis.ui.widget.VisTable;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.Main;
 import lando.systems.ld54.screens.GameScreen;
-import lando.systems.ld54.utils.Utils;
 
-import java.util.ArrayList;
+public class GameScreenUI {
 
-public class GameScreenUI extends Group {
+    static float WIDTH = Config.Screen.window_width * .2f;
+    static float HEIGHT = Config.Screen.window_height * .2f;
 
-    private VisProgressBar fuelBar;
-    private GameScreen screen;
-    private VisLabel scrapValueLabel;
-    ProgressBar.ProgressBarStyle progressBarStyle;
-    ArrayList<VisImage> fuelImages = new ArrayList<>();
-    ArrayList<Color> colors = new ArrayList<>() {{
-        add(Color.BLACK); //0
-        add(Color.RED); //1
-        add(Color.SALMON); //2
-        add(Color.ORANGE); //3
-        add(Color.YELLOW); //4
-        add(Color.LIME); //5
-        add(Color.OLIVE); //6
-        add(Color.GREEN); //7
-        add(Color.BLUE);//8
-        add(Color.PURPLE); //9
-    }};
+    GameScreen screen;
+    Rectangle bounds;
+    Rectangle targetBounds;
+    Rectangle fuelBox1;
+    Rectangle fuelBox2;
+    Rectangle fuelBox3;
+    Rectangle fuelBox4;
+    Rectangle fuelBox5;
+    Rectangle fuelBox6;
+    Rectangle fuelBox7;
+    Rectangle fuelBox8;
 
-    public GameScreenUI(Assets assets, GameScreen screen) {
-        super();
+    float accum;
+
+
+    public GameScreenUI(GameScreen screen) {
         this.screen = screen;
-        setX(Config.Screen.window_width - 200f);
-        setY(Config.Screen.window_height / 2f);
-        setWidth(200f);
-        setHeight(300f);
-        VisTable infoWindow = new VisTable();
-        infoWindow.setBackground(Assets.Patch.glass.drawable);
-        infoWindow.setFillParent(true);
-        infoWindow.align(Align.center);
-        VisLabel fuelLabel = new VisLabel("Fuel");
-        Label.LabelStyle style = new Label.LabelStyle();
-//        style.font = assets.smallFont;
-        style.font = assets.abandonedFont20;
-        fuelLabel.setStyle(style);
-        infoWindow.add(fuelLabel).colspan(4).padBottom(5f);
-//        fuelLabel.setColor(Color.BLACK);
-        infoWindow.row();
+        bounds = new Rectangle(5, screen.windowCamera.viewportHeight - HEIGHT - screen.miniMap.bounds.height - 15f, WIDTH, HEIGHT);
+        targetBounds = new Rectangle(bounds);
+        fuelBox1 = new Rectangle(bounds.x + 5f, bounds.y + bounds.height - 40f, 30f, 30f);
 
-        fuelBar = new VisProgressBar(0f, 1f, 0.01f, true);
-        progressBarStyle = fuelBar.getStyle();
-        fuelBar.setColor(Color.WHITE);
-        float barValue;
-        if (screen.currentShip == null) {
-            barValue = screen.player.fuelLevel;
-            fuelBar.setValue(barValue);
-        } else {
-            barValue = screen.currentShip.fuel / screen.currentShip.FUEL_PER_BAR_LEVEL;
-            fuelBar.setValue(barValue);
-        }
-        infoWindow.add(fuelBar).center().colspan(4).padBottom(5f);
-        infoWindow.row();
-        // for dumb reason, i can't reuse the same image, so i have to make 4 of them
-        VisImage fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        fuelImages.add(fuelBarImage);
-        fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        fuelImages.add(fuelBarImage);
-        fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        fuelImages.add(fuelBarImage);
-        fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        fuelImages.add(fuelBarImage);
-        infoWindow.row();
-        fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        fuelImages.add(fuelBarImage);
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        fuelImages.add(fuelBarImage);
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        fuelImages.add(fuelBarImage);
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        fuelBarImage = new VisImage(new TextureRegionDrawable(assets.pickupsFuel.getKeyFrame(0f)));
-        fuelImages.add(fuelBarImage);
-        infoWindow.add(fuelBarImage).width(20f).height(20f);
-        infoWindow.row();
-        VisLabel scrapLabel = new VisLabel("Scrap: ");
-
-        scrapLabel.setStyle(style);
-        infoWindow.add(scrapLabel).left().pad(5f).colspan(4).padTop(10f);
-        infoWindow.row();
-
-        scrapValueLabel = new VisLabel("0");
-        scrapValueLabel.setStyle(style);
-        infoWindow.add(scrapValueLabel).left().pad(5f).colspan(4);
-        infoWindow.row();
-
-
-
-        addActor(infoWindow);
     }
 
-    public void update() {
-        float barValue;
-        if (screen.currentShip == null || screen.isLaunchPhase) {
-            barValue = screen.player.fuelLevel;
-        } else {
-            barValue = screen.currentShip.fuel / screen.currentShip.FUEL_PER_BAR_LEVEL;
-        }
-        for (int i = 0; i < 8; i++) {
-            if (barValue < i) {
-                fuelImages.get(i).setVisible(false);
-            } else {
-                fuelImages.get(i).setVisible(true);
-            }
-        }
-        progressBarStyle.knobAfter = new TextureRegionDrawable(Utils.getColoredTextureRegion(colors.get((int)barValue)));
-        progressBarStyle.knobBefore = new TextureRegionDrawable(Utils.getColoredTextureRegion(colors.get((int)(barValue + 1))));
-        for (int i = 7; i >= 0; i--) {
-            if (barValue >= i) {
-                fuelImages.get(i).setVisible(false);
-                fuelBar.setValue(barValue - i);
-                break;
-            }
-        }
-        scrapValueLabel.setText(String.valueOf(screen.player.scrap));
+    public void update(float dt) {
+        bounds.x = screen.miniMap.bounds.x;
+        accum+=dt;
     }
 
+    public void render(SpriteBatch batch) {
+        float alpha = .4f;
+        batch.setColor(1f, 1f, 1f, alpha);
+        Assets.NinePatches.glass_blue.draw(batch, bounds.x - 5, bounds.y - 5, bounds.width + 10, bounds.height + 10);
+        batch.setColor(Color.WHITE);
+        batch.draw(Main.game.assets.pickupsFuel.getKeyFrame(accum), bounds.x + 5f, bounds.y + bounds.height - 40f, 30f, 30f);
+
+        //draw fuelBox1 next to the pickupsFuel
+        batch.draw(Main.game.assets.whitePixel, bounds.x + 30f + 10f, bounds.y + bounds.height - 40f, 30f, 30f);
+        batch.draw(Main.game.assets.whitePixel, bounds.x + 60f + 10f + 5f, bounds.y + bounds.height - 40f, 30f, 30f);
+        batch.draw(Main.game.assets.whitePixel, bounds.x + 90f + 10f + 5f + 5f, bounds.y + bounds.height - 40f, 30f, 30f);
+
+    }
 }
