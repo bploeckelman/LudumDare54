@@ -128,7 +128,7 @@
   },
   {
     "title": "Finger On The Pulsar",
-    "text": "Your ship comes dangerously close to a hyper-energetic pulsar.\n\nYou might be able to use its emissions for fuel...\n\nWhat do you do?",
+    "text": "Your ship comes dangerously close to a hyper-energetic pulsar.\n\nYou might be able to use its emissions for fuel . . .\n\nWhat do you do?",
     "imageKey": "nebula",
     "options": [
       {
@@ -137,7 +137,7 @@
           {
             "type": "FUEL",
             "value": -1,
-            "text": "A beautiful view, but sadly not a source of fuel.",
+            "text": "A beautiful view, but sadly not much more than that.\n\nAt least you'll always have your memories.",
             "weight": 0.7
           }
         ]
@@ -159,7 +159,7 @@
           {
             "type": "NOTHING",
             "value": 0,
-            "text": "After some time, the pulsar's energy emissions dissipate.\n\nYou can continue your journey unharmed.",
+            "text": "After some time, the pulsar's energy emissions dissipate.\n\nYou continue your journey unharmed.",
             "weight": 0.8
           }
         ]
@@ -167,7 +167,7 @@
     ]
   },
   {
-    "title": "Black Hole Encounter",
+    "title": "Black Hole Sun",
     "text": "You encounter a massive black hole. What do you do?",
     "imageKey": "blackhole",
     "options": [
@@ -176,15 +176,9 @@
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": -1,
-            "text": "Your ship gets too close and is pulled into the black hole, leading to certain doom.",
-            "weight": 0.5
-          },
-          {
-            "type": "FUEL",
-            "value": 4,
-            "text": "Your research yields valuable data about the black hole without risking your ship.",
-            "weight": 0.5
+            "value": 2,
+            "text": "The time dilation causes you to resemble Matthew McConaughey.\n\nAlright, alright, alright!",
+            "weight": 1
           }
         ]
       },
@@ -194,14 +188,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You make groundbreaking observations about the black hole's behavior from a safe distance.",
+            "text": "You make groundbreaking observations about black holes from a safe distance.\n\nHow responsible of you!",
             "weight": 0.7
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Your ship's systems are affected by the black hole's gravitational forces, causing minor damage.",
-            "weight": 0.3
           }
         ]
       },
@@ -209,9 +197,9 @@
         "text": "Flee from the black hole",
         "possibleOutcomes": [
           {
-            "type": "FUEL",
-            "value": 1,
-            "text": "You FUELfully escape the black hole's gravitational pull and avoid any harm.",
+            "type": "NOTHING",
+            "value": -1,
+            "text": "What you lack in courage you gain in longevity.\n\nFor now, anyway. These spaceships aren't exactly known for their durability.",
             "weight": 0.8
           },
           {
@@ -225,8 +213,8 @@
     ]
   },
   {
-    "title": "Landing on a Mysterious Planet",
-    "text": "You discover an uncharted planet. What do you do?",
+    "title": "A Mysterious Planet",
+    "text": "You discover a planet that doesn't appear on any of your maps.\n\n What do you do?",
     "imageKey": "mysteriousplanet",
     "options": [
       {
@@ -235,14 +223,8 @@
           {
             "type": "FUEL",
             "value": 2,
-            "text": "You find a wealth of valuable resources on the planet's surface.",
-            "weight": 0.6
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Your spaceship encounters turbulence during landing, causing minor damage.",
-            "weight": 0.4
+            "text": "Surprisingly enough, this planet is full of resources yet to be extracted.\n\nScore!",
+            "weight": 1
           }
         ]
       },
@@ -252,39 +234,27 @@
           {
             "type": "FUEL",
             "value": 2,
-            "text": "You detect unusual energy signatures on the planet's surface, prompting further investigation.",
+            "text": "Unusual energy signatures suggest high levels of stay-the-fuck-awaynium.\n\nGood thing you kept your distance.",
             "weight": 0.7
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "Your observations from orbit reveal nothing of interest.",
-            "weight": 0.3
           }
         ]
       },
       {
-        "text": "Leave the planet and continue your journey",
+        "text": "Leave the planet alone and continue your journey",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You depart without incident and continue your exploration of space.",
+            "text": "Dumb planet was probably stupid anyway.\n\n. . . \n\nNo, YOU'RE crying!",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "As you leave the planet, your ship experiences a minor technical malfunction.",
-            "weight": 0.2
           }
         ]
       }
     ]
   },
   {
-    "title": "Asteroid Field Encounter",
-    "text": "You enter a dense asteroid field. What do you do?",
+    "title": "Asteroid Field",
+    "text": "You enter a dense asteroid field. \n\nWhat do you do?",
     "imageKey": "asteroidfield",
     "options": [
       {
@@ -293,14 +263,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your skillful navigation allows you to pass through the asteroid field unscathed.",
+            "text": "Skillful navigation allows you to pass through the asteroid field unscathed.\n\nLooks like your co-pilot just lost a bet!",
             "weight": 0.7
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Despite your best efforts, your ship sustains minor damage from asteroid impacts.",
-            "weight": 0.3
           }
         ]
       },
@@ -310,14 +274,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your onboard systems effectively clear a safe path through the asteroid field.",
+            "text": "Your onboard systems effectively clear a safe path through the asteroid field.\n\nAnd they said AI would be the death of us!",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Your systems malfunction, and attempting to clear the path causes minor damage.",
-            "weight": 0.2
           }
         ]
       },
@@ -327,14 +285,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You change course and safely bypass the asteroid field without any issues.",
+            "text": "You change course and safely bypass the asteroid field without any issues.\n\nTurns out sometimes you CAN run from your problems!",
             "weight": 0.9
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Your course change is abrupt and results in minor damage to your ship's systems.",
-            "weight": 0.1
           }
         ]
       }
@@ -342,7 +294,7 @@
   },
   {
     "title": "Exploring an Abandoned Space Station",
-    "text": "You come across an abandoned space station. What do you do?",
+    "text": "You come across an abandoned space station. \n\nTotally normal, not creepy at all.\n\nWhat do you do?",
     "imageKey": "abandonedstation",
     "options": [
       {
@@ -351,14 +303,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You find valuable technology and supplies inside the space station.",
+            "text": "You find valuable technology and supplies inside the space station\n\nDefinitely no disfigured bodies of long-dead travelers that traversed hell itself",
             "weight": 0.6
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "The space station's interior is unstable, and your ship sustains minor damage during docking.",
-            "weight": 0.4
           }
         ]
       },
@@ -368,14 +314,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your scans reveal hidden compartments with useful resources on the space station.",
+            "text": "Your scans reveal hidden compartments with useful resources on the space station.\n\nTotally worth it.",
             "weight": 0.7
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "Your scans do not detect anything remarkable about the space station.",
-            "weight": 0.3
           }
         ]
       },
@@ -385,72 +325,48 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You decide to move on, and your journey continues without incident.",
+            "text": "Fucking nope.",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "As you depart, your ship experiences a minor technical glitch.",
-            "weight": 0.2
           }
         ]
       }
     ]
   },
   {
-    "title": "Encounter with Space Pirates",
-    "text": "You encounter a group of space pirates. What do you do?",
+    "title": "Bounty Hunters",
+    "text": "You encounter a ragtag group of bounty hunters. \n\nWhat do you do?",
     "imageKey": "spacepirates",
     "options": [
       {
-        "text": "Engage the pirates in combat",
+        "text": "Attack!",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your combat skills prevail, and you defeat the space pirates, securing valuable loot.",
+            "text": "Your combat skills prevail, and you soundly defeat the bounty hunters, securing valuable loot.\n\n",
             "weight": 0.6
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "The battle is intense, and your ship sustains moderate damage in the process.",
-            "weight": 0.4
           }
         ]
       },
       {
-        "text": "Attempt to negotiate with the pirates",
+        "text": "Ask them for directions",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your negotiation skills convince the pirates to accept FUELs and spare your ship.",
+            "text": "The bounty hunters were surprisingly helpful.\n\nThey also had this recipe for a killer vegan tomato bisque and honestly, \nyou don't miss the cream at all.",
             "weight": 0.7
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Negotiations fail, and the pirates attack your ship, causing moderate damage.",
-            "weight": 0.3
           }
         ]
       },
       {
-        "text": "Evade the pirates and flee",
+        "text": "Evade the bounty hunters",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your evasive maneuvers allow you to escape the space pirates without any harm.",
+            "text": "For a group whose whole thing is finding people, they were shockingly easy to sneak past.\n\nOn to the next sector!",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "While evading, your ship sustains minor damage from enemy fire.",
-            "weight": 0.2
           }
         ]
       }
@@ -458,7 +374,7 @@
   },
   {
     "title": "Unexpected Meteor Shower",
-    "text": "Your spaceship encounters a sudden meteor shower. What do you do?",
+    "text": "Your spaceship encounters a sudden meteor shower. \n\nWhat do you do?",
     "imageKey": "meteorshower",
     "options": [
       {
@@ -467,14 +383,8 @@
           {
             "type": "FUEL",
             "value": 4,
-            "text": "Your shields hold up, and you fully navigate through the meteor shower unharmed.",
+            "text": "Your shields fucking CRUSH IT. Not a single scratch.\n\n You fully navigate through the meteor shower unharmed.\n\nAlso, mad bragging rights for your shield tech. Dude's a pro.",
             "weight": 0.7
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Despite your shields, some meteors breach and cause minor damage to your ship.",
-            "weight": 0.3
           }
         ]
       },
@@ -484,39 +394,27 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your quick thinking and technology usage divert the meteor shower FUELfully.",
+            "text": "You are able to repel the meteors using your ship's ion exhaust.\n\nWhich is totally a real thing and not something I just made up.",
             "weight": 0.6
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Your attempt to divert the meteors causes minor damage to your ship's systems.",
-            "weight": 0.4
           }
         ]
       },
       {
-        "text": "Wait it out and hope for the best",
+        "text": "Make sure the crew knows the difference between meteor and meteorite",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 2,
-            "text": "The meteor shower subsides, and your ship remains unharmed.",
+            "text": "It's only a meteorite after it hits the ground. If it's still in the sky, it's a meteor.\n\n(Technically, these were 'meteoroids' since they are still in interplanetary space\n but meteor reads better in the text)",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "While waiting, some meteors strike your ship, causing minor damage.",
-            "weight": 0.2
           }
         ]
       }
     ]
   },
   {
-    "title": "Exploration of a Gas Giant's Moon",
-    "text": "You decide to explore one of the moons of a gas giant. What do you do?",
+    "title": "A Gas Giant's Moon",
+    "text": "You approach one of the moons of a gas giant. \n\nWhat do you do?",
     "imageKey": "gasgiantmoon",
     "options": [
       {
@@ -525,14 +423,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You find unique and valuable minerals while collecting samples.",
+            "text": "You find unique and valuable minerals while collecting samples.\n\nHurray.",
             "weight": 0.6
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Your landing is rough, causing minor damage to your spaceship.",
-            "weight": 0.4
           }
         ]
       },
@@ -542,97 +434,67 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your drones capture valuable data about the moon's geological features.",
+            "text": "Your drones capture valuable data about the moon's geological features.\n\nYou also capture footage that will be absolutely KILLER for engagement on your socials.",
             "weight": 0.7
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "The drone deployment reveals no significant findings.",
-            "weight": 0.3
           }
         ]
       },
       {
-        "text": "Decide to stay in orbit and observe from the ship",
+        "text": "No fart joke? Seriously?",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your decision to stay in orbit allows you to continue your journey without incidents.",
+            "text": "I mean, there's already the \"moon\" bit, like when someone exposes their butt. \n\nBetween that, \"gas giant\", and \"Uranus\" it practically writes itself!",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "While in orbit, your ship's systems experience a minor malfunction.",
-            "weight": 0.2
           }
         ]
       }
     ]
   },
   {
-    "title": "Encounter with an Interstellar Anomaly",
-    "text": "You come across a mysterious interstellar anomaly. What do you do?",
+    "title": "An Interstellar Anomaly",
+    "text": "You come across a mysterious Interstellar anomaly. \n\nWhat do you do?",
     "imageKey": "interstellaranomaly",
     "options": [
       {
-        "text": "Investigate the anomaly up close",
+        "text": "Grab a Memento from the surface",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You gather unique scientific data from the anomaly, enhancing your knowledge.",
+            "text": "I mean... it WAS a little obvious to capitalize the titles and all, but subtlety is hit-or-miss.",
             "weight": 0.6
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Approaching the anomaly causes minor damage to your ship's sensors.",
-            "weight": 0.4
           }
         ]
       },
       {
-        "text": "Analyze the anomaly from a distance using advanced equipment",
+        "text": "Try to gain Prestige from fellow astronauts",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your analysis from a distance yields valuable insights into the anomaly's nature.",
+            "text": "It didn't always work, but he really made a lot of bold storytelling choices.\n\nAnd come on - Hugh Jackman? SWOON CITY",
             "weight": 0.7
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "Despite your advanced equipment, no remarkable data is obtained.",
-            "weight": 0.3
           }
         ]
       },
       {
-        "text": "Decide to change course and avoid the anomaly",
+        "text": "Try to uncover the source of the anomaly's Inception",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You change course and continue your journey without encountering any issues.",
+            "text": "Trying to work in \"Dark (K)night\" would have been too much of a stretch I think",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "As you change course, your ship experiences a minor technical malfunction.",
-            "weight": 0.2
           }
         ]
       }
     ]
   },
   {
-    "title": "Asteroid Mining Operation",
-    "text": "You find a rich asteroid field suitable for mining. What do you do?",
+    "title": "Mining Operation",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
     "imageKey": "asteroidmining",
     "options": [
       {
@@ -641,14 +503,8 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining operation yields a valuable haul of minerals and resources.",
+            "text": "Going right for the biggest one...\n\nKind of a size queen, are we?",
             "weight": 0.6
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "During mining, an unexpected asteroid collision damages your mining equipment.",
-            "weight": 0.4
           }
         ]
       },
@@ -658,14 +514,8 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.",
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store.",
             "weight": 0.7
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "The mining drones do not uncover any remarkable resources in the selected asteroids.",
-            "weight": 0.3
           }
         ]
       },
@@ -675,14 +525,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You decide to move on and continue your exploration without any issues.",
+            "text": "Giving up? Already?\n\nYour mother was right.",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "As you leave the asteroid field, your ship experiences a minor technical glitch.",
-            "weight": 0.2
           }
         ]
       }
