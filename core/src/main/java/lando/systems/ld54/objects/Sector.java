@@ -32,6 +32,7 @@ public class Sector {
     public boolean isEncounterActive = true;
 
     public int distanceFromEarth;
+    public boolean isGoal;
 
     public PullPlayerShipInfluencer pullPlayerShip;
     public PushJunkInfluencer pushJunk;
@@ -45,6 +46,7 @@ public class Sector {
         this.bounds = new Rectangle(x * WIDTH, y * HEIGHT, WIDTH, HEIGHT);
         this.encounter = encounter;
         this.encounter.sector = this;
+        this.isGoal = false;
 
         int earthX = GameScreen.SECTORS_WIDE /2 ;
         int earthY = GameScreen.SECTORS_HIGH /2 ;

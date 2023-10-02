@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Config;
+import lando.systems.ld54.Main;
 import lando.systems.ld54.Stats;
 import lando.systems.ld54.assets.Asteroids;
 import lando.systems.ld54.assets.PlanetManager;
@@ -48,7 +49,7 @@ public class GameScreen extends BaseScreen {
     public static float gameWidth = Config.Screen.window_width * SECTORS_WIDE;
     public static float gameHeight = Config.Screen.window_height * SECTORS_HIGH;
 
-    public static final int LAUNCHES_FOR_SCAN = 2;
+    public static final int LAUNCHES_FOR_SCAN = 3;
     public static final int LAUNCHES_FOR_SHIELD = 4;
 
     public final Vector3 mousePos = new Vector3();
@@ -161,6 +162,7 @@ public class GameScreen extends BaseScreen {
         homeSector.pushJunk.setRange(350);
 
         goalSector = sectors.get(possibleGoals.random());
+        goalSector.isGoal = true;
         goalSector.encounter = null;
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
@@ -614,6 +616,10 @@ public class GameScreen extends BaseScreen {
         Stats.numEncounters++;
         Time.pause_timer = 0f;
         encounterUI.remove();
+        if (encounter.sector.isGoal) {
+            Main.game.setScreen(new EndScreen());
+            return;
+        }
         // TODO: SOUND HERE (WOOSH as it scans the sector)
         game.audioManager.playSound(AudioManager.Sounds.radarReveal, 1.0f);
 //        game.audioManager.playSound(AudioManager.Sounds.radarPing, 2f);
@@ -682,7 +688,7 @@ public class GameScreen extends BaseScreen {
         }
 
 
-        if (!scanHelperActive && launchesSinceEncounterScan > LAUNCHES_FOR_SCAN && closestUnscannedNonBossSector != null){
+        if (!scanHelperActive && launchesSinceEncounterScan > LAUNCHES_FOR_SCAN && closestUnscannedNonBossSector != null && playerShips.size == 0){
             launchesSinceEncounterScan = 0;
             closestUnscannedNonBossSector.scan();
         }
