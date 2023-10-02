@@ -3,6 +3,7 @@
     "title": "Hostile Space Pirates",
     "text": "You run afoul of a group of space pirates on their way to plunder other hapless\nspacefarers like yourself \n \nHow do you proceed?",
     "imageKey": "asuka",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Attack the brigands!",
@@ -44,6 +45,7 @@
     "title": "Alien Nation",
     "text": "You come across a planet populated by a species you've never seen before!\n\nThese creatures must be. . .",
     "imageKey": "cherry",
+    "type": "BATTLE",
     "options": [
         {
             "text": "Destroyed!",
@@ -84,6 +86,7 @@
     "title": "Multiple Ore Chasms",
     "text": "Glistening caverns cover the nearby planet's surface.\n\nExploring these crevices may yield untold riches - or be a waste of time and energy.\n\nHow do you proceed?",
     "imageKey": "spaceship",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Dive in with reckless abandon",
@@ -124,6 +127,7 @@
     "title": "Finger On The Pulsar",
     "text": "Your ship comes dangerously close to a hyper-energetic pulsar.\n\nYou might be able to use its emissions for fuel . . .\n\nWhat do you do?",
     "imageKey": "nebula",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Get a closer look",
@@ -153,7 +157,7 @@
           {
             "type": "NOTHING",
             "value": 0,
-            "text": "After some time, the pulsar's energy emissions dissipate.\n\nYou continue your journey unharmed.",
+            "text": "After some time, the pulsar's energy emissions dissipate.\n\nYou continue your journey unharmed, albeit a bit lamer for it..",
             "weight": 0.8
           }
         ]
@@ -164,6 +168,7 @@
     "title": "Black Hole Sun",
     "text": "You encounter a massive black hole. What do you do?",
     "imageKey": "blackhole",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Approach the black hole for research",
@@ -210,6 +215,7 @@
     "title": "A Mysterious Planet",
     "text": "You discover a planet that doesn't appear on any of your maps.\n\n What do you do?",
     "imageKey": "mysteriousplanet",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Land on the planet and explore",
@@ -250,6 +256,7 @@
     "title": "Asteroid Field",
     "text": "You enter a dense asteroid field. \n\nWhat do you do?",
     "imageKey": "asteroidfield",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Navigate carefully through the asteroid field",
@@ -290,6 +297,7 @@
     "title": "Abandoned Space Station",
     "text": "You come across an abandoned space station. \n\nTotally normal, not creepy at all.\n\nWhat do you do?",
     "imageKey": "abandonedstation",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Dock with the space station and explore its interior",
@@ -330,6 +338,7 @@
     "title": "Bounty Hunters",
     "text": "You encounter a ragtag group of bounty hunters. \n\nWhat do you do?",
     "imageKey": "spacepirates",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Attack!",
@@ -370,6 +379,7 @@
     "title": "Unexpected Meteor Shower",
     "text": "Your spaceship encounters a sudden meteor shower. \n\nWhat do you do?",
     "imageKey": "meteorshower",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Activate the ship's shields and navigate through the meteor shower",
@@ -410,6 +420,7 @@
     "title": "A Gas Giant's Moon",
     "text": "You approach one of the moons of a gas giant. \n\nWhat do you do?",
     "imageKey": "gasgiantmoon",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Land on the moon and collect samples",
@@ -450,6 +461,7 @@
     "title": "An Interstellar Anomaly",
     "text": "You come across a mysterious Interstellar anomaly. \n\nWhat do you do?",
     "imageKey": "interstellaranomaly",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Grab a Memento from the surface",
@@ -490,6 +502,7 @@
     "title": "Mining Operation",
     "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
     "imageKey": "asteroidmining",
+    "type": "BATTLE",
     "options": [
       {
         "text": "Begin mining operations on the largest asteroid",
@@ -508,7 +521,7 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store.",
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
             "weight": 0.7
           }
         ]
@@ -519,7 +532,457 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nYour mother was right.",
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Stellar Orbs",
+    "text": "You encounter what appears to be a flying recreational vehicle.\n\nThe crew are a handsome rogue and  \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+    "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "15",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "16",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+    "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "17",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+   "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "18",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "19",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+    "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "20",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "21",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "22",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "23",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "weight": 0.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "24",
+    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
+    "imageKey": "asteroidmining",
+  "type": "BATTLE",
+    "options": [
+      {
+        "text": "Begin mining operations on the largest asteroid",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "weight": 0.6
+          }
+        ]
+      },
+      {
+        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "possibleOutcomes": [
+          {
+            "type": "SCRAP",
+            "value": 1,
+            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "weight": 0.7
+          }
+        ]
+      },
+      {
+        "text": "Abandon the asteroid mining operation and continue your journey",
+        "possibleOutcomes": [
+          {
+            "type": "FUEL",
+            "value": 1,
+            "text": "Giving up? Already?\n\nMaybe your ex was right...",
             "weight": 0.8
           }
         ]

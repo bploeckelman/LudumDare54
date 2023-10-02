@@ -342,7 +342,7 @@ public class PlayerShip implements Collidable {
     public void collidedWith(Collidable object) {
 
         screen.audioManager.playSound(AudioManager.Sounds.thud, .5f);
-//        screen.audioManager.playSound(AudioManager.Sounds.squish, .5f);
+
 
         // assumes max velocity is 300
         if (!isShielded) {
@@ -362,6 +362,7 @@ public class PlayerShip implements Collidable {
 
         if (object instanceof Body) {
             screen.particles.bodySplatter((Body) object);
+                    screen.audioManager.playSound(AudioManager.Sounds.squish, .5f);
         }
     }
 

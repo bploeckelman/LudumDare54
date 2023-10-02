@@ -7,6 +7,7 @@ public class Encounter {
 
     public String title;
     public String text;
+    public String type;
     public String imageKey;
     public EncounterOption[] options;
     public Encounter() {}

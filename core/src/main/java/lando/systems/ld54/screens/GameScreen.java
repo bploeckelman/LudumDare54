@@ -118,6 +118,9 @@ public class GameScreen extends BaseScreen {
         var planetManager = new PlanetManager(this);
         earth = planetManager.createPlanets(planets);
 
+        var file = Gdx.files.internal("encounters/battle_encounters.json");
+        encounters = json.fromJson(Array.class, Encounter.class, file);
+
         levelMusic = audioManager.musics.get(AudioManager.Musics.mainTheme);
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
@@ -233,7 +236,6 @@ public class GameScreen extends BaseScreen {
         // TODO: DEBUG REMOVE ME
         {
             if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-//            Config.Debug.general = true;
                 if (!encounterShown) {
                     Encounter encounter = encounters.get(12);
                     encounter.sector = sectors.get(0);
@@ -249,10 +251,71 @@ public class GameScreen extends BaseScreen {
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
                 audioManager.swapMusic();
-
-//            audioManager.fadeMusic(AudioManager.Musics.mainTheme);
-//            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
             }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(1);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                       if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(2);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                       if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(3);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                       if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(4);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                       if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(5);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                       if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(6);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                       if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_7)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(7);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                       if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_8)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(8);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+                                   if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9)) {
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(9);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
+            }
+
         }
 
         miniMap.update(dt);
@@ -490,8 +553,8 @@ public class GameScreen extends BaseScreen {
     }
 
     private Encounter getRandomEncounter() {
-        var file = Gdx.files.internal("encounters/battle_encounters.json");
-        encounters = json.fromJson(Array.class, Encounter.class, file);
+//        var file = Gdx.files.internal("encounters/battle_encounters.json");
+//        encounters = json.fromJson(Array.class, Encounter.class, file);
         var index = MathUtils.random(encounters.size - 1);
 //        if(!Config.Debug.general) {
             return (Encounter) encounters.get(index);
