@@ -31,6 +31,8 @@ public class Sector {
     public boolean visited = false;
     public boolean isEncounterActive = true;
 
+    public int distanceFromEarth;
+
     public PullPlayerShipInfluencer pullPlayerShip;
     public PushJunkInfluencer pushJunk;
 
@@ -43,6 +45,11 @@ public class Sector {
         this.bounds = new Rectangle(x * WIDTH, y * HEIGHT, WIDTH, HEIGHT);
         this.encounter = encounter;
         this.encounter.sector = this;
+
+        int earthX = GameScreen.SECTORS_WIDE /2 ;
+        int earthY = GameScreen.SECTORS_HIGH /2 ;
+
+        distanceFromEarth = (int)Math.abs((earthX - x) * 1.6f) + Math.abs(earthY - y);
 
         // create 100x100 encounter bounds random in sector
         // TODO - these rands should be based on some fraction of a sector size

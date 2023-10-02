@@ -23,7 +23,7 @@ public class PlayerShip implements Collidable {
     public static final float MAX_SPEED = 400f;
 
     private static final float DRAG_FRICTION = 0.4f;
-    public static final float FUEL_PER_BAR_LEVEL = 300f;
+    public static final float FUEL_PER_BAR_LEVEL = 450f;
 
     private float mass = 100;
     private float health = 100;
@@ -73,7 +73,7 @@ public class PlayerShip implements Collidable {
 
         this.collisionBounds = new Rectangle(pos.x - size.x/3f, pos.y - size.y /3f, size.x * 2f/3f, size.y * .66f);
         this.collisionShape = new CollisionShapeCircle(size.x /3f, pos.x, pos.y);
-        this.fuel = Player.fuelLevel * FUEL_PER_BAR_LEVEL;
+        this.fuel = screen.player.fuelLevel * FUEL_PER_BAR_LEVEL;
         targetRotation = vel.angleDeg();
         rotation = targetRotation;
     }

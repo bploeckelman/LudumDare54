@@ -254,6 +254,8 @@ public class GameScreen extends BaseScreen {
         cameraController.update(dt);
         checkCurrentSector();
         particles.update(dt);
+        updateMinFuel();
+
         super.update(dt);
     }
 
@@ -503,5 +505,17 @@ public class GameScreen extends BaseScreen {
             physicsObjects.add(satellite);
             debris.add(satellite);
         }
+    }
+
+    private void updateMinFuel() {
+        int lowestDistance = Integer.MAX_VALUE;
+        for (Sector sector : sectors){
+            if (sector.distanceFromEarth == 0) continue;
+            if (sector.isEncounterActive){
+                lowestDistance = Math.min(lowestDistance, sector.distanceFromEarth);
+            }
+        }
+        player.minFuelLevel = Player.STARTING_FUEL + lowestDistance - 1;
+        player.addFuel(0);
     }
 }

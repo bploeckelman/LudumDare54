@@ -4,12 +4,14 @@ import com.badlogic.gdx.math.MathUtils;
 
 // Store global stuff for the player
 public class Player {
-    private final int STARTING_FUEL = 3;
-    public final int MAX_FUEL = 8;
+    public static final int STARTING_FUEL = 3;
+    public static final int MAX_FUEL = 8;
     private final float MAX_SCRAP = 500f;
 
-    public static int fuelLevel;
-    public static float scrap;
+    public int fuelLevel;
+    public float scrap;
+
+    public int minFuelLevel = STARTING_FUEL;
 
     public Player() {
         fuelLevel = STARTING_FUEL;
@@ -18,20 +20,14 @@ public class Player {
 
     public void addFuel(int fuel) {
         fuelLevel += fuel;
-        fuelLevel = MathUtils.clamp(fuelLevel, STARTING_FUEL, MAX_FUEL);
+        fuelLevel = MathUtils.clamp(fuelLevel, minFuelLevel, MAX_FUEL);
     }
 
-    public void useFuel(float fuel) {
-        fuelLevel -= fuel;
-        if (fuelLevel < 0) {
-            fuelLevel = 0;
-        }
-    }
 
     public void addScrap(float scrap) {
-        Player.scrap += scrap;
-        if (Player.scrap > MAX_SCRAP) {
-            Player.scrap = MAX_SCRAP;
+        scrap += scrap;
+        if (scrap > MAX_SCRAP) {
+            scrap = MAX_SCRAP;
         }
     }
 }
