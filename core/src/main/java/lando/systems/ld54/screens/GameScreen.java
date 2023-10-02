@@ -115,10 +115,10 @@ public class GameScreen extends BaseScreen {
             var sector = new Sector(this, getRandomEncounter(), x, y);
             sectors.add(sector);
 
-            // save index as possible goal
-            // if this sector is on an edge
-            if (x == 0 || x == SECTORS_WIDE - 1
-             || y == 0 || y == SECTORS_HIGH - 1) {
+            // save index as possible goal if this sector is on an edge, but not in the middle of an edge
+            var isOnEdge = (x == 0) || (x == SECTORS_WIDE - 1) || (y == 0) || (y == SECTORS_HIGH - 1);
+            var isNotMidEdge = (x != SECTORS_WIDE / 2) && (y != SECTORS_HIGH / 2);
+            if (isOnEdge && isNotMidEdge) {
                 possibleGoals.add(i);
             }
         }
