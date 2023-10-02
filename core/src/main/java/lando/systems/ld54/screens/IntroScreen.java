@@ -56,7 +56,7 @@ public class IntroScreen extends BaseScreen {
         if (accum > layout.height && Gdx.input.justTouched()) {
             launchGame();
         }
-        if (accum >= layout.height) {
+        if (accum >= layout.height + 500f) {
             launchGame();
         }
     }
