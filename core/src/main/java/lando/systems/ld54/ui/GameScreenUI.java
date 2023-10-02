@@ -11,30 +11,25 @@ import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.screens.GameScreen;
+import lando.systems.ld54.utils.Utils;
 
 public class GameScreenUI {
 
     static float WIDTH = Config.Screen.window_width * .2f;
-    static float HEIGHT = Config.Screen.window_height * .2f;
+    static float HEIGHT = Config.Screen.window_height * .25f;
 
     GameScreen screen;
     Rectangle bounds;
     Rectangle targetBounds;
-    Animation<TextureRegion> fuelAnimation1;
-    Animation<TextureRegion> fuelAnimation2;
-    Animation<TextureRegion> fuelAnimation3;
-    Animation<TextureRegion> fuelAnimation4;
-    Animation<TextureRegion> fuelAnimation5;
-    Animation<TextureRegion> fuelAnimation6;
-    Animation<TextureRegion> fuelAnimation7;
-    Animation<TextureRegion> fuelAnimation8;
     float accum;
     float fuelLevel;
+    float health = 1f;
+    float pulseTimer = 0f;
 
 
     public GameScreenUI(GameScreen screen) {
         this.screen = screen;
-        bounds = new Rectangle(5, screen.windowCamera.viewportHeight - HEIGHT - screen.miniMap.bounds.height - 15f, WIDTH, HEIGHT);
+        bounds = new Rectangle(5, 5f, WIDTH, HEIGHT);
         targetBounds = new Rectangle(bounds);
         fuelLevel = screen.player.fuelLevel;
     }
@@ -42,10 +37,13 @@ public class GameScreenUI {
     public void update(float dt) {
         bounds.x = screen.miniMap.bounds.x;
         accum+=dt;
+        pulseTimer+=dt;
         if (screen.currentShip != null && !screen.currentShip.isReset) {
             fuelLevel= screen.currentShip.fuel / screen.currentShip.FUEL_PER_BAR_LEVEL;
+            health = screen.currentShip.health / screen.currentShip.MAX_HEALTH;
         } else {
             fuelLevel = screen.player.fuelLevel;
+            health = 1f;
         }
     }
 
@@ -54,8 +52,28 @@ public class GameScreenUI {
         batch.setColor(1f, 1f, 1f, alpha);
         Assets.NinePatches.glass_blue.draw(batch, bounds.x - 5, bounds.y - 5, bounds.width + 10, bounds.height + 10);
         batch.setColor(Color.WHITE);
-        batch.draw(Main.game.assets.pickupsFuel.getKeyFrame(accum), bounds.x + 5f, bounds.y + bounds.height - 80f, 60f, 60f);
 
+        // Fuel Tank
+        var anim = Main.game.assets.pickupsFuel;
+        TextureRegion textureRegion;
+        if (screen.currentShip == null || screen.currentShip.isReset || screen.currentShip.fuel <= 0) {
+            textureRegion = anim.getKeyFrame(0f);
+        } else {
+            textureRegion = anim.getKeyFrame(accum);
+        }
+        batch.draw(textureRegion, bounds.x + 5f, bounds.y + bounds.height - 80f, 60f, 60f);
+
+        // Heart
+        TextureRegion icon = Main.game.assets.heartIcon;
+        float iconSize = 40f;
+        if (pulseTimer % 1.1f > (health)) {
+            float pulsePercentage = (pulseTimer % 0.25f) +1f;
+            iconSize = iconSize * pulsePercentage;
+        }
+        batch.draw(icon, bounds.x + 20f, bounds.y + bounds.height - 130f, iconSize, iconSize);
+
+        // Batteries
+        float endOfBatteriesY = 0f;
         for (int i = 0; i < screen.player.fuelLevel; i++) {
             Animation<TextureRegion> batteryAnimation;
             int row = i / 4;
@@ -84,11 +102,23 @@ public class GameScreenUI {
                     batteryAnimation = Main.game.assets.batteryEmpty;
                 }
             }
-            batch.draw(batteryAnimation.getKeyFrame(accum), bounds.x + 80f + (i % 4 * 40f), bounds.y + bounds.height - 50f - row * 30f , 40f, 30f);
+            endOfBatteriesY = bounds.y + bounds.height - 50f - row * 30f;
+            batch.draw(batteryAnimation.getKeyFrame(accum), bounds.x + 80f + (i % 4 * 40f), endOfBatteriesY, 40f, 30f);
         }
-        //batch.draw(Main.game.assets.batteryGreen.getKeyFrame(0), bounds.x + 80f, bounds.y + bounds.height - 50f, 40f, 30f);
-//        batch.draw(Main.game.assets.whitePixel, bounds.x + 60f + 10f + 5f, bounds.y + bounds.height - 40f, 30f, 30f);
- //       batch.draw(Main.game.assets.whitePixel, bounds.x + 90f + 10f + 5f + 5f, bounds.y + bounds.height - 40f, 30f, 30f);
+
+        float healthBarWidth = 160f;
+        float healthBarHeight = 20f;
+        float healthBarX = bounds.x + 80f;
+        float healthBarY = endOfBatteriesY - 70f;
+        float healthBarSmoothedHealth = MathUtils.lerp(0f, healthBarWidth, health);
+        // Health Bar that goes down from right to left
+        batch.setColor(Color.RED);
+        batch.draw(Main.game.assets.whitePixel, healthBarX, healthBarY, healthBarWidth, healthBarHeight);
+        batch.setColor(Color.FOREST);
+        batch.draw(Main.game.assets.whitePixel, healthBarX, healthBarY, healthBarSmoothedHealth, healthBarHeight);
+        batch.setColor(Color.WHITE);
+
+
 
     }
 }

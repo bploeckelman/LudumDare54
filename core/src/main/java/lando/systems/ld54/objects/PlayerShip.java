@@ -24,9 +24,10 @@ public class PlayerShip implements Collidable {
 
     private static final float DRAG_FRICTION = 0.4f;
     public static final float FUEL_PER_BAR_LEVEL = 450f;
+    public static final float MAX_HEALTH = 100f;
 
     private float mass = 100;
-    private float health = 100;
+    public float health = MAX_HEALTH;
 
     private Animation<TextureRegion> anim;
     private TextureRegion keyframe;

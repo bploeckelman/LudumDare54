@@ -90,6 +90,7 @@ public class Assets implements Disposable {
     public TextureRegion pixelRegion;
     public TextureRegion fuzzyCircle;
     public TextureRegion lockIcon;
+    public TextureRegion heartIcon;
 
     public Array<ShaderProgram> randomTransitions;
     public ShaderProgram starWarsShader;
@@ -389,6 +390,7 @@ public class Assets implements Disposable {
 
         fuzzyCircle = atlas.findRegion("fuzzy-circle");
         lockIcon = atlas.findRegion("icons/lock");
+        heartIcon = atlas.findRegion("icons/heart");
 
         inputPrompts = new InputPrompts(this);
 
