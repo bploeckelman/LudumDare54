@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.Stats;
 import lando.systems.ld54.audio.AudioManager;
+import lando.systems.ld54.particles.Particle;
 import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
 import lando.systems.ld54.physics.CollisionShapeCircle;
@@ -60,6 +62,8 @@ public class PlayerShip implements Collidable {
     private long engineSoundID;
     public boolean isReset = false;
 
+    public Array<Particle> trailParticles;
+
     public PlayerShip(GameScreen gameScreen) {
         this.screen = gameScreen;
         this.anim = screen.assets.playerShipActive;
@@ -68,6 +72,7 @@ public class PlayerShip implements Collidable {
         this.vel = new Vector2();
         this.size = new Vector2();
         this.rotation = 0;
+        this.trailParticles = new Array<>();
 
         var homeBounds = screen.homeSector.bounds;
         this.pos.set(
@@ -122,7 +127,7 @@ public class PlayerShip implements Collidable {
         fuel = Math.max(0, fuel - vel.len() * dt);
 
         float curVelocity = vel.len2();
-        if (curVelocity < 1f) {
+        if (curVelocity < 10f) {
             trackMovement = false;
             screen.isShipMoving = false;
             screen.isLaunchPhase = inactive = true;
@@ -140,6 +145,8 @@ public class PlayerShip implements Collidable {
         if (fuel > 0){
             screen.particles.addRocketPropulsionParticles(this);
         }
+
+        trailParticles.addAll(screen.particles.addShipTrail(pos.x, pos.y));
     }
 
     public void draw(SpriteBatch batch) {
@@ -227,6 +234,7 @@ public class PlayerShip implements Collidable {
         // remove this ship from drawing and physics since it is now in pieces
         screen.playerShips.removeValue(this, true);
         screen.physicsObjects.removeValue(this, true);
+        clearTrail();
         screen.isLaunchPhase = true;
     }
 
@@ -261,6 +269,7 @@ public class PlayerShip implements Collidable {
         screen.physicsObjects.removeValue(this, true);
 
         screen.particles.shipExplode(pos.x, pos.y);
+        clearTrail();
     }
 
     private void resetCameraToHomeSector() {
@@ -270,6 +279,13 @@ public class PlayerShip implements Collidable {
             homeBounds.x + homeBounds.width / 2f,
             homeBounds.y + homeBounds.height / 2f,
             0);
+    }
+
+    private void clearTrail() {
+        for (Particle p : trailParticles) {
+            p.ttl = 5f;
+            p.ttlMax = 5f;
+        }
     }
 
     @Override

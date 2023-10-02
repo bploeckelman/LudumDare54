@@ -48,6 +48,7 @@ public class Particles implements Disposable {
         }
     }
 
+
     public void draw(SpriteBatch batch, Layer layer) {
         activeParticles.get(layer).forEach(particle -> particle.render(batch));
     }
@@ -131,6 +132,26 @@ public class Particles implements Disposable {
 //            );
         }
 
+    }
+
+    public Array<Particle> addShipTrail(float inX, float inY) {
+        Array<Particle> trailParticles = new Array<>();
+        for (int i = 0; i < 4; i++) {
+            float x = inX + MathUtils.random(-3, 3f);
+            float y = inY + MathUtils.random(-3f, 3f);
+            Particle p = Particle.initializer(particlePool.obtain())
+                .keyframe(assets.particles.smoke)
+                .startPos(x, y)
+                .startColor(.5f, .5f, .7f, .5f)
+                .endColor(0,0,0,0)
+                .timeToLive(1000f)
+                .startSize(MathUtils.random(10, 15f))
+                .endSize(10)
+                .init();
+            trailParticles.add(p);
+            activeParticles.get(Layer.background).add(p);
+        }
+        return trailParticles;
     }
 
     public void debrisExplode(float inX, float inY) {

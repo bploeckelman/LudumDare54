@@ -63,8 +63,8 @@ public class Particle implements Pool.Poolable {
     private float r, g, b, a;
 
     private boolean timed;
-    private float ttlMax;
-    private float ttl;
+    public float ttlMax;
+    public float ttl;
 
     private boolean dead;
     private boolean persistent;
