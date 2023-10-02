@@ -19,6 +19,7 @@ import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.ui.TitleScreenUI;
 import lando.systems.ld54.utils.accessors.Vector2Accessor;
+import lando.systems.ld54.utils.typinglabel.TypingLabel;
 
 public class TitleScreen extends BaseScreen {
 
@@ -53,8 +54,9 @@ public class TitleScreen extends BaseScreen {
     private MutableFloat mercuryAlpha = new MutableFloat(1f);
     private Vector2 shipTargetPos = new Vector2(Config.Screen.window_width + 100, Config.Screen.window_height - 100);
 
-
+    TypingLabel debug;
     public TitleScreen() {
+        debug = new TypingLabel(assets.font, "SOME BS", 500, 500);
         background = Main.game.assets.titleBackgroundTrash;
         titleScreenWordsNoCek = Main.game.assets.titleScreenWordsNoCek;
         titleScreenWordsWhiteTrail = Main.game.assets.titleScreenWordsWhiteTrail;
@@ -139,7 +141,7 @@ public class TitleScreen extends BaseScreen {
 
     @Override
     public void alwaysUpdate(float delta) {
-
+        debug.update(delta);
     }
 
     @Override
@@ -201,7 +203,7 @@ public class TitleScreen extends BaseScreen {
             // draw text "LD45" with font assets.freeTypeFont
             assets.abandonedFont50.draw(batch, "LD54", 50, 100);
         }
-
+        debug.render(batch);
         batch.end();
         if (drawUI) {
             uiStage.draw();
