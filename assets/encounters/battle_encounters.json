@@ -10,14 +10,8 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Victory! You destroyed them and claimed their fuel as yours.\n\nOnward, to the stars!",
+            "text": "Victory! You destroyed them and claimed their fuel as yours.\n\nI mean, it wasn't even close - you SMOKED them.\n\nOnward, to the stars!",
             "weight": 0.7
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "A valiant attempt but they straight-up SMOKED you. \n\nLike, it wasn't even close\n\nAND they stole your fuel! Jerks.",
-            "weight": 0.3
           }
         ]
       },
@@ -29,18 +23,18 @@
             "value": 1,
             "text": "Against all odds, the marauders could be reasoned with!\n\nThey even shared their resources with you. \n\nHow kind-hearted of those filthy space rats!",
             "weight": 1.0
-          },
+          }
+        ]
+      },
+      {
+        "text": "Let's make a deal, hmm?",
+        "possibleOutcomes": [
+
           {
             "type": "FUEL",
             "value": -1,
             "text": "Diplomacy was... not effective.\n\nLike a bully stealing lunch money from the nerdy kid in an 80s movie, they stole your fuel. \n\nAnd your dignity.",
             "weight": 1.0
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "Diplomacy was... not effective.\n\nThey stole your fuel, like a bully stealing lunch money from a nerd in an 80s movie.",
-            "weight": 0.0
           }
         ]
       }
@@ -293,7 +287,7 @@
     ]
   },
   {
-    "title": "Exploring an Abandoned Space Station",
+    "title": "Abandoned Space Station",
     "text": "You come across an abandoned space station. \n\nTotally normal, not creepy at all.\n\nWhat do you do?",
     "imageKey": "abandonedstation",
     "options": [
@@ -303,7 +297,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "You find valuable technology and supplies inside the space station\n\nDefinitely no disfigured bodies of long-dead travelers that traversed hell itself",
+            "text": "You find valuable technology and supplies inside the space station\n\nDefinitely no disfigured bodies of long-dead travelers who traversed \nhell itself by passing through the event horizon of a black hole",
             "weight": 0.6
           }
         ]
@@ -314,7 +308,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your scans reveal hidden compartments with useful resources on the space station.\n\nTotally worth it.",
+            "text": "Your scans reveal hidden compartments with useful resources on the space station.\n\nWhich are full of useful stuff and TOTALLY worth this creepy detour.",
             "weight": 0.7
           }
         ]
@@ -325,7 +319,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Fucking nope.",
+            "text": "Fucking nope as hell, brah.\n\nI am OUT.",
             "weight": 0.8
           }
         ]

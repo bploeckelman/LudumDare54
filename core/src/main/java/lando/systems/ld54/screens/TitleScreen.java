@@ -19,8 +19,9 @@ public class TitleScreen extends BaseScreen {
         background = Main.game.assets.gdx;
         Gdx.input.setInputProcessor(uiStage);
 //        Main.game.audioManager.playMusic(AudioManager.Musics.intro);
+        assets.intro.setLooping(true);
         assets.intro.play();
-        assets.intro.setVolume(audioManager.musicVolume.floatValue());
+        assets.intro.setVolume(.7f);
     }
 
     @Override

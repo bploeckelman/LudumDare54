@@ -20,13 +20,67 @@ public class IntroScreen extends BaseScreen {
     GlyphLayout layout;
     BitmapFont font;
 
-    String text = "\n\nSPACE Ltd.\n\n\nThis is the story, all about how\n\n" +
-        "my life got flip turned upside down\n\n" +
-        "And I'd like to take a minute so just sit right there\n\n" +
-        "I'll tell you all about how corporate\n\n"+
-        "imperialism destroyed a country called POTASSIA\n\n"+
+    String text = "\n\n" +
+        "Space. \n\n" +
+        "" +
+        "The Final Frontier. \n\n" +
         "\n\n" +
-        "--------\n\n";
+        "" +
+       "These are the voyages of th- \n\n" +
+        "" +
+        "...\n\n" +
+        "" +
+        "Wait, is this the right franchise?\n\n" +
+        "We've got the crawl going,\n" +
+        "but the name of the game is...\n\n" +
+        "" +
+        "\n\n" +
+        "And the sub-title is a play on...\n\n" +
+        "\n\n" +
+        "Anyway. Bottom line, Earth is FUCKED up. \n" +
+        "Most of the rest of the solar system too." +
+        "\n\n" +
+        "And it's honestly kind of our fault." +
+        "\n\n " +
+        "\n\n " +
+        "We've been living like tech-bro " +
+        "rock stars for generations now, " +
+        "which includes using near-Earth orbit as our space dump." +
+        "\n\n" +
+        "\n\n" +
+        "We're trying to find a new planet to start fresh. " +
+        "\n\n" +
+        "\n\n" +
+        "We send out ship after ship, but it's been rough." +
+        "\n\n" +
+        "When they aren't getting wrecked by the space debris, they're running out of fuel. " +
+        "\n\n" +
+        "\n\n" +
+        "There is shit floating around EVERYWHERE up there, and this huge cloud of microplastics makes navigation basically impossible." +
+        "\n\n" +
+
+
+        "We know that each sector in the local system has a waypoint somewhere in it, though.\n\n" +
+        "If we reach those, it'll help us chart our path and " +
+        "figure out where to send the next ship." +
+        "\n\n" +
+        "Some of them even have fuel and other resources on them that might make subsequent trips easier..." +
+        "\n\n" +
+        "\n\n" +
+        "We're also pretty sure one of the waypoints is actually a wormhole to a newer, better planet." +
+        "\n\n" +
+        "Which would be nice." +
+        "\n\n" +
+        "If we reach it, we'll be set!" +
+        "\n\n " +
+        "... but it does feel like our window of " +
+        "opportunity is closing.\n\n" +
+        "And the amount of space we have " +
+        "to fly in is... rather limited." +
+
+        "\n\n"
+        ;
+
 
     public IntroScreen() {
         layout = new GlyphLayout();

@@ -316,8 +316,8 @@ public class PlayerShip implements Collidable {
     @Override
     public void collidedWith(Collidable object) {
 
-//        screen.audioManager.playSound(AudioManager.Sounds.thud, .5f);
-        screen.audioManager.playSound(AudioManager.Sounds.squish, .5f);
+        screen.audioManager.playSound(AudioManager.Sounds.thud, .5f);
+//        screen.audioManager.playSound(AudioManager.Sounds.squish, .5f);
 
         // assumes max velocity is 300
         float speedModifier = vel.len() / 125; // 4x damage for full speed

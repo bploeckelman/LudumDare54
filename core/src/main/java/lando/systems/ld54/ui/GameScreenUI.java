@@ -118,7 +118,7 @@ public class GameScreenUI {
         batch.setColor(Color.WHITE);
 
         // Show number of encounters
-        String encounters = "Encounters: " + Stats.numEncounters + " / 23";
+        String encounters = "Waypoints: " + Stats.numEncounters + " / 23";
         Main.game.assets.starJediFont20.draw(batch, encounters, bounds.x + 20f, healthBarY - 30f);
 
     }
