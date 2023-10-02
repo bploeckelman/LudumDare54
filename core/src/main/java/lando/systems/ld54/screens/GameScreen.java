@@ -656,7 +656,7 @@ public class GameScreen extends BaseScreen {
         Stats.numEncounters++;
         Time.pause_timer = 0f;
         encounterUI.remove();
-        if (encounter.sector.isGoal) {
+        if (encounter.sector == goalSector) {
             Main.game.setScreen(new EndScreen());
             return;
         }
