@@ -144,6 +144,7 @@ public class PlayerShip implements Collidable {
         }
         if (fuel > 0){
             screen.particles.addRocketPropulsionParticles(this);
+            screen.particles.addShipSpeedParticles(this);
         }
 
         trailParticles.addAll(screen.particles.addShipTrail(pos.x, pos.y, vel.len() / 200f));

@@ -135,6 +135,28 @@ public class Particles implements Disposable {
 
     }
 
+    public void addShipSpeedParticles(PlayerShip ship) {
+        float shipSpeed = ship.vel.len();
+        int numParticles = (int)((shipSpeed - 100)/80);
+        for (int i = 0; i < numParticles; i++) {
+            float angle = MathUtils.random(0f, 360f);
+            float speed = MathUtils.random(20f, 70f);
+            float x = ship.pos.x + MathUtils.random(-5f, 5f);
+            float y = ship.pos.y + MathUtils.random(-5f, 5f);
+            float size = MathUtils.random(1f, 4f);
+            activeParticles.get(Layer.middle).add(Particle.initializer(particlePool.obtain())
+                .keyframe(assets.particles.circle)
+                .startPos(x, y)
+                .velocity(MathUtils.cosDeg(angle) * speed, MathUtils.sinDeg(angle) * speed)
+                .startColor(1f, MathUtils.random(0, 1f), 0,1f)
+                .endColor(0,0,0,0)
+                .startSize(size)
+                .endSize(0)
+                .timeToLive(MathUtils.random(2f, 4f))
+                .init()
+            );
+        }
+    }
     public Array<Particle> addShipTrail(float inX, float inY, float speedPercent) {
         speedPercent = MathUtils.clamp(speedPercent, 0, 1f);
         Utils.hsvToRgb(150f/360f * (1f - speedPercent), 1f, 1f, tempColor);
