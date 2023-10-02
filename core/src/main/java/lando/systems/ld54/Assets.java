@@ -92,6 +92,7 @@ public class Assets implements Disposable {
     public TextureRegion fuzzyCircle;
     public TextureRegion lockIcon;
     public TextureRegion heartIcon;
+    public TextureRegion arrowTexture;
     public Array<TextureRegion> bloodSplatters;
 
     public Array<ShaderProgram> randomTransitions;
@@ -399,6 +400,7 @@ public class Assets implements Disposable {
         fuzzyCircle = atlas.findRegion("fuzzy-circle");
         lockIcon = atlas.findRegion("icons/lock");
         heartIcon = atlas.findRegion("icons/heart");
+        arrowTexture = atlas.findRegion("arrow");
 
         bloodSplatters = new Array<>();
         bloodSplatters.addAll(atlas.findRegions("particles/splats/splat"));

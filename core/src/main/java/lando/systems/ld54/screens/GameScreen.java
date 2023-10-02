@@ -48,6 +48,9 @@ public class GameScreen extends BaseScreen {
     public static float gameWidth = Config.Screen.window_width * SECTORS_WIDE;
     public static float gameHeight = Config.Screen.window_height * SECTORS_HIGH;
 
+    public static final int LAUNCHES_FOR_SCAN = 2;
+    public static final int LAUNCHES_FOR_SHIELD = 4;
+
     public final Vector3 mousePos = new Vector3();
 
     public final Earth earth;
@@ -94,6 +97,10 @@ public class GameScreen extends BaseScreen {
 
     public boolean transitioning;
     public Vector2 tempVec2 = new Vector2();
+    public Vector2 tempVec22 = new Vector2();
+
+    public int launchesSinceEncounterScan;
+    public int launchesSinceEncounterShield;
 
     public GameScreen() {
         this(false);
@@ -243,7 +250,7 @@ public class GameScreen extends BaseScreen {
                 }
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-//                sectors.forEach(Sector::scan);
+                sectors.forEach(Sector::scan);
                 if (!playerShips.isEmpty()) {
                     var ship = playerShips.get(playerShips.size - 1);
                     ship.isShielded = !ship.isShielded;
@@ -366,7 +373,7 @@ public class GameScreen extends BaseScreen {
         cameraController.update(dt);
         checkCurrentSector();
         particles.update(dt);
-        updateMinFuel();
+        updateHelpers();
 
         super.update(dt);
     }
@@ -486,6 +493,18 @@ public class GameScreen extends BaseScreen {
         }
         launcher.render(batch);
         particles.draw(batch, Particles.Layer.middle);
+
+        // Show helper
+        for (Sector sector : sectors){
+            if (sector.scanned && sector.isEncounterActive) {
+                float SIZE = 50f;
+                float offset = 230 + 20 * MathUtils.cos(accum * 4f + sector.coords.x + sector.coords.y);
+                tempVec2.set(sector.encounterBounds.getCenter(tempVec2)).sub(gameWidth/2f, gameHeight/2f).nor();
+                tempVec22.set(gameWidth/2f, gameHeight/2f).mulAdd(tempVec2, offset);
+                batch.draw(assets.arrowTexture, tempVec22.x - SIZE/2f, tempVec22.y - SIZE/2f, SIZE/2f, SIZE/2f, SIZE, SIZE, 1, 1, tempVec2.angleDeg());
+            }
+        }
+
         batch.end();
     }
 
@@ -548,6 +567,12 @@ public class GameScreen extends BaseScreen {
         isShipMoving = true;
         Stats.numLaunches++;
         playerShips.add(ship);
+        if (launchesSinceEncounterShield > LAUNCHES_FOR_SHIELD){
+            launchesSinceEncounterShield = 0;
+            ship.isShielded = true;
+        }
+        launchesSinceEncounterScan++;
+        launchesSinceEncounterShield++;
 //        useFuel(power * .01f); //TODO: debug, place it in the drag controller and limit drag per fuel level
 //        resetWorldCamera();
     }
@@ -566,6 +591,8 @@ public class GameScreen extends BaseScreen {
 
     private void startEncounter(Encounter encounter) {
         encounterShown = true;
+        launchesSinceEncounterShield = 0;
+        launchesSinceEncounterScan = 0;
 //        game.audioManager.stopAllSounds();
         assets.engineRunning.stop();
         game.audioManager.playSound(AudioManager.Sounds.stingIntense);
@@ -632,13 +659,32 @@ public class GameScreen extends BaseScreen {
         }
     }
 
-    private void updateMinFuel() {
+    private void updateHelpers() {
         int lowestDistance = Integer.MAX_VALUE;
+        boolean scanHelperActive = false;
+        Sector closestUnscannedNonBossSector = null;
+        float closestDistance = Float.MAX_VALUE;
         for (Sector sector : sectors){
             if (sector.distanceFromEarth == 0) continue;
             if (sector.isEncounterActive){
+                // TODO: exclude Final
                 lowestDistance = Math.min(lowestDistance, sector.distanceFromEarth);
+                if (sector.scanned) {
+                    scanHelperActive = true;
+                } else {
+                    tempVec2.set(sector.encounterBounds.getCenter(tempVec2)).sub(gameWidth/2f, gameHeight/2f);
+                    if (closestDistance > tempVec2.len2()){
+                        closestDistance = tempVec2.len2();
+                        closestUnscannedNonBossSector = sector;
+                    }
+                }
             }
+        }
+
+
+        if (!scanHelperActive && launchesSinceEncounterScan > LAUNCHES_FOR_SCAN && closestUnscannedNonBossSector != null){
+            launchesSinceEncounterScan = 0;
+            closestUnscannedNonBossSector.scan();
         }
         player.minFuelLevel = Player.STARTING_FUEL + lowestDistance - 1;
         player.addFuel(0);

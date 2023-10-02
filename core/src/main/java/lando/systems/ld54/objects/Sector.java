@@ -22,7 +22,7 @@ public class Sector {
     private static final Color COLOR = Color.TEAL.cpy().add(0, 0, 0, -0.75f);
 
     private final GameScreen screen;
-    private final IntVector2 coords;
+    public final IntVector2 coords;
     public final Rectangle bounds;
     public Encounter encounter;
     public Rectangle encounterBounds;
