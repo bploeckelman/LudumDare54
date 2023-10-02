@@ -33,12 +33,27 @@ public class Satellite extends Debris {
 
     @Override
     public boolean shouldCollideWith(Collidable object) {
-        return (object instanceof PlayerShip);
+        // see collideWith
+        return (object instanceof PlayerShip) && (object != lastHit || hitCount < 5);
     }
+
+    private PlayerShip lastHit = null;
+    private int hitCount = 0;
 
     @Override
     public void collidedWith(Collidable object) {
-        if (object instanceof PlayerShip) { free = true; }
+        if (object instanceof PlayerShip) {
+            // if the reflection velocity doesn't go away from the ship, it can get multiple hits
+            // prevent this from destroying the ship
+            var ship = (PlayerShip)object;
+            if (lastHit == ship) {
+                hitCount++;
+            } else {
+                lastHit = ship;
+                hitCount = 0;
+            }
+            free = true;
+        }
     }
 
     @Override
