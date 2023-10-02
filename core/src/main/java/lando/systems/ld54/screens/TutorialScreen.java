@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 import lando.systems.ld54.Assets;
@@ -21,6 +24,18 @@ public class TutorialScreen extends BaseScreen {
     private float alpha;
     private float targetAlpha;
     private float accum;
+    private float headingBottomY;
+
+    private final BitmapFont fontSm;
+    private final BitmapFont fontMd;
+    private final BitmapFont fontLg;
+    private final GlyphLayout layout;
+
+    static class Art {
+        TextureRegion minimapUnexplored;
+        TextureRegion minimapExplored;
+    }
+    private final Art art;
 
     public TutorialScreen() {
         this.numPages = 3;
@@ -32,6 +47,15 @@ public class TutorialScreen extends BaseScreen {
         this.accum = 0;
         this.alpha = 0;
         this.targetAlpha = 1;
+
+        this.fontSm = assets.abandonedFont20;
+        this.fontMd = assets.abandonedFont50;
+        this.fontLg = assets.abandonedFont100;
+        this.layout = assets.layout;
+
+        this.art = new Art();
+        art.minimapExplored = assets.atlas.findRegion("tutorial/minimap-explored");
+        art.minimapUnexplored = assets.atlas.findRegion("tutorial/minimap-unexplored");
     }
 
     @Override
@@ -42,15 +66,16 @@ public class TutorialScreen extends BaseScreen {
         super.update(delta);
         accum += delta;
 
-        if (alpha < targetAlpha) alpha = Math.min(targetAlpha, alpha + delta * 2f);
-        if (alpha > targetAlpha) alpha = Math.max(targetAlpha, alpha - delta * 4f);
+        if (alpha < targetAlpha) alpha = Math.min(targetAlpha, alpha + delta * 4f);
+        if (alpha > targetAlpha) alpha = Math.max(targetAlpha, alpha - delta * 8f);
         textColor.set(.8f, .8f, 1f, alpha);
 
         if (alpha == targetAlpha) {
             if (targetAlpha == 0) {
                 page++;
                 targetAlpha = 1f;
-                if (page >= numPages) {
+                if (page >= numPages && !exitingScreen) {
+                    exitingScreen = true;
                     game.setScreen(new GameScreen(true), assets.cubeShader, 2f);
                 }
             } else {
@@ -73,47 +98,83 @@ public class TutorialScreen extends BaseScreen {
         var patch = Assets.NinePatches.glass;
         patch.draw(batch, bounds.x, bounds.y, bounds.width, bounds.height);
 
-        assets.largeFont.getData().setScale(.8f);
-        assets.layout.setText(assets.largeFont, "Tutorial", titleColor, bounds.width, Align.center, true);
-        assets.largeFont.draw(batch, assets.layout, bounds.x, bounds.y + bounds.height - 20);
-        assets.largeFont.getData().setScale(1f);
+        fontLg.getData().setScale(.8f);
+        layout.setText(fontLg, "How to play!", titleColor, bounds.width, Align.center, true);
+        headingBottomY = bounds.y + bounds.height - 20 - layout.height;
+        fontLg.draw(batch, layout, bounds.x, bounds.y + bounds.height - 20);
+        fontLg.getData().setScale(1f);
 
-        float height = assets.layout.height;
-        assets.font.getData().setScale(.5f);
-        assets.layout.setText(assets.font, "(We somehow had time for this..)", titleColor, bounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + bounds.height - 40 - height);
+//        float height = layout.height;
+//        fontMd.getData().setScale(.5f);
+//        layout.setText(fontMd, "(We somehow had time for this..)", titleColor, bounds.width, Align.center, true);
+//        fontMd.draw(batch, layout, bounds.x, bounds.y + bounds.height - 40 - height);
 
         batch.setColor(1, 1, 1, alpha);
         switch (page) {
-            case 0:
-                drawPage1(batch);
-                break;
-            case 1:
-                drawPage2(batch);
-                break;
-            case 2:
-                drawPage3(batch);
-                break;
+            case 0: drawPage1(batch); break;
+            case 1: drawPage2(batch); break;
+            case 2: drawPage3(batch); break;
         }
         batch.setColor(Color.WHITE);
 
-        assets.font.getData().setScale(.5f);
+        fontMd.getData().setScale(.5f);
         String continueString = "Click or press a key to continue";
         if (page == 2) continueString = "Let's start!";
-        assets.layout.setText(assets.font, continueString, textColor, bounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + assets.layout.height + 15);
-        assets.font.getData().setScale(1f);
+        layout.setText(fontMd, continueString, textColor, bounds.width, Align.center, true);
+        fontMd.draw(batch, layout, bounds.x, bounds.y + layout.height + 15);
+        fontMd.getData().setScale(1f);
         batch.end();
     }
 
     @Override
-    public void renderFrameBuffers(SpriteBatch batch) {
-    }
+    public void renderFrameBuffers(SpriteBatch batch) {}
 
     private void drawPage1(SpriteBatch batch) {
-        // Packages
+        // map, encounters, goal(?)
+        float margin = 10f;
+        float x, y;
+        float lineThickness, lineRadius;
+        TextureRegion tex;
 
-        float delta = 60;
+        // sector map heading -----------------
+        var mapLineY = headingBottomY - 4 * margin;
+        layout.setText(fontMd, "Sector Map", Color.WHITE, bounds.width, Align.center, true);
+        fontMd.draw(batch, layout, bounds.x, mapLineY);
+        mapLineY -= layout.height;
+
+        // header border-bottom
+        lineThickness = 4f;
+        lineRadius = 140f;
+        assets.shapes.line(
+            bounds.x + bounds.width / 2f - lineRadius, mapLineY - lineThickness - 2,
+            bounds.x + bounds.width / 2f + lineRadius, mapLineY - lineThickness - 2,
+            Color.LIGHT_GRAY, lineThickness);
+        // end sector map heading -------------
+
+        // minimap section --------------------
+        tex = art.minimapUnexplored;
+        mapLineY -= tex.getRegionHeight() + 2 * margin;
+
+        y = mapLineY;
+        x = bounds.x + (bounds.width - tex.getRegionWidth()) / 2f - (tex.getRegionWidth() / 2f + 5 * margin);
+        batch.draw(tex, x, y);
+
+        // draw text between minimap images
+        layout.setText(fontSm, "  >>>  \nexplore\n  >>> ", Color.LIME, bounds.width, Align.center, true);
+        fontSm.draw(batch, layout, bounds.x, mapLineY + (tex.getRegionHeight() + layout.height) / 2f);
+
+        tex = art.minimapExplored;
+        x = bounds.x + (bounds.width - tex.getRegionWidth()) / 2f + (tex.getRegionWidth() / 2f + 5 * margin);
+        batch.draw(tex, x, y);
+        // end minimap section ----------------
+
+
+        // waypoints heading ------------------
+        // end waypoints heading --------------
+
+
+
+//        float delta = 60;
 //        for (int i = 0; i < 4; i++){
 //            TextureRegion tex = assets.cargoCyan.getKeyFrame(accum);
 //            switch(i){
@@ -133,21 +194,22 @@ public class TutorialScreen extends BaseScreen {
 //            }
 //            batch.draw(tex, bounds.x + 445 + (i * (delta+10)), bounds.y + 400, delta, delta);
 //        }
-        assets.layout.setText(assets.font, "Packages", textColor, bounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + 400 - 10);
+//        layout.setText(fontMd, "Packages", textColor, bounds.width, Align.center, true);
+//        fontMd.draw(batch, layout, bounds.x, bounds.y + 400 - 10);
 
 //        TextureRegion tex = Goal.Type.cyan.baseAnim.getKeyFrame(accum);
 //        batch.draw(tex, Config.Screen.window_width/2f - 30, bounds.y + 290, delta, delta);
 
-        assets.layout.setText(assets.font, "Goals", textColor, bounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + 290 - 10);
-
-        assets.layout.setText(assets.font, "You need to \"deliver\" the packages to their corresponding goals.\nEach level has a quota of packages that need to be delivered to move to the next level.", textColor, bounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + 200 - 10);
+//        layout.setText(fontMd, "Goals", textColor, bounds.width, Align.center, true);
+//        fontMd.draw(batch, layout, bounds.x, bounds.y + 290 - 10);
+//
+//        layout.setText(fontMd, "You need to \"deliver\" the packages to their corresponding goals.\nEach level has a quota of packages that need to be delivered to move to the next level.", textColor, bounds.width, Align.center, true);
+//        fontMd.draw(batch, layout, bounds.x, bounds.y + 200 - 10);
     }
 
     private void drawPage2(SpriteBatch batch) {
-        // Controls
+        // fuel, speed, health(?)
+
         float delta = 60;
 //        for (int i = 0; i < 4; i++){
 //            TextureRegion tex = assets.gobbler.getKeyFrame(accum);
@@ -168,18 +230,20 @@ public class TutorialScreen extends BaseScreen {
 //            }
 //            batch.draw(tex, bounds.x + 445 + (i * (delta+10)), bounds.y + 400, delta, delta);
 //        }
-        assets.layout.setText(assets.font, "Enemies", textColor, bounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + 400 - 10);
+        layout.setText(fontMd, "Enemies", textColor, bounds.width, Align.center, true);
+        fontMd.draw(batch, layout, bounds.x, bounds.y + 400 - 10);
 
 //        batch.draw(assets.playerIdleRight.getKeyFrame(accum), Config.Screen.window_width/2f - 40, bounds.y + 290, 80, 80);
-//        assets.layout.setText(assets.font, "The Player (You)", textColor, bounds.width, Align.center, true);
-//        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + 290 - 10);
+//        layout.setText(fontMd, "The Player (You)", textColor, bounds.width, Align.center, true);
+//        fontMd.draw(batch, layout, bounds.x, bounds.y + 290 - 10);
 
-        assets.layout.setText(assets.font, "Move the player with WASD and press number keys [1-5] to use your powers\n\nThings bounce around like billiard balls.  Knock the packages into their goals by moving into them, but watch out enemies will show up to harass you.", textColor, bounds.width - 20, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x + 10, bounds.y + 200 - 10);
+        layout.setText(fontMd, "Move the player with WASD and press number keys [1-5] to use your powers\n\nThings bounce around like billiard balls.  Knock the packages into their goals by moving into them, but watch out enemies will show up to harass you.", textColor, bounds.width - 20, Align.center, true);
+        fontMd.draw(batch, layout, bounds.x + 10, bounds.y + 200 - 10);
     }
 
     private void drawPage3(SpriteBatch batch) {
+        // Controls ?
+
         // Powerups
         float delta = 60;
 //        for (int i = 0; i < 5; i++){
@@ -203,11 +267,11 @@ public class TutorialScreen extends BaseScreen {
 //                default:
 //            }
 //            batch.draw(ability.textureRegion, bounds.x + 100, bounds.y + 420 - (i * (delta+5)), delta, delta);
-//            assets.layout.setText(assets.font, ability.title + " - " + ability.description, textColor, bounds.width - 200, Align.left, true);
-//            assets.font.draw(batch, assets.layout, bounds.x + 190, bounds.y + 420 - (i * (delta+5)) + 30 + assets.layout.height/2f);
+//            layout.setText(fontMd, ability.title + " - " + ability.description, textColor, bounds.width - 200, Align.left, true);
+//            fontMd.draw(batch, layout, bounds.x + 190, bounds.y + 420 - (i * (delta+5)) + 30 + layout.height/2f);
 //        }
-        assets.layout.setText(assets.font, "Powerups: You can activate a powerup with the corresponding number key (1-5), but watch how much stamina you have (The bar at the top), great powers come with great costs.", textColor, bounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, bounds.x, bounds.y + 100 - 10);
+        layout.setText(fontMd, "Powerups: You can activate a powerup with the corresponding number key (1-5), but watch how much stamina you have (The bar at the top), great powers come with great costs.", textColor, bounds.width, Align.center, true);
+        fontMd.draw(batch, layout, bounds.x, bounds.y + 100 - 10);
     }
 
 }
