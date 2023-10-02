@@ -14,6 +14,7 @@ import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.screens.BaseScreen;
 import lando.systems.ld54.screens.CreditScreen;
 import lando.systems.ld54.screens.GameScreen;
+import lando.systems.ld54.screens.IntroScreen;
 
 public class TitleScreenUI extends Group {
 
@@ -41,7 +42,7 @@ public class TitleScreenUI extends Group {
                 screen.audioManager.stopMusic();
                 screen.exitingScreen = true;
                 Gdx.input.setInputProcessor(null);
-                screen.game.setScreen(new GameScreen());
+                screen.game.setScreen(new IntroScreen());
             }
         });
 
