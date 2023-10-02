@@ -50,6 +50,14 @@ public class PushJunkInfluencer implements Influencer {
         }
     }
 
+    public void setStrength(float newValue) {
+        strength.setNewValue(newValue, 0.1f);
+    }
+
+    public void setRange(float newValue) {
+        range.setNewValue(newValue, 0.1f);
+    }
+
     @Override
     public float getStrength() {
         return strength.getValue();

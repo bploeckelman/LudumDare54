@@ -141,6 +141,7 @@ public class GameScreen extends BaseScreen {
             homeSector.bounds.x + homeSector.bounds.width / 2f,
             homeSector.bounds.y + homeSector.bounds.height / 2f
         );
+        homeSector.pushJunk.setRange(350);
 
         goalSector = sectors.get(possibleGoals.random());
         goalSector.encounter = null;
@@ -528,9 +529,9 @@ public class GameScreen extends BaseScreen {
 
     private void placeSatellites(Planet planet) {
         var vector = new Vector2();
-        float satellitePath = planet.size * 1.5f;
+        float satellitePath = planet.size * 2.25f;
 
-        int satelliteCount = MathUtils.random(8, 14);
+        int satelliteCount = MathUtils.random(10, 15);
         float aveAngle = 360f / satelliteCount;
         while (satelliteCount-- > 0) {
             vector.set(satellitePath + MathUtils.random(30f), 0);

@@ -103,7 +103,7 @@ public class PlayerShip implements Collidable {
             trackMovement = false;
             screen.isShipMoving = false;
             screen.isLaunchPhase = inactive = true;
-            Time.do_after_delay(3f, (params) -> resetCameraToHomeSector());
+            Time.do_after_delay(2f, (params) -> resetCameraToHomeSector());
             return;
         }
 
@@ -126,7 +126,7 @@ public class PlayerShip implements Collidable {
             screen.isShipMoving = false;
             screen.isLaunchPhase = inactive = true;
             becomeDerelict();
-            Time.do_after_delay(3f, (params) -> resetCameraToHomeSector());
+            Time.do_after_delay(2f, (params) -> resetCameraToHomeSector());
         } else {
             // get rotation based on velocity
             targetRotation = vel.angleDeg();

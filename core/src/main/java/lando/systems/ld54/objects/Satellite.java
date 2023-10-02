@@ -19,7 +19,7 @@ public class Satellite extends Debris {
         this.planet = planet;
         angleVector.set(x, y).sub(planet.centerPosition);
 
-        setRadius(10);
+        setRadius(20);
         angularMomentum = MathUtils.randomSign() * MathUtils.random(30f, 50f);
     }
 
