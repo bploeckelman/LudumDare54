@@ -554,24 +554,24 @@
   },
   {
     "title": "Stellar Orbs",
-    "text": "You encounter what appears to be a flying recreational vehicle.\n\nThe crew are a handsome rogue and  \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "text": "You encounter what appears to be a flying recreational vehicle.\n\nThe crew consists of a handsome rogue and a . . . talking dog-man? \n\nWhat do you do?",
+    "imageKey": "spaceballs",
     "characterKey": "asuka",
     "type": "BATTLE",
     "options": [
       {
-        "text": "Begin mining operations on the largest asteroid",
+        "text": "Change the password on your luggage",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "You're surrounded by assholes!\n\nAt least ",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "Order a pizza",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
@@ -597,7 +597,7 @@
   {
     "title": "An Odyssey in Space",
     "text": "You encounter a ship that appears to have a sentient onboard computer. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "imageKey": "discoveryone",
     "characterKey": "asuka",
     "options": [
       {
@@ -617,7 +617,7 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "You are overcome by a sudden urge towards violence . . . \n\nThose other apes better watch their asses.",
             "weight": 0.7
           }
         ]
@@ -638,7 +638,7 @@
   {
     "title": "Murder Sun",
     "text": "Is that a moon?\n\nNo, I think it's a space station. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "imageKey": "deathstar",
     "characterKey": "asuka",
     "type": "BATTLE",
     "options": [
@@ -654,23 +654,23 @@
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "Use the pressure",
         "possibleOutcomes": [
           {
-            "type": "SCRAP",
+            "type": "FUEL",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "Do . . . or do not.\n\nIt's your call, I'm good either way.",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "Don't get cocky",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "It was his first time as a gunner . . .\n\nProbably mostly beginner's luck.",
             "weight": 0.8
           }
         ]

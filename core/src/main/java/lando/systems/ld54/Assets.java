@@ -90,6 +90,7 @@ public class Assets implements Disposable {
     public Array<Animation<TextureRegion>> nagilum;
     public Array<Animation<TextureRegion>> starveFox;
     public Animation<TextureRegion> discoveryOne;
+    public Animation<TextureRegion> spaceBalls;
     public Animation<TextureRegion> deathStar;
     public Animation<TextureRegion> normandy;
     public Animation<TextureRegion> intergalactivcEagle5;
@@ -390,6 +391,7 @@ public class Assets implements Disposable {
         starveFox.add(new Animation<>(.1f, atlas.findRegions("encounters/starve-fox/starve-fox-chat-b/starve-fox-chat-b"), Animation.PlayMode.LOOP));
 
         discoveryOne = new Animation<>(.1f, atlas.findRegions("encounters/odyssey/2001"), Animation.PlayMode.LOOP);
+        spaceBalls = new Animation<>(.1f, atlas.findRegions("encounters/rv/spaceballs-rv"), Animation.PlayMode.LOOP);
         deathStar = new Animation<>(.1f, atlas.findRegions("encounters/deathstar/deathstar"), Animation.PlayMode.LOOP);
         normandy = new Animation<>(.1f, atlas.findRegions("encounters/normandy/masseffect-normandy"), Animation.PlayMode.LOOP);
         intergalactivcEagle5  = new Animation<>(.1f, atlas.findRegions("encounters/rv/spaceballs-rv"), Animation.PlayMode.LOOP);
@@ -583,6 +585,9 @@ public class Assets implements Disposable {
         encounterAnimationHashMap.put("gasgiantmoon", marsSpin);
         encounterAnimationHashMap.put("interstellaranomaly", mercurySpin);
         encounterAnimationHashMap.put("asteroidmining", jupiterSpin);
+        encounterAnimationHashMap.put("deathstar", deathStar);
+        encounterAnimationHashMap.put("discoveryone", discoveryOne);
+        encounterAnimationHashMap.put("spaceballs", spaceBalls);
 
         initialized = true;
         return 1;
