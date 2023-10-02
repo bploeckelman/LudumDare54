@@ -22,10 +22,12 @@ public class PullPlayerShipInfluencer implements Influencer {
     private boolean active;
 
     public PullPlayerShipInfluencer(GameScreen screen, float x, float y) {
+        COLOR.a = 0.8f;
+
         this.screen = screen;
         this.position = new Vector2(x, y);
-        this.strength = new InterpolatingFloat(600);
-        this.range = new InterpolatingFloat(200f);
+        this.strength = new InterpolatingFloat(700);
+        this.range = new InterpolatingFloat(150f);
         this.range.setInterpolation(Interpolation.elasticOut);
         this.influenceRenderer = new InfluenceRenderer(this, COLOR);
         this.active = true;

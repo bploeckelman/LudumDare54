@@ -23,12 +23,12 @@ public class PushJunkInfluencer implements Influencer {
     private boolean active;
 
     public PushJunkInfluencer(GameScreen screen, float x, float y) {
-        COLOR.a = 0.2f;
+        COLOR.a = 0.05f;
 
         this.screen = screen;
         this.position = new Vector2(x, y);
         this.strength = new InterpolatingFloat(-200);
-        this.range = new InterpolatingFloat(200f);
+        this.range = new InterpolatingFloat(250f);
         this.range.setInterpolation(Interpolation.elasticOut);
         this.influenceRenderer = new InfluenceRenderer(this, COLOR);
         this.active = true;
