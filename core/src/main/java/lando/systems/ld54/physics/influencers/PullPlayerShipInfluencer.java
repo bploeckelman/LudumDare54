@@ -11,7 +11,7 @@ import lando.systems.ld54.screens.GameScreen;
 
 public class PullPlayerShipInfluencer implements Influencer {
 
-    private static final Color COLOR = Color.SKY.cpy();
+    private static final Color COLOR = Color.TEAL.cpy();
 
     private final GameScreen screen;
     private final Vector2 position;
