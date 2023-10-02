@@ -34,6 +34,8 @@ public class TutorialScreen extends BaseScreen {
     static class Art {
         TextureRegion minimapUnexplored;
         TextureRegion minimapExplored;
+        TextureRegion waypointExample;
+        TextureRegion waypointGoal;
     }
     private final Art art;
 
@@ -56,6 +58,8 @@ public class TutorialScreen extends BaseScreen {
         this.art = new Art();
         art.minimapExplored = assets.atlas.findRegion("tutorial/minimap-explored");
         art.minimapUnexplored = assets.atlas.findRegion("tutorial/minimap-unexplored");
+        art.waypointExample = assets.atlas.findRegion("tutorial/waypoint-example");
+        art.waypointGoal = assets.atlas.findRegion("tutorial/waypoint-goal");
     }
 
     @Override
@@ -98,16 +102,11 @@ public class TutorialScreen extends BaseScreen {
         var patch = Assets.NinePatches.glass;
         patch.draw(batch, bounds.x, bounds.y, bounds.width, bounds.height);
 
-        fontLg.getData().setScale(.8f);
-        layout.setText(fontLg, "How to play!", titleColor, bounds.width, Align.center, true);
+//        fontMd.getData().setScale(.8f);
+        layout.setText(fontMd, "How to play!", titleColor, bounds.width, Align.center, true);
         headingBottomY = bounds.y + bounds.height - 20 - layout.height;
-        fontLg.draw(batch, layout, bounds.x, bounds.y + bounds.height - 20);
-        fontLg.getData().setScale(1f);
-
-//        float height = layout.height;
-//        fontMd.getData().setScale(.5f);
-//        layout.setText(fontMd, "(We somehow had time for this..)", titleColor, bounds.width, Align.center, true);
-//        fontMd.draw(batch, layout, bounds.x, bounds.y + bounds.height - 40 - height);
+        fontMd.draw(batch, layout, bounds.x, bounds.y + bounds.height - 20);
+//        fontMd.getData().setScale(1f);
 
         batch.setColor(1, 1, 1, alpha);
         switch (page) {
@@ -117,12 +116,12 @@ public class TutorialScreen extends BaseScreen {
         }
         batch.setColor(Color.WHITE);
 
-        fontMd.getData().setScale(.5f);
+//        fontSm.getData().setScale(.5f);
         String continueString = "Click or press a key to continue";
         if (page == 2) continueString = "Let's start!";
-        layout.setText(fontMd, continueString, textColor, bounds.width, Align.center, true);
-        fontMd.draw(batch, layout, bounds.x, bounds.y + layout.height + 15);
-        fontMd.getData().setScale(1f);
+        layout.setText(fontSm, continueString, textColor, bounds.width, Align.center, true);
+        fontSm.draw(batch, layout, bounds.x, bounds.y + layout.height + 15);
+//        fontSm.getData().setScale(1f);
         batch.end();
     }
 
@@ -131,24 +130,28 @@ public class TutorialScreen extends BaseScreen {
 
     private void drawPage1(SpriteBatch batch) {
         // map, encounters, goal(?)
-        float margin = 10f;
         float x, y;
+        float margin = 10f;
+        float borderOffset = 5f;
+        float mapLineY;
         float lineThickness, lineRadius;
         TextureRegion tex;
 
+        fontMd.getData().setScale(0.7f);
+
         // sector map heading -----------------
-        var mapLineY = headingBottomY - 4 * margin;
+        mapLineY = headingBottomY - 2 * margin;
         layout.setText(fontMd, "Sector Map", Color.WHITE, bounds.width, Align.center, true);
         fontMd.draw(batch, layout, bounds.x, mapLineY);
         mapLineY -= layout.height;
 
         // header border-bottom
-        lineThickness = 4f;
-        lineRadius = 140f;
+        lineThickness = 3f;
+        lineRadius = 110f;
         assets.shapes.line(
-            bounds.x + bounds.width / 2f - lineRadius, mapLineY - lineThickness - 2,
-            bounds.x + bounds.width / 2f + lineRadius, mapLineY - lineThickness - 2,
-            Color.LIGHT_GRAY, lineThickness);
+            bounds.x + bounds.width / 2f - lineRadius, mapLineY - lineThickness - borderOffset,
+            bounds.x + bounds.width / 2f + lineRadius, mapLineY - lineThickness - borderOffset,
+            Color.GRAY, lineThickness);
         // end sector map heading -------------
 
         // minimap section --------------------
@@ -169,42 +172,50 @@ public class TutorialScreen extends BaseScreen {
         // end minimap section ----------------
 
 
+        // move to next section...
+        mapLineY -= margin;
+
+
         // waypoints heading ------------------
+        layout.setText(fontMd, "Waypoints", Color.WHITE, bounds.width, Align.center, true);
+        fontMd.draw(batch, layout, bounds.x, mapLineY);
+        mapLineY -= layout.height;
+
+        // header border-bottom
+        lineThickness = 3f;
+        lineRadius = 100f;
+        assets.shapes.line(
+            bounds.x + bounds.width / 2f - lineRadius, mapLineY - lineThickness - borderOffset,
+            bounds.x + bounds.width / 2f + lineRadius, mapLineY - lineThickness - borderOffset,
+            Color.GRAY, lineThickness);
         // end waypoints heading --------------
 
+        // waypoints section ------------------
+        tex = art.waypointExample;
+        mapLineY -= tex.getRegionHeight() + 2 * margin;
 
+        y = mapLineY;
+        x = bounds.x + (bounds.width - tex.getRegionWidth()) / 2f - (tex.getRegionWidth() / 2f + 10 * margin);
+        batch.draw(tex, x, y);
 
-//        float delta = 60;
-//        for (int i = 0; i < 4; i++){
-//            TextureRegion tex = assets.cargoCyan.getKeyFrame(accum);
-//            switch(i){
-//                case 0:
-//                    tex = assets.cargoCyan.getKeyFrame(accum);
-//                    break;
-//                case 1:
-//                    tex = assets.cargoRed.getKeyFrame(accum);
-//                    break;
-//                case 2:
-//                    tex = assets.cargoGreen.getKeyFrame(accum);
-//                    break;
-//                case 3:
-//                    tex = assets.cargoYellow.getKeyFrame(accum);
-//                    break;
-//                default:
-//            }
-//            batch.draw(tex, bounds.x + 445 + (i * (delta+10)), bounds.y + 400, delta, delta);
-//        }
-//        layout.setText(fontMd, "Packages", textColor, bounds.width, Align.center, true);
-//        fontMd.draw(batch, layout, bounds.x, bounds.y + 400 - 10);
+        // draw waypoint explanation below waypoint image
+        layout.setText(fontSm, "encounter waypoints\nmake choices", Color.CYAN, bounds.width / 3f, Align.center, true);
+        fontSm.draw(batch, layout, bounds.x + 215, mapLineY - margin);
 
-//        TextureRegion tex = Goal.Type.cyan.baseAnim.getKeyFrame(accum);
-//        batch.draw(tex, Config.Screen.window_width/2f - 30, bounds.y + 290, delta, delta);
+        // draw general waypoint explanation between waypoint images
+        layout.setText(fontSm, "one waypoint\nin each sector\n\ninteract to\nreveal sector", Color.TAN, bounds.width, Align.center, true);
+        fontSm.draw(batch, layout, bounds.x, mapLineY + (tex.getRegionHeight() + layout.height) / 2f);
 
-//        layout.setText(fontMd, "Goals", textColor, bounds.width, Align.center, true);
-//        fontMd.draw(batch, layout, bounds.x, bounds.y + 290 - 10);
-//
-//        layout.setText(fontMd, "You need to \"deliver\" the packages to their corresponding goals.\nEach level has a quota of packages that need to be delivered to move to the next level.", textColor, bounds.width, Align.center, true);
-//        fontMd.draw(batch, layout, bounds.x, bounds.y + 200 - 10);
+        tex = art.waypointGoal;
+        x = bounds.x + (bounds.width - tex.getRegionWidth()) / 2f + (tex.getRegionWidth() / 2f + 10 * margin);
+        batch.draw(tex, x, y);
+
+        // draw goal explanation below goal waypoint image
+        layout.setText(fontSm, "find space station\nescape to free space!", Color.YELLOW, bounds.width / 3f, Align.center, true);
+        fontSm.draw(batch, layout, bounds.x + bounds.width / 2f - 20, mapLineY - margin);
+        // end waypoints section --------------
+
+        fontMd.getData().setScale(1f);
     }
 
     private void drawPage2(SpriteBatch batch) {
