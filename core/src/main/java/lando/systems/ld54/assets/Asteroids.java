@@ -13,7 +13,7 @@ public class Asteroids {
     private static Assets assets;
     private static ObjectMap<Level, Array<TextureRegion>> asteroids;
 
-    public enum Level { one, two, three, four }
+    public enum Level { one, two }
 
     public static void init(Assets assets) {
         Asteroids.assets = assets;
@@ -26,8 +26,6 @@ public class Asteroids {
         for (var region : assets.atlas.getRegions()) {
             if      (region.name.startsWith("asteroids/level-1/")) asteroids.get(Level.one).add(region);
             else if (region.name.startsWith("asteroids/level-2/")) asteroids.get(Level.two).add(region);
-            else if (region.name.startsWith("asteroids/level-3/")) asteroids.get(Level.three).add(region);
-            else if (region.name.startsWith("asteroids/level-4/")) asteroids.get(Level.four).add(region);
         }
     }
 

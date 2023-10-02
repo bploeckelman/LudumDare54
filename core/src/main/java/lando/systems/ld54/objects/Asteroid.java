@@ -33,15 +33,12 @@ public class Asteroid implements Collidable, JunkInfluencible {
     public Vector2 velocity;
     public Vector2 size;
     public Vector2 range;
-    private float rotationSpeed;
+    private final float rotationSpeed;
 
     private final Rectangle collisionBounds;
     private final CollisionShapeCircle collisionShape;
 
     public boolean alive;
-
-    private Tween floatTween;
-    private boolean updateFloat;
 
     // TODO - support rotation, tweening, etc...
     private static final float default_range = 100;
@@ -54,29 +51,16 @@ public class Asteroid implements Collidable, JunkInfluencible {
         this.initialPos = new Vector2(x, y);
         this.initialSize = new Vector2(region.getRegionWidth(), region.getRegionHeight());
         this.pos = initialPos.cpy();
-        this.size = initialSize.cpy();
+        this.size = initialSize.cpy().scl(MathUtils.random(0.5f, 1.75f));
         this.mass = size.x * size.y / 600f;
         this.health = mass * 2f;
         this.velocity = new Vector2(0, 0);
         this.range = new Vector2(default_range, default_range);
-        this.updateFloat = false;
-        this.alive = true;
+         this.alive = true;
         this.collisionBounds = new Rectangle(pos.x - size.x/2, pos.y - size.y /2, size.x, size.y);
         this.collisionShape = new CollisionShapeCircle(size.x/2f, pos.x, pos.y);
-        this.rotationSpeed = MathUtils.random(-30f, 30f);
-//        updateFloatTween();
+        this.rotationSpeed = MathUtils.random(-60f, 60f);
     }
-
-//    public Asteroid(TextureRegion region, float x, float y, float w, float h) {
-//        this.region = region;
-//        this.initialPos = new Vector2(x, y);
-//        this.initialSize = new Vector2(w, h);
-//        this.pos = initialPos.cpy();
-//        this.size = initialSize.cpy();
-//        this.range = new Vector2(default_range, default_range);
-//        this.updateFloat = false;
-//        updateFloatTween();
-//    }
 
     private float animTime = 0;
 
