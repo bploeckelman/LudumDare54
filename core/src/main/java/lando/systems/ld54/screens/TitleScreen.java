@@ -122,6 +122,7 @@ public class TitleScreen extends BaseScreen {
             float height = worldCamera.viewportHeight;
             TextureRegion mercuryKeyframe = mercury.getKeyFrame(accum);
             TextureRegion shipKeyframe = ship.getKeyFrame(accum);
+            TextureRegion explosionKeyframe = Main.game.assets.explosion.getKeyFrame(accum);
             batch.draw(background, 0, 0, width, height);
             if (swapBackgroundText) {
                 batch.draw(titleScreenWordsWhiteTrail, 0, 0, width, height);
@@ -136,6 +137,7 @@ public class TitleScreen extends BaseScreen {
             batch.draw(mercuryKeyframe, 940, 370, mercuryKeyframe.getRegionWidth() * 4, mercuryKeyframe.getRegionHeight() * 4);
             // rotate the ship so it's heading toward mercury
             float rotation = (float) Math.atan2(370 - shipPos.y, 940 - shipPos.x);
+            batch.draw(explosionKeyframe, 300, 300, 300, 300);
             batch.draw(shipKeyframe, shipPos.x, shipPos.y, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, (float) Math.toDegrees(rotation));
             // draw text "LD45" with font assets.freeTypeFont
             assets.abandonedFont50.draw(batch, "LD54", 50, 100);

@@ -436,7 +436,7 @@ public class Assets implements Disposable {
         arwing  = new Animation<>(.1f, atlas.findRegions("encounters/arwing/starfox-arwing"), Animation.PlayMode.LOOP);
         enterprise = new Animation<>(.1f, atlas.findRegions("encounters/enterprise/startrek-enterprise"), Animation.PlayMode.LOOP);
         podCity = new Animation<>(.1f, atlas.findRegions("encounters/pod-city/pod-city"), Animation.PlayMode.LOOP);
-        explosion = new Animation<>(.1f, atlas.findRegions("encounters/title-explosion/title-explosion"), Animation.PlayMode.LOOP);
+        explosion = new Animation<>(.1f, atlas.findRegions("title-explosion/title-explosion"), Animation.PlayMode.NORMAL);
 
         // Fonts
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
