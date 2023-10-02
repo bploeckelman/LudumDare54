@@ -34,7 +34,7 @@ public class CreditScreen extends BaseScreen {
     private final String developers = "{COLOR=gray}Developed by:{COLOR=white}\n {GRADIENT=white;gray}Brian Ploeckelman{ENDGRADIENT} \n {GRADIENT=white;gray}Doug Graham{ENDGRADIENT} \n {GRADIENT=white;gray}Brian Rossman{ENDGRADIENT} \n {GRADIENT=white;gray}Jeffrey Hwang{ENDGRADIENT}";
     private final String artists = "{COLOR=gray}Art by:{COLOR=white}\n {GRADIENT=white;gray}Matt Neumann{ENDGRADIENT}";
     private final String emotionalSupport = "{COLOR=cyan}Emotional Support:{COLOR=white}\n  Asuka, Osha, Cherry \n       obi, and yoda";
-    private final String music = "{COLOR=gray}Music, Sounds, and Miscellaneous:{COLOR=white}\n {GRADIENT=white;gray}Pete V{ENDGRADIENT}";
+    private final String music = "{COLOR=gray}Music, Writing, and Miscellaneous:{COLOR=white}\n {GRADIENT=white;gray}Pete V{ENDGRADIENT}";
     private final String libgdx = "Made with {COLOR=red}<3{COLOR=white}\nand LibGDX";
     private final String disclaimer = "{GRADIENT=black;gray}Disclaimer:{ENDGRADIENT}  {GRADIENT=gold;yellow}{JUMP=.27} No aliens were harmed in the making of this game{ENDJUMP}{ENDGRADIENT}";
 

@@ -990,12 +990,12 @@
         ]
       },
       {
-        "text": "Not your best work...",
+        "text": "Yeah - not your best work...",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Yeah, I agree.\n\nOnly so much you can do though.",
+            "text": "I agree.\n\nOnly so much you can do though.",
             "weight": 0.7
           }
         ]

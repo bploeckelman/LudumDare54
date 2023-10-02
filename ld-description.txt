@@ -1,0 +1,51 @@
+- ** [HTML5/WebGL](https://lando.systems/games/ld54-LINKHERE) **
+- ** [Desktop/Java](https://lando.systems/games/ld54-LINKHERE) **
+- ** [Source](https://github.com/bploeckelman/LudumDare54) **
+# Start Wreck: The Finite Frontier ️#
+
+
+The endless void of space sure feels a lot smaller when it's cluttered with space garbage.
+
+Boldly go where no one has gone before in the explore-and-escape space simulator Start Wreck: The Finite Frontier!
+
+Navigate your ship through a veritable sea of space-junk as you try to find your way to a new, unpolluted home.
+
+Visit the waypoint in each sector of the map to reveal more of the surrounding area so you can pilot your way to freedom.
+
+![ld53-gif.gif](///raw/1ca/43/z/5a23a.gif)
+
+# Controls:
+---
+**Click and Drag**: Launch your ship. The further back you pull the faster you go - but be careful! More speed also means more damage.
+
+**Scroll/Mousewheel**: zoom in and out of the map. Use the minimap to see which sectors you still need to clear.
+
+
+
+# About the Team:
+---
+
+[LandoSystems](https://lando.systems) is a group of jammers from Madison, Wisconsin that varies in size from 2 to 12 people. This is the team's 27th Ludum Dare game!! :grinning:
+
+# Team Members:
+---
+
+![screen2.png](///raw/1ca/43/z/5a256.png)
+
+![title-screen.png](///raw/1ca/43/z/5a24c.png)
+
+
+![screen3.png](///raw/1ca/43/z/5a257.png)
+
+
+
+Code:
+- Doug Graham [dsgraham](https://twitter.com/dsgraham) :elephant: [dsgraham on mastodon](https://mastodon.gamedev.place/@dsgraham)
+- Brian Ploeckelman [PalpatinesSmile](https://twitter.com/PalpatinesSmile) :elephant: [brian on mastodon](https://mastodon.gamedev.place/@brian)
+- Jeffrey Hwang :elephant: [jeffreyhwang on mastodon](https://mastodon.gamedev.place/@jeffreyhwang)
+
+Art:
+- Matt Neumann
+
+Music, Writing, Other Stuff:
+- Pete V
