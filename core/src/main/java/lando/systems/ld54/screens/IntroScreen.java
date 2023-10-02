@@ -20,7 +20,7 @@ public class IntroScreen extends BaseScreen {
     GlyphLayout layout;
     BitmapFont font;
 
-    String text = "\n\n\n\n\nThis is the story, all about how\n\n" +
+    String text = "\n\nSPACE Ltd.\n\n\nThis is the story, all about how\n\n" +
         "my life got flip turned upside down\n\n" +
         "And I'd like to take a minute so just sit right there\n\n" +
         "I'll tell you all about how corporate\n\n"+
