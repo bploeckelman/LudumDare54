@@ -40,8 +40,9 @@ public class MiniMap {
             targetBounds.x = 5;
         }
         if (targetBounds.x != bounds.x){
+            float speed = 3.5f;
             float dist = bounds.x - targetBounds.x;
-            float moveDist = 1280f * dt * 1.5f;
+            float moveDist = Config.Screen.window_width * dt * speed;
             if (Math.abs(dist) < moveDist){
                 bounds.x = targetBounds.x;
             } else {
