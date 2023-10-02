@@ -2,7 +2,7 @@
   {
     "title": "Hostile Space Pirates",
     "text": "You run afoul of a group of space pirates on their way to plunder other hapless\nspacefarers like yourself \n \nHow do you proceed?",
-    "imageKey": "asuka",
+    "imageKey": "starveFox",
     "characterKey": "mal9000",
     "type": "BATTLE",
     "options": [
@@ -45,7 +45,7 @@
   {
     "title": "Alien Nation",
     "text": "You come across a planet populated by a species you've never seen before!\n\nThese creatures must be. . .",
-    "imageKey": "cherry",
+    "imageKey": "nagilum",
     "characterKey": "",
     "type": "BATTLE",
     "options": [
@@ -129,7 +129,7 @@
   {
     "title": "Finger On The Pulsar",
     "text": "Your ship comes dangerously close to a hyper-energetic pulsar.\n\nYou might be able to use its emissions for fuel . . .\n\nWhat do you do?",
-    "imageKey": "nebula",
+    "imageKey": "blackhole",
     "characterKey": "",
     "type": "BATTLE",
     "options": [
@@ -169,7 +169,7 @@
     ]
   },
   {
-    "title": "Black Hole Sun",
+    "title": "Black Hole, Son",
     "text": "You encounter a massive black hole. What do you do?",
     "imageKey": "blackhole",
     "characterKey": "",
@@ -251,7 +251,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Dumb planet was probably stupid anyway.\n\n. . . \n\nNo, YOU'RE crying!",
+            "text": "Yeah! You leave that planet right where it is!\n\nIt was probably stupid anyway.",
             "weight": 0.8
           }
         ]
@@ -764,7 +764,7 @@
   {
     "title": "You Know This One",
     "text": "You come upon a ship that has seen countless adventures over the years, \nwith many, many different crews. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "imageKey": "enterprise",
     "characterKey": "",
     "type": "BATTLE",
     "options": [

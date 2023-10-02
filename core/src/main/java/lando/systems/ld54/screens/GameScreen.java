@@ -302,7 +302,7 @@ public class GameScreen extends BaseScreen {
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(1);
+                    Encounter encounter = encounters.get(0);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
@@ -316,49 +316,49 @@ public class GameScreen extends BaseScreen {
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(13);
+                    Encounter encounter = encounters.get(3);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(14);
+                    Encounter encounter = encounters.get(4);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(15);
+                    Encounter encounter = encounters.get(5);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(16);
+                    Encounter encounter = encounters.get(6);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_7)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(17);
+                    Encounter encounter = encounters.get(7);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_8)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(18);
+                    Encounter encounter = encounters.get(8);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                                    if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_9)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(23);
+                    Encounter encounter = encounters.get(9);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }

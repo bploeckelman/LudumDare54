@@ -80,6 +80,8 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> earthSpin;
     public Animation<TextureRegion> marsSpin;
     public Animation<TextureRegion> jupiterSpin;
+    public Animation<TextureRegion> blackhole;
+    public Animation<TextureRegion> asteroidfield;
     public Animation<TextureRegion> launchArrow;
     public Animation<TextureRegion> playerShip;
     public Animation<TextureRegion> playerShipActive;
@@ -376,6 +378,8 @@ public class Assets implements Disposable {
         earthSpin = new Animation<>(0.1f, atlas.findRegions("planets/earth/earth-spin"), Animation.PlayMode.LOOP);
         marsSpin = new Animation<>(0.08f, atlas.findRegions("planets/mars/mars-spin"), Animation.PlayMode.LOOP);
         jupiterSpin = new Animation<>(0.04f, atlas.findRegions("planets/gas/gas-spin"), Animation.PlayMode.LOOP);
+        blackhole = new Animation<>(0.09f, atlas.findRegions("planets/blackhole/blackhole"), Animation.PlayMode.LOOP);
+        asteroidfield = new Animation<>(0.29f, atlas.findRegions("planets/asteroidfield/asteroidfield"), Animation.PlayMode.LOOP);
         launchArrow = new Animation<>(.1f, atlas.findRegions("launch-arrow/launch-arrow"), Animation.PlayMode.LOOP);
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/idle/player-ship-idle"), Animation.PlayMode.LOOP);
         playerShipActive = new Animation<>(.1f, atlas.findRegions("ships/player/active/player-ship-active"), Animation.PlayMode.LOOP);
@@ -609,11 +613,11 @@ public class Assets implements Disposable {
         encounterAnimationHashMap.put("asuka", earthSpin);
         encounterAnimationHashMap.put("cherry", jupiterSpin);
         encounterAnimationHashMap.put("spaceship", marsSpin);
-        encounterAnimationHashMap.put("nebula", venusSpin);
-        encounterAnimationHashMap.put("blackhole", mercurySpin);
+        encounterAnimationHashMap.put("nebula", satellites.get(0));
+        encounterAnimationHashMap.put("blackhole", blackhole);
         encounterAnimationHashMap.put("mysteriousplanet", jupiterSpin);
-        encounterAnimationHashMap.put("asteroidfield", marsSpin);
-        encounterAnimationHashMap.put("abandonedstation", venusSpin);
+        encounterAnimationHashMap.put("asteroidfield", asteroidfield);
+        encounterAnimationHashMap.put("abandonedstation", satellites.get(2));
         encounterAnimationHashMap.put("spacepirates", mercurySpin);
         encounterAnimationHashMap.put("meteorshower", jupiterSpin);
         encounterAnimationHashMap.put("gasgiantmoon", marsSpin);
@@ -624,6 +628,7 @@ public class Assets implements Disposable {
         encounterAnimationHashMap.put("spaceballs", spaceBalls);
         encounterAnimationHashMap.put("arwing", arwing);
         encounterAnimationHashMap.put("normandy", normandy);
+        encounterAnimationHashMap.put("enterprise", enterprise);
         encounterAnimationHashMap.put("podcity", podCity);
 
         // characters
