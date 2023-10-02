@@ -422,7 +422,7 @@ public class GameScreen extends BaseScreen {
 
     private void checkCurrentSector() {
         if (currentShip != null) {
-            for (int i = 0; i < sectors.size - 1; i++) {
+            for (int i = 0; i < sectors.size; i++) {
                 var sector = sectors.get(i);
                 if (sector.bounds.contains(currentShip.pos)) {
                     if (sector.encounter != null && sector != homeSector && sector.isEncounterActive && sector.encounterBounds.contains(currentShip.pos)) {
