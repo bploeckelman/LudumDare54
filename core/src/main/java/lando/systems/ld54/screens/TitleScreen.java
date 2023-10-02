@@ -88,6 +88,7 @@ public class TitleScreen extends BaseScreen {
             .end()
             .push(Tween.call((type, source) -> {
                 exploded = true;
+                audioManager.playSound(AudioManager.Sounds.explosion);
                 swapBackgroundText = true;
             }))
 
@@ -131,6 +132,7 @@ public class TitleScreen extends BaseScreen {
             .push(Tween.call((type, source) -> {
                 showShip2 = false;
                 exploded2 = true;
+                audioManager.playSound(AudioManager.Sounds.explosion);
             }))
             .start(tween);
     }
