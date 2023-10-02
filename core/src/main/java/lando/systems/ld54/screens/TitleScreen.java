@@ -16,6 +16,7 @@ import lando.systems.ld54.audio.AudioManager;
 import lando.systems.ld54.ui.TitleScreenUI;
 import lando.systems.ld54.utils.accessors.FloatAccessor;
 import lando.systems.ld54.utils.accessors.Vector2Accessor;
+import org.w3c.dom.Text;
 
 public class TitleScreen extends BaseScreen {
 
@@ -33,6 +34,8 @@ public class TitleScreen extends BaseScreen {
     private Animation<TextureRegion> mercury;
     private float accum = 0f;
     private boolean swapBackgroundText = false;
+    private Animation<TextureRegion> ship;
+    private Vector2 shipPos;
 
 
     public TitleScreen() {
@@ -43,6 +46,8 @@ public class TitleScreen extends BaseScreen {
         titleScreenWordsBlueTrail = assets.titleScreenWordsBlueTrail;
         titleScreenWordsBlueTrailPos = new Vector2(Config.Screen.window_width / 2f, Config.Screen.window_height / 2f);
         titleScreenWordsBlueTrailSize = new Vector2(0, 0);
+        shipPos = new Vector2(300f, 800f);
+        ship = Main.game.assets.playerShipActive;
 
         ePos = new Vector2(0f, 0f);
         cPos = new Vector2(0f, 0f);
@@ -69,22 +74,24 @@ public class TitleScreen extends BaseScreen {
                 swapBackgroundText = true;
             }))
             .beginParallel()
-            .push(Tween.to(ePos, Vector2Accessor.XY, 1f)
-                .ease(Expo.OUT)
-                .target(0f, -50f))
-            .push(Tween.to(cPos, Vector2Accessor.XY, 1f)
-                .ease(Expo.OUT)
-                .target(0f, -70f))
-            .push(Tween.to(kPos, Vector2Accessor.XY, 1f)
-                .ease(Expo.OUT)
-                .target(0f, -80f))
-            .push(Tween.to(eRot, FloatAccessor.VALUE, 1f)
-                .ease(Expo.OUT)
-                .target(Float.valueOf(360f)))
+                .push(Tween.to(ePos, Vector2Accessor.XY, 1f)
+                    .target(0f, -50f))
+                .push(Tween.to(cPos, Vector2Accessor.XY, 1f)
+                    .ease(Expo.OUT)
+                    .target(0f, -70f))
+                .push(Tween.to(kPos, Vector2Accessor.XY, 1f)
+                    .ease(Expo.OUT)
+                    .target(0f, -80f))
+                .push(Tween.to(eRot, FloatAccessor.VALUE, 1f)
+                    .ease(Expo.OUT)
+                    .target(Float.valueOf(360f)))
             .end()
+            // rocket starts here
             .push(Tween.call((type, source) -> {
                 drawUI = true;
             }))
+            .push(Tween.to(shipPos, Vector2Accessor.XY, .5f)
+                .target(940, 370))
             .start(tween);
     }
 
@@ -114,6 +121,7 @@ public class TitleScreen extends BaseScreen {
             float width = worldCamera.viewportWidth;
             float height = worldCamera.viewportHeight;
             TextureRegion mercuryKeyframe = mercury.getKeyFrame(accum);
+            TextureRegion shipKeyframe = ship.getKeyFrame(accum);
             batch.draw(background, 0, 0, width, height);
             if (swapBackgroundText) {
                 batch.draw(titleScreenWordsWhiteTrail, 0, 0, width, height);
@@ -126,6 +134,9 @@ public class TitleScreen extends BaseScreen {
                 batch.draw(titleScreenWordsBlueTrail, titleScreenWordsBlueTrailPos.x, titleScreenWordsBlueTrailPos.y, titleScreenWordsBlueTrailSize.x, titleScreenWordsBlueTrailSize.y);
             }
             batch.draw(mercuryKeyframe, 940, 370, mercuryKeyframe.getRegionWidth() * 4, mercuryKeyframe.getRegionHeight() * 4);
+            // rotate the ship so it's heading toward mercury
+            float rotation = (float) Math.atan2(370 - shipPos.y, 940 - shipPos.x);
+            batch.draw(shipKeyframe, shipPos.x, shipPos.y, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, (float) Math.toDegrees(rotation));
             // draw text "LD45" with font assets.freeTypeFont
             assets.abandonedFont50.draw(batch, "LD54", 50, 100);
         }
