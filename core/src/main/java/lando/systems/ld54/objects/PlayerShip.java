@@ -226,6 +226,15 @@ public class PlayerShip implements Collidable {
         screen.debris.add(part);
         screen.physicsObjects.add(part);
 
+        // instantiate astronaut debris
+        var numBodies = MathUtils.random(1, 3);
+        Stats.numAstronautsEjected += numBodies;
+        for (int i = 0; i < numBodies; i++) {
+            var body = new Body(screen, pos.x, pos.y);
+            screen.debris.add(body);
+            screen.physicsObjects.add(body);
+        }
+
         screen.playerShips.removeValue(this, true);
         screen.physicsObjects.removeValue(this, true);
 
