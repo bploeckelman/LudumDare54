@@ -41,7 +41,7 @@ public class MiniMap {
         }
         if (targetBounds.x != bounds.x){
             float dist = bounds.x - targetBounds.x;
-            float moveDist = 1280f * dt;
+            float moveDist = 1280f * dt * 1.5f;
             if (Math.abs(dist) < moveDist){
                 bounds.x = targetBounds.x;
             } else {
