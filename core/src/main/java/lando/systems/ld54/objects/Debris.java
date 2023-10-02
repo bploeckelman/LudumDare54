@@ -10,9 +10,10 @@ import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
 import lando.systems.ld54.physics.CollisionShapeCircle;
+import lando.systems.ld54.physics.influencers.JunkInfluencible;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
-public class Debris implements Collidable {
+public class Debris implements Collidable, JunkInfluencible {
 
     private final Vector2 pos;
     private final Vector2 vel;
@@ -139,4 +140,6 @@ public class Debris implements Collidable {
         return true;
     }
 
+    @Override
+    public boolean canBeInfluenced() { return true; }
 }

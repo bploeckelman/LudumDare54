@@ -77,7 +77,7 @@ public class PushJunkInfluencer implements Influencer {
     @Override
     public boolean shouldEffect(Collidable c) {
         if (!active) return false;
-        return (c instanceof Debris || c instanceof Asteroid);
+        return c instanceof JunkInfluencible && ((JunkInfluencible) c).canBeInfluenced();
     }
 
     @Override

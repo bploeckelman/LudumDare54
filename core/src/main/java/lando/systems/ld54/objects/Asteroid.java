@@ -12,10 +12,11 @@ import lando.systems.ld54.Main;
 import lando.systems.ld54.physics.Collidable;
 import lando.systems.ld54.physics.CollisionShape;
 import lando.systems.ld54.physics.CollisionShapeCircle;
+import lando.systems.ld54.physics.influencers.JunkInfluencible;
 import lando.systems.ld54.utils.accessors.Vector2Accessor;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
-public class Asteroid implements Collidable {
+public class Asteroid implements Collidable, JunkInfluencible {
 
     public float friction = .7f;
     public float mass;
@@ -146,4 +147,7 @@ public class Asteroid implements Collidable {
     public boolean shouldCollideWith(Collidable object) {
         return true;
     }
+
+    @Override
+    public boolean canBeInfluenced() { return true; }
 }

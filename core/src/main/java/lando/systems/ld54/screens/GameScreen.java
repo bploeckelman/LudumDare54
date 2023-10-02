@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Config;
@@ -104,8 +105,7 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
         Asteroids.createTestAsteroids(asteroids);
-        physicsObjects.addAll(asteroids)
-        ;
+        physicsObjects.addAll(asteroids);
         var possibleGoals = new IntArray();
         var numSectors = SECTORS_WIDE * SECTORS_HIGH;
         for (int i = 0; i < numSectors; i++) {
@@ -182,6 +182,8 @@ public class GameScreen extends BaseScreen {
         uiStage.addActor(gameScreenUI);
         miniMap = new MiniMap(this);
         particles = new Particles(assets);
+
+        placeSatellites(earth);
     }
 
     @Override
@@ -475,9 +477,15 @@ public class GameScreen extends BaseScreen {
         player.addFuel(value);
     }
 
-    public void useFuel(float value) {
-        // use fuel from player
-        player.useFuel(value);
+    private void placeSatellites(Planet planet) {
+        var vector = new Vector2();
+        float satellitePath = planet.size * 1.5f;
+        for (int i = 0; i < MathUtils.random(3, 6); i++) {
+            vector.set(satellitePath + MathUtils.random(30f), 0);
+            vector.rotateDeg(MathUtils.random(360f)).add(planet.centerPosition);
+            var satellite = new Satellite(assets.satellites.random(), vector.x, vector.y);
+            physicsObjects.add(satellite);
+            debris.add(satellite);
+        }
     }
-
 }
