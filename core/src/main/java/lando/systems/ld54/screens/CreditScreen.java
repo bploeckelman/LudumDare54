@@ -27,48 +27,48 @@ public class CreditScreen extends BaseScreen {
     private final Animation<TextureRegion> kittenAnimation;
     private final TextureRegion background;
 
-    private final String title = "{GRADIENT=purple;cyan}Space Limited{ENDGRADIENT}";
+    private final String title = "{GRADIENT=purple;cyan}Start Wreck: The Finite Frontier{ENDGRADIENT}";
     private final String theme = "Made for Ludum Dare 54: Limited Space";
 
-    private final String thanks = "{GRADIENT=purple;cyan}Thanks for playing our game!{ENDGRADIENT}";
+    private final String thanks = "{GRADIENT=purple;cyan}Thank you for playing our game!{ENDGRADIENT}";
     private final String developers = "{COLOR=gray}Developed by:{COLOR=white}\n {GRADIENT=white;gray}Brian Ploeckelman{ENDGRADIENT} \n {GRADIENT=white;gray}Doug Graham{ENDGRADIENT} \n {GRADIENT=white;gray}Brian Rossman{ENDGRADIENT} \n {GRADIENT=white;gray}Jeffrey Hwang{ENDGRADIENT}";
     private final String artists = "{COLOR=gray}Art by:{COLOR=white}\n {GRADIENT=white;gray}Matt Neumann{ENDGRADIENT}";
     private final String emotionalSupport = "{COLOR=cyan}Emotional Support:{COLOR=white}\n  Asuka, Osha, Cherry \n       obi, and yoda";
-    private final String music = "{COLOR=gray}Music, Sounds, and Miscellaneous:{COLOR=white}\n {GRADIENT=white;gray}Pete Valeo{ENDGRADIENT}";
+    private final String music = "{COLOR=gray}Music, Sounds, and Miscellaneous:{COLOR=white}\n {GRADIENT=white;gray}Pete V{ENDGRADIENT}";
     private final String libgdx = "Made with {COLOR=red}<3{COLOR=white}\nand LibGDX";
-    private final String disclaimer = "{GRADIENT=black;gray}Disclaimer:{ENDGRADIENT}  {GRADIENT=gold;yellow}{JUMP=1.2}No bunnies were harmed in the making of this game{ENDJUMP}{ENDGRADIENT}";
+    private final String disclaimer = "{GRADIENT=black;gray}Disclaimer:{ENDGRADIENT}  {GRADIENT=gold;yellow}{JUMP=.27} No aliens were harmed in the making of this game{ENDJUMP}{ENDGRADIENT}";
 
     private float accum = 0f;
 
     public CreditScreen() {
         super();
 
-        titleLabel = new TypingLabel(assets.font, title.toLowerCase(), 0f, Config.Screen.window_height - 15f);
+        titleLabel = new TypingLabel(assets.abandonedFont50, title, 0f, Config.Screen.window_height - 20f);
         titleLabel.setWidth(Config.Screen.window_width);
         titleLabel.setFontScale(1f);
 
-        themeLabel = new TypingLabel(assets.smallFont, theme.toLowerCase(), 0f, Config.Screen.window_height - 70f);
+        themeLabel = new TypingLabel(assets.abandonedFont20, theme, 0f, Config.Screen.window_height - 80f);
         themeLabel.setWidth(Config.Screen.window_width);
         themeLabel.setFontScale(1f);
 
-        leftCreditLabel = new TypingLabel(assets.smallFont, developers.toLowerCase() + "\n\n" + emotionalSupport.toLowerCase() + "\n\n", 75f, Config.Screen.window_height / 2f + 135f);
+        leftCreditLabel = new TypingLabel(assets.abandonedFont20, developers.toLowerCase() + "\n\n" + emotionalSupport.toLowerCase() + "\n\n", 75f, Config.Screen.window_height / 2f + 135f);
         leftCreditLabel.setWidth(Config.Screen.window_width / 2f - 150f);
         leftCreditLabel.setLineAlign(Align.left);
         leftCreditLabel.setFontScale(1f);
 
         background = assets.pixelRegion;
 
-        rightCreditLabel = new TypingLabel(assets.smallFont, artists.toLowerCase() + "\n\n" + music.toLowerCase() + "\n\n" + libgdx.toLowerCase(), Config.Screen.window_width / 2 + 75f, Config.Screen.window_height / 2f + 135f);
+        rightCreditLabel = new TypingLabel(assets.abandonedFont20, artists.toLowerCase() + "\n\n" + music.toLowerCase() + "\n\n" + libgdx.toLowerCase(), Config.Screen.window_width / 2 + 75f, Config.Screen.window_height / 2f + 135f);
         rightCreditLabel.setWidth(Config.Screen.window_width / 2f - 150f);
         rightCreditLabel.setLineAlign(Align.left);
         rightCreditLabel.setFontScale(1f);
 
-        thanksLabel = new TypingLabel(assets.smallFont, thanks.toLowerCase(), 0f, 115f);
+        thanksLabel = new TypingLabel(assets.abandonedFont20, thanks, 0f, 105f);
         thanksLabel.setWidth(Config.Screen.window_width);
         thanksLabel.setLineAlign(Align.center);
         thanksLabel.setFontScale(1f);
 
-        disclaimerLabel = new TypingLabel(assets.abandonedFont20, disclaimer, 0f, 50f);
+        disclaimerLabel = new TypingLabel(assets.smallFont, disclaimer, 0f, 50f);
         disclaimerLabel.setWidth(Config.Screen.window_width);
         thanksLabel.setLineAlign(Align.center);
         disclaimerLabel.setFontScale(.6f);
@@ -108,7 +108,7 @@ public class CreditScreen extends BaseScreen {
 
     @Override
     public void render(SpriteBatch batch) {
-        ScreenUtils.clear(.1f, .1f, .6f, 1f);
+        ScreenUtils.clear(.0f, .0f, .1f, 1f);
 
         batch.enableBlending();
         batch.setProjectionMatrix(windowCamera.combined);
@@ -116,7 +116,7 @@ public class CreditScreen extends BaseScreen {
         {
             //batch.draw(background, 0, 0, Config.Screen.window_width, Config.Screen.window_height);
 
-            batch.setColor(0f, 0f, 0f, 0.6f);
+            batch.setColor(0f, 0f, 0f, .6f);
             batch.draw(assets.pixelRegion, 25f, 130f, Config.Screen.window_width / 2f - 50f, 400f);
             batch.draw(assets.pixelRegion, Config.Screen.window_width / 2f + 25f, 130f, Config.Screen.window_width / 2f - 50f, 400f);
 

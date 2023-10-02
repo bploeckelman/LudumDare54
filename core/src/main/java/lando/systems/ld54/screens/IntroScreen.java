@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+
 import com.badlogic.gdx.utils.Align;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
@@ -22,9 +23,11 @@ public class IntroScreen extends BaseScreen {
     PerspectiveCamera perspectiveCamera;
     GlyphLayout layout;
     BitmapFont font;
+    Rectangle skipRect;
+    Rectangle speedRect;
 
     // Last day Magic numbers
-    Rectangle skipButtonRect = new Rectangle(Config.Screen.window_width - 250, 20, 200, 60);
+    Rectangle skipButtonRect = new Rectangle(Config.Screen.window_width - 150, 620, 100, 40);
 
     String text = "\n\n" +
         "Space. \n\n" +
@@ -96,14 +99,14 @@ public class IntroScreen extends BaseScreen {
         layout.setText(font, text, Color.WHITE, worldCamera.viewportWidth, Align.center, true);
         font.getData().setScale(1f);
 
-        // TODO: Start intro Music
-//        audioManager.playMusic(AudioManager.Musics.intro);
 
         perspectiveCamera = new PerspectiveCamera(90, 1280, 800);
         perspectiveCamera.far=10000;
         perspectiveCamera.position.set(640, 0, 500);
         perspectiveCamera.lookAt(640, 400, 0);
         perspectiveCamera.update();
+        skipRect = new Rectangle(windowCamera.viewportWidth - 170, 70, 150, 50);
+        speedRect = new Rectangle(windowCamera.viewportWidth - 370, windowCamera.viewportHeight-70, 350, 50);
     }
 
     Vector3 mousePos = new Vector3();
@@ -119,13 +122,13 @@ public class IntroScreen extends BaseScreen {
             }
         }
 
-        accum += 75*dt * speedMultiplier;
 //        accum = MathUtils.clamp(accum, 0, layout.height);
         if (accum > layout.height && Gdx.input.justTouched()) {
             launchGame();
         }
-        if (accum >= layout.height + 500f) {
-            launchGame();
+        if (accum <= layout.height + 100f) {
+//            launchGame();
+            accum += 75*dt * speedMultiplier;
         }
         if (Gdx.input.justTouched()) {
             mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -169,6 +172,7 @@ public class IntroScreen extends BaseScreen {
         font.draw(batch, text, 0, accum, worldCamera.viewportWidth, Align.center, true);
         font.getData().setScale(1.0f);
 //        batch.draw(textTexture, 0, 0, 1024, layout.height);
+
         batch.end();
 
         batch.setProjectionMatrix(windowCamera.combined);
@@ -176,10 +180,11 @@ public class IntroScreen extends BaseScreen {
         Assets.Patch.glass.ninePatch.draw(batch, skipButtonRect.x, skipButtonRect.y, skipButtonRect.width, skipButtonRect.height);
 
         BitmapFont skipFont = assets.abandonedFont50;
-        skipFont.getData().setScale(.6f);
-        assets.layout.setText(skipFont, "Skip Intro", Color.WHITE, 200, Align.center, false);
-        skipFont.draw(batch, assets.layout, skipButtonRect.x, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
+        skipFont.getData().setScale(.4f);
+        assets.layout.setText(skipFont, "Skip", Color.WHITE, 200, Align.center, false);
+        skipFont.draw(batch, assets.layout, skipButtonRect.x - 50, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
         skipFont.getData().setScale(1f);
         batch.end();
+
     }
 }

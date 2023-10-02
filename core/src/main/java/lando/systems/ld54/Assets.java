@@ -53,7 +53,7 @@ public class Assets implements Disposable {
     public Texture noiseTexture;
     public Texture whitePixel;
     public Texture starsTexture;
-    public Texture wormholdTexture;
+    public Texture wormholeTexture;
     public Texture encounterTexture;
     public Texture encounterOutcomeTexture;
 
@@ -332,9 +332,9 @@ public class Assets implements Disposable {
         starsTexture = mgr.get("images/stars.png");
         starsTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         starsTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        wormholdTexture = mgr.get("images/wormhole.png");
-        wormholdTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        wormholdTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        wormholeTexture = mgr.get("images/wormhole.png");
+        wormholeTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        wormholeTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         encounterTexture = mgr.get("images/encounter-screen_00.png");
         encounterOutcomeTexture = mgr.get("images/encounter-screen-outcome_00.png");
 

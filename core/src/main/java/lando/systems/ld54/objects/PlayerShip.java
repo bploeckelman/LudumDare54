@@ -362,7 +362,7 @@ public class PlayerShip implements Collidable {
 
         if (object instanceof Body) {
             screen.particles.bodySplatter((Body) object);
-                    screen.audioManager.playSound(AudioManager.Sounds.squish, .5f);
+                    screen.audioManager.playSound(AudioManager.Sounds.squish, .35f);
         }
     }
 

@@ -23,6 +23,7 @@ public class TitleScreen extends BaseScreen {
 //        assets.intro.play();
 //        assets.intro.setVolume(audioManager.musicVolume.floatValue());
         audioManager.playMusic(AudioManager.Musics.intro);
+
     }
 
     @Override

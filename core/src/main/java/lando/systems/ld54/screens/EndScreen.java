@@ -14,15 +14,21 @@ public class EndScreen extends BaseScreen {
 
     float accum;
     BitmapFont font;
-    String text = "{GRADIENT=purple;cyan}Lorem ipsum{ENDGRADIENT} dolor sit amet, consectetur adipiscing elit. Mauris gravida sem lectus, " +
-        "vel convallis dolor tristique et. In a orci eget augue ornare blandit in " +
-        "ac nulla. Ut id ante id augue imperdiet dapibus a id metus. Vivamus " +
-        "in purus id enim imperdiet interdum in sed lorem. Donec quis sagittis purus. Integer iaculis auctor viverra. " +
-        "Proin tempus consectetur diam, a iaculis erat dapibus sit amet. Integer eu sagittis orci, a scelerisque dolor. Morbi sollicitudin enim orci, at facilisis erat iaculis sit amet. Etiam sed nibh venenatis, fringilla enim nec, sodales lorem. Aliquam aliquam nunc ligula, ac sagittis purus vehicula vel.\n" +
+    String text = "It was touch and go there for a while, but {GRADIENT=gold;brown}we made it{ENDGRADIENT}!\n" +
         "\n" +
-        "Quisque posuere, lectus et lobortis lobortis, odio arcu molestie erat, quis interdum ex lacus non sapien. Vestibulum lectus leo, consectetur eu diam quis, auctor ultrices nunc. Morbi nisi enim, cursus ut accumsan ut, tristique eget purus. Quisque nisi ex, interdum eu luctus sit amet, ullamcorper in nisi. Cras malesuada est nec tortor imperdiet, eu cursus nulla ullamcorper. Suspendisse porta id nibh nec sollicitudin. Ut risus nulla, pretium in ultricies sed, auctor sed eros. Vestibulum lacinia consequat commodo. Nam consequat mauris non porttitor mattis. Vestibulum sed fermentum nisl. Phasellus erat urna, elementum nec fringilla id, molestie ac eros. Sed ut sem sollicitudin, commodo libero et, luctus nisi. Vestibulum elementum justo id varius sollicitudin. Nunc scelerisque libero nibh, dapibus lacinia mauris iaculis a. Cras vitae hendrerit nibh. Quisque eget egestas elit.\n" +
+        "That floating pod-city-terrarium thing really saved our bacon.\n" +
         "\n" +
-        "Vivamus diam velit, viverra quis faucibus at, vehicula cursus est. Mauris consequat ipsum eu tellus tristique varius. Donec sit amet lorem placerat dolor porttitor convallis ut sed tellus. ";
+        "To be real, the whole experience, with all the ships and starting a new civilization... It felt kind of god-like . . . maybe we should call this new place \"Deus\".\n" +
+        "\n" +
+        "And as a cyborg-planet thing, it's kind mechanical too.\n" +
+        "\n" +
+        "\"Deus Ex Machina\" -  kind of a nice ring to it - maybe that's what we call it?" +
+        "\n\n" +
+        "Either way, it's been real, folks.\n\n" +
+        "Thanks for helping us figure out how to navigate the limited space we had to work with." +
+        "\n\n" +
+        "This truly has been a trip through {GRADIENT=gold;brown}The Finite Frontier{ENDGRADIENT}."
+       ;
     TypingLabel label;
     GlyphLayout layout;
 
@@ -30,20 +36,23 @@ public class EndScreen extends BaseScreen {
         float scale = 1f;
         boolean gettingFix = true;
         int fuckingInfiniteLoops = 0;
-        font = assets.smallFont;
+        font = assets.abandonedFont20;
         layout = new GlyphLayout();
-        layout.setText(font, text, Color.WHITE, windowCamera.viewportWidth - 200, Align.center, true);
+        layout.setText(font, text, Color.WHITE, windowCamera.viewportWidth - 200, Align.topLeft, true);
 
         scale = (windowCamera.viewportHeight - 200f) / layout.height;
         if (scale >1f) {
             scale = 1f;
         }
         font.getData().setScale(scale);
-        layout.setText(font, text, Color.WHITE, windowCamera.viewportWidth - 200, Align.center, true);
+        layout.setText(font, text, Color.WHITE, windowCamera.viewportWidth - 200, Align.left, true);
         font.getData().setScale(1f);
 
-        label = new TypingLabel(font, text, 100, windowCamera.viewportHeight/2f + layout.height/2f);
+        label = new TypingLabel(font, text, 100, windowCamera.viewportHeight/2f + layout.height/2f + 50);
         label.setWidth(windowCamera.viewportWidth - 200);
+        label.setLineAlign(Align.left);
+        font.getData().setLineHeight(30f);
+        ;
         label.setFontScale(scale);
 
 
@@ -79,14 +88,14 @@ public class EndScreen extends BaseScreen {
         batch.setShader(wormHoleShader);
         batch.begin();
         wormHoleShader.setUniformf("u_time", accum);
-        batch.draw(assets.wormholdTexture, 0, 0, windowCamera.viewportWidth, windowCamera.viewportHeight);
+        batch.draw(assets.wormholeTexture, 0, 0, windowCamera.viewportWidth, windowCamera.viewportHeight);
         batch.end();
         batch.setShader(null);
 
         batch.begin();
         {
-            batch.setColor(0f, 0f, 0f, .4f);
-            batch.draw(assets.pixel, 80, windowCamera.viewportHeight/2f - layout.height/2f - 20, windowCamera.viewportWidth - 160, layout.height + 40);
+            batch.setColor(0f, 0f, 0f, .6f);
+            batch.draw(assets.pixel, 80, windowCamera.viewportHeight/2f - layout.height/2f - 70, windowCamera.viewportWidth - 160, layout.height + 140);
             batch.setColor(Color.WHITE);
             label.render(batch);
         }

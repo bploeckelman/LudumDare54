@@ -104,7 +104,7 @@ public class AudioManager implements Disposable {
         putSound(Sounds.squish, assets.squish2);
         putSound(Sounds.squish, assets.squish3);
         putSound(Sounds.squish, assets.squish4);
-        putSound(Sounds.dammit, assets.dammit);
+        putSound(Sounds.squish, assets.dammit);
 //        putSound(Sounds.swoosh, assets.swoosh1);
 //        putSound(Sounds.bigswoosh, assets.bigSwoosh1);
 //        putSound(Sounds.grunt, assets.grunt1);
