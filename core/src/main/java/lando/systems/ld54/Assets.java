@@ -93,6 +93,7 @@ public class Assets implements Disposable {
     public ShaderProgram stereoShader;
     public ShaderProgram circleCropShader;
     public ShaderProgram cubeShader;
+    public ShaderProgram simpleZoomeShader;
     public ShaderProgram dreamyShader;
     public ShaderProgram flameShader;
     public ShaderProgram cooldownShader;
@@ -377,6 +378,7 @@ public class Assets implements Disposable {
         doorwayShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/doorway.frag");
         crosshatchShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/crosshatch.frag");
         rippleShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/ripple.frag");
+        simpleZoomeShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/simplezoom.frag");
         heartShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/heart.frag");
         stereoShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/stereo.frag");
         circleCropShader = loadShader("shaders/transitions/default.vert", "shaders/transitions/circlecrop.frag");

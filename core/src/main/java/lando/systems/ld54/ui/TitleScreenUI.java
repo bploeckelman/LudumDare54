@@ -42,7 +42,7 @@ public class TitleScreenUI extends Group {
                 screen.audioManager.stopMusic();
                 screen.exitingScreen = true;
                 Gdx.input.setInputProcessor(null);
-                screen.game.setScreen(new IntroScreen());
+                screen.game.setScreen(new IntroScreen(), Main.game.assets.simpleZoomeShader, 2f);
             }
         });
 
