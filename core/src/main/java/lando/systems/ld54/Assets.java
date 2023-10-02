@@ -570,7 +570,7 @@ public class Assets implements Disposable {
 //        = mgr.get("audio/sounds/.ogg", Sound.class);
 //        = mgr.get("audio/sounds/.ogg", Sound.class);
 
-        encounterAnimationHashMap.put("asuka", venusSpin);
+        encounterAnimationHashMap.put("asuka", earthSpin);
         encounterAnimationHashMap.put("cherry", jupiterSpin);
         encounterAnimationHashMap.put("spaceship", marsSpin);
         encounterAnimationHashMap.put("nebula", venusSpin);

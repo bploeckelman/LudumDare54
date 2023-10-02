@@ -284,35 +284,35 @@ public class GameScreen extends BaseScreen {
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(4);
+                    Encounter encounter = encounters.get(14);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(5);
+                    Encounter encounter = encounters.get(15);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(6);
+                    Encounter encounter = encounters.get(16);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_7)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(7);
+                    Encounter encounter = encounters.get(17);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }
             }
                        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_8)) {
                 if (!encounterShown) {
-                    Encounter encounter = encounters.get(8);
+                    Encounter encounter = encounters.get(18);
                     encounter.sector = sectors.get(0);
                     startEncounter(encounter);
                 }

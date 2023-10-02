@@ -9,6 +9,7 @@ public class Encounter {
     public String text;
     public String type;
     public String imageKey;
+    public String characterKey;
     public EncounterOption[] options;
     public Encounter() {}
 }
