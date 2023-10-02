@@ -84,9 +84,7 @@ public class PlayerShip implements Collidable {
         animState += dt;
         Main.game.assets.engineRunning.setVolume(engineSoundID, fuel / 1000 * Main.game.audioManager.soundVolume.floatValue());
 
-        if (inactive) { return; }
-
-        if (fuel <= 0) {
+        if (fuel <= 0 && !inactive) { // don't show idle when inactive
             Main.game.assets.engineRunning.stop();
             anim = screen.assets.playerShip; // revert to idle animation
         }
@@ -107,7 +105,6 @@ public class PlayerShip implements Collidable {
             }
             rotation += Math.signum(rotationChange) * ROTATION_LERP * dt;
         }
-
 
         fuel = Math.max(0, fuel - vel.len() * dt);
 
