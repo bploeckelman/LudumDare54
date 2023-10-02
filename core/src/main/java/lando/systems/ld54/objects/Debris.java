@@ -21,7 +21,7 @@ public class Debris implements Collidable, JunkInfluencible {
     private final Vector2 vel;
     private final Rectangle collisionBounds;
     private final CollisionShapeCircle collisionShape;
-    private final Animation<TextureRegion> anim;
+    protected final Animation<TextureRegion> anim;
 
     private TextureRegion keyframe;
     private float stateTime;

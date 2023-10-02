@@ -10,7 +10,25 @@ public class RandomShit extends Debris {
         angularMomentum = MathUtils.randomSign() * MathUtils.random(30f, 50f);
         mass = 0.01f;
 
-        setRadius(8);
+        int index = screen.assets.randomDebris.indexOf(anim, true);
+        float radius = 8;
+        switch (index) {
+            case 0: // 6pack
+                radius = 5;
+                break;
+            case 1: // chair
+                radius = 11;
+                break;
+            case 2: // tv off
+            case 3: // tv on - in space?
+                radius = 7;
+                break;
+            default:
+                radius = 8;
+                break;
+        }
+
+        setRadius(radius);
     }
 
 //    @Override

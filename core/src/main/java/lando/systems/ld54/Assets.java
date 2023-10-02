@@ -434,17 +434,11 @@ public class Assets implements Disposable {
         satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-c"), Animation.PlayMode.LOOP));
 
         randomDebris = new Array<>();
-//        randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/debris-rocket-a"), Animation.PlayMode.LOOP));
-//        randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/debris-rocket-b"), Animation.PlayMode.LOOP));
-//        randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/debris-rocket-c"), Animation.PlayMode.LOOP));
-//        randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/debris-rocket-d"), Animation.PlayMode.LOOP));
-//        randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/debris-shuttle"), Animation.PlayMode.LOOP));
         randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/items-6pack"), Animation.PlayMode.LOOP));
         randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/items-chair"), Animation.PlayMode.LOOP));
         randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/items-tv-idle"), Animation.PlayMode.LOOP));
         randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/items-tv-on"), Animation.PlayMode.LOOP));
         randomDebris.add(new Animation<>(.1f, atlas.findRegions("debris/tombstone"), Animation.PlayMode.LOOP));
-
 
         mal9000 = new Array<>();
         mal9000.add(new Animation<>(.1f, atlas.findRegions("encounters/mal9000/mal-9000-idle/mal-9000-idle"), Animation.PlayMode.LOOP));
