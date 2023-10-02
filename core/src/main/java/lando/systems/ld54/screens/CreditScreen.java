@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld54.Config;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
@@ -107,7 +108,9 @@ public class CreditScreen extends BaseScreen {
 
     @Override
     public void render(SpriteBatch batch) {
+        ScreenUtils.clear(.1f, .1f, .6f, 1f);
 
+        batch.enableBlending();
         batch.setProjectionMatrix(windowCamera.combined);
         batch.begin();
         {

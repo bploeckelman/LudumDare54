@@ -53,6 +53,7 @@ public class Assets implements Disposable {
     public Texture noiseTexture;
     public Texture whitePixel;
     public Texture starsTexture;
+    public Texture wormholdTexture;
     public Texture encounterTexture;
     public Texture encounterOutcomeTexture;
 
@@ -130,6 +131,7 @@ public class Assets implements Disposable {
     public ShaderProgram fogObjectShader;
     public ShaderProgram starfieldShader;
     public ShaderProgram minimapShader;
+    public ShaderProgram wormholeShader;
 
     public HashMap<String, Animation<TextureRegion>> encounterAnimationHashMap = new HashMap<>();
 
@@ -253,6 +255,7 @@ public class Assets implements Disposable {
             mgr.load("images/noise.png", Texture.class);
             mgr.load("images/pixel.png", Texture.class);
             mgr.load("images/stars.png", Texture.class);
+            mgr.load("images/wormhole.png", Texture.class);
             mgr.load("images/encounter-screen_00.png", Texture.class);
             mgr.load("images/encounter-screen-outcome_00.png", Texture.class);
 
@@ -329,6 +332,9 @@ public class Assets implements Disposable {
         starsTexture = mgr.get("images/stars.png");
         starsTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         starsTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        wormholdTexture = mgr.get("images/wormhole.png");
+        wormholdTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        wormholdTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         encounterTexture = mgr.get("images/encounter-screen_00.png");
         encounterOutcomeTexture = mgr.get("images/encounter-screen-outcome_00.png");
 
@@ -471,6 +477,7 @@ public class Assets implements Disposable {
         influencerShader = loadShader("shaders/default.vert", "shaders/influencer.frag");
         goalShader = loadShader("shaders/default.vert", "shaders/goal.frag");
         minimapShader = loadShader("shaders/default.vert", "shaders/minimap.frag");
+        wormholeShader = loadShader("shaders/default.vert", "shaders/wormhole.frag");
 
         randomTransitions.add(radialShader);
         randomTransitions.add(pizelizeShader);

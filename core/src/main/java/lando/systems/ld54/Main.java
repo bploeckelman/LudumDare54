@@ -19,10 +19,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
 import lando.systems.ld54.audio.AudioManager;
-import lando.systems.ld54.screens.BaseScreen;
-import lando.systems.ld54.screens.GameScreen;
-import lando.systems.ld54.screens.LaunchScreen;
-import lando.systems.ld54.screens.TitleScreen;
+import lando.systems.ld54.screens.*;
 import lando.systems.ld54.ui.DebugInfo;
 import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.accessors.*;
@@ -110,8 +107,8 @@ public class Main extends ApplicationAdapter {
 
         var showLaunchScreen = (Gdx.app.getType() == Application.ApplicationType.WebGL || Config.Debug.show_launch_screen);
         var startingScreen = showLaunchScreen ? new LaunchScreen() : new TitleScreen();
-//        setScreen(startingScreen);
-        setScreen(new GameScreen());
+        setScreen(startingScreen);
+//        setScreen(new EndScreen());
     }
 
     public void update(float delta) {
