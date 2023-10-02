@@ -368,6 +368,7 @@ public class AudioManager implements Disposable {
             assets.mainThemeLowpass.play();
             assets.mainThemeLowpass.setPosition(currentPosition);
             assets.mainTheme.stop();
+            currentMusic = assets.mainThemeLowpass;
 
             return;
         }
@@ -377,6 +378,7 @@ public class AudioManager implements Disposable {
             assets.mainTheme.play();
             assets.mainTheme.setPosition(currentPosition);
             assets.mainThemeLowpass.stop();
+            currentMusic = assets.mainTheme;
             return;
         }
         else {

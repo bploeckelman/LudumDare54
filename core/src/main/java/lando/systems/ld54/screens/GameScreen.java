@@ -209,9 +209,9 @@ public class GameScreen extends BaseScreen {
         levelMusicLowpass.setLooping(true);
 //        levelMusic.play();
 
-//        audioManager.playMusic(AudioManager.Musics.mainTheme);
-        assets.mainTheme.play();
-        assets.intro.stop();
+        audioManager.playMusic(AudioManager.Musics.mainTheme);
+//        assets.mainTheme.play();
+//        assets.intro.stop();
 
         miniMap = new MiniMap(this);
         gameScreenUI = new GameScreenUI(this);
