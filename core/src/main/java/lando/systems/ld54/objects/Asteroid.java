@@ -92,8 +92,14 @@ public class Asteroid implements Collidable, JunkInfluencible {
             screen.particles.debrisExplode(pos.x, pos.y);
             alive = false;
         }
+        // kill if off-screen
+        if (pos.x - size.x / 2f < 0
+         || pos.y - size.y / 2f < 0
+         || pos.x + size.x / 2f > GameScreen.gameWidth
+         || pos.y + size.y / 2f > GameScreen.gameHeight) {
+            alive = false;
+        }
     }
-
 
     @Override
     public void renderDebug(ShapeDrawer shapes) {
