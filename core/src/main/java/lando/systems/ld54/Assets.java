@@ -73,10 +73,14 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> launchArrow;
     public Animation<TextureRegion> playerShip;
     public Animation<TextureRegion> playerShipActive;
+    public Animation<TextureRegion> playerShipInactive;
     public Animation<TextureRegion> pickupsFuel;
     public ObjectMap<PlayerShipPart.Type, Animation<TextureRegion>> playerShipParts;
     public Array<Animation<TextureRegion>> astronautBodies;
     public Array<Animation<TextureRegion>> satellites;
+
+    // encounter objects
+    public Animation<TextureRegion> podCity;
 
     public TextureRegion pixelRegion;
     public TextureRegion fuzzyCircle;
@@ -312,7 +316,8 @@ public class Assets implements Disposable {
         jupiterSpin = new Animation<>(0.04f, atlas.findRegions("planets/gas/gas-spin"), Animation.PlayMode.LOOP);
         launchArrow = new Animation<>(.1f, atlas.findRegions("launch-arrow/launch-arrow"), Animation.PlayMode.LOOP);
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/idle/player-ship-idle"), Animation.PlayMode.LOOP);
-        playerShipActive = new Animation<>(.1f, atlas.findRegions("ships/player/active/player-ship"), Animation.PlayMode.LOOP);
+        playerShipActive = new Animation<>(.1f, atlas.findRegions("ships/player/active/player-ship-active"), Animation.PlayMode.LOOP);
+        playerShipInactive = new Animation<>(.1f, atlas.findRegions("ships/player/inactive/player-ship-inert"), Animation.PlayMode.LOOP);
         pickupsFuel = new Animation<>(.1f, atlas.findRegions("pickups-fuel/pickup-fuel"), Animation.PlayMode.LOOP);
         playerShipParts = new ObjectMap<>();
         for (var part : PlayerShipPart.Type.values()) {
@@ -333,6 +338,8 @@ public class Assets implements Disposable {
         satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-a"), Animation.PlayMode.LOOP));
         satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-b"), Animation.PlayMode.LOOP));
         satellites.add(new Animation<>(.1f, atlas.findRegions("satellites/debris-satellite-c"), Animation.PlayMode.LOOP));
+
+        podCity = new Animation<>(.1f, atlas.findRegions("encounters/pod-city/pod-city"), Animation.PlayMode.LOOP);
 
         // Fonts
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");

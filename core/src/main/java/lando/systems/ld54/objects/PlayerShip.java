@@ -55,7 +55,7 @@ public class PlayerShip implements Collidable {
 
     public PlayerShip(GameScreen gameScreen) {
         this.screen = gameScreen;
-        this.anim = screen.assets.playerShip;
+        this.anim = screen.assets.playerShipActive;
         this.animState = 0;
         this.pos = new Vector2();
         this.vel = new Vector2();
