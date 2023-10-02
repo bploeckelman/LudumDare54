@@ -1,0 +1,20 @@
+{
+  "title": "The Undiscovered Country",
+  "text": "A mysterious ancient space station appears in front of you.\nIt contains unfathomable wormhole technology that could finally release us\nfrom this junk filled hell space. Dare we try it?\n\nThe only way out is through, let's go!",
+  "imageKey": "spaceballs",
+  "characterKey": "abandonedstation",
+  "type": "GOAL",
+  "options": [
+    {
+      "text": "Activate the technology and boldly go wherever it might lead!",
+      "possibleOutcomes": [
+        {
+          "type": "NOTHING",
+          "value": 1,
+          "text": "Engage!",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

@@ -42,6 +42,8 @@ import lando.systems.ld54.ui.MiniMap;
 import lando.systems.ld54.utils.Time;
 import lando.systems.ld54.utils.camera.PanZoomCameraController;
 
+import java.util.stream.IntStream;
+
 public class GameScreen extends BaseScreen {
 
     public static int SECTORS_WIDE = 5;
@@ -60,8 +62,9 @@ public class GameScreen extends BaseScreen {
     public final Array<Asteroid> asteroids = new Array<>();
     public final Array<PlayerShip> playerShips = new Array<>();
     public final Array<Debris> debris = new Array<>();
-    public final Sector homeSector;
-    public final Sector goalSector;
+
+    public Sector homeSector;
+    public Sector goalSector;
 
     private final Json json = new Json(JsonWriter.OutputType.json);
 
@@ -126,44 +129,13 @@ public class GameScreen extends BaseScreen {
         var planetManager = new PlanetManager(this);
         earth = planetManager.createPlanets(planets);
 
-        var file = Gdx.files.internal("encounters/battle_encounters.json");
-        encounters = json.fromJson(Array.class, Encounter.class, file);
-
         levelMusic = audioManager.musics.get(AudioManager.Musics.mainTheme);
         levelMusicLowpass = audioManager.musics.get(AudioManager.Musics.mainThemeLowpass);
 
         Asteroids.createTestAsteroids(this, asteroids);
         physicsObjects.addAll(asteroids);
 
-        var possibleGoals = new IntArray();
-        var numSectors = SECTORS_WIDE * SECTORS_HIGH;
-        for (int i = 0; i < numSectors; i++) {
-            var x = i / SECTORS_WIDE;
-            var y = i % SECTORS_WIDE;
-            var sector = new Sector(this, getRandomEncounter(), x, y);
-            sectors.add(sector);
-
-            // save index as possible goal if this sector is on an edge, but not in the middle of an edge
-            var isOnEdge = (x == 0) || (x == SECTORS_WIDE - 1) || (y == 0) || (y == SECTORS_HIGH - 1);
-            var isNotMidEdge = (x != SECTORS_WIDE / 2) && (y != SECTORS_HIGH / 2);
-            if (isOnEdge && isNotMidEdge) {
-                possibleGoals.add(i);
-            }
-        }
-        homeSector = sectors.get(numSectors / 2);
-
-        // TODO - lots of fiddly shit here related to encounters and influencers, need to rework a bit
-        homeSector.encounter = null;
-        homeSector.pullPlayerShip.deactivate();
-        homeSector.pushJunk.position.set(
-            homeSector.bounds.x + homeSector.bounds.width / 2f,
-            homeSector.bounds.y + homeSector.bounds.height / 2f
-        );
-        homeSector.pushJunk.setRange(350);
-
-        goalSector = sectors.get(possibleGoals.random());
-        goalSector.isGoal = true;
-        goalSector.encounter = null;
+        createSectors();
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
         int width = Config.Screen.framebuffer_width;
@@ -218,6 +190,70 @@ public class GameScreen extends BaseScreen {
         particles = new Particles(assets);
 
         placeSatellites(earth);
+    }
+
+    private void createSectors() {
+        // pick the goal sector index ahead of time
+        var possibleGoals = new IntArray();
+        for (int y = 0; y < SECTORS_HIGH; y++) {
+            for (int x = 0; x < SECTORS_WIDE; x++) {
+                // save index as possible goal if this sector is on an edge, but not in the middle of an edge
+                var isOnEdge = (x == 0) || (x == SECTORS_WIDE - 1) || (y == 0) || (y == SECTORS_HIGH - 1);
+                var isNotMidEdge = (x != SECTORS_WIDE / 2) && (y != SECTORS_HIGH / 2);
+                if (isOnEdge && isNotMidEdge) {
+                    var index = y * SECTORS_WIDE + x;
+                    possibleGoals.add(index);
+                }
+            }
+        }
+        var goalSectorIndex = possibleGoals.random();
+
+        // load 'normal' encounters
+        var file = Gdx.files.internal("encounters/battle_encounters.json");
+        encounters = json.fromJson(Array.class, Encounter.class, file);
+
+        // load the special 'goal' encounter
+        file = Gdx.files.internal("encounters/goal_encounter.json");
+        var goalEncounter = json.fromJson(Encounter.class, file);
+
+        // get a list of indices into the encounters array,
+        // this is used to assign encounters uniquely
+        // without removing them from the main encounters array
+        var encounterIndices = new IntArray(IntStream.range(0, encounters.size).toArray());
+
+        var numSectors = SECTORS_WIDE * SECTORS_HIGH;
+        for (int i = 0; i < numSectors; i++) {
+            var x = i / SECTORS_WIDE;
+            var y = i % SECTORS_WIDE;
+
+            // pick the encounter to assign to this sector
+            Encounter encounter;
+            if (goalSectorIndex == i) {
+                encounter = goalEncounter;
+            } else {
+                var random = MathUtils.random(0, encounterIndices.size - 1);
+                var index = encounterIndices.removeIndex(random);
+                encounter = encounters.get(index);
+            }
+
+            var sector = new Sector(this, encounter, x, y);
+            sectors.add(sector);
+        }
+
+        // set our convenience fields for home and goal
+        homeSector = sectors.get(numSectors / 2);
+        goalSector = sectors.get(goalSectorIndex);
+
+        // do any special configuration of the home and goal sectors that's needed
+        // TODO - lots of fiddly shit here related to encounters and influencers
+        homeSector.encounter = null;
+        homeSector.pullPlayerShip.deactivate();
+        homeSector.pushJunk.position.set(
+            homeSector.bounds.x + homeSector.bounds.width / 2f,
+            homeSector.bounds.y + homeSector.bounds.height / 2f
+        );
+        homeSector.pushJunk.setRange(350);
+        goalSector.isGoal = true;
     }
 
     @Override
