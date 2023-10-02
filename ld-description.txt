@@ -1,4 +1,4 @@
-- ** [HTML5/WebGL](https://lando.systems/games/ld54-LINKHERE) **
+- ** [HTML6/WebGL](https://lando.systems/games/ld54-LINKHERE) **
 - ** [Desktop/Java](https://lando.systems/games/ld54-LINKHERE) **
 - ** [Source](https://github.com/bploeckelman/LudumDare54) **
 # Start Wreck: The Finite Frontier ️#
