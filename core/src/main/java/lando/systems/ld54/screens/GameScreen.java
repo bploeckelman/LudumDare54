@@ -626,6 +626,7 @@ public class GameScreen extends BaseScreen {
         Gdx.app.log("Logging the finish Encounter", "True");
         float fogMargin = 50;
         if(!Config.Debug.general) {
+            float currentZoom = cameraController.targetZoom;
             showSectorTransition = encounter.sector;
             fogOfWar.addFogRectangle(encounter.sector.bounds.x - fogMargin, encounter.sector.bounds.y - fogMargin, encounter.sector.bounds.width + fogMargin*2f, encounter.sector.bounds.height + fogMargin*2f, .2f);
             Timeline.createSequence()
@@ -634,6 +635,7 @@ public class GameScreen extends BaseScreen {
                     @Override
                     public void onEvent(int type, BaseTween<?> source) {
                         showSectorTransition = null;
+                        cameraController.targetZoom = currentZoom;
                     }
                 }))
                 .start(game.tween);
