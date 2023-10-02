@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.*;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.objects.Body;
 import lando.systems.ld54.objects.PlayerShip;
+import lando.systems.ld54.utils.Utils;
 
 public class Particles implements Disposable {
 
@@ -134,15 +135,19 @@ public class Particles implements Disposable {
 
     }
 
-    public Array<Particle> addShipTrail(float inX, float inY) {
+    public Array<Particle> addShipTrail(float inX, float inY, float speedPercent) {
+        speedPercent = MathUtils.clamp(speedPercent, 0, 1f);
+        Utils.hsvToRgb(150f/360f * (1f - speedPercent), 1f, 1f, tempColor);
+        tempColor.a = .5f;
         Array<Particle> trailParticles = new Array<>();
+
         for (int i = 0; i < 4; i++) {
             float x = inX + MathUtils.random(-3, 3f);
             float y = inY + MathUtils.random(-3f, 3f);
             Particle p = Particle.initializer(particlePool.obtain())
                 .keyframe(assets.particles.smoke)
                 .startPos(x, y)
-                .startColor(.5f, .5f, .7f, .5f)
+                .startColor(tempColor)
                 .endColor(0,0,0,0)
                 .timeToLive(1000f)
                 .startSize(MathUtils.random(10, 15f))

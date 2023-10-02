@@ -146,7 +146,7 @@ public class PlayerShip implements Collidable {
             screen.particles.addRocketPropulsionParticles(this);
         }
 
-        trailParticles.addAll(screen.particles.addShipTrail(pos.x, pos.y));
+        trailParticles.addAll(screen.particles.addShipTrail(pos.x, pos.y, vel.len() / 200f));
     }
 
     public void draw(SpriteBatch batch) {
