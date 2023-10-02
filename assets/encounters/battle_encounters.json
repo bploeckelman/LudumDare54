@@ -129,7 +129,7 @@
   {
     "title": "Finger On The Pulsar",
     "text": "Your ship comes dangerously close to a hyper-energetic pulsar.\n\nYou might be able to use its emissions for fuel . . .\n\nWhat do you do?",
-    "imageKey": "blackhole",
+    "imageKey": "pulsar",
     "characterKey": "",
     "type": "BATTLE",
     "options": [
@@ -355,7 +355,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Your combat skills prevail, and you soundly defeat the bounty hunters, securing valuable loot.\n\n",
+            "text": "Your combat skills prevail, and you soundly defeat the bounty hunters.\n\nYou have secured valuable loot, and also bragging rights.\n\n",
             "weight": 0.6
           }
         ]
@@ -366,7 +366,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "The bounty hunters were surprisingly helpful.\n\nThey also had this recipe for a killer vegan tomato bisque and honestly, \nyou don't miss the cream at all.",
+            "text": "The bounty hunters were surprisingly helpful.\n\nThey also had this recipe for a killer vegan tomato bisque.\nHonestly, you don't miss the cream at all.",
             "weight": 0.7
           }
         ]
@@ -523,7 +523,7 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "Going right for the biggest one . . .\n\nSize queen much?",
             "weight": 0.6
           }
         ]
@@ -679,24 +679,24 @@
   },
   {
     "title": "Weight Impact",
-    "text": "Honestly, I've never played this one, but I hear good things.. \n\nWhat do you do?",
+    "text": "Honestly, I've never played Mass Effect, but I hear good things.. \n\nWhat do you do in it?",
     "imageKey": "normandy",
     "characterKey": "",
    "type": "BATTLE",
     "options": [
       {
-        "text": "Try to have sex with an alien?",
+        "text": "Try to have sex with an alien, mostly",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "That's the whole thing with this one, right?",
+            "text": "That's the whole thing with this one, right?\n\nWhat a strange and beautiful time to be alive.",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "???",
+        "text": "I don't actually remember",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
@@ -707,7 +707,7 @@
         ]
       },
       {
-        "text": "???",
+        "text": "Huh?",
         "possibleOutcomes": [
           {
             "type": "FUEL",
@@ -743,7 +743,7 @@
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "He's so cocky! \n\nNot gonna lie though, kind of a lot of daddy energy going on.\n\nDefinite smash.",
+            "text": "He's so cocky! \n\nNot gonna lie though, kind of a lot of daddy energy going on there.\n\nDefinite smash.",
             "weight": 0.7
           }
         ]
@@ -796,7 +796,7 @@
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Honestly, as far as IPs go, it's got a pretty deep bench\n\nWe could do this for years to come.",
+            "text": "As far as IPs go, it's got a pretty deep bench\n\nWe could do this for years to come.",
             "weight": 0.8
           }
         ]
@@ -804,41 +804,41 @@
     ]
   },
   {
-    "title": "20",
-    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "title": "UrAnus",
+    "text": "Get it?\n\nLike YOUR ANUS!\n\nEh? Eh?",
+    "imageKey": "blackhole",
     "characterKey": "",
   "type": "BATTLE",
     "options": [
       {
-        "text": "Begin mining operations on the largest asteroid",
+        "text": "Really?",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "Yeah, I know...\n\nIn my defense, there were a LOT of these to have to write",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "That feels juvenile even for a jam game.",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "Okay, point taken...",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "It IS a little funny, though...",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "Right?\n\nSome jokes never get old.",
             "weight": 0.8
           }
         ]
@@ -846,41 +846,41 @@
     ]
   },
   {
-    "title": "21",
-    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "title": "Space Antenna",
+    "text": "A strange piece of space technology. \n\nWhat do you do?",
+    "imageKey": "antenna",
     "characterKey": "",
   "type": "BATTLE",
     "options": [
       {
-        "text": "Begin mining operations on the largest asteroid",
+        "text": "Let's check it out",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "Free internet for life?!\n\nHell yeah!",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "Maybe it's about my car's extended warranty?",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "Is that joke overdone?\n\nI don't think so, but I'm biased.",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "Make contact",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "You made contact, and... \n\nNot a lot happened.\n\nWorth a shot, I guess?",
             "weight": 0.8
           }
         ]
@@ -889,40 +889,40 @@
   },
   {
     "title": "22",
-    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "text": "More meteors. \n\nAlthough actually, wait - aren't these meteoroids?\n\nWhich one is it?",
+    "imageKey": "meteorshower",
     "characterKey": "",
   "type": "BATTLE",
     "options": [
       {
-        "text": "Begin mining operations on the largest asteroid",
+        "text": "Meteors",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "Meteroids, but partial credit due to ambiguity.",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "Meteorites",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "WRONG! \n\nThese are NOT on the Earth's surface.\n\nNo credit.",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "Meteoroids!",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "Teacher's pet-looking motherfucker over here!\n\nNice job, but you're still a huge dork.",
             "weight": 0.8
           }
         ]
@@ -930,41 +930,41 @@
     ]
   },
   {
-    "title": "23",
-    "text": "You find a rich asteroid field suitable for mining. \n\nWhat do you do?",
-    "imageKey": "asteroidmining",
+    "title": "Supernova",
+    "text": "It's not actually a supernova. \n\nYou'd be long dead if it was.\n\nWhat do you do?",
+    "imageKey": "pulsar",
     "characterKey": "",
   "type": "BATTLE",
     "options": [
       {
-        "text": "Begin mining operations on the largest asteroid",
+        "text": "Yeah, I know.,",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "Can't fool you!\n\nIt was worth a shot though.\n\n",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "A champagne supernova? In the sky?",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "Maybe...\n\nYou're gonna be the one that saves meee...",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "Not really that super, is it?",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "No, it's... \n\nWe've already established that. \n\nTry to keep up.",
             "weight": 0.8
           }
         ]
@@ -972,41 +972,41 @@
     ]
   },
   {
-    "title": "The Final Destination",
-    "text": "You encounter what appears to be a floating space-city.\n\nBasically an an enormous terrarium.\n\nWhat do you do?",
-    "imageKey": "podcity",
+    "title": "Another Black Hole",
+    "text": "So many collapsed stars out here.\n\nFeels like a cut-rate plastic surgeon's office in East LA.\n\nWhat do you do?",
+    "imageKey": "blackhole",
     "characterKey": "",
   "type": "BATTLE",
     "options": [
       {
-        "text": "Begin mining operations on the largest asteroid",
+        "text": "Tacky joke, buddy",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Going right for the biggest one...\n\nSize queen much?",
+            "text": "Oh, so you're suddenly the defender of washed-up movie stars?\n\nGimme a break.",
             "weight": 0.6
           }
         ]
       },
       {
-        "text": "Deploy mining drones to collect resources from multiple asteroids",
+        "text": "Not your best work...",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "Your mining drones gather a diverse range of valuable resources from the asteroids.\n\nWhich you now have to find a place to store. Yay.",
+            "text": "Yeah, I agree.\n\nOnly so much you can do though.",
             "weight": 0.7
           }
         ]
       },
       {
-        "text": "Abandon the asteroid mining operation and continue your journey",
+        "text": "Eesh",
         "possibleOutcomes": [
           {
             "type": "FUEL",
             "value": 1,
-            "text": "Giving up? Already?\n\nMaybe your ex was right...",
+            "text": "Yeah, I know...",
             "weight": 0.8
           }
         ]

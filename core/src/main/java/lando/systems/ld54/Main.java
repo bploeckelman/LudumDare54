@@ -109,6 +109,7 @@ public class Main extends ApplicationAdapter {
         var showLaunchScreen = (Gdx.app.getType() == Application.ApplicationType.WebGL || Config.Debug.show_launch_screen);
         var startingScreen = showLaunchScreen ? new LaunchScreen() : new TitleScreen();
         setScreen(startingScreen);
+//        setScreen(new GameScreen());
     }
 
     public void update(float delta) {

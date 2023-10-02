@@ -81,6 +81,8 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> marsSpin;
     public Animation<TextureRegion> jupiterSpin;
     public Animation<TextureRegion> blackhole;
+    public Animation<TextureRegion> pulsar;
+    public Animation<TextureRegion> meteorShower;
     public Animation<TextureRegion> asteroidfield;
     public Animation<TextureRegion> launchArrow;
     public Animation<TextureRegion> playerShip;
@@ -380,6 +382,8 @@ public class Assets implements Disposable {
         marsSpin = new Animation<>(0.08f, atlas.findRegions("planets/mars/mars-spin"), Animation.PlayMode.LOOP);
         jupiterSpin = new Animation<>(0.04f, atlas.findRegions("planets/gas/gas-spin"), Animation.PlayMode.LOOP);
         blackhole = new Animation<>(0.09f, atlas.findRegions("planets/blackhole/blackhole"), Animation.PlayMode.LOOP);
+        pulsar = new Animation<>(0.09f, atlas.findRegions("planets/pulsar/pulsar"), Animation.PlayMode.LOOP);
+        meteorShower = new Animation<>(0.09f, atlas.findRegions("planets/meteorshower/meteorshower"), Animation.PlayMode.LOOP);
         asteroidfield = new Animation<>(0.29f, atlas.findRegions("planets/asteroidfield/asteroidfield"), Animation.PlayMode.LOOP);
         launchArrow = new Animation<>(.1f, atlas.findRegions("launch-arrow/launch-arrow"), Animation.PlayMode.LOOP);
         playerShip = new Animation<>(.1f, atlas.findRegions("ships/player/idle/player-ship-idle"), Animation.PlayMode.LOOP);
@@ -617,11 +621,13 @@ public class Assets implements Disposable {
         encounterAnimationHashMap.put("spaceship", marsSpin);
         encounterAnimationHashMap.put("nebula", satellites.get(0));
         encounterAnimationHashMap.put("blackhole", blackhole);
+        encounterAnimationHashMap.put("pulsar", pulsar);
         encounterAnimationHashMap.put("mysteriousplanet", jupiterSpin);
         encounterAnimationHashMap.put("asteroidfield", asteroidfield);
         encounterAnimationHashMap.put("abandonedstation", satellites.get(2));
+        encounterAnimationHashMap.put("antenna", satellites.get(1));
         encounterAnimationHashMap.put("spacepirates", mercurySpin);
-        encounterAnimationHashMap.put("meteorshower", jupiterSpin);
+        encounterAnimationHashMap.put("meteorshower", meteorShower);
         encounterAnimationHashMap.put("gasgiantmoon", marsSpin);
         encounterAnimationHashMap.put("interstellaranomaly", mercurySpin);
         encounterAnimationHashMap.put("asteroidmining", jupiterSpin);
