@@ -80,6 +80,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> batteryGreen;
     public Animation<TextureRegion> batteryOrange;
     public Animation<TextureRegion> batteryEmpty;
+    public Animation<TextureRegion> shield;
     public ObjectMap<PlayerShipPart.Type, Animation<TextureRegion>> playerShipParts;
     public Array<Animation<TextureRegion>> astronautBodies;
     public Array<Animation<TextureRegion>> satellites;
@@ -341,6 +342,7 @@ public class Assets implements Disposable {
         batteryRed = new Animation<>(.1f, atlas.findRegions("batteries/battery-red"), Animation.PlayMode.LOOP);
         batteryOrange = new Animation<>(.1f, atlas.findRegions("batteries/battery-orange"), Animation.PlayMode.LOOP);
         pickupsFuel = new Animation<>(.1f, atlas.findRegions("pickups-fuel/pickup-fuel"), Animation.PlayMode.LOOP);
+        shield = new Animation<>(.1f, atlas.findRegions("effects/shield"), Animation.PlayMode.LOOP);
         playerShipParts = new ObjectMap<>();
         for (var part : PlayerShipPart.Type.values()) {
             Animation<TextureRegion> anim;

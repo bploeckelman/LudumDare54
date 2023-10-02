@@ -233,7 +233,11 @@ public class GameScreen extends BaseScreen {
                 }
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-                sectors.forEach(Sector::scan);
+//                sectors.forEach(Sector::scan);
+                if (!playerShips.isEmpty()) {
+                    var ship = playerShips.get(playerShips.size - 1);
+                    ship.isShielded = !ship.isShielded;
+                }
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
                 audioManager.swapMusic();

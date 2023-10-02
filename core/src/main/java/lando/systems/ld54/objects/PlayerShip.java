@@ -34,6 +34,7 @@ public class PlayerShip implements Collidable {
     private TextureRegion keyframe;
     private float animState;
 
+    public boolean isShielded = false;
     public boolean trackMovement = false;
     public int currentSector = -1;
     public float ROTATION_LERP = 80f;
@@ -93,6 +94,7 @@ public class PlayerShip implements Collidable {
         if (fuel <= 0 && !inactive) { // don't show idle when inactive
             Main.game.assets.engineRunning.stop();
             anim = screen.assets.playerShip; // revert to idle animation
+            isShielded = false;
         }
 
         if (health <= 0) {
@@ -150,6 +152,24 @@ public class PlayerShip implements Collidable {
             1, 1,
             rotation
         );
+
+        if (isShielded) {
+            batch.setColor(1, 1, 1, 0.9f);
+            var margin = 5;
+            var scale = 4;
+            var shield = screen.assets.shield.getKeyFrame(animState);
+            batch.draw(shield,
+                pos.x - size.x / 2f - margin * scale,
+                pos.y - size.y / 2f - margin,
+                size.x / 2f + margin * scale,
+                size.y / 2f + margin,
+                size.x + margin * 2 * scale,
+                size.y + margin * 2,
+                1, 1,
+                rotation
+            );
+            batch.setColor(1, 1, 1, 1);
+        }
     }
 
     public void launch(float angle, float power) {
@@ -320,9 +340,11 @@ public class PlayerShip implements Collidable {
 //        screen.audioManager.playSound(AudioManager.Sounds.squish, .5f);
 
         // assumes max velocity is 300
-        float speedModifier = vel.len() / 125; // 4x damage for full speed
-        health -= object.getMass() * speedModifier;
-        System.out.println(health);
+        if (!isShielded) {
+            float speedModifier = vel.len() / 125; // 4x damage for full speed
+            health -= object.getMass() * speedModifier;
+            System.out.println(health);
+        }
 
         if (object instanceof GameBoundry) {
             // TODO - maybe reflect instead so parts
