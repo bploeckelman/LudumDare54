@@ -86,7 +86,15 @@ public class GameScreen extends BaseScreen {
     public Particles particles;
     public Array<Encounter> encounters;
 
+    public boolean transitioning;
+
     public GameScreen() {
+        this(false);
+    }
+
+    public GameScreen(boolean transitioning) {
+        this.transitioning = transitioning;
+
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
         physicsObjects = new Array<>();
         physicsObjects.add(new GameBoundry(0, 0, gameWidth, 0));
@@ -209,6 +217,10 @@ public class GameScreen extends BaseScreen {
             Gdx.app.exit();
         }
         Stats.runDuration += dt;
+
+        if (transitioning) {
+            return;
+        }
 
         // TODO: DEBUG REMOVE ME
         {
