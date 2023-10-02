@@ -191,6 +191,7 @@ public class GameScreen extends BaseScreen {
         particles = new Particles(assets);
 
         placeSatellites(earth);
+        placeRandomShit();
     }
 
     private void createSectors() {
@@ -618,6 +619,16 @@ public class GameScreen extends BaseScreen {
             var satellite = new Satellite(this, planet, assets.satellites.random(), vector.x, vector.y);
             physicsObjects.add(satellite);
             debris.add(satellite);
+        }
+    }
+
+    private void placeRandomShit() {
+        for (int i = 0; i < MathUtils.random(100, 200); i++) {
+            var x = MathUtils.random(0, GameScreen.gameWidth);
+            var y = MathUtils.random(0, GameScreen.gameHeight);
+            var randomDebris = new RandomShit(this, x, y);
+            physicsObjects.add(randomDebris);
+            debris.add(randomDebris);
         }
     }
 
