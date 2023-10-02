@@ -191,12 +191,15 @@ public class IntroScreen extends BaseScreen {
             skipFont.draw(batch, assets.layout, skipButtonRect.x - 50, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
         }
         else {
-            skipButtonRect.y = 20;
+            skipButtonRect.y = 100;
+            skipButtonRect.x = Config.Screen.window_width / 2 - 150f;
+            skipButtonRect.width = 300;
+            skipButtonRect.height = 100;
 
 
             assets.layout.setText(skipFont, "Play!", Color.WHITE, 200, Align.center, false);
-            skipFont.draw(batch, assets.layout, skipButtonRect.x - 50, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
-            Assets.Patch.glass.ninePatch.draw(batch, skipButtonRect.x, skipButtonRect.y, skipButtonRect.width, skipButtonRect.height);
+            skipFont.draw(batch, assets.layout, skipButtonRect.x + 50f, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
+            Assets.Patch.glass.ninePatch.draw(batch, skipButtonRect.x, skipButtonRect.y, 300, 100);
 
         }
 
