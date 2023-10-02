@@ -21,6 +21,8 @@
   <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.encounters.EncounterOptionOutcome" />
   <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.physics.Collision" />
     <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.particles.Particle" />
+    <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.utils.typinglabel.TypingGlyph" />
+    <extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld54.utils.typinglabel.effects" />
 
 
     <entry-point class="lando.systems.ld54.gwt.GwtLauncher" />
