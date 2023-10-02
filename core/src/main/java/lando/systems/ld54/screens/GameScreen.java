@@ -183,8 +183,6 @@ public class GameScreen extends BaseScreen {
         assets.mainTheme.play();
         assets.intro.stop();
 
-        gameScreenUI = new GameScreenUI(assets, this);
-        uiStage.addActor(gameScreenUI);
         miniMap = new MiniMap(this);
         gameScreenUI = new GameScreenUI(this);
         particles = new Particles(assets);
