@@ -53,8 +53,9 @@ public class EndScreen extends BaseScreen {
     public void alwaysUpdate(float delta) {
         accum += delta;
         float timeScale = 1f;
-        if (Gdx.input.justTouched() && label.hasEnded()){
-            game.setScreen(new CreditScreen());
+        if (Gdx.input.justTouched() && label.hasEnded() && !exitingScreen){
+            exitingScreen = true;
+            game.setScreen(new CreditScreen(), assets.heartShader, 1.5f);
         }
         if (Gdx.input.isTouched()) {
             timeScale = 8f;
