@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.Scaling;
 import com.kotcrab.vis.ui.widget.*;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
@@ -124,22 +125,17 @@ public class EncounterUI extends Group {
 
         encounterImageBox = new VisImage(encounterAnimation.getKeyFrame(0));
         float height = encounterWindow.getHeight() / 3f;
-        float width = height;
-        if (characterAnimation != null) {
-            width /= 2;
-        }
+        float width = encounterWindow.getWidth() * 0.75f;
 
         var table = new Table();
         if (characterAnimation != null) {
             characterImageBox = new VisImage(characterAnimation.getKeyFrame(0));
+            characterImageBox.setScaling(Scaling.stretch);
             table.add(characterImageBox).padRight(100);
         }
 
         table.add(encounterImageBox);
-
-        //encounterWindow.add(encounterImageBox).padTop(10f).padBottom(10f).width(width).height(height);
-
-        encounterWindow.add(table).padTop(10f).padBottom(10f).width(width*2).height(height);
+        encounterWindow.add(table).padTop(10f).padBottom(10f).width(width).height(height);
 
         encounterWindow.row();
 
