@@ -146,7 +146,7 @@ public class IntroScreen extends BaseScreen {
         if (!exitingScreen){
             exitingScreen = true;
 //            game.audioManager.stopMusic();
-            game.setScreen(new GameScreen(true), assets.cubeShader, 3f);
+            game.setScreen(new TutorialScreen(), assets.doomShader, 1f);
         }
     }
 
