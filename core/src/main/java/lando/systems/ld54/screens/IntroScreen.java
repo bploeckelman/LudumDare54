@@ -25,6 +25,7 @@ public class IntroScreen extends BaseScreen {
     BitmapFont font;
     Rectangle skipRect;
     Rectangle speedRect;
+    boolean done;
 
     // Last day Magic numbers
     Rectangle skipButtonRect = new Rectangle(Config.Screen.window_width - 150, 620, 100, 40);
@@ -98,6 +99,7 @@ public class IntroScreen extends BaseScreen {
         font.getData().setScale(textScale);
         layout.setText(font, text, Color.WHITE, worldCamera.viewportWidth, Align.center, true);
         font.getData().setScale(1f);
+        done = false;
 
 
         perspectiveCamera = new PerspectiveCamera(90, 1280, 800);
@@ -123,8 +125,9 @@ public class IntroScreen extends BaseScreen {
         }
 
 //        accum = MathUtils.clamp(accum, 0, layout.height);
-        if (accum > layout.height && Gdx.input.justTouched()) {
-            launchGame();
+        if (accum > layout.height) {
+//            launchGame();
+            done = true;
         }
         if (accum <= layout.height + 100f) {
 //            launchGame();
@@ -177,12 +180,27 @@ public class IntroScreen extends BaseScreen {
 
         batch.setProjectionMatrix(windowCamera.combined);
         batch.begin();
-        Assets.Patch.glass.ninePatch.draw(batch, skipButtonRect.x, skipButtonRect.y, skipButtonRect.width, skipButtonRect.height);
-
         BitmapFont skipFont = assets.abandonedFont50;
         skipFont.getData().setScale(.4f);
-        assets.layout.setText(skipFont, "Skip", Color.WHITE, 200, Align.center, false);
-        skipFont.draw(batch, assets.layout, skipButtonRect.x - 50, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
+
+        Assets.Patch.glass.ninePatch.draw(batch, skipButtonRect.x, skipButtonRect.y, skipButtonRect.width, skipButtonRect.height);
+
+        if(!done) {
+
+            assets.layout.setText(skipFont, "Skip", Color.WHITE, 200, Align.center, false);
+            skipFont.draw(batch, assets.layout, skipButtonRect.x - 50, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
+        }
+        else {
+            skipButtonRect.y = 20;
+
+
+            assets.layout.setText(skipFont, "Play!", Color.WHITE, 200, Align.center, false);
+            skipFont.draw(batch, assets.layout, skipButtonRect.x - 50, skipButtonRect.y + (assets.layout.height + skipButtonRect.height)/2f);
+            Assets.Patch.glass.ninePatch.draw(batch, skipButtonRect.x, skipButtonRect.y, skipButtonRect.width, skipButtonRect.height);
+
+        }
+
+
         skipFont.getData().setScale(1f);
         batch.end();
 
