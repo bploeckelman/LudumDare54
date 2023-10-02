@@ -36,6 +36,9 @@ public class TitleScreen extends BaseScreen {
     private boolean swapBackgroundText = false;
     private Animation<TextureRegion> ship;
     private Vector2 shipPos;
+    private boolean showShip = false;
+    private boolean exploded = false;
+    private float explosionAccum = 0f;
 
 
     public TitleScreen() {
@@ -71,6 +74,7 @@ public class TitleScreen extends BaseScreen {
                     .target(0f))
             .end()
             .push(Tween.call((type, source) -> {
+                exploded = true;
                 swapBackgroundText = true;
             }))
             .beginParallel()
@@ -89,9 +93,13 @@ public class TitleScreen extends BaseScreen {
             // rocket starts here
             .push(Tween.call((type, source) -> {
                 drawUI = true;
+                showShip = true;
             }))
             .push(Tween.to(shipPos, Vector2Accessor.XY, .5f)
                 .target(940, 370))
+            .push(Tween.call((type, source) -> {
+                showShip = false;
+            }))
             .start(tween);
     }
 
@@ -104,6 +112,9 @@ public class TitleScreen extends BaseScreen {
     public void update(float dt) {
         super.update(dt);
         accum+=dt;
+        if (exploded) {
+            explosionAccum += dt;
+        }
     }
 
     @Override
@@ -122,7 +133,7 @@ public class TitleScreen extends BaseScreen {
             float height = worldCamera.viewportHeight;
             TextureRegion mercuryKeyframe = mercury.getKeyFrame(accum);
             TextureRegion shipKeyframe = ship.getKeyFrame(accum);
-            TextureRegion explosionKeyframe = Main.game.assets.explosion.getKeyFrame(accum);
+            TextureRegion explosionKeyframe = Main.game.assets.explosion.getKeyFrame(explosionAccum);
             batch.draw(background, 0, 0, width, height);
             if (swapBackgroundText) {
                 batch.draw(titleScreenWordsWhiteTrail, 0, 0, width, height);
@@ -137,8 +148,12 @@ public class TitleScreen extends BaseScreen {
             batch.draw(mercuryKeyframe, 940, 370, mercuryKeyframe.getRegionWidth() * 4, mercuryKeyframe.getRegionHeight() * 4);
             // rotate the ship so it's heading toward mercury
             float rotation = (float) Math.atan2(370 - shipPos.y, 940 - shipPos.x);
-            batch.draw(explosionKeyframe, 300, 300, 300, 300);
-            batch.draw(shipKeyframe, shipPos.x, shipPos.y, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, (float) Math.toDegrees(rotation));
+            if (exploded) {
+                batch.draw(explosionKeyframe, 940, 370, 300, 300);
+            }
+            if (showShip) {
+                batch.draw(shipKeyframe, shipPos.x, shipPos.y, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, shipKeyframe.getRegionWidth() * 2, shipKeyframe.getRegionHeight() * 2, 1f, 1f, (float) Math.toDegrees(rotation));
+            }
             // draw text "LD45" with font assets.freeTypeFont
             assets.abandonedFont50.draw(batch, "LD54", 50, 100);
         }

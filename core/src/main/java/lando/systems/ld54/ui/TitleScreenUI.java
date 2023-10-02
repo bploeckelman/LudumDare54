@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Main;
 import lando.systems.ld54.audio.AudioManager;
@@ -80,9 +81,13 @@ public class TitleScreenUI extends Group {
         TextButton.TextButtonStyle titleScreenButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
         titleScreenButtonStyle.font = Main.game.assets.abandonedFont20;
         titleScreenButtonStyle.fontColor = Color.WHITE;
-        titleScreenButtonStyle.up = Assets.Patch.glass.drawable;
-        titleScreenButtonStyle.down = Assets.Patch.glass_dim.drawable;
-        titleScreenButtonStyle.over = Assets.Patch.glass_dim.drawable;
+        titleScreenButtonStyle.up = new NinePatchDrawable(Assets.NinePatches.metal);
+        titleScreenButtonStyle.down = new NinePatchDrawable(Assets.NinePatches.metal);
+        titleScreenButtonStyle.over = new NinePatchDrawable(Assets.NinePatches.metal);
+        titleScreenButtonStyle.fontColor = Color.BLACK;
+        titleScreenButtonStyle.downFontColor = Color.YELLOW;
+        titleScreenButtonStyle.overFontColor = Color.YELLOW;
+
         return titleScreenButtonStyle;
     }
 }
