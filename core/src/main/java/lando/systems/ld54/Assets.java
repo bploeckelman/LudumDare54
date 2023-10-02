@@ -56,6 +56,15 @@ public class Assets implements Disposable {
     public Texture wormholeTexture;
     public Texture encounterTexture;
     public Texture encounterOutcomeTexture;
+    public Texture titleBackground;
+    public Texture titleScreenWordsBlueC;
+    public Texture titleScreenWordsBlueE;
+    public Texture titleScreenWordsBlueK;
+    public Texture titleScreenWordsBlueTrail;
+    public Texture titleScreenWordstiltedWhite;
+    public Texture titleScreenWordsWhiteTrail;
+    public Texture titleScreenWordsWhite;
+    public Texture titleScreenWordsNoCek;
 
     public Particles particles;
     public Array<Animation<TextureRegion>> numberParticles;
@@ -258,6 +267,15 @@ public class Assets implements Disposable {
             mgr.load("images/wormhole.png", Texture.class);
             mgr.load("images/encounter-screen_00.png", Texture.class);
             mgr.load("images/encounter-screen-outcome_00.png", Texture.class);
+            mgr.load("titlescreen/background.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-blue-c_00.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-blue-e_00.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-blue-k_00.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-blue-trail_00.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-tilted-white.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-white-trail_00.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-white_00.png", Texture.class);
+            mgr.load("titlescreen/title-screen-words-no-cek.png", Texture.class);
 
 
             mgr.load("fonts/outfit-medium-20px.fnt", BitmapFont.class);
@@ -337,6 +355,15 @@ public class Assets implements Disposable {
         wormholeTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         encounterTexture = mgr.get("images/encounter-screen_00.png");
         encounterOutcomeTexture = mgr.get("images/encounter-screen-outcome_00.png");
+        titleBackground = mgr.get("titlescreen/background.png");
+        titleScreenWordsBlueC = mgr.get("titlescreen/title-screen-words-blue-c_00.png");
+        titleScreenWordsBlueE = mgr.get("titlescreen/title-screen-words-blue-e_00.png");
+        titleScreenWordsBlueK = mgr.get("titlescreen/title-screen-words-blue-k_00.png");
+        titleScreenWordsBlueTrail = mgr.get("titlescreen/title-screen-words-blue-trail_00.png");
+        titleScreenWordstiltedWhite = mgr.get("titlescreen/title-screen-words-tilted-white.png");
+        titleScreenWordsWhiteTrail = mgr.get("titlescreen/title-screen-words-white-trail_00.png");
+        titleScreenWordsWhite = mgr.get("titlescreen/title-screen-words-white_00.png");
+        titleScreenWordsNoCek = mgr.get("titlescreen/title-screen-words-no-cek.png");
 
         // Animations
         cherry = new Animation<>(.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);

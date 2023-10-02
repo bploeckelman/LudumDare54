@@ -78,6 +78,7 @@ public class Main extends ApplicationAdapter {
         Tween.registerAccessor(Vector2.class, new Vector2Accessor());
         Tween.registerAccessor(Vector3.class, new Vector3Accessor());
         Tween.registerAccessor(OrthographicCamera.class, new CameraAccessor());
+        Tween.registerAccessor(Float.class, new FloatAccessor());
 
         Pixmap.Format format = Pixmap.Format.RGBA8888;
         int width = Config.Screen.framebuffer_width;
@@ -108,7 +109,6 @@ public class Main extends ApplicationAdapter {
         var showLaunchScreen = (Gdx.app.getType() == Application.ApplicationType.WebGL || Config.Debug.show_launch_screen);
         var startingScreen = showLaunchScreen ? new LaunchScreen() : new TitleScreen();
         setScreen(startingScreen);
-//        setScreen(new EndScreen());
     }
 
     public void update(float delta) {
