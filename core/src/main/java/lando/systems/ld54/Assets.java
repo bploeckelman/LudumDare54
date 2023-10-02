@@ -196,6 +196,11 @@ public class Assets implements Disposable {
     public Sound explosion1;
     public Sound explosion2;
     public Sound explosion3;
+    public Sound squish1;
+    public Sound squish2;
+    public Sound squish3;
+    public Sound squish4;
+    public Sound dammit;
 
 
     public Assets() {
@@ -275,6 +280,11 @@ public class Assets implements Disposable {
             mgr.load("audio/sounds/explosion1.ogg", Sound.class);
             mgr.load("audio/sounds/explosion2.ogg", Sound.class);
             mgr.load("audio/sounds/explosion3.ogg", Sound.class);
+            mgr.load("audio/sounds/squish1.ogg", Sound.class);
+            mgr.load("audio/sounds/squish2.ogg", Sound.class);
+            mgr.load("audio/sounds/squish3.ogg", Sound.class);
+            mgr.load("audio/sounds/squish4.ogg", Sound.class);
+            mgr.load("audio/sounds/dammit.ogg", Sound.class);
 
         }
 
@@ -501,6 +511,11 @@ public class Assets implements Disposable {
         powerup1 = mgr.get("audio/sounds/powerup1.ogg", Sound.class);
         powerup2 = mgr.get("audio/sounds/powerup2.ogg", Sound.class);
         swoosh1 = mgr.get("audio/sounds/swoosh1.ogg", Sound.class);
+        squish1 = mgr.get("audio/sounds/squish1.ogg", Sound.class);
+        squish2 = mgr.get("audio/sounds/squish2.ogg", Sound.class);
+        squish3 = mgr.get("audio/sounds/squish3.ogg", Sound.class);
+        squish4 = mgr.get("audio/sounds/squish4.ogg", Sound.class);
+        dammit = mgr.get("audio/sounds/dammit.ogg", Sound.class);
 
         stingAliens1 = mgr.get("audio/sounds/sting-aliens1.ogg", Sound.class);
         stingAliens2 = mgr.get("audio/sounds/sting-aliens2.ogg", Sound.class);

@@ -47,8 +47,8 @@
     ]
   },
   {
-    "title": "Alien Encounter",
-    "text": "You come across a planet populated by a species you've never seen before!\n\nThey must be. . .",
+    "title": "Alien Nation",
+    "text": "You come across a planet populated by a species you've never seen before!\n\nThese creatures must be. . .",
     "imageKey": "cherry",
     "options": [
         {
@@ -57,7 +57,7 @@
               {
                 "type": "SCRAP",
                 "value": 100,
-                "text": "You wipe out the nascent civilization to plunder their planet's meager resources\n\nHonestly, kind of a dick move. \n\nAnd unnecessary! Have you considered therapy?",
+                "text": "You wipe out the nascent civilization and plunder their planet's meager resources\n\nKind of a dick move, honestly. \n\nAnd so unnecessary! Have you considered therapy?",
                 "weight": 1
               }
             ]
@@ -79,7 +79,7 @@
               {
                 "type": "NOTHING",
                 "value": 0,
-                "text": "You avoided them! And. . . \n\n. . . that's' it?\n\nHow narratively unsatisfying.",
+                "text": "You avoid them. \n\n . . . that's it.\n\nHow narratively unsatisfying.",
                 "weight": 1
               }
             ]
@@ -87,122 +87,80 @@
     ]
   },
   {
-    "title": "Space Exploration",
-    "text": "You are aboard a spaceship on a mission to explore the far reaches of the galaxy. What do you do?",
+    "title": "Multiple Ore Chasms",
+    "text": "Glistening caverns cover the nearby planet's surface.\n\nExploring these crevices may yield untold riches - or be a waste of time and energy.\n\nHow do you proceed?",
     "imageKey": "spaceship",
     "options": [
       {
-        "text": "Survey a nearby asteroid",
+        "text": "Dive in with reckless abandon",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "You find valuable minerals on the asteroid's surface.",
-            "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "Your spaceship is damaged while attempting to land on the asteroid.",
-            "weight": 0.2
+            "text": "Your eagerness pays off and the crew experiences multiple ore chasms.\n\nNo mutiny for these folks!",
+            "weight": 1.0
           }
         ]
       },
       {
-        "text": "Explore an abandoned space station",
+        "text": "Maybe I'll explore the opening a little, just to see how it feels",
         "possibleOutcomes": [
-          {
-            "type": "SCRAP",
-            "value": 1,
-            "text": "You discover advanced technology and upgrade your ship.",
-            "weight": 0.5
-          },
           {
             "type": "FUEL",
             "value": -1,
-            "text": "The space station's security systems activate, and you must escape quickly.",
-            "weight": 0.5
+            "text": "There were orbs of varying shades of blue, but no ore chasms.\n\nHow anti-climactic!",
+            "weight": 1
           }
         ]
       },
       {
-        "text": "Contact an alien civilization",
+        "text": "I think I'll just watch",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
             "value": 1,
-            "text": "The aliens are friendly and share their knowledge with you.",
-            "weight": 0.4
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "The aliens view you as a threat and open fire on your ship.",
-            "weight": 0.4
-          },
-          {
-            "type": "NOTHING",
-            "value": 0,
-            "text": "The aliens are indifferent and don't engage with you.",
-            "weight": 0.2
+            "text": "Hey, different strokes for different folks - you do you, buddy.",
+            "weight": 1.0
           }
         ]
       }
     ]
   },
   {
-    "title": "Lost in a Nebula",
-    "text": "Your spaceship becomes trapped in a dense nebula. What do you do?",
+    "title": "Finger On The Pulsar",
+    "text": "Your ship comes dangerously close to a hyper-energetic pulsar.\n\nYou might be able to use its emissions for fuel...\n\nWhat do you do?",
     "imageKey": "nebula",
     "options": [
       {
-        "text": "Attempt to navigate out",
+        "text": "Get a closer look",
         "possibleOutcomes": [
           {
             "type": "FUEL",
-            "value": 2,
-            "text": "You FUELfully navigate the nebula and continue your journey.",
-            "weight": 0.7
-          },
-          {
-            "type": "FUEL",
             "value": -1,
-            "text": "Your ship sustains minor damage during the navigation attempt.",
-            "weight": 0.3
+            "text": "A beautiful view, but sadly not a source of fuel.",
+            "weight": 0.7
           }
         ]
       },
       {
-        "text": "Send a distress signal",
+        "text": "Send a message back to earth",
         "possibleOutcomes": [
           {
             "type": "SCRAP",
-            "value": 1,
-            "text": "Another spaceship responds to your distress signal and guides you out of the nebula.",
-            "weight": 0.6
-          },
-          {
-            "type": "FUEL",
             "value": -1,
-            "text": "Sending the distress signal attracts the attention of space pirates who attack your ship.",
-            "weight": 0.4
+            "text": "Nobody back home was listening. \n\nDisappointing, but not surprising, I suppose...",
+            "weight": 1
           }
         ]
       },
       {
-        "text": "Wait for help",
+        "text": "Wait and see",
         "possibleOutcomes": [
           {
-            "type": "FUEL",
-            "value": 4,
-            "text": "After some time, the nebula dissipates, and you can continue your journey unharmed.",
+            "type": "NOTHING",
+            "value": 0,
+            "text": "After some time, the pulsar's energy emissions dissipate.\n\nYou can continue your journey unharmed.",
             "weight": 0.8
-          },
-          {
-            "type": "FUEL",
-            "value": -1,
-            "text": "While waiting, your ship experiences minor technical difficulties.",
-            "weight": 0.2
           }
         ]
       }
