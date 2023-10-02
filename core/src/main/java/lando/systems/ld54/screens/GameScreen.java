@@ -81,6 +81,7 @@ public class GameScreen extends BaseScreen {
     public Array<Influencer> influencers;
     public boolean isLaunchPhase = false;
     public Particles particles;
+    public Array<Encounter> encounters;
 
     public GameScreen() {
         physics = new PhysicsSystem(new Rectangle(0, 0, gameWidth, gameHeight));
@@ -200,14 +201,13 @@ public class GameScreen extends BaseScreen {
             Gdx.app.exit();
         }
 
-
         // TODO: DEBUG REMOVE ME
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             Config.Debug.general = true;
             if (!encounterShown) {
-                startEncounter(getRandomEncounter());
-            } else {
-                finishEncounter(getRandomEncounter());
+                Encounter encounter = encounters.get(0);
+                encounter.sector = sectors.get(0);
+                startEncounter(encounter);
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
@@ -317,7 +317,9 @@ public class GameScreen extends BaseScreen {
         miniMap.render(batch);
         if (Config.Debug.general) {
             batch.draw(fogOfWar.fogMaskTexture, 0, 0, windowCamera.viewportWidth / 6, windowCamera.viewportHeight / 6);
-
+            uiStage.setDebugAll(true);
+        } else {
+            uiStage.setDebugAll(false);
         }
         batch.end();
 
@@ -426,7 +428,7 @@ public class GameScreen extends BaseScreen {
 
     private Encounter getRandomEncounter() {
         var file = Gdx.files.internal("encounters/battle_encounters.json");
-        var encounters = json.fromJson(Array.class, Encounter.class, file);
+        encounters = json.fromJson(Array.class, Encounter.class, file);
         var index = MathUtils.random(encounters.size - 1);
         if(!Config.Debug.general) {
             return (Encounter) encounters.get(index);

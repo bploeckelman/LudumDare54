@@ -53,6 +53,7 @@ public class Assets implements Disposable {
     public Texture noiseTexture;
     public Texture whitePixel;
     public Texture starsTexture;
+    public Texture encounterTexture;
 
     public Particles particles;
     public Array<Animation<TextureRegion>> numberParticles;
@@ -220,6 +221,7 @@ public class Assets implements Disposable {
             mgr.load("images/noise.png", Texture.class);
             mgr.load("images/pixel.png", Texture.class);
             mgr.load("images/stars.png", Texture.class);
+            mgr.load("images/encounter-screen-test.png", Texture.class);
 
 
             mgr.load("fonts/outfit-medium-20px.fnt", BitmapFont.class);
@@ -289,6 +291,7 @@ public class Assets implements Disposable {
         starsTexture = mgr.get("images/stars.png");
         starsTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         starsTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        encounterTexture = mgr.get("images/encounter-screen-test.png");
 
         // Animations
         cherry = new Animation<>(.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);

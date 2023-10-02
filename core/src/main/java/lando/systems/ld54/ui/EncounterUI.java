@@ -74,7 +74,7 @@ public class EncounterUI extends Group {
         Window.WindowStyle defaultWindowStyle = skin.get("default", Window.WindowStyle.class);
         Window.WindowStyle glassWindowStyle = new Window.WindowStyle(defaultWindowStyle);
         glassWindowStyle.background = Assets.Patch.metal.drawable;
-
+        glassWindowStyle.background = new TextureRegionDrawable(new TextureRegion(assets.encounterTexture));
         Rectangle encounterWindowBound = new Rectangle(Config.Screen.window_width / 8, 0, Config.Screen.window_width * 3 / 4, Config.Screen.window_height);
 
         encounterWindow = new VisWindow("", glassWindowStyle);
@@ -92,7 +92,7 @@ public class EncounterUI extends Group {
         encounterTitleLabel.setStyle(style);
         encounterTitleLabel.setAlignment(Align.center);
         encounterTitleLabel.setColor(Color.BLACK);
-        encounterWindow.add(encounterTitleLabel).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f);
+        encounterWindow.add(encounterTitleLabel).padTop(20f).padBottom(10f).width(encounterWindow.getWidth() - 100f);
         encounterWindow.row();
 
         encounterImageBox = new VisImage(encounterAnimation.getKeyFrame(0));
@@ -108,7 +108,7 @@ public class EncounterUI extends Group {
         encounterTextLabel.setStyle(style);
         encounterTextLabel.setAlignment(Align.left);
         encounterTextLabel.setColor(Color.BLACK);
-        encounterWindow.add(encounterTextLabel).padTop(10f).padBottom(1f).width(encounterWindow.getWidth() - 100f);
+        encounterWindow.add(encounterTextLabel).padBottom(5f).width(encounterWindow.getWidth() - 100f).height(150f).align(Align.topLeft);
         encounterWindow.row();
 
         optionStyle = new VisTextButton.VisTextButtonStyle();
@@ -118,6 +118,7 @@ public class EncounterUI extends Group {
         optionStyle.down = Assets.Patch.glass_dim.drawable;
         optionStyle.over = Assets.Patch.glass_dim.drawable;
         optionButtons = new ArrayList<>();
+        float margin = 0f;
         for (EncounterOption option : encounterOptions) {
             VisTextButton optionButton = new VisTextButton(option.text, optionStyle);
             optionButton.setHeight(20f);
@@ -128,8 +129,9 @@ public class EncounterUI extends Group {
                     optionClicked(option.possibleOutcomes);
                 }
             });
-            encounterWindow.add(optionButton).padTop(10f).padBottom(10f).width(encounterWindow.getWidth() - 100f).height(50f);
+            encounterWindow.add(optionButton).padTop(10f).padBottom(5f).width(encounterWindow.getWidth() - 90f- margin).height(50f);
             optionButtons.add(optionButton);
+            margin += 16f;
             encounterWindow.row();
         }
 
@@ -166,12 +168,16 @@ public class EncounterUI extends Group {
                 screen.finishEncounter(encounter);
             }
         });
-        encounterWindow.add(optionButton).padTop(10f).padBottom(1f).width(encounterWindow.getWidth() - 100f).height(50f);
+        encounterWindow.add(optionButton).padTop(75f).padBottom(1f).width(encounterWindow.getWidth() - 106f).height(50f);
     }
 
     private void destroyOptions() {
         for (VisTextButton button : optionButtons) {
+            Cell cell = encounterWindow.getCell(button);
             button.remove();
+            // remove cell from table
+            encounterWindow.getCells().removeValue(cell, true);
+            encounterWindow.invalidate();
         }
     }
 
