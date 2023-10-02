@@ -98,6 +98,11 @@ public class PlayerShip implements Collidable {
         if (health <= 0) {
             explode();
             vel.setZero();
+            trackMovement = false;
+            screen.isShipMoving = false;
+            screen.isLaunchPhase = inactive = true;
+            Time.do_after_delay(3f, (params) -> resetCameraToHomeSector());
+            return;
         }
 
         float rotationChange = targetRotation - rotation;
@@ -116,13 +121,10 @@ public class PlayerShip implements Collidable {
         float curVelocity = vel.len2();
         if (curVelocity < 1f) {
             trackMovement = false;
-            screen.isLaunchPhase = inactive = true;
-            anim = screen.assets.playerShipInactive;
-            Stats.numShipsDerelict++;
-            keyframe = anim.getKeyFrame(0);
-
             screen.isShipMoving = false;
-            Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
+            screen.isLaunchPhase = inactive = true;
+            becomeDerelict();
+            Time.do_after_delay(3f, (params) -> resetCameraToHomeSector());
         } else {
             // get rotation based on velocity
             targetRotation = vel.angleDeg();
@@ -162,6 +164,7 @@ public class PlayerShip implements Collidable {
     }
 
     private static final PlayerShipPart.Type[] shipPartTypes = new PlayerShipPart.Type[] { nose, cabin, cabin, tail };
+
     public void explode() {
         // TODO - particle effect
         screen.particles.shipExplode(pos.x, pos.y);
@@ -204,6 +207,29 @@ public class PlayerShip implements Collidable {
         screen.playerShips.removeValue(this, true);
         screen.physicsObjects.removeValue(this, true);
         screen.isLaunchPhase = true;
+    }
+
+    private void becomeDerelict() {
+        Stats.numShipsDerelict++;
+
+        var type = derelict;
+        var angle = MathUtils.random(0, 360);
+        var magnitude = MathUtils.random(5, 20);
+        var velX = magnitude * MathUtils.cosDeg(angle);
+        var velY = magnitude * MathUtils.sinDeg(angle);
+        var spinDir = MathUtils.randomSign();
+        var spin = spinDir * MathUtils.random(10, 25);
+        var part = new PlayerShipPart(screen, type, screen.assets, pos.x, pos.y);
+        part.setVelocity(velX, velY);
+        part.angularMomentum = spin;
+        part.setRadius(64);
+        screen.debris.add(part);
+        screen.physicsObjects.add(part);
+
+        screen.playerShips.removeValue(this, true);
+        screen.physicsObjects.removeValue(this, true);
+
+        screen.particles.shipExplode(pos.x, pos.y);
     }
 
     private void resetCameraToHomeSector() {

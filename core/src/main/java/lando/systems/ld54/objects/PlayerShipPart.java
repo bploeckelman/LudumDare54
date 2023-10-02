@@ -7,7 +7,7 @@ import lando.systems.ld54.screens.GameScreen;
 
 public class PlayerShipPart extends Debris {
 
-    public enum Type { nose, cabin, tail }
+    public enum Type { nose, cabin, tail, derelict }
 
     private static final Color DIM = new Color(0.5f, 0.5f, 0.5f, 1);
 

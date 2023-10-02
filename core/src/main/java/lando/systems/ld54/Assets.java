@@ -343,9 +343,14 @@ public class Assets implements Disposable {
         pickupsFuel = new Animation<>(.1f, atlas.findRegions("pickups-fuel/pickup-fuel"), Animation.PlayMode.LOOP);
         playerShipParts = new ObjectMap<>();
         for (var part : PlayerShipPart.Type.values()) {
-            var suffix = (part == PlayerShipPart.Type.cabin) ? "-b" : ""; // cabin has two variants, this always uses the second
-            var name = Stringf.format("ships/player/parts/ship-part-%1$s/ship-part-%1$s%2$s", part.name(), suffix);
-            var anim = new Animation<TextureRegion>(.1f, atlas.findRegions(name), Animation.PlayMode.LOOP);
+            Animation<TextureRegion> anim;
+            if (part == PlayerShipPart.Type.derelict) {
+                anim = playerShipInactive;
+            } else {
+                var suffix = (part == PlayerShipPart.Type.cabin) ? "-b" : ""; // cabin has two variants, this always uses the second
+                var name = Stringf.format("ships/player/parts/ship-part-%1$s/ship-part-%1$s%2$s", part.name(), suffix);
+                anim = new Animation<>(.1f, atlas.findRegions(name), Animation.PlayMode.LOOP);
+            }
             playerShipParts.put(part, anim);
         }
         astronautBodies = new Array<>();
