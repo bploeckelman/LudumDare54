@@ -21,11 +21,14 @@ public class Sector {
     private static final float LINE_WIDTH = 4f;
     private static final Color COLOR = Color.TEAL.cpy().add(0, 0, 0, -0.75f);
 
+    private final GameScreen screen;
     private final IntVector2 coords;
     public final Rectangle bounds;
-    private boolean visited = false;
     public Encounter encounter;
     public Rectangle encounterBounds;
+
+    public boolean scanned = false;
+    public boolean visited = false;
     public boolean isEncounterActive = true;
 
     public PullPlayerShipInfluencer pullPlayerShip;
@@ -35,10 +38,12 @@ public class Sector {
     private float encounterAnimState = 0;
 
     public Sector(GameScreen gameScreen, Encounter encounter, int x, int y) {
+        this.screen = gameScreen;
         this.coords = new IntVector2(x, y);
         this.bounds = new Rectangle(x * WIDTH, y * HEIGHT, WIDTH, HEIGHT);
         this.encounter = encounter;
         this.encounter.sector = this;
+
         // create 100x100 encounter bounds random in sector
         // TODO - these rands should be based on some fraction of a sector size
         this.encounterBounds = new Rectangle(
@@ -46,10 +51,12 @@ public class Sector {
             MathUtils.random(bounds.y + 100, bounds.y + bounds.height - 200f),
             100f, 100f
         );
+
         this.pullPlayerShip = new PullPlayerShipInfluencer(gameScreen,
             encounterBounds.x + encounterBounds.width / 2f,
             encounterBounds.y + encounterBounds.height / 2f
         );
+
         this.pushJunk = new PushJunkInfluencer(gameScreen,
             encounterBounds.x + encounterBounds.width / 2f,
             encounterBounds.y + encounterBounds.height / 2f
@@ -61,14 +68,21 @@ public class Sector {
         pushJunk.updateInfluence(dt);
     }
 
-    public void draw(SpriteBatch batch) {
-        // TEMP
-        animState += Time.delta;
-        var keyframe = Main.game.assets.asuka.getKeyFrame(animState);
-        batch.draw(keyframe, bounds.x, bounds.y, bounds.width, bounds.height);
+    public void drawShape(ShapeDrawer shapes) {
+        shapes.rectangle(bounds, Sector.COLOR, Sector.LINE_WIDTH);
     }
 
-    public void drawEncounter(SpriteBatch batch) {
+    public void drawAboveFogStuff(SpriteBatch batch) {
+        if (scanned && encounter != null) {
+            batch.draw(screen.assets.lockIcon,
+                encounterBounds.x, encounterBounds.y,
+                encounterBounds.width, encounterBounds.height);
+        }
+    }
+
+    public void drawBelowFogStuff(SpriteBatch batch) {
+        drawShape(screen.assets.shapes);
+
         batch.setColor(1, 1, 1, isEncounterActive ? 1 : 0.33f);
 
         // TODO - too many fiddly things to have setup correctly here
@@ -94,10 +108,6 @@ public class Sector {
         batch.setColor(Color.WHITE);
     }
 
-    public void draw(ShapeDrawer shapes) {
-        shapes.rectangle(bounds, Sector.COLOR, Sector.LINE_WIDTH);
-    }
-
     public boolean isVisited() {
         return visited;
     }
@@ -110,4 +120,7 @@ public class Sector {
         this.visited = false;
     }
 
+    public void scan() {
+        scanned = true;
+    }
 }

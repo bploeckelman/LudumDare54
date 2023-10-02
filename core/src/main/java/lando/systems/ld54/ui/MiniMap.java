@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld54.Assets;
 import lando.systems.ld54.Config;
-import lando.systems.ld54.encounters.Encounter;
 import lando.systems.ld54.objects.Asteroid;
 import lando.systems.ld54.objects.Debris;
 import lando.systems.ld54.objects.PlayerShip;
@@ -67,13 +66,14 @@ public class MiniMap {
             batch.draw(screen.assets.whitePixel, bounds.x + miniPos.x, bounds.y + miniPos.y, 2, 2);
         }
         for (Sector sector : screen.sectors){
-            Vector2 miniPos = convertToMiniMapSpace(sector.encounterBounds.getCenter(tempVec));
+            if (sector.encounter == null) continue;
             if (sector.isEncounterActive){
                 float flashAmount = (MathUtils.sin(accum * 10f) * .5f + 1) * .8f + .2f;
                 batch.setColor(flashAmount, flashAmount, 0, 1f);
             } else {
                 batch.setColor(.3f, .3f, .3f, 1f);
             }
+            Vector2 miniPos = convertToMiniMapSpace(sector.encounterBounds.getCenter(tempVec));
             batch.draw(screen.assets.fuzzyCircle, bounds.x + miniPos.x - 2, bounds.y + miniPos.y -2, 5, 5);
         }
         batch.setColor(1f, 1f, 1f, 1f);
@@ -89,14 +89,25 @@ public class MiniMap {
         batch.setShader(null);
 
         // draw on top of fog
-        batch.setColor(.2f, .2f, .9f, .3f);
         for (Sector sector : screen.sectors){
+            batch.setColor(.2f, .2f, .9f, .3f);
             Rectangle miniRect = convertToMiniMapSpace(sector.bounds);
             drawLine(batch, miniRect.x, miniRect.y, miniRect.x, miniRect.y + miniRect.height, 2f);
             drawLine(batch, miniRect.x, miniRect.y + miniRect.height, miniRect.x + miniRect.width, miniRect.y + miniRect.height, 2f);
             drawLine(batch, miniRect.x + miniRect.width, miniRect.y + miniRect.height, miniRect.x + miniRect.width, miniRect.y, 2f);
             drawLine(batch, miniRect.x + miniRect.width, miniRect.y, miniRect.x, miniRect.y, 2f);
 
+            // draw a pixel at the encounter location above the fog if it's been scanned
+            if (sector.scanned && sector.encounter != null) {
+                if (!sector.isVisited()) {
+                    var flashAmount = (MathUtils.sin(accum * 10f) * .5f + 1) * .8f + .2f;
+                    batch.setColor(flashAmount, flashAmount, 0, 1f);
+                } else {
+                    batch.setColor(.3f, .3f, .3f, 1f);
+                }
+                Vector2 miniPos = convertToMiniMapSpace(sector.encounterBounds.getCenter(tempVec));
+                batch.draw(screen.assets.fuzzyCircle, bounds.x + miniPos.x - 2, bounds.y + miniPos.y -2, 5, 5);
+            }
         }
 
         batch.setColor(Color.WHITE);

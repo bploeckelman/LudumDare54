@@ -106,6 +106,7 @@ public class GameScreen extends BaseScreen {
 
         Asteroids.createTestAsteroids(asteroids);
         physicsObjects.addAll(asteroids);
+
         var possibleGoals = new IntArray();
         var numSectors = SECTORS_WIDE * SECTORS_HIGH;
         for (int i = 0; i < numSectors; i++) {
@@ -204,19 +205,23 @@ public class GameScreen extends BaseScreen {
         }
 
         // TODO: DEBUG REMOVE ME
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            Config.Debug.general = true;
-            if (!encounterShown) {
-                Encounter encounter = encounters.get(0);
-                encounter.sector = sectors.get(0);
-                startEncounter(encounter);
+        {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                Config.Debug.general = true;
+                if (!encounterShown) {
+                    Encounter encounter = encounters.get(0);
+                    encounter.sector = sectors.get(0);
+                    startEncounter(encounter);
+                }
             }
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            audioManager.swapMusic(levelMusic, levelMusicLowpass);
-
+            if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                sectors.forEach(Sector::scan);
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+                audioManager.swapMusic(levelMusic, levelMusicLowpass);
 //            audioManager.fadeMusic(AudioManager.Musics.mainTheme);
 //            audioManager.fadeMusic(AudioManager.Musics.mainThemeLowpass);
+            }
         }
 
         miniMap.update(dt);
@@ -343,12 +348,11 @@ public class GameScreen extends BaseScreen {
         background.render(batch, true);
         particles.draw(batch, Particles.Layer.background);
 
+        sectors.forEach(sector -> sector.drawBelowFogStuff(batch));
 
-        sectors.forEach(sector -> sector.draw(assets.shapes));
-        sectors.forEach(sector -> sector.drawEncounter(batch));
-        goalSector.draw(batch);
-
+        // TODO - these should probably just be encounters rather than decorations
         planets.forEach(p -> p.render(batch));
+
         playerShips.forEach(ps -> ps.draw(batch));
         debris.forEach(d -> d.draw(batch));
 
@@ -379,7 +383,7 @@ public class GameScreen extends BaseScreen {
 
         // TEMP - 'world' bounds
         assets.shapes.rectangle(0, 0, gameWidth, gameHeight, Color.MAGENTA, 4);
-        sectors.forEach(sector -> sector.draw(assets.shapes));
+        sectors.forEach(sector -> sector.drawShape(assets.shapes));
         batch.end();
 
         // Background
@@ -393,11 +397,11 @@ public class GameScreen extends BaseScreen {
 
         batch.begin();
         particles.draw(batch, Particles.Layer.overFog);
+        sectors.forEach(s -> s.drawAboveFogStuff(batch));
         batch.end();
     }
 
     private void resetWorldCamera() {
-        var initialZoom = PanZoomCameraController.INITIAL_ZOOM;
         var centerShiftX = (gameWidth / 2f);
         var centerShiftY = (gameHeight / 2f);
         isLaunchPhase = true;
@@ -406,7 +410,6 @@ public class GameScreen extends BaseScreen {
         worldCamera.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCamera.position.set(0, 0, 0);
         worldCamera.translate(centerShiftX, centerShiftY);
-//        worldCamera.zoom = initialZoom;
         worldCamera.update();
 
         if (cameraController == null) {
