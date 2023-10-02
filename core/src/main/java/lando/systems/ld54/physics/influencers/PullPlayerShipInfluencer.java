@@ -25,7 +25,7 @@ public class PullPlayerShipInfluencer implements Influencer {
         this.screen = screen;
         this.position = new Vector2(x, y);
         this.strength = new InterpolatingFloat(600);
-        this.range = new InterpolatingFloat(300f);
+        this.range = new InterpolatingFloat(200f);
         this.range.setInterpolation(Interpolation.elasticOut);
         this.influenceRenderer = new InfluenceRenderer(this, COLOR);
         this.active = true;

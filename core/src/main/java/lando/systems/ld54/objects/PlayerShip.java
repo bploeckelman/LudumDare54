@@ -20,6 +20,8 @@ import static lando.systems.ld54.objects.PlayerShipPart.Type.*;
 
 public class PlayerShip implements Collidable {
 
+    public static final float MAX_SPEED = 400f;
+
     private static final float DRAG_FRICTION = 0.4f;
     public static final float FUEL_PER_BAR_LEVEL = 300f;
 
@@ -251,6 +253,9 @@ public class PlayerShip implements Collidable {
     @Override
     public void setVelocity(float x, float y) {
         vel.set(x, y);
+        if (vel.len2() > MAX_SPEED * MAX_SPEED) {
+            vel.nor().scl(MAX_SPEED);
+        }
     }
 
     @Override
