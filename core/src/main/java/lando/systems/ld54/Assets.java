@@ -599,6 +599,13 @@ public class Assets implements Disposable {
         encounterAnimationHashMap.put("normandy", normandy);
         encounterAnimationHashMap.put("podcity", podCity);
 
+        // characters
+        // just get chat anim for now
+        encounterAnimationHashMap.put("starveFox", starveFox.get(1));
+        encounterAnimationHashMap.put("nagilum", nagilum.get(0));
+        encounterAnimationHashMap.put("mal9000", mal9000.get(1));
+
+
         initialized = true;
         return 1;
     }

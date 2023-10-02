@@ -20,6 +20,7 @@ import lando.systems.ld54.encounters.EncounterOptionOutcome;
 import lando.systems.ld54.screens.GameScreen;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EncounterUI extends Group {
     private Assets assets;
@@ -28,6 +29,7 @@ public class EncounterUI extends Group {
     private VisWindow encounterWindow;
     private VisLabel encounterTextLabel;
     VisImage encounterImageBox;
+    VisImage characterImageBox;
     private GameScreen screen;
     private float animTimer = 0f;
     private Encounter encounter;
@@ -35,6 +37,7 @@ public class EncounterUI extends Group {
     private String encounterTitle = "";
     private String encounterText = "";
     private Animation<TextureRegion> encounterAnimation;
+    private Animation<TextureRegion> characterAnimation;
     private ArrayList<EncounterOption> encounterOptions;
     private ArrayList<VisTextButton> optionButtons;
     private VisTextButton.VisTextButtonStyle optionStyle;
@@ -46,6 +49,7 @@ public class EncounterUI extends Group {
         this.skin = skin;
         this.audio = audio;
         encounterAnimation = null;
+        characterAnimation = null;
         encounterOptions = new ArrayList<>();
     }
 
@@ -53,6 +57,10 @@ public class EncounterUI extends Group {
         encounterTitle = encounter.title;
         encounterText = encounter.text;
         encounterAnimation = assets.encounterAnimationHashMap.get(encounter.imageKey);
+        if (encounter.characterKey != null && encounter.characterKey != "") {
+            characterAnimation = assets.encounterAnimationHashMap.get(encounter.characterKey);
+        }
+
         encounterOptions.clear();
         this.encounter = encounter;
         for (EncounterOption option : encounter.options) {
@@ -67,6 +75,10 @@ public class EncounterUI extends Group {
         animTimer += delta;
         if (encounterAnimation != null) {
             encounterImageBox.setDrawable(new TextureRegionDrawable(encounterAnimation.getKeyFrame(animTimer)));
+        }
+
+        if (characterAnimation != null) {
+            characterImageBox.setDrawable(new TextureRegionDrawable(characterAnimation.getKeyFrame(animTimer)));
         }
     }
 
@@ -96,8 +108,24 @@ public class EncounterUI extends Group {
         encounterWindow.row();
 
         encounterImageBox = new VisImage(encounterAnimation.getKeyFrame(0));
-        float size = encounterWindow.getHeight() / 3f;
-        encounterWindow.add(encounterImageBox).padTop(10f).padBottom(10f).width(size).height(size);
+        float height = encounterWindow.getHeight() / 3f;
+        float width = height;
+        if (characterAnimation != null) {
+            width /= 2;
+        }
+
+        var table = new Table();
+        if (characterAnimation != null) {
+            characterImageBox = new VisImage(characterAnimation.getKeyFrame(0));
+            table.add(characterImageBox).padRight(100);
+        }
+
+        table.add(encounterImageBox);
+
+        //encounterWindow.add(encounterImageBox).padTop(10f).padBottom(10f).width(width).height(height);
+
+        encounterWindow.add(table).padTop(10f).padBottom(10f).width(width*2).height(height);
+
         encounterWindow.row();
 
         encounterTextLabel = new VisLabel(encounterText);
