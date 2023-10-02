@@ -484,19 +484,19 @@ public class Assets implements Disposable {
 //        = mgr.get("audio/sounds/.ogg", Sound.class);
 //        = mgr.get("audio/sounds/.ogg", Sound.class);
 
-        encounterAnimationHashMap.put("asuka", asuka);
-        encounterAnimationHashMap.put("cherry", cherry);
-        encounterAnimationHashMap.put("spaceship", asuka);
-        encounterAnimationHashMap.put("nebula", cherry);
-        encounterAnimationHashMap.put("blackhole", obi);
-        encounterAnimationHashMap.put("mysteriousplanet", cherry);
-        encounterAnimationHashMap.put("asteroidfield", asuka);
-        encounterAnimationHashMap.put("abandonedstation", osha);
-        encounterAnimationHashMap.put("spacepirates", obi);
-        encounterAnimationHashMap.put("meteorshower", obi);
-        encounterAnimationHashMap.put("gasgiantmoon", yoda);
-        encounterAnimationHashMap.put("interstellaranomaly", osha);
-        encounterAnimationHashMap.put("asteroidmining", yoda);
+        encounterAnimationHashMap.put("asuka", venusSpin);
+        encounterAnimationHashMap.put("cherry", jupiterSpin);
+        encounterAnimationHashMap.put("spaceship", marsSpin);
+        encounterAnimationHashMap.put("nebula", venusSpin);
+        encounterAnimationHashMap.put("blackhole", mercurySpin);
+        encounterAnimationHashMap.put("mysteriousplanet", jupiterSpin);
+        encounterAnimationHashMap.put("asteroidfield", marsSpin);
+        encounterAnimationHashMap.put("abandonedstation", venusSpin);
+        encounterAnimationHashMap.put("spacepirates", mercurySpin);
+        encounterAnimationHashMap.put("meteorshower", jupiterSpin);
+        encounterAnimationHashMap.put("gasgiantmoon", marsSpin);
+        encounterAnimationHashMap.put("interstellaranomaly", mercurySpin);
+        encounterAnimationHashMap.put("asteroidmining", jupiterSpin);
 
         initialized = true;
         return 1;
