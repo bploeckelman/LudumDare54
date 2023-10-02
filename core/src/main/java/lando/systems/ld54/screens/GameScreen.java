@@ -82,6 +82,7 @@ public class GameScreen extends BaseScreen {
     public Array<Collidable> physicsObjects;
     public Array<Influencer> influencers;
     public boolean isLaunchPhase = false;
+    public boolean isShipMoving = false;
     public Particles particles;
     public Array<Encounter> encounters;
 
@@ -450,6 +451,7 @@ public class GameScreen extends BaseScreen {
         var ship = new PlayerShip(this);
         physicsObjects.add(ship);
         ship.launch(angle, power);
+        isShipMoving = true;
         Stats.numLaunches++;
         playerShips.add(ship);
 //        useFuel(power * .01f); //TODO: debug, place it in the drag controller and limit drag per fuel level

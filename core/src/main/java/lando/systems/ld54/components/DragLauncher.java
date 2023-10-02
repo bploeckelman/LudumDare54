@@ -52,6 +52,7 @@ public class DragLauncher extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (screen.isShipMoving) return false;
         if (button != Input.Buttons.LEFT || pointer > 0) {
             dragging = false;
         } else {
@@ -68,6 +69,7 @@ public class DragLauncher extends InputAdapter {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if (screen.isShipMoving) return false;
         if (!dragging) { return false; }
 
         mousePos.set(screenX, screenY, 0);
@@ -78,6 +80,7 @@ public class DragLauncher extends InputAdapter {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (screen.isShipMoving) return false;
         if (dragging) {
             dragging = false;
             screen.audioManager.stopSound(AudioManager.Sounds.engineStart);
@@ -89,6 +92,8 @@ public class DragLauncher extends InputAdapter {
     }
 
     public void update(float delta) {
+        if (screen.isShipMoving) return;
+
         animTimer += delta;
         currentImage = launcherAnimation.getKeyFrame(animTimer);
         if (dragging) {

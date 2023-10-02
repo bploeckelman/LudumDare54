@@ -97,8 +97,7 @@ public class PlayerShip implements Collidable {
 
         if (health <= 0) {
             explode();
-            Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
-            return;
+            vel.setZero();
         }
 
         float rotationChange = targetRotation - rotation;
@@ -122,6 +121,7 @@ public class PlayerShip implements Collidable {
             Stats.numShipsDerelict++;
             keyframe = anim.getKeyFrame(0);
 
+            screen.isShipMoving = false;
             Time.do_after_delay(0.5f, (params) -> resetCameraToHomeSector());
         } else {
             // get rotation based on velocity
